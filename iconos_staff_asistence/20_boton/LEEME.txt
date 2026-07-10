@@ -1,0 +1,17 @@
+Staff Asistence - Iconos de boton, 35 x 25 px exactos
+======================================================
+
+Cada PNG mide exactamente 35x25 px (el icono se dibuja centrado dentro de
+ese lienzo, sin deformarse, dejando un pequeno margen transparente).
+
+Dos colores:
+  *_azul.png    -> #2B4C8C, para botones con fondo blanco/gris
+  *_blanco.png  -> #FFFFFF, para botones con fondo azul (sidebar, botones primarios)
+
+Como usarlos:
+1. Copia esta carpeta a tu proyecto (ej. Resources/Icons) o agrega los PNG
+   como Recursos del proyecto (Propiedades del proyecto -> Recursos -> Agregar existente).
+2. En el boton: propiedad Image -> selecciona el PNG. Como ya mide 35x25,
+   NO se necesita reescalar en codigo ni cambiar el tamano del boton.
+3. Sugerido: ImageAlign = MiddleLeft, TextAlign = MiddleRight,
+   Padding = 10,0,0,0 (izquierda) para separar icono y texto.
