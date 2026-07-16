@@ -14,8 +14,8 @@ namespace ProyectoRegistroAsistencia
     {
         public frmNuevoDepartamento()
         {
-            InitializeComponent();
-            }
+            InitializeComponent();   
+        }
 
     }
 }

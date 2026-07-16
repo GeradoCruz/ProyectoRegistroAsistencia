@@ -15,7 +15,7 @@ namespace ProyectoRegistroAsistencia
         public frmNuevoEmpleado()
         {
             InitializeComponent();
-            }
+        }
 
     }
 }

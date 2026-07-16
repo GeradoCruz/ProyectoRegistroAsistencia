@@ -16,7 +16,20 @@ namespace ProyectoRegistroAsistencia
         {
             InitializeComponent();
             KeyPreview = true;
-            KeyDown += frmRegistroAsistencia_KeyDown;
+
+        }
+
+        private void btnRegistrar_Click(object? sender, EventArgs e)
+        {
+
+            string clave = string.IsNullOrEmpty(txtClaveTrabajador.Text) ? null : txtClaveTrabajador.Text;
+
+            if (clave == null)
+            {
+                MessageBox.Show("Escribe tu clave de trabajador.", "Staff Asistence",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
         }
 
         private void frmRegistroAsistencia_KeyDown(object? sender, KeyEventArgs e)

@@ -78,7 +78,7 @@
             // txtUsuario
             // 
             txtUsuario.BackColor = Color.White;
-            txtUsuario.ForeColor = Color.FromArgb(108, 117, 125);
+            txtUsuario.ForeColor = Color.FromArgb(64, 64, 64);
             txtUsuario.Location = new Point(117, 154);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(296, 29);
@@ -109,7 +109,7 @@
             // txtPassword
             // 
             txtPassword.BackColor = Color.White;
-            txtPassword.ForeColor = Color.FromArgb(108, 117, 125);
+            txtPassword.ForeColor = Color.FromArgb(64, 64, 64);
             txtPassword.Location = new Point(117, 258);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(296, 29);
@@ -126,6 +126,7 @@
             btnInicioSesion.TabIndex = 7;
             btnInicioSesion.Text = "Iniciar Sesión";
             btnInicioSesion.UseVisualStyleBackColor = false;
+            btnInicioSesion.Click += btnInicioSesion_Click;
             // 
             // lblCancelar
             // 
@@ -158,6 +159,7 @@
             Name = "frmAccesoAdmin";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Staff Asistence";
+            KeyDown += frmAccesoAdmin_KeyDown;
             ((System.ComponentModel.ISupportInitialize)pcbUsuario).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcbPassword).EndInit();
             ResumeLayout(false);

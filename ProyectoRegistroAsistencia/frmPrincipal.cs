@@ -12,59 +12,44 @@ namespace ProyectoRegistroAsistencia
 {
     public partial class frmPrincipal : Form
     {
-        // Se crea una sola instancia de cada pantalla y se reutiliza,
-        // asi no se pierden los filtros/datos capturados al cambiar de modulo y volver.
-        private readonly frmAsistencias _asistencias = new frmAsistencias();
-        private readonly frmEmpleados _empleados = new frmEmpleados();
-        private readonly frmHorarioSemanal _horarios = new frmHorarioSemanal();
-        private readonly frmDepartamentos _departamentos = new frmDepartamentos();
-        private readonly frmPuestos _puestos = new frmPuestos();
-        private readonly frmIncidencias _incidencias = new frmIncidencias();
-        private readonly frmReportes _reportes = new frmReportes();
+        private clsPrincipal principal;
 
         public frmPrincipal()
         {
             InitializeComponent();
-
-            btnAsistencias.Click += btnAsistencias_Click;
-            btnEmpleados.Click += btnEmpleados_Click;
-            btnHorarios.Click += btnHorarios_Click;
-            btnDepartamentos.Click += btnDepartamentos_Click;
-            btnPuestos.Click += btnPuestos_Click;
-            btnIncidencias.Click += btnIncidencias_Click;
-            btnReportes.Click += btnReportes_Click;
-            btnCerrarSesion.Click += btnCerrarSesion_Click;
-
-            this.Load += frmPrincipal_Load;
+            principal = new clsPrincipal();
         }
 
         private void frmPrincipal_Load(object? sender, EventArgs e)
         {
-            // Asistencias es la vista que siempre se muestra al arrancar el panel de administracion.
-            AbrirModulo(_asistencias, btnAsistencias);
+            lblUsuario.Text = clsLogin.usuarioActual;
+            if (clsLogin.AuxiliarReporte)
+            {
+                lblBienvenida.Text = "Bienvenido auxiliar:";
+            }
+            // El auxiliar de reportes entra directo a Reportes; el administrador entra a Asistencias.
+            if (clsLogin.AuxiliarReporte)
+            {
+                principal.agregarAlContenedor(new frmReportes(), pnlContenido);
+                ResaltarBoton(btnReportes);
+            }
+            else
+            {
+                principal.agregarAlContenedor(new frmAsistencias(), pnlContenido);
+                ResaltarBoton(btnAsistencias);
+            }
+
+            btnAsistencias.Enabled = clsLogin.EsAdministrador;
+            btnEmpleados.Enabled = clsLogin.EsAdministrador;
+            btnHorarios.Enabled = clsLogin.EsAdministrador;
+            btnDepartamentos.Enabled = clsLogin.EsAdministrador;
+            btnPuestos.Enabled = clsLogin.EsAdministrador;
+            btnIncidencias.Enabled = clsLogin.EsAdministrador;
+            btnReportes.Enabled = clsLogin.EsAdministrador || clsLogin.AuxiliarReporte;
+            btnCerrarSesion.Enabled = clsLogin.EsAdministrador || clsLogin.AuxiliarReporte;
         }
 
-        /// <summary>
-        /// Carga "modulo" dentro de pnlContenido, quitando el que estuviera antes,
-        /// y resalta el boton del sidebar correspondiente (si aplica).
-        /// </summary>
-        private void AbrirModulo(Form modulo, Button? botonActivo)
-        {
-            pnlContenido.SuspendLayout();
-            pnlContenido.Controls.Clear();
-
-            modulo.TopLevel = false;
-            modulo.FormBorderStyle = FormBorderStyle.None;
-            modulo.Dock = DockStyle.Fill;
-            pnlContenido.Controls.Add(modulo);
-            modulo.Show();
-
-            pnlContenido.ResumeLayout();
-
-            ResaltarBoton(botonActivo);
-        }
-
-        private void ResaltarBoton(Button? botonActivo)
+        private void ResaltarBoton(Button botonActivo)
         {
             foreach (Control control in pnlSidebar.Controls)
             {
@@ -77,16 +62,51 @@ namespace ProyectoRegistroAsistencia
             if (botonActivo != null)
             {
                 botonActivo.BackColor = Color.FromArgb(43, 76, 140); // Azul Institucional = activo
+                lblModuloValor.Text = botonActivo.Text;
             }
         }
 
-        private void btnAsistencias_Click(object? sender, EventArgs e) => AbrirModulo(_asistencias, btnAsistencias);
-        private void btnEmpleados_Click(object? sender, EventArgs e) => AbrirModulo(_empleados, btnEmpleados);
-        private void btnHorarios_Click(object? sender, EventArgs e) => AbrirModulo(_horarios, btnHorarios);
-        private void btnDepartamentos_Click(object? sender, EventArgs e) => AbrirModulo(_departamentos, btnDepartamentos);
-        private void btnPuestos_Click(object? sender, EventArgs e) => AbrirModulo(_puestos, btnPuestos);
-        private void btnIncidencias_Click(object? sender, EventArgs e) => AbrirModulo(_incidencias, btnIncidencias);
-        private void btnReportes_Click(object? sender, EventArgs e) => AbrirModulo(_reportes, btnReportes);
+        private void btnAsistencias_Click(object? sender, EventArgs e)
+        {
+            principal.agregarAlContenedor(new frmAsistencias(), pnlContenido);
+            ResaltarBoton(btnAsistencias);
+        }
+
+        private void btnEmpleados_Click(object? sender, EventArgs e)
+        {
+            principal.agregarAlContenedor(new frmEmpleados(), pnlContenido);
+            ResaltarBoton(btnEmpleados);
+        }
+
+        private void btnHorarios_Click(object? sender, EventArgs e)
+        {
+            principal.agregarAlContenedor(new frmHorarioSemanal(), pnlContenido);
+            ResaltarBoton(btnHorarios);
+        }
+
+        private void btnDepartamentos_Click(object? sender, EventArgs e)
+        {
+            principal.agregarAlContenedor(new frmDepartamentos(), pnlContenido);
+            ResaltarBoton(btnDepartamentos);
+        }
+
+        private void btnPuestos_Click(object? sender, EventArgs e)
+        {
+            principal.agregarAlContenedor(new frmPuestos(), pnlContenido);
+            ResaltarBoton(btnPuestos);
+        }
+
+        private void btnIncidencias_Click(object? sender, EventArgs e)
+        {
+            principal.agregarAlContenedor(new frmIncidencias(), pnlContenido);
+            ResaltarBoton(btnIncidencias);
+        }
+
+        private void btnReportes_Click(object? sender, EventArgs e)
+        {
+            principal.agregarAlContenedor(new frmReportes(), pnlContenido);
+            ResaltarBoton(btnReportes);
+        }
 
         private void btnCerrarSesion_Click(object? sender, EventArgs e)
         {
@@ -95,9 +115,20 @@ namespace ProyectoRegistroAsistencia
 
             if (confirmacion == DialogResult.Yes)
             {
-                this.Hide();
-                new frmAccesoAdmin().Show();
+                this.Close();
             }
+        }
+
+        private void pcbAyuda_MouseDown(object mipictureSeleccionado, MouseEventArgs e)
+        {
+            PictureBox pcb = (PictureBox)mipictureSeleccionado;
+            pcb.Location = new Point(pcb.Location.X + 3, pcb.Location.Y + 3);
+        }
+
+        private void pcbAyuda_MouseUp(object mipictureSeleccionado, MouseEventArgs e)
+        {
+            PictureBox pcb = (PictureBox)mipictureSeleccionado;
+            pcb.Location = new Point(pcb.Location.X - 3, pcb.Location.Y - 3);
         }
     }
 }

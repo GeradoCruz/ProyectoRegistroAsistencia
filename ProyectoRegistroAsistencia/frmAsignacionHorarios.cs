@@ -15,7 +15,7 @@ namespace ProyectoRegistroAsistencia
         public frmAsignacionHorarios()
         {
             InitializeComponent();
-
+         
         }
     }
 }

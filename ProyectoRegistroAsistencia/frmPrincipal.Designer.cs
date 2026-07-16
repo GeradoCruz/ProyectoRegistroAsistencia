@@ -41,12 +41,27 @@
             lblSistema = new Label();
             pcbLogo = new PictureBox();
             pnlContenido = new Panel();
+            pnlHeader = new Panel();
+            lblAyuda = new Label();
+            pcbAyuda = new PictureBox();
+            lblUsuario = new Label();
+            pcbUsuario = new PictureBox();
+            pcbModulo = new PictureBox();
+            lblModuloPrefijo = new Label();
+            lblModuloValor = new Label();
+            lblBienvenida = new Label();
+            pnlHeaderBorde = new Panel();
             pnlSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbLogo).BeginInit();
+            pnlHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pcbAyuda).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pcbUsuario).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pcbModulo).BeginInit();
             SuspendLayout();
             // 
             // pnlSidebar
             // 
+            pnlSidebar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             pnlSidebar.BackColor = Color.FromArgb(43, 76, 140);
             pnlSidebar.Controls.Add(btnCerrarSesion);
             pnlSidebar.Controls.Add(btnReportes);
@@ -75,6 +90,7 @@
             btnCerrarSesion.TabIndex = 7;
             btnCerrarSesion.Text = "Cerrar Sesión";
             btnCerrarSesion.UseVisualStyleBackColor = false;
+            btnCerrarSesion.Click += btnCerrarSesion_Click;
             // 
             // btnReportes
             // 
@@ -88,6 +104,7 @@
             btnReportes.TabIndex = 6;
             btnReportes.Text = "Reportes";
             btnReportes.UseVisualStyleBackColor = false;
+            btnReportes.Click += btnReportes_Click;
             // 
             // btnIncidencias
             // 
@@ -101,6 +118,7 @@
             btnIncidencias.TabIndex = 5;
             btnIncidencias.Text = "Incidencias";
             btnIncidencias.UseVisualStyleBackColor = false;
+            btnIncidencias.Click += btnIncidencias_Click;
             // 
             // btnPuestos
             // 
@@ -114,6 +132,7 @@
             btnPuestos.TabIndex = 4;
             btnPuestos.Text = "Puestos";
             btnPuestos.UseVisualStyleBackColor = false;
+            btnPuestos.Click += btnPuestos_Click;
             // 
             // btnDepartamentos
             // 
@@ -127,6 +146,7 @@
             btnDepartamentos.TabIndex = 3;
             btnDepartamentos.Text = "Departamentos";
             btnDepartamentos.UseVisualStyleBackColor = false;
+            btnDepartamentos.Click += btnDepartamentos_Click;
             // 
             // btnHorarios
             // 
@@ -140,6 +160,7 @@
             btnHorarios.TabIndex = 2;
             btnHorarios.Text = "Horarios";
             btnHorarios.UseVisualStyleBackColor = false;
+            btnHorarios.Click += btnHorarios_Click;
             // 
             // btnEmpleados
             // 
@@ -153,6 +174,7 @@
             btnEmpleados.TabIndex = 1;
             btnEmpleados.Text = "Empleados";
             btnEmpleados.UseVisualStyleBackColor = false;
+            btnEmpleados.Click += btnEmpleados_Click;
             // 
             // btnAsistencias
             // 
@@ -166,6 +188,7 @@
             btnAsistencias.TabIndex = 8;
             btnAsistencias.Text = "Asistencias";
             btnAsistencias.UseVisualStyleBackColor = false;
+            btnAsistencias.Click += btnAsistencias_Click;
             // 
             // lblSistema
             // 
@@ -190,19 +213,135 @@
             // 
             // pnlContenido
             // 
-            pnlContenido.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pnlContenido.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlContenido.BackColor = Color.FromArgb(240, 242, 245);
-            pnlContenido.Location = new Point(221, 0);
+            pnlContenido.Location = new Point(221, 52);
             pnlContenido.Name = "pnlContenido";
-            pnlContenido.Size = new Size(902, 788);
+            pnlContenido.Size = new Size(1084, 698);
             pnlContenido.TabIndex = 1;
+            // 
+            // pnlHeader
+            // 
+            pnlHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pnlHeader.BackColor = Color.White;
+            pnlHeader.Controls.Add(lblAyuda);
+            pnlHeader.Controls.Add(pcbAyuda);
+            pnlHeader.Controls.Add(lblUsuario);
+            pnlHeader.Controls.Add(pcbUsuario);
+            pnlHeader.Controls.Add(pcbModulo);
+            pnlHeader.Controls.Add(lblModuloPrefijo);
+            pnlHeader.Controls.Add(lblModuloValor);
+            pnlHeader.Controls.Add(lblBienvenida);
+            pnlHeader.Controls.Add(pnlHeaderBorde);
+            pnlHeader.Location = new Point(221, 0);
+            pnlHeader.Name = "pnlHeader";
+            pnlHeader.Size = new Size(1084, 53);
+            pnlHeader.TabIndex = 2;
+            // 
+            // lblAyuda
+            // 
+            lblAyuda.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblAyuda.ForeColor = Color.FromArgb(108, 117, 125);
+            lblAyuda.Location = new Point(986, 15);
+            lblAyuda.Name = "lblAyuda";
+            lblAyuda.Size = new Size(57, 20);
+            lblAyuda.TabIndex = 5;
+            lblAyuda.Text = "Ayuda";
+            lblAyuda.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // pcbAyuda
+            // 
+            pcbAyuda.Cursor = Cursors.Hand;
+            pcbAyuda.Image = (Image)resources.GetObject("pcbAyuda.Image");
+            pcbAyuda.Location = new Point(1048, 8);
+            pcbAyuda.Name = "pcbAyuda";
+            pcbAyuda.Size = new Size(30, 30);
+            pcbAyuda.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbAyuda.TabIndex = 7;
+            pcbAyuda.TabStop = false;
+            pcbAyuda.MouseDown += pcbAyuda_MouseDown;
+            pcbAyuda.MouseUp += pcbAyuda_MouseUp;
+            // 
+            // lblUsuario
+            // 
+            lblUsuario.AutoSize = true;
+            lblUsuario.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsuario.ForeColor = Color.FromArgb(43, 76, 140);
+            lblUsuario.Location = new Point(939, 16);
+            lblUsuario.Name = "lblUsuario";
+            lblUsuario.Size = new Size(39, 20);
+            lblUsuario.TabIndex = 5;
+            lblUsuario.Text = "-----";
+            // 
+            // pcbUsuario
+            // 
+            pcbUsuario.Image = (Image)resources.GetObject("pcbUsuario.Image");
+            pcbUsuario.Location = new Point(718, 8);
+            pcbUsuario.Name = "pcbUsuario";
+            pcbUsuario.Size = new Size(30, 30);
+            pcbUsuario.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbUsuario.TabIndex = 1;
+            pcbUsuario.TabStop = false;
+            // 
+            // pcbModulo
+            // 
+            pcbModulo.Image = (Image)resources.GetObject("pcbModulo.Image");
+            pcbModulo.Location = new Point(20, 8);
+            pcbModulo.Name = "pcbModulo";
+            pcbModulo.Size = new Size(30, 30);
+            pcbModulo.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbModulo.TabIndex = 0;
+            pcbModulo.TabStop = false;
+            // 
+            // lblModuloPrefijo
+            // 
+            lblModuloPrefijo.AutoSize = true;
+            lblModuloPrefijo.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblModuloPrefijo.ForeColor = Color.FromArgb(108, 117, 125);
+            lblModuloPrefijo.Location = new Point(52, 16);
+            lblModuloPrefijo.Name = "lblModuloPrefijo";
+            lblModuloPrefijo.Size = new Size(64, 20);
+            lblModuloPrefijo.TabIndex = 1;
+            lblModuloPrefijo.Text = "Módulo:";
+            // 
+            // lblModuloValor
+            // 
+            lblModuloValor.AutoSize = true;
+            lblModuloValor.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblModuloValor.ForeColor = Color.FromArgb(43, 76, 140);
+            lblModuloValor.Location = new Point(122, 16);
+            lblModuloValor.Name = "lblModuloValor";
+            lblModuloValor.Size = new Size(33, 20);
+            lblModuloValor.TabIndex = 2;
+            lblModuloValor.Text = "----";
+            // 
+            // lblBienvenida
+            // 
+            lblBienvenida.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblBienvenida.ForeColor = Color.FromArgb(108, 117, 125);
+            lblBienvenida.Location = new Point(752, 16);
+            lblBienvenida.Name = "lblBienvenida";
+            lblBienvenida.Size = new Size(185, 20);
+            lblBienvenida.TabIndex = 4;
+            lblBienvenida.Text = "Bienvenido administrador:";
+            lblBienvenida.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // pnlHeaderBorde
+            // 
+            pnlHeaderBorde.BackColor = Color.FromArgb(221, 225, 231);
+            pnlHeaderBorde.Dock = DockStyle.Bottom;
+            pnlHeaderBorde.Location = new Point(0, 52);
+            pnlHeaderBorde.Name = "pnlHeaderBorde";
+            pnlHeaderBorde.Size = new Size(1084, 1);
+            pnlHeaderBorde.TabIndex = 6;
             // 
             // frmPrincipal
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
-            ClientSize = new Size(1124, 749);
+            ClientSize = new Size(1306, 749);
+            Controls.Add(pnlHeader);
             Controls.Add(pnlContenido);
             Controls.Add(pnlSidebar);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -210,9 +349,15 @@
             Name = "frmPrincipal";
             Text = "Administración";
             WindowState = FormWindowState.Maximized;
+            Load += frmPrincipal_Load;
             pnlSidebar.ResumeLayout(false);
             pnlSidebar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pcbLogo).EndInit();
+            pnlHeader.ResumeLayout(false);
+            pnlHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pcbAyuda).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pcbUsuario).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pcbModulo).EndInit();
             ResumeLayout(false);
         }
 
@@ -230,5 +375,15 @@
         private Button btnHorarios;
         private Button btnCerrarSesion;
         private Panel pnlContenido;
+        private Panel pnlHeader;
+        private Panel pnlHeaderBorde;
+        private Label lblModuloPrefijo;
+        private Label lblModuloValor;
+        private Label lblBienvenida;
+        private Label lblUsuario;
+        private PictureBox pcbModulo;
+        private PictureBox pcbUsuario;
+        private Label lblAyuda;
+        private PictureBox pcbAyuda;
     }
 }
