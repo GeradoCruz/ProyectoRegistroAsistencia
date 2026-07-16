@@ -14,30 +14,8 @@ namespace ProyectoRegistroAsistencia
     {
         public frmNuevoDepartamento()
         {
-            InitializeComponent();
-            btnGuardar.Click += btnGuardar_Click;
-            btnCancelar.Click += btnCancelar_Click;
+            InitializeComponent();   
         }
 
-        private void btnGuardar_Click(object? sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtDepartamento.Text))
-            {
-                MessageBox.Show("Escribe el nombre del departamento.", "Staff Asistence",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // TODO: guardar el nuevo departamento en la base de datos
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
-        }
-
-        private void btnCancelar_Click(object? sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
     }
 }
