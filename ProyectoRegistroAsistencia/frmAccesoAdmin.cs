@@ -15,10 +15,7 @@ namespace ProyectoRegistroAsistencia
         public frmAccesoAdmin()
         {
             InitializeComponent();
-
             KeyPreview = true;
-            KeyDown += frmAccesoAdmin_KeyDown;
-            btnInicioSesion.Click += btnInicioSesion_Click;
         }
 
         private void frmAccesoAdmin_KeyDown(object? sender, KeyEventArgs e)
@@ -40,9 +37,5 @@ namespace ProyectoRegistroAsistencia
                 return;
             }
 
-            // TODO: validar usuario/contraseña contra la base de datos.
-            DialogResult = DialogResult.OK;
-            Close();
-        }
     }
 }

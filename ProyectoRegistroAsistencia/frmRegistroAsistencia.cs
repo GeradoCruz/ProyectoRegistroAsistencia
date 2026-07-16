@@ -15,7 +15,6 @@ namespace ProyectoRegistroAsistencia
         public frmRegistroAsistencia()
         {
             InitializeComponent();
-
             KeyPreview = true;
             KeyDown += frmRegistroAsistencia_KeyDown;
         }
@@ -29,15 +28,9 @@ namespace ProyectoRegistroAsistencia
             }
         }
 
-        /// <summary>
-        /// F5: cierra (oculta) el registro de asistencia y pide las credenciales
-        /// de administrador. Si son correctas abre el panel de administración;
-        /// si se cancela (Esc), vuelve a mostrar el registro de asistencia.
-        /// </summary>
         private void AbrirPanelAdministrador()
         {
             Hide();
-
             using (var login = new frmAccesoAdmin())
             {
                 if (login.ShowDialog() == DialogResult.OK)
