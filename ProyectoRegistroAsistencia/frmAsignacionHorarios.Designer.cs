@@ -335,7 +335,7 @@ namespace ProyectoRegistroAsistencia
             btnGuardar.ForeColor = Color.White;
             btnGuardar.Image = (Image)resources.GetObject("btnGuardar.Image");
             btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGuardar.Location = new Point(12, 465);
+            btnGuardar.Location = new Point(10, 475);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(180, 40);
             btnGuardar.TabIndex = 4;
@@ -349,7 +349,7 @@ namespace ProyectoRegistroAsistencia
             btnCancelar.ForeColor = Color.White;
             btnCancelar.Image = (Image)resources.GetObject("btnCancelar.Image");
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(291, 465);
+            btnCancelar.Location = new Point(293, 475);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(180, 40);
             btnCancelar.TabIndex = 5;
@@ -361,7 +361,7 @@ namespace ProyectoRegistroAsistencia
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
-            ClientSize = new Size(484, 509);
+            ClientSize = new Size(484, 532);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
             Controls.Add(grpHorario);
@@ -373,7 +373,7 @@ namespace ProyectoRegistroAsistencia
             MinimizeBox = false;
             Name = "frmAsignacionHorarios";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Asignacion de Horario";
+            Text = "Staff Asistence";
             grpBuscarTrabajador.ResumeLayout(false);
             grpBuscarTrabajador.PerformLayout();
             grpDatosTrabajador.ResumeLayout(false);

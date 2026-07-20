@@ -40,8 +40,8 @@ namespace ProyectoRegistroAsistencia
                     conexionLocal.Open();
                     return conexionLocal;
                 }
-            catch (Exception ex)
-            {
+                catch (Exception ex)
+                {
                     throw new Exception("Error al intentar conectarse a la base de datos remota y local: " + ex.Message, ex);
                 }
             }

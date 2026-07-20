@@ -1,4 +1,4 @@
-﻿namespace ProyectoRegistroAsistencia
+namespace ProyectoRegistroAsistencia
 {
     partial class frmHorarioSemanal
     {
@@ -40,9 +40,9 @@
             dgvHorarios = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dgvHorarios).BeginInit();
             SuspendLayout();
-            // 
+            //
             // lblTitulo
-            // 
+            //
             lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -52,9 +52,9 @@
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Horario Semanal";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
-            // 
+            //
             // lblSubtitulo
-            // 
+            //
             lblSubtitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblSubtitulo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -64,9 +64,9 @@
             lblSubtitulo.TabIndex = 2;
             lblSubtitulo.Text = "Gestión de los horarios de cada empleado";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
-            // 
+            //
             // lblDepartamento
-            // 
+            //
             lblDepartamento.AutoSize = true;
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             lblDepartamento.Location = new Point(12, 127);
@@ -74,9 +74,9 @@
             lblDepartamento.Size = new Size(113, 21);
             lblDepartamento.TabIndex = 5;
             lblDepartamento.Text = "Departamento:";
-            // 
+            //
             // cmbDepartamento
-            // 
+            //
             cmbDepartamento.BackColor = Color.White;
             cmbDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             cmbDepartamento.FormattingEnabled = true;
@@ -84,9 +84,9 @@
             cmbDepartamento.Name = "cmbDepartamento";
             cmbDepartamento.Size = new Size(200, 29);
             cmbDepartamento.TabIndex = 6;
-            // 
+            //
             // btnBuscar
-            // 
+            //
             btnBuscar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnBuscar.BackColor = Color.FromArgb(43, 76, 140);
             btnBuscar.ForeColor = Color.White;
@@ -98,9 +98,9 @@
             btnBuscar.TabIndex = 10;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = false;
-            // 
+            //
             // btnAsignarHorario
-            // 
+            //
             btnAsignarHorario.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAsignarHorario.BackColor = Color.FromArgb(43, 76, 140);
             btnAsignarHorario.ForeColor = Color.White;
@@ -112,9 +112,9 @@
             btnAsignarHorario.TabIndex = 11;
             btnAsignarHorario.Text = "Asignar Horario";
             btnAsignarHorario.UseVisualStyleBackColor = false;
-            // 
+            //
             // dgvHorarios
-            // 
+            //
             dgvHorarios.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvHorarios.BackgroundColor = Color.FromArgb(240, 242, 245);
             dgvHorarios.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
@@ -139,9 +139,9 @@
             dgvHorarios.Name = "dgvHorarios";
             dgvHorarios.Size = new Size(1044, 427);
             dgvHorarios.TabIndex = 12;
-            // 
+            //
             // frmHorarioSemanal
-            // 
+            //
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
