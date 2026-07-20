@@ -14,8 +14,78 @@ namespace ProyectoRegistroAsistencia
 {
     internal class clsReportes
     {
-        DataTable tabla;
-        MySqlDataAdapter consulta;
+        private DataTable tabla;
+        private MySqlDataAdapter consulta;
+        private MySqlCommand comando;
+
+
+        public DataTable obtenerDepartamentos()
+        {
+            tabla = new DataTable();
+            try
+            {
+                clsConexion conexionBD = new clsConexion();
+                using (var conexion = conexionBD.AbrirConexion())
+                {
+                    string sql = "SELECT id_departamento, nombre_departamento FROM tbldepartamento;";
+                    using (consulta = new MySqlDataAdapter(sql, conexion))
+                    {
+                        consulta.Fill(tabla);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el catalogo de Departamentos: " + ex.Message);
+            }
+            return tabla;
+        }
+
+        public DataTable ConsultarAsistenciaSemanal(DateTime desde, DateTime hasta, int idDepartamento)
+        {
+            tabla = new DataTable();
+            try
+            {
+                clsConexion conexionBD = new clsConexion();
+                using (var conexion = conexionBD.AbrirConexion())
+                {
+                    string sql = "SELECT t.clave_trabajador AS Clave, " +
+                                 "CONCAT(t.nombre, ' ', t.a_paterno, ' ', IFNULL(t.a_materno,'')) AS Trabajador, " +
+                                 "d.nombre_departamento AS Departamento, " +
+                                 "COUNT(DISTINCT a.fecha) AS 'Días Asistidos', " +
+                                 "(DATEDIFF(@hasta, @desde) + 1) - COUNT(DISTINCT a.fecha) AS 'Faltas' " +
+                                 "FROM tbltrabajador t " +
+                                 "INNER JOIN tbldepartamento d ON t.id_departamento = d.id_departamento " +
+                                 "INNER JOIN tblasistencia a ON a.id_trabajador = t.id_trabajador " +
+                                 "AND a.fecha BETWEEN @desde AND @hasta " +
+                                 "WHERE t.estatus = 'activo' " +
+                                 (idDepartamento != 0 ? "AND t.id_departamento = @idDepartamento " : "") +
+                                 "GROUP BY t.id_trabajador " +
+                                 "ORDER BY d.nombre_departamento, t.nombre;";
+
+                    using (var comando = new MySqlCommand(sql, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@desde", desde.ToString("yyyy-MM-dd"));
+                        comando.Parameters.AddWithValue("@hasta", hasta.ToString("yyyy-MM-dd"));
+                        if (idDepartamento != 0)
+                            comando.Parameters.AddWithValue("@idDepartamento", idDepartamento);
+
+                        using (consulta = new MySqlDataAdapter(comando))
+                        {
+                            consulta.Fill(tabla);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al consultar asistencia semanal: " + ex.Message);
+            }
+            return tabla;
+        }
+
+
+
 
         public void ExportarPDF(DataTable tabla, string tituloReporte, string nombreArchivoSugerido)
         {
