@@ -7,11 +7,11 @@ namespace ProyectoRegistroAsistencia
     internal class clsConexion
     {
         private string host = "189.240.192.140";
-        private string bd = "bdescuelagbequipo1";
-        private string user = "gbEquipo1";
-        private string password = "grupo1";
+        private string bd = "equipo1_staff_asistence";
+        private string user = "usuario1GB";
+        private string password = "equipo1gb";
         private string port = "3306";
-
+        
         //datos del servidor local 
         private string hostLocal = "localhost";
         private string bdLocal = "equipo1_staff_asistence";
@@ -26,12 +26,12 @@ namespace ProyectoRegistroAsistencia
         {
             try
             {
-                //primero intenta conectarse al servidor remoto
+               
                 var conexion = new MySqlConnection(CadenaRemota);
                 conexion.Open();
                 return conexion;
             }
-            catch
+           catch
             {
                 try
                 {
