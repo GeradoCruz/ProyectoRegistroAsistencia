@@ -1,4 +1,4 @@
-﻿namespace ProyectoRegistroAsistencia
+namespace ProyectoRegistroAsistencia
 {
     partial class frmPuestos
     {
@@ -41,9 +41,9 @@
             dgvPuestos = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dgvPuestos).BeginInit();
             SuspendLayout();
-            // 
+            //
             // lblTitulo
-            // 
+            //
             lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -53,9 +53,9 @@
             lblTitulo.TabIndex = 3;
             lblTitulo.Text = "Puestos";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
-            // 
+            //
             // lblSubtitulo
-            // 
+            //
             lblSubtitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblSubtitulo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -65,9 +65,9 @@
             lblSubtitulo.TabIndex = 4;
             lblSubtitulo.Text = "Gestión de los puestos de la institución";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
-            // 
+            //
             // btnEditar
-            // 
+            //
             btnEditar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnEditar.BackColor = Color.FromArgb(43, 76, 140);
             btnEditar.ForeColor = Color.White;
@@ -79,9 +79,9 @@
             btnEditar.TabIndex = 17;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = false;
-            // 
+            //
             // btnNuevo
-            // 
+            //
             btnNuevo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnNuevo.BackColor = Color.FromArgb(43, 76, 140);
             btnNuevo.ForeColor = Color.White;
@@ -93,9 +93,9 @@
             btnNuevo.TabIndex = 16;
             btnNuevo.Text = "Nuevo";
             btnNuevo.UseVisualStyleBackColor = false;
-            // 
+            //
             // btnBuscar
-            // 
+            //
             btnBuscar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnBuscar.BackColor = Color.FromArgb(43, 76, 140);
             btnBuscar.ForeColor = Color.White;
@@ -107,9 +107,9 @@
             btnBuscar.TabIndex = 15;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = false;
-            // 
+            //
             // cmbDepartamento
-            // 
+            //
             cmbDepartamento.BackColor = Color.White;
             cmbDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             cmbDepartamento.FormattingEnabled = true;
@@ -117,9 +117,9 @@
             cmbDepartamento.Name = "cmbDepartamento";
             cmbDepartamento.Size = new Size(200, 29);
             cmbDepartamento.TabIndex = 14;
-            // 
+            //
             // lblDepartamento
-            // 
+            //
             lblDepartamento.AutoSize = true;
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             lblDepartamento.Location = new Point(13, 127);
@@ -127,9 +127,9 @@
             lblDepartamento.Size = new Size(113, 21);
             lblDepartamento.TabIndex = 13;
             lblDepartamento.Text = "Departamento:";
-            // 
+            //
             // dgvPuestos
-            // 
+            //
             dgvPuestos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvPuestos.BackgroundColor = Color.FromArgb(240, 242, 245);
             dgvPuestos.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
@@ -154,9 +154,9 @@
             dgvPuestos.Name = "dgvPuestos";
             dgvPuestos.Size = new Size(1044, 427);
             dgvPuestos.TabIndex = 18;
-            // 
+            //
             // frmPuestos
-            // 
+            //
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);

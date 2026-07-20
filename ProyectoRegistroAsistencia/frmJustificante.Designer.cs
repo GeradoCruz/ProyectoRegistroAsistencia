@@ -45,9 +45,9 @@ namespace ProyectoRegistroAsistencia
             grpDatos = new GroupBox();
             grpDatos.SuspendLayout();
             SuspendLayout();
-            // 
+            //
             // lblTitulo
-            // 
+            //
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -57,9 +57,9 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.Size = new Size(261, 30);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Justificante de Incidencia";
-            // 
+            //
             // lblNombre
-            // 
+            //
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblNombre.ForeColor = Color.FromArgb(108, 117, 125);
@@ -69,9 +69,9 @@ namespace ProyectoRegistroAsistencia
             lblNombre.Size = new Size(71, 21);
             lblNombre.TabIndex = 1;
             lblNombre.Text = "Nombre:";
-            // 
+            //
             // lblDepartamento
-            // 
+            //
             lblDepartamento.AutoSize = true;
             lblDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
@@ -81,9 +81,9 @@ namespace ProyectoRegistroAsistencia
             lblDepartamento.Size = new Size(113, 21);
             lblDepartamento.TabIndex = 3;
             lblDepartamento.Text = "Departamento:";
-            // 
+            //
             // lblFecha
-            // 
+            //
             lblFecha.AutoSize = true;
             lblFecha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblFecha.ForeColor = Color.FromArgb(108, 117, 125);
@@ -93,9 +93,9 @@ namespace ProyectoRegistroAsistencia
             lblFecha.Size = new Size(53, 21);
             lblFecha.TabIndex = 4;
             lblFecha.Text = "Fecha:";
-            // 
+            //
             // lblIncidencia
-            // 
+            //
             lblIncidencia.AutoSize = true;
             lblIncidencia.ForeColor = Color.FromArgb(108, 117, 125);
             lblIncidencia.Location = new Point(285, 113);
@@ -104,9 +104,9 @@ namespace ProyectoRegistroAsistencia
             lblIncidencia.Size = new Size(82, 21);
             lblIncidencia.TabIndex = 5;
             lblIncidencia.Text = "Incidencia:";
-            // 
+            //
             // lblJustificante
-            // 
+            //
             lblJustificante.AutoSize = true;
             lblJustificante.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblJustificante.ForeColor = Color.FromArgb(108, 117, 125);
@@ -116,9 +116,9 @@ namespace ProyectoRegistroAsistencia
             lblJustificante.Size = new Size(87, 21);
             lblJustificante.TabIndex = 6;
             lblJustificante.Text = "Justificante";
-            // 
+            //
             // btnGuardar
-            // 
+            //
             btnGuardar.BackColor = Color.FromArgb(43, 76, 140);
             btnGuardar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGuardar.ForeColor = Color.White;
@@ -131,9 +131,9 @@ namespace ProyectoRegistroAsistencia
             btnGuardar.TabIndex = 7;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
-            // 
+            //
             // btnCancelar
-            // 
+            //
             btnCancelar.BackColor = Color.FromArgb(108, 117, 125);
             btnCancelar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCancelar.ForeColor = Color.White;
@@ -146,9 +146,9 @@ namespace ProyectoRegistroAsistencia
             btnCancelar.TabIndex = 8;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
-            // 
+            //
             // txtNombre
-            // 
+            //
             txtNombre.BackColor = Color.White;
             txtNombre.Enabled = false;
             txtNombre.ForeColor = Color.FromArgb(108, 117, 125);
@@ -157,9 +157,9 @@ namespace ProyectoRegistroAsistencia
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(200, 29);
             txtNombre.TabIndex = 9;
-            // 
+            //
             // txtJustificante
-            // 
+            //
             txtJustificante.BackColor = Color.White;
             txtJustificante.ForeColor = Color.FromArgb(108, 117, 125);
             txtJustificante.Location = new Point(18, 225);
@@ -168,9 +168,9 @@ namespace ProyectoRegistroAsistencia
             txtJustificante.Name = "txtJustificante";
             txtJustificante.Size = new Size(467, 82);
             txtJustificante.TabIndex = 10;
-            // 
+            //
             // txtIncidencia
-            // 
+            //
             txtIncidencia.BackColor = Color.White;
             txtIncidencia.Enabled = false;
             txtIncidencia.ForeColor = Color.FromArgb(108, 117, 125);
@@ -179,9 +179,9 @@ namespace ProyectoRegistroAsistencia
             txtIncidencia.Name = "txtIncidencia";
             txtIncidencia.Size = new Size(200, 29);
             txtIncidencia.TabIndex = 11;
-            // 
+            //
             // txtDepartamento
-            // 
+            //
             txtDepartamento.BackColor = Color.White;
             txtDepartamento.Enabled = false;
             txtDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -191,9 +191,9 @@ namespace ProyectoRegistroAsistencia
             txtDepartamento.Name = "txtDepartamento";
             txtDepartamento.Size = new Size(200, 29);
             txtDepartamento.TabIndex = 12;
-            // 
+            //
             // dtpFecha
-            // 
+            //
             dtpFecha.CustomFormat = "dd/MM/yyyy";
             dtpFecha.Enabled = false;
             dtpFecha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -203,9 +203,9 @@ namespace ProyectoRegistroAsistencia
             dtpFecha.Name = "dtpFecha";
             dtpFecha.Size = new Size(200, 29);
             dtpFecha.TabIndex = 13;
-            // 
+            //
             // grpDatos
-            // 
+            //
             grpDatos.Controls.Add(txtIncidencia);
             grpDatos.Controls.Add(dtpFecha);
             grpDatos.Controls.Add(lblNombre);
@@ -226,9 +226,9 @@ namespace ProyectoRegistroAsistencia
             grpDatos.TabIndex = 14;
             grpDatos.TabStop = false;
             grpDatos.Text = "Datos del Trabajador";
-            // 
+            //
             // frmJustificante
-            // 
+            //
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);

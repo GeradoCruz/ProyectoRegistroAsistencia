@@ -39,9 +39,9 @@ namespace ProyectoRegistroAsistencia
             btnCancelar = new Button();
             pnlDepartamento.SuspendLayout();
             SuspendLayout();
-            // 
+            //
             // lblTitulo
-            // 
+            //
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -50,9 +50,9 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.Size = new Size(226, 30);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Nuevo Departamento";
-            // 
+            //
             // pnlDepartamento
-            // 
+            //
             pnlDepartamento.BorderStyle = BorderStyle.FixedSingle;
             pnlDepartamento.Controls.Add(txtDescripcion);
             pnlDepartamento.Controls.Add(lblDescripcion);
@@ -63,9 +63,9 @@ namespace ProyectoRegistroAsistencia
             pnlDepartamento.Name = "pnlDepartamento";
             pnlDepartamento.Size = new Size(365, 235);
             pnlDepartamento.TabIndex = 1;
-            // 
+            //
             // txtDescripcion
-            // 
+            //
             txtDescripcion.BackColor = Color.White;
             txtDescripcion.ForeColor = Color.FromArgb(108, 117, 125);
             txtDescripcion.Location = new Point(15, 116);
@@ -74,9 +74,9 @@ namespace ProyectoRegistroAsistencia
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(319, 105);
             txtDescripcion.TabIndex = 3;
-            // 
+            //
             // lblDescripcion
-            // 
+            //
             lblDescripcion.AutoSize = true;
             lblDescripcion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDescripcion.ForeColor = Color.FromArgb(108, 117, 125);
@@ -84,10 +84,10 @@ namespace ProyectoRegistroAsistencia
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(94, 21);
             lblDescripcion.TabIndex = 2;
-            lblDescripcion.Text = "Descripción:";
-            // 
+            lblDescripcion.Text = "Descripciï¿½n:";
+            //
             // txtDepartamento
-            // 
+            //
             txtDepartamento.BackColor = Color.White;
             txtDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
@@ -96,9 +96,9 @@ namespace ProyectoRegistroAsistencia
             txtDepartamento.Name = "txtDepartamento";
             txtDepartamento.Size = new Size(319, 29);
             txtDepartamento.TabIndex = 1;
-            // 
+            //
             // lblDepartamento
-            // 
+            //
             lblDepartamento.AutoSize = true;
             lblDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
@@ -107,9 +107,9 @@ namespace ProyectoRegistroAsistencia
             lblDepartamento.Size = new Size(113, 21);
             lblDepartamento.TabIndex = 0;
             lblDepartamento.Text = "Departamento:";
-            // 
+            //
             // btnGuardar
-            // 
+            //
             btnGuardar.BackColor = Color.FromArgb(43, 76, 140);
             btnGuardar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGuardar.ForeColor = Color.White;
@@ -122,9 +122,9 @@ namespace ProyectoRegistroAsistencia
             btnGuardar.TabIndex = 2;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
-            // 
+            //
             // btnCancelar
-            // 
+            //
             btnCancelar.BackColor = Color.FromArgb(108, 117, 125);
             btnCancelar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCancelar.ForeColor = Color.White;
@@ -137,9 +137,9 @@ namespace ProyectoRegistroAsistencia
             btnCancelar.TabIndex = 3;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
-            // 
+            //
             // frmNuevoDepartamento
-            // 
+            //
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);

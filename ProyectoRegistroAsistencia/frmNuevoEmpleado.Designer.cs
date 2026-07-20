@@ -28,6 +28,7 @@ namespace ProyectoRegistroAsistencia
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNuevoEmpleado));
             grpDatosGenerales = new GroupBox();
             lblPuesto = new Label();
             lblDepartamento = new Label();
@@ -84,7 +85,7 @@ namespace ProyectoRegistroAsistencia
             grpDatosGenerales.Controls.Add(lblNombre);
             grpDatosGenerales.Controls.Add(lblClaveTrabajador);
             grpDatosGenerales.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpDatosGenerales.ForeColor = Color.FromArgb(43, 76, 140);
+            grpDatosGenerales.ForeColor = Color.FromArgb(108, 117, 125);
             grpDatosGenerales.Location = new Point(12, 42);
             grpDatosGenerales.Name = "grpDatosGenerales";
             grpDatosGenerales.Size = new Size(480, 253);
@@ -246,7 +247,7 @@ namespace ProyectoRegistroAsistencia
             //
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitulo.ForeColor = Color.FromArgb(43, 76, 140);
+            lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
             lblTitulo.Location = new Point(104, 9);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(298, 30);
@@ -264,7 +265,7 @@ namespace ProyectoRegistroAsistencia
             grpGenero.Controls.Add(lblCP);
             grpGenero.Controls.Add(lblNumCalle);
             grpGenero.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpGenero.ForeColor = Color.FromArgb(43, 76, 140);
+            grpGenero.ForeColor = Color.FromArgb(108, 117, 125);
             grpGenero.Location = new Point(12, 301);
             grpGenero.Name = "grpGenero";
             grpGenero.Size = new Size(480, 134);
@@ -351,7 +352,7 @@ namespace ProyectoRegistroAsistencia
             grpDatosDeContacto.Controls.Add(lblCorreoInstitucional);
             grpDatosDeContacto.Controls.Add(lblTelefono);
             grpDatosDeContacto.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpDatosDeContacto.ForeColor = Color.FromArgb(43, 76, 140);
+            grpDatosDeContacto.ForeColor = Color.FromArgb(108, 117, 125);
             grpDatosDeContacto.Location = new Point(12, 441);
             grpDatosDeContacto.Name = "grpDatosDeContacto";
             grpDatosDeContacto.Size = new Size(480, 83);
@@ -402,9 +403,11 @@ namespace ProyectoRegistroAsistencia
             btnGuardar.BackColor = Color.FromArgb(43, 76, 140);
             btnGuardar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(12, 542);
+            btnGuardar.Image = (Image)resources.GetObject("btnGuardar.Image");
+            btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnGuardar.Location = new Point(12, 540);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(120, 35);
+            btnGuardar.Size = new Size(180, 40);
             btnGuardar.TabIndex = 4;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
@@ -414,9 +417,11 @@ namespace ProyectoRegistroAsistencia
             btnCancelar.BackColor = Color.FromArgb(108, 117, 125);
             btnCancelar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(372, 542);
+            btnCancelar.Image = (Image)resources.GetObject("btnCancelar.Image");
+            btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCancelar.Location = new Point(310, 540);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(120, 35);
+            btnCancelar.Size = new Size(180, 40);
             btnCancelar.TabIndex = 5;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
@@ -438,7 +443,7 @@ namespace ProyectoRegistroAsistencia
             MinimizeBox = false;
             Name = "frmNuevoEmpleado";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Registro de Nuevo Empleado";
+            Text = "Staff Asistence";
             grpDatosGenerales.ResumeLayout(false);
             grpDatosGenerales.PerformLayout();
             grpGenero.ResumeLayout(false);

@@ -42,6 +42,8 @@
             pcbLogo = new PictureBox();
             pnlContenido = new Panel();
             pnlHeader = new Panel();
+            pcbDisminuir = new PictureBox();
+            pcbAumentar = new PictureBox();
             lblAyuda = new Label();
             pcbAyuda = new PictureBox();
             lblUsuario = new Label();
@@ -54,6 +56,8 @@
             pnlSidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbLogo).BeginInit();
             pnlHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pcbDisminuir).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pcbAumentar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcbAyuda).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcbUsuario).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcbModulo).BeginInit();
@@ -224,6 +228,8 @@
             // 
             pnlHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlHeader.BackColor = Color.White;
+            pnlHeader.Controls.Add(pcbDisminuir);
+            pnlHeader.Controls.Add(pcbAumentar);
             pnlHeader.Controls.Add(lblAyuda);
             pnlHeader.Controls.Add(pcbAyuda);
             pnlHeader.Controls.Add(lblUsuario);
@@ -238,11 +244,40 @@
             pnlHeader.Size = new Size(1084, 53);
             pnlHeader.TabIndex = 2;
             // 
+            // pcbDisminuir
+            // 
+            pcbDisminuir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pcbDisminuir.Cursor = Cursors.Hand;
+            pcbDisminuir.Image = (Image)resources.GetObject("pcbDisminuir.Image");
+            pcbDisminuir.Location = new Point(1046, 8);
+            pcbDisminuir.Name = "pcbDisminuir";
+            pcbDisminuir.Size = new Size(30, 30);
+            pcbDisminuir.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbDisminuir.TabIndex = 9;
+            pcbDisminuir.TabStop = false;
+            pcbDisminuir.MouseDown += pcbAyuda_MouseDown;
+            pcbDisminuir.MouseUp += pcbAyuda_MouseUp;
+            // 
+            // pcbAumentar
+            // 
+            pcbAumentar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pcbAumentar.Cursor = Cursors.Hand;
+            pcbAumentar.Image = (Image)resources.GetObject("pcbAumentar.Image");
+            pcbAumentar.Location = new Point(1010, 8);
+            pcbAumentar.Name = "pcbAumentar";
+            pcbAumentar.Size = new Size(30, 30);
+            pcbAumentar.SizeMode = PictureBoxSizeMode.StretchImage;
+            pcbAumentar.TabIndex = 8;
+            pcbAumentar.TabStop = false;
+            pcbAumentar.MouseDown += pcbAyuda_MouseDown;
+            pcbAumentar.MouseUp += pcbAyuda_MouseUp;
+            // 
             // lblAyuda
             // 
+            lblAyuda.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblAyuda.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblAyuda.ForeColor = Color.FromArgb(108, 117, 125);
-            lblAyuda.Location = new Point(986, 15);
+            lblAyuda.Location = new Point(910, 15);
             lblAyuda.Name = "lblAyuda";
             lblAyuda.Size = new Size(57, 20);
             lblAyuda.TabIndex = 5;
@@ -251,9 +286,10 @@
             // 
             // pcbAyuda
             // 
+            pcbAyuda.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pcbAyuda.Cursor = Cursors.Hand;
             pcbAyuda.Image = (Image)resources.GetObject("pcbAyuda.Image");
-            pcbAyuda.Location = new Point(1048, 8);
+            pcbAyuda.Location = new Point(969, 8);
             pcbAyuda.Name = "pcbAyuda";
             pcbAyuda.Size = new Size(30, 30);
             pcbAyuda.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -264,10 +300,11 @@
             // 
             // lblUsuario
             // 
+            lblUsuario.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblUsuario.AutoSize = true;
             lblUsuario.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblUsuario.ForeColor = Color.FromArgb(43, 76, 140);
-            lblUsuario.Location = new Point(939, 16);
+            lblUsuario.Location = new Point(859, 16);
             lblUsuario.Name = "lblUsuario";
             lblUsuario.Size = new Size(39, 20);
             lblUsuario.TabIndex = 5;
@@ -275,8 +312,9 @@
             // 
             // pcbUsuario
             // 
+            pcbUsuario.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pcbUsuario.Image = (Image)resources.GetObject("pcbUsuario.Image");
-            pcbUsuario.Location = new Point(718, 8);
+            pcbUsuario.Location = new Point(641, 8);
             pcbUsuario.Name = "pcbUsuario";
             pcbUsuario.Size = new Size(30, 30);
             pcbUsuario.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -292,9 +330,9 @@
             pcbModulo.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbModulo.TabIndex = 0;
             pcbModulo.TabStop = false;
-            // 
+            //
             // lblModuloPrefijo
-            // 
+            //
             lblModuloPrefijo.AutoSize = true;
             lblModuloPrefijo.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblModuloPrefijo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -303,9 +341,9 @@
             lblModuloPrefijo.Size = new Size(64, 20);
             lblModuloPrefijo.TabIndex = 1;
             lblModuloPrefijo.Text = "Módulo:";
-            // 
+            //
             // lblModuloValor
-            // 
+            //
             lblModuloValor.AutoSize = true;
             lblModuloValor.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblModuloValor.ForeColor = Color.FromArgb(43, 76, 140);
@@ -314,12 +352,13 @@
             lblModuloValor.Size = new Size(33, 20);
             lblModuloValor.TabIndex = 2;
             lblModuloValor.Text = "----";
-            // 
+            //
             // lblBienvenida
             // 
+            lblBienvenida.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblBienvenida.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblBienvenida.ForeColor = Color.FromArgb(108, 117, 125);
-            lblBienvenida.Location = new Point(752, 16);
+            lblBienvenida.Location = new Point(673, 16);
             lblBienvenida.Name = "lblBienvenida";
             lblBienvenida.Size = new Size(185, 20);
             lblBienvenida.TabIndex = 4;
@@ -355,6 +394,8 @@
             ((System.ComponentModel.ISupportInitialize)pcbLogo).EndInit();
             pnlHeader.ResumeLayout(false);
             pnlHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pcbDisminuir).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pcbAumentar).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcbAyuda).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcbUsuario).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcbModulo).EndInit();
@@ -385,5 +426,7 @@
         private PictureBox pcbUsuario;
         private Label lblAyuda;
         private PictureBox pcbAyuda;
+        private PictureBox pcbAumentar;
+        private PictureBox pcbDisminuir;
     }
 }

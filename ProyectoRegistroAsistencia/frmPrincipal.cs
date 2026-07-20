@@ -122,13 +122,13 @@ namespace ProyectoRegistroAsistencia
         private void pcbAyuda_MouseDown(object mipictureSeleccionado, MouseEventArgs e)
         {
             PictureBox pcb = (PictureBox)mipictureSeleccionado;
-            pcb.Location = new Point(pcb.Location.X + 3, pcb.Location.Y + 3);
+            pcb.Location = new Point(pcb.Location.X + 1, pcb.Location.Y + 1);
         }
 
         private void pcbAyuda_MouseUp(object mipictureSeleccionado, MouseEventArgs e)
         {
             PictureBox pcb = (PictureBox)mipictureSeleccionado;
-            pcb.Location = new Point(pcb.Location.X - 3, pcb.Location.Y - 3);
+            pcb.Location = new Point(pcb.Location.X - 1, pcb.Location.Y - 1);
         }
     }
 }

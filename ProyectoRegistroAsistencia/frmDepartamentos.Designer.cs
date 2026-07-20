@@ -1,4 +1,4 @@
-﻿namespace ProyectoRegistroAsistencia
+namespace ProyectoRegistroAsistencia
 {
     partial class frmDepartamentos
     {
@@ -38,9 +38,9 @@
             dgvDepartamentos = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dgvDepartamentos).BeginInit();
             SuspendLayout();
-            // 
+            //
             // lblTitulo
-            // 
+            //
             lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -50,9 +50,9 @@
             lblTitulo.TabIndex = 2;
             lblTitulo.Text = "Departamentos";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
-            // 
+            //
             // lblSubtitulo
-            // 
+            //
             lblSubtitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblSubtitulo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -62,9 +62,9 @@
             lblSubtitulo.TabIndex = 3;
             lblSubtitulo.Text = "Gestión de los departamentos de la institución";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
-            // 
+            //
             // btnEditar
-            // 
+            //
             btnEditar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnEditar.BackColor = Color.FromArgb(43, 76, 140);
             btnEditar.ForeColor = Color.White;
@@ -76,9 +76,9 @@
             btnEditar.TabIndex = 14;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = false;
-            // 
+            //
             // btnNuevo
-            // 
+            //
             btnNuevo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnNuevo.BackColor = Color.FromArgb(43, 76, 140);
             btnNuevo.ForeColor = Color.White;
@@ -90,9 +90,9 @@
             btnNuevo.TabIndex = 13;
             btnNuevo.Text = "Nuevo";
             btnNuevo.UseVisualStyleBackColor = false;
-            // 
+            //
             // dgvDepartamentos
-            // 
+            //
             dgvDepartamentos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvDepartamentos.BackgroundColor = Color.FromArgb(240, 242, 245);
             dgvDepartamentos.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
@@ -117,9 +117,9 @@
             dgvDepartamentos.Name = "dgvDepartamentos";
             dgvDepartamentos.Size = new Size(1044, 427);
             dgvDepartamentos.TabIndex = 15;
-            // 
+            //
             // frmDepartamentos
-            // 
+            //
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);

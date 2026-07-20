@@ -1,4 +1,4 @@
-﻿namespace ProyectoRegistroAsistencia
+namespace ProyectoRegistroAsistencia
 {
     partial class frmReportes
     {
@@ -46,6 +46,10 @@
             btnPdf = new Button();
             btnExcel = new Button();
             btnImprimir = new Button();
+            rdbSemanal = new RadioButton();
+            rdbMensual = new RadioButton();
+            rdbHistorial = new RadioButton();
+            gpbOpciones = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)dgvReporte).BeginInit();
             SuspendLayout();
             // 
@@ -54,7 +58,7 @@
             cmbDepartamento.BackColor = Color.White;
             cmbDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             cmbDepartamento.FormattingEnabled = true;
-            cmbDepartamento.Location = new Point(661, 177);
+            cmbDepartamento.Location = new Point(661, 178);
             cmbDepartamento.Name = "cmbDepartamento";
             cmbDepartamento.Size = new Size(200, 29);
             cmbDepartamento.TabIndex = 29;
@@ -63,7 +67,7 @@
             // 
             lblDepartamento.AutoSize = true;
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDepartamento.Location = new Point(661, 153);
+            lblDepartamento.Location = new Point(661, 154);
             lblDepartamento.Name = "lblDepartamento";
             lblDepartamento.Size = new Size(113, 21);
             lblDepartamento.TabIndex = 28;
@@ -73,7 +77,7 @@
             // 
             txtClaveTrabajador.BackColor = Color.White;
             txtClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
-            txtClaveTrabajador.Location = new Point(444, 177);
+            txtClaveTrabajador.Location = new Point(444, 178);
             txtClaveTrabajador.Name = "txtClaveTrabajador";
             txtClaveTrabajador.Size = new Size(200, 29);
             txtClaveTrabajador.TabIndex = 27;
@@ -82,7 +86,7 @@
             // 
             lblClaveTrabajador.AutoSize = true;
             lblClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
-            lblClaveTrabajador.Location = new Point(446, 153);
+            lblClaveTrabajador.Location = new Point(446, 154);
             lblClaveTrabajador.Name = "lblClaveTrabajador";
             lblClaveTrabajador.Size = new Size(150, 21);
             lblClaveTrabajador.TabIndex = 26;
@@ -91,7 +95,7 @@
             // dtpFechaFin
             // 
             dtpFechaFin.Format = DateTimePickerFormat.Custom;
-            dtpFechaFin.Location = new Point(227, 177);
+            dtpFechaFin.Location = new Point(227, 178);
             dtpFechaFin.Name = "dtpFechaFin";
             dtpFechaFin.Size = new Size(200, 29);
             dtpFechaFin.TabIndex = 25;
@@ -100,16 +104,16 @@
             // 
             lblFechaFin.AutoSize = true;
             lblFechaFin.ForeColor = Color.FromArgb(108, 117, 125);
-            lblFechaFin.Location = new Point(227, 153);
+            lblFechaFin.Location = new Point(227, 154);
             lblFechaFin.Name = "lblFechaFin";
-            lblFechaFin.Size = new Size(25, 21);
+            lblFechaFin.Size = new Size(52, 21);
             lblFechaFin.TabIndex = 24;
-            lblFechaFin.Text = "al:";
+            lblFechaFin.Text = "Hasta:";
             // 
             // dtpFechaInicio
             // 
             dtpFechaInicio.Format = DateTimePickerFormat.Custom;
-            dtpFechaInicio.Location = new Point(10, 177);
+            dtpFechaInicio.Location = new Point(10, 178);
             dtpFechaInicio.Name = "dtpFechaInicio";
             dtpFechaInicio.Size = new Size(200, 29);
             dtpFechaInicio.TabIndex = 23;
@@ -118,11 +122,11 @@
             // 
             lblFechaInicio.AutoSize = true;
             lblFechaInicio.ForeColor = Color.FromArgb(108, 117, 125);
-            lblFechaInicio.Location = new Point(10, 153);
+            lblFechaInicio.Location = new Point(10, 154);
             lblFechaInicio.Name = "lblFechaInicio";
-            lblFechaInicio.Size = new Size(94, 21);
+            lblFechaInicio.Size = new Size(56, 21);
             lblFechaInicio.TabIndex = 22;
-            lblFechaInicio.Text = "Semana del:";
+            lblFechaInicio.Text = "Desde:";
             lblFechaInicio.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblSubtitulo
@@ -130,7 +134,7 @@
             lblSubtitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblSubtitulo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblSubtitulo.Location = new Point(172, 87);
+            lblSubtitulo.Location = new Point(172, 53);
             lblSubtitulo.Name = "lblSubtitulo";
             lblSubtitulo.Size = new Size(621, 25);
             lblSubtitulo.TabIndex = 21;
@@ -142,7 +146,7 @@
             lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblTitulo.Location = new Point(216, 33);
+            lblTitulo.Location = new Point(216, 16);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(506, 30);
             lblTitulo.TabIndex = 20;
@@ -156,7 +160,7 @@
             btnGenerar.ForeColor = Color.White;
             btnGenerar.Image = (Image)resources.GetObject("btnGenerar.Image");
             btnGenerar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGenerar.Location = new Point(876, 170);
+            btnGenerar.Location = new Point(876, 171);
             btnGenerar.Name = "btnGenerar";
             btnGenerar.Size = new Size(180, 40);
             btnGenerar.TabIndex = 31;
@@ -186,7 +190,7 @@
             dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
             dgvReporte.DefaultCellStyle = dataGridViewCellStyle4;
             dgvReporte.EnableHeadersVisualStyles = false;
-            dgvReporte.Location = new Point(10, 230);
+            dgvReporte.Location = new Point(10, 220);
             dgvReporte.Name = "dgvReporte";
             dgvReporte.RowTemplate.Height = 40;
             dgvReporte.Size = new Size(1046, 429);
@@ -194,12 +198,12 @@
             // 
             // btnPdf
             // 
-            btnPdf.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnPdf.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnPdf.BackColor = Color.FromArgb(43, 76, 140);
             btnPdf.ForeColor = Color.White;
             btnPdf.Image = (Image)resources.GetObject("btnPdf.Image");
             btnPdf.ImageAlign = ContentAlignment.MiddleLeft;
-            btnPdf.Location = new Point(878, 667);
+            btnPdf.Location = new Point(878, 657);
             btnPdf.Name = "btnPdf";
             btnPdf.Size = new Size(180, 40);
             btnPdf.TabIndex = 32;
@@ -208,12 +212,12 @@
             // 
             // btnExcel
             // 
-            btnExcel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnExcel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnExcel.BackColor = Color.FromArgb(43, 76, 140);
             btnExcel.ForeColor = Color.White;
             btnExcel.Image = (Image)resources.GetObject("btnExcel.Image");
             btnExcel.ImageAlign = ContentAlignment.MiddleLeft;
-            btnExcel.Location = new Point(692, 667);
+            btnExcel.Location = new Point(692, 657);
             btnExcel.Name = "btnExcel";
             btnExcel.Size = new Size(180, 40);
             btnExcel.TabIndex = 33;
@@ -222,17 +226,59 @@
             // 
             // btnImprimir
             // 
-            btnImprimir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnImprimir.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnImprimir.BackColor = Color.FromArgb(43, 76, 140);
             btnImprimir.ForeColor = Color.White;
             btnImprimir.Image = (Image)resources.GetObject("btnImprimir.Image");
             btnImprimir.ImageAlign = ContentAlignment.MiddleLeft;
-            btnImprimir.Location = new Point(506, 667);
+            btnImprimir.Location = new Point(506, 657);
             btnImprimir.Name = "btnImprimir";
             btnImprimir.Size = new Size(180, 40);
             btnImprimir.TabIndex = 34;
             btnImprimir.Text = "Imprimir";
             btnImprimir.UseVisualStyleBackColor = false;
+            // 
+            // rdbSemanal
+            // 
+            rdbSemanal.AutoSize = true;
+            rdbSemanal.Location = new Point(191, 109);
+            rdbSemanal.Name = "rdbSemanal";
+            rdbSemanal.Size = new Size(161, 25);
+            rdbSemanal.TabIndex = 35;
+            rdbSemanal.TabStop = true;
+            rdbSemanal.Text = "Asistencia Semanal";
+            rdbSemanal.UseVisualStyleBackColor = true;
+            // 
+            // rdbMensual
+            // 
+            rdbMensual.AutoSize = true;
+            rdbMensual.Location = new Point(390, 109);
+            rdbMensual.Name = "rdbMensual";
+            rdbMensual.Size = new Size(235, 25);
+            rdbMensual.TabIndex = 36;
+            rdbMensual.TabStop = true;
+            rdbMensual.Text = "Tardanzas y Faltas(Mensuales)";
+            rdbMensual.UseVisualStyleBackColor = true;
+            // 
+            // rdbHistorial
+            // 
+            rdbHistorial.AutoSize = true;
+            rdbHistorial.Location = new Point(651, 109);
+            rdbHistorial.Name = "rdbHistorial";
+            rdbHistorial.Size = new Size(158, 25);
+            rdbHistorial.TabIndex = 37;
+            rdbHistorial.TabStop = true;
+            rdbHistorial.Text = "Historial Individual";
+            rdbHistorial.UseVisualStyleBackColor = true;
+            // 
+            // gpbOpciones
+            // 
+            gpbOpciones.Location = new Point(184, 84);
+            gpbOpciones.Name = "gpbOpciones";
+            gpbOpciones.Size = new Size(625, 59);
+            gpbOpciones.TabIndex = 38;
+            gpbOpciones.TabStop = false;
+            gpbOpciones.Text = "Opciones";
             // 
             // frmReportes
             // 
@@ -240,6 +286,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 719);
+            Controls.Add(rdbHistorial);
+            Controls.Add(rdbMensual);
+            Controls.Add(rdbSemanal);
             Controls.Add(btnImprimir);
             Controls.Add(btnExcel);
             Controls.Add(btnPdf);
@@ -255,6 +304,7 @@
             Controls.Add(lblTitulo);
             Controls.Add(btnGenerar);
             Controls.Add(dgvReporte);
+            Controls.Add(gpbOpciones);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ForeColor = SystemColors.ControlText;
             Margin = new Padding(4);
@@ -281,5 +331,9 @@
         private Button btnPdf;
         private Button btnExcel;
         private Button btnImprimir;
+        private RadioButton rdbSemanal;
+        private RadioButton rdbMensual;
+        private RadioButton rdbHistorial;
+        private GroupBox gpbOpciones;
     }
 }
