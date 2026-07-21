@@ -1,4 +1,4 @@
-﻿namespace ProyectoRegistroAsistencia
+namespace ProyectoRegistroAsistencia
 {
     partial class frmAccesoAdmin
     {
@@ -41,9 +41,9 @@
             ((System.ComponentModel.ISupportInitialize)pcbUsuario).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcbPassword).BeginInit();
             SuspendLayout();
-            // 
+            //
             // lblAcceso
-            // 
+            //
             lblAcceso.AutoSize = true;
             lblAcceso.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblAcceso.ForeColor = Color.FromArgb(108, 117, 125);
@@ -52,9 +52,9 @@
             lblAcceso.Size = new Size(271, 32);
             lblAcceso.TabIndex = 0;
             lblAcceso.Text = "Acceso Administrativo";
-            // 
+            //
             // lblUsuario
-            // 
+            //
             lblUsuario.AutoSize = true;
             lblUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblUsuario.ForeColor = Color.FromArgb(108, 117, 125);
@@ -63,9 +63,9 @@
             lblUsuario.Size = new Size(73, 21);
             lblUsuario.TabIndex = 1;
             lblUsuario.Text = "Usuario:";
-            // 
+            //
             // pcbUsuario
-            // 
+            //
             pcbUsuario.BackColor = Color.White;
             pcbUsuario.Image = (Image)resources.GetObject("pcbUsuario.Image");
             pcbUsuario.Location = new Point(83, 154);
@@ -74,18 +74,18 @@
             pcbUsuario.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbUsuario.TabIndex = 2;
             pcbUsuario.TabStop = false;
-            // 
+            //
             // txtUsuario
-            // 
+            //
             txtUsuario.BackColor = Color.White;
-            txtUsuario.ForeColor = Color.FromArgb(108, 117, 125);
+            txtUsuario.ForeColor = Color.FromArgb(64, 64, 64);
             txtUsuario.Location = new Point(117, 154);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(296, 29);
             txtUsuario.TabIndex = 3;
-            // 
+            //
             // lblPassword
-            // 
+            //
             lblPassword.AutoSize = true;
             lblPassword.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPassword.ForeColor = Color.FromArgb(108, 117, 125);
@@ -94,9 +94,9 @@
             lblPassword.Size = new Size(100, 21);
             lblPassword.TabIndex = 4;
             lblPassword.Text = "Contraseña:";
-            // 
+            //
             // pcbPassword
-            // 
+            //
             pcbPassword.BackColor = Color.White;
             pcbPassword.Image = (Image)resources.GetObject("pcbPassword.Image");
             pcbPassword.Location = new Point(83, 258);
@@ -105,19 +105,19 @@
             pcbPassword.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbPassword.TabIndex = 5;
             pcbPassword.TabStop = false;
-            // 
+            //
             // txtPassword
-            // 
+            //
             txtPassword.BackColor = Color.White;
-            txtPassword.ForeColor = Color.FromArgb(108, 117, 125);
+            txtPassword.ForeColor = Color.FromArgb(64, 64, 64);
             txtPassword.Location = new Point(117, 258);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(296, 29);
             txtPassword.TabIndex = 6;
             txtPassword.UseSystemPasswordChar = true;
-            // 
+            //
             // btnInicioSesion
-            // 
+            //
             btnInicioSesion.BackColor = Color.FromArgb(43, 76, 140);
             btnInicioSesion.ForeColor = Color.White;
             btnInicioSesion.Location = new Point(80, 318);
@@ -126,9 +126,10 @@
             btnInicioSesion.TabIndex = 7;
             btnInicioSesion.Text = "Iniciar Sesión";
             btnInicioSesion.UseVisualStyleBackColor = false;
-            // 
+            btnInicioSesion.Click += btnInicioSesion_Click;
+            //
             // lblCancelar
-            // 
+            //
             lblCancelar.AutoSize = true;
             lblCancelar.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblCancelar.ForeColor = Color.FromArgb(108, 117, 125);
@@ -137,9 +138,9 @@
             lblCancelar.Size = new Size(238, 20);
             lblCancelar.TabIndex = 8;
             lblCancelar.Text = "Presione Esc para cancelar y volver";
-            // 
+            //
             // frmAccesoAdmin
-            // 
+            //
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
@@ -158,6 +159,7 @@
             Name = "frmAccesoAdmin";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Staff Asistence";
+            KeyDown += frmAccesoAdmin_KeyDown;
             ((System.ComponentModel.ISupportInitialize)pcbUsuario).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcbPassword).EndInit();
             ResumeLayout(false);
