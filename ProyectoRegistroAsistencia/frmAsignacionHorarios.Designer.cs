@@ -34,9 +34,9 @@ namespace ProyectoRegistroAsistencia
             txtBusacarClave = new TextBox();
             lblClaveTrabaj = new Label();
             grpDatosTrabajador = new GroupBox();
+            cmbSemestre = new ComboBox();
             txtPuesto = new TextBox();
             txtDepartamento = new TextBox();
-            txtSemestre = new TextBox();
             txtBuscarNombreCompleto = new TextBox();
             lblPuesto = new Label();
             lblDepartamento = new Label();
@@ -68,9 +68,11 @@ namespace ProyectoRegistroAsistencia
             grpBuscarTrabajador.Controls.Add(lblClaveTrabaj);
             grpBuscarTrabajador.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             grpBuscarTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
-            grpBuscarTrabajador.Location = new Point(12, 37);
+            grpBuscarTrabajador.Location = new Point(14, 49);
+            grpBuscarTrabajador.Margin = new Padding(3, 4, 3, 4);
             grpBuscarTrabajador.Name = "grpBuscarTrabajador";
-            grpBuscarTrabajador.Size = new Size(460, 87);
+            grpBuscarTrabajador.Padding = new Padding(3, 4, 3, 4);
+            grpBuscarTrabajador.Size = new Size(526, 116);
             grpBuscarTrabajador.TabIndex = 0;
             grpBuscarTrabajador.TabStop = false;
             grpBuscarTrabajador.Text = "Buscar Trabajador";
@@ -82,35 +84,38 @@ namespace ProyectoRegistroAsistencia
             btnBuscar.ForeColor = Color.White;
             btnBuscar.Image = (Image)resources.GetObject("btnBuscar.Image");
             btnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnBuscar.Location = new Point(247, 38);
+            btnBuscar.Location = new Point(282, 51);
+            btnBuscar.Margin = new Padding(3, 4, 3, 4);
             btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(180, 40);
+            btnBuscar.Size = new Size(206, 53);
             btnBuscar.TabIndex = 2;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = false;
+            btnBuscar.Click += btnBuscar_Click;
             // 
             // txtBusacarClave
             // 
-            txtBusacarClave.Location = new Point(18, 49);
+            txtBusacarClave.Location = new Point(21, 65);
+            txtBusacarClave.Margin = new Padding(3, 4, 3, 4);
             txtBusacarClave.Name = "txtBusacarClave";
-            txtBusacarClave.Size = new Size(150, 29);
+            txtBusacarClave.Size = new Size(171, 34);
             txtBusacarClave.TabIndex = 1;
             // 
             // lblClaveTrabaj
             // 
             lblClaveTrabaj.AutoSize = true;
             lblClaveTrabaj.ForeColor = Color.FromArgb(108, 117, 125);
-            lblClaveTrabaj.Location = new Point(18, 25);
+            lblClaveTrabaj.Location = new Point(21, 33);
             lblClaveTrabaj.Name = "lblClaveTrabaj";
-            lblClaveTrabaj.Size = new Size(154, 21);
+            lblClaveTrabaj.Size = new Size(193, 28);
             lblClaveTrabaj.TabIndex = 0;
             lblClaveTrabaj.Text = "Clave del Trabajador:";
             // 
             // grpDatosTrabajador
             // 
+            grpDatosTrabajador.Controls.Add(cmbSemestre);
             grpDatosTrabajador.Controls.Add(txtPuesto);
             grpDatosTrabajador.Controls.Add(txtDepartamento);
-            grpDatosTrabajador.Controls.Add(txtSemestre);
             grpDatosTrabajador.Controls.Add(txtBuscarNombreCompleto);
             grpDatosTrabajador.Controls.Add(lblPuesto);
             grpDatosTrabajador.Controls.Add(lblDepartamento);
@@ -118,48 +123,58 @@ namespace ProyectoRegistroAsistencia
             grpDatosTrabajador.Controls.Add(lblNombreCompleto);
             grpDatosTrabajador.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             grpDatosTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
-            grpDatosTrabajador.Location = new Point(12, 130);
+            grpDatosTrabajador.Location = new Point(14, 173);
+            grpDatosTrabajador.Margin = new Padding(3, 4, 3, 4);
             grpDatosTrabajador.Name = "grpDatosTrabajador";
-            grpDatosTrabajador.Size = new Size(460, 145);
+            grpDatosTrabajador.Padding = new Padding(3, 4, 3, 4);
+            grpDatosTrabajador.Size = new Size(526, 193);
             grpDatosTrabajador.TabIndex = 1;
             grpDatosTrabajador.TabStop = false;
             grpDatosTrabajador.Text = "Datos Del Trabajador";
             // 
+            // cmbSemestre
+            // 
+            cmbSemestre.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbSemestre.FormattingEnabled = true;
+            cmbSemestre.Location = new Point(282, 65);
+            cmbSemestre.Name = "cmbSemestre";
+            cmbSemestre.Size = new Size(228, 36);
+            cmbSemestre.TabIndex = 8;
+            // 
             // txtPuesto
             // 
-            txtPuesto.Location = new Point(247, 105);
+            txtPuesto.Location = new Point(282, 140);
+            txtPuesto.Margin = new Padding(3, 4, 3, 4);
             txtPuesto.Name = "txtPuesto";
-            txtPuesto.Size = new Size(200, 29);
+            txtPuesto.ReadOnly = true;
+            txtPuesto.Size = new Size(228, 34);
             txtPuesto.TabIndex = 7;
             // 
             // txtDepartamento
             // 
-            txtDepartamento.Location = new Point(18, 105);
+            txtDepartamento.Location = new Point(21, 140);
+            txtDepartamento.Margin = new Padding(3, 4, 3, 4);
             txtDepartamento.Name = "txtDepartamento";
-            txtDepartamento.Size = new Size(200, 29);
+            txtDepartamento.ReadOnly = true;
+            txtDepartamento.Size = new Size(228, 34);
             txtDepartamento.TabIndex = 6;
-            // 
-            // txtSemestre
-            // 
-            txtSemestre.Location = new Point(247, 49);
-            txtSemestre.Name = "txtSemestre";
-            txtSemestre.Size = new Size(200, 29);
-            txtSemestre.TabIndex = 5;
             // 
             // txtBuscarNombreCompleto
             // 
-            txtBuscarNombreCompleto.Location = new Point(18, 49);
+            txtBuscarNombreCompleto.Location = new Point(21, 65);
+            txtBuscarNombreCompleto.Margin = new Padding(3, 4, 3, 4);
             txtBuscarNombreCompleto.Name = "txtBuscarNombreCompleto";
-            txtBuscarNombreCompleto.Size = new Size(200, 29);
+            txtBuscarNombreCompleto.ReadOnly = true;
+            txtBuscarNombreCompleto.Size = new Size(228, 34);
             txtBuscarNombreCompleto.TabIndex = 4;
             // 
             // lblPuesto
             // 
             lblPuesto.AutoSize = true;
             lblPuesto.ForeColor = Color.FromArgb(108, 117, 125);
-            lblPuesto.Location = new Point(247, 81);
+            lblPuesto.Location = new Point(282, 108);
             lblPuesto.Name = "lblPuesto";
-            lblPuesto.Size = new Size(60, 21);
+            lblPuesto.Size = new Size(75, 28);
             lblPuesto.TabIndex = 3;
             lblPuesto.Text = "Puesto:";
             // 
@@ -167,9 +182,9 @@ namespace ProyectoRegistroAsistencia
             // 
             lblDepartamento.AutoSize = true;
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDepartamento.Location = new Point(18, 81);
+            lblDepartamento.Location = new Point(21, 108);
             lblDepartamento.Name = "lblDepartamento";
-            lblDepartamento.Size = new Size(113, 21);
+            lblDepartamento.Size = new Size(143, 28);
             lblDepartamento.TabIndex = 2;
             lblDepartamento.Text = "Departamento:";
             // 
@@ -177,9 +192,9 @@ namespace ProyectoRegistroAsistencia
             // 
             lblSemestre.AutoSize = true;
             lblSemestre.ForeColor = Color.FromArgb(108, 117, 125);
-            lblSemestre.Location = new Point(247, 25);
+            lblSemestre.Location = new Point(282, 33);
             lblSemestre.Name = "lblSemestre";
-            lblSemestre.Size = new Size(78, 21);
+            lblSemestre.Size = new Size(96, 28);
             lblSemestre.TabIndex = 1;
             lblSemestre.Text = "Semestre:";
             // 
@@ -187,9 +202,9 @@ namespace ProyectoRegistroAsistencia
             // 
             lblNombreCompleto.AutoSize = true;
             lblNombreCompleto.ForeColor = Color.FromArgb(108, 117, 125);
-            lblNombreCompleto.Location = new Point(18, 25);
+            lblNombreCompleto.Location = new Point(21, 33);
             lblNombreCompleto.Name = "lblNombreCompleto";
-            lblNombreCompleto.Size = new Size(143, 21);
+            lblNombreCompleto.Size = new Size(181, 28);
             lblNombreCompleto.TabIndex = 0;
             lblNombreCompleto.Text = "Nombre Completo:";
             // 
@@ -198,9 +213,9 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblTitulo.Location = new Point(141, 4);
+            lblTitulo.Location = new Point(161, 5);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(233, 30);
+            lblTitulo.Size = new Size(304, 37);
             lblTitulo.TabIndex = 2;
             lblTitulo.Text = "Asignacion de Horario";
             // 
@@ -218,9 +233,11 @@ namespace ProyectoRegistroAsistencia
             grpHorario.Controls.Add(dtpHoraEntrada);
             grpHorario.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             grpHorario.ForeColor = Color.FromArgb(108, 117, 125);
-            grpHorario.Location = new Point(12, 281);
+            grpHorario.Location = new Point(14, 375);
+            grpHorario.Margin = new Padding(3, 4, 3, 4);
             grpHorario.Name = "grpHorario";
-            grpHorario.Size = new Size(460, 178);
+            grpHorario.Padding = new Padding(3, 4, 3, 4);
+            grpHorario.Size = new Size(526, 237);
             grpHorario.TabIndex = 3;
             grpHorario.TabStop = false;
             grpHorario.Text = "Horario";
@@ -229,9 +246,9 @@ namespace ProyectoRegistroAsistencia
             // 
             lblDias.AutoSize = true;
             lblDias.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDias.Location = new Point(18, 138);
+            lblDias.Location = new Point(21, 184);
             lblDias.Name = "lblDias";
-            lblDias.Size = new Size(43, 21);
+            lblDias.Size = new Size(53, 28);
             lblDias.TabIndex = 9;
             lblDias.Text = "Dias:";
             // 
@@ -239,9 +256,10 @@ namespace ProyectoRegistroAsistencia
             // 
             chkViernes.AutoSize = true;
             chkViernes.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            chkViernes.Location = new Point(342, 143);
+            chkViernes.Location = new Point(391, 191);
+            chkViernes.Margin = new Padding(3, 4, 3, 4);
             chkViernes.Name = "chkViernes";
-            chkViernes.Size = new Size(64, 17);
+            chkViernes.Size = new Size(76, 23);
             chkViernes.TabIndex = 8;
             chkViernes.Text = "Viernes";
             chkViernes.UseVisualStyleBackColor = true;
@@ -250,9 +268,10 @@ namespace ProyectoRegistroAsistencia
             // 
             chkJueves.AutoSize = true;
             chkJueves.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            chkJueves.Location = new Point(277, 143);
+            chkJueves.Location = new Point(317, 191);
+            chkJueves.Margin = new Padding(3, 4, 3, 4);
             chkJueves.Name = "chkJueves";
-            chkJueves.Size = new Size(59, 17);
+            chkJueves.Size = new Size(71, 23);
             chkJueves.TabIndex = 7;
             chkJueves.Text = "Jueves";
             chkJueves.UseVisualStyleBackColor = true;
@@ -261,9 +280,10 @@ namespace ProyectoRegistroAsistencia
             // 
             chkMiercoles.AutoSize = true;
             chkMiercoles.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            chkMiercoles.Location = new Point(196, 143);
+            chkMiercoles.Location = new Point(224, 191);
+            chkMiercoles.Margin = new Padding(3, 4, 3, 4);
             chkMiercoles.Name = "chkMiercoles";
-            chkMiercoles.Size = new Size(75, 17);
+            chkMiercoles.Size = new Size(89, 23);
             chkMiercoles.TabIndex = 6;
             chkMiercoles.Text = "Miercoles";
             chkMiercoles.UseVisualStyleBackColor = true;
@@ -272,9 +292,10 @@ namespace ProyectoRegistroAsistencia
             // 
             chkMartes.AutoSize = true;
             chkMartes.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            chkMartes.Location = new Point(129, 142);
+            chkMartes.Location = new Point(147, 189);
+            chkMartes.Margin = new Padding(3, 4, 3, 4);
             chkMartes.Name = "chkMartes";
-            chkMartes.Size = new Size(61, 17);
+            chkMartes.Size = new Size(74, 23);
             chkMartes.TabIndex = 5;
             chkMartes.Text = "Martes";
             chkMartes.UseVisualStyleBackColor = true;
@@ -283,9 +304,10 @@ namespace ProyectoRegistroAsistencia
             // 
             chkLunes.AutoSize = true;
             chkLunes.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            chkLunes.Location = new Point(67, 143);
+            chkLunes.Location = new Point(77, 191);
+            chkLunes.Margin = new Padding(3, 4, 3, 4);
             chkLunes.Name = "chkLunes";
-            chkLunes.Size = new Size(56, 17);
+            chkLunes.Size = new Size(67, 23);
             chkLunes.TabIndex = 4;
             chkLunes.Text = "Lunes";
             chkLunes.UseVisualStyleBackColor = true;
@@ -294,38 +316,40 @@ namespace ProyectoRegistroAsistencia
             // 
             lblHoraSalida.AutoSize = true;
             lblHoraSalida.ForeColor = Color.FromArgb(108, 117, 125);
-            lblHoraSalida.Location = new Point(18, 79);
+            lblHoraSalida.Location = new Point(21, 105);
             lblHoraSalida.Name = "lblHoraSalida";
-            lblHoraSalida.Size = new Size(111, 21);
+            lblHoraSalida.Size = new Size(140, 28);
             lblHoraSalida.TabIndex = 3;
             lblHoraSalida.Text = "Hora de Salida";
             // 
             // dtpHoraSalida
             // 
             dtpHoraSalida.Format = DateTimePickerFormat.Time;
-            dtpHoraSalida.Location = new Point(18, 103);
+            dtpHoraSalida.Location = new Point(21, 137);
+            dtpHoraSalida.Margin = new Padding(3, 4, 3, 4);
             dtpHoraSalida.Name = "dtpHoraSalida";
             dtpHoraSalida.ShowUpDown = true;
-            dtpHoraSalida.Size = new Size(122, 29);
+            dtpHoraSalida.Size = new Size(139, 34);
             dtpHoraSalida.TabIndex = 2;
             // 
             // lblHoraEntrada
             // 
             lblHoraEntrada.AutoSize = true;
             lblHoraEntrada.ForeColor = Color.FromArgb(108, 117, 125);
-            lblHoraEntrada.Location = new Point(18, 23);
+            lblHoraEntrada.Location = new Point(21, 31);
             lblHoraEntrada.Name = "lblHoraEntrada";
-            lblHoraEntrada.Size = new Size(122, 21);
+            lblHoraEntrada.Size = new Size(154, 28);
             lblHoraEntrada.TabIndex = 1;
             lblHoraEntrada.Text = "Hora de Entrada";
             // 
             // dtpHoraEntrada
             // 
             dtpHoraEntrada.Format = DateTimePickerFormat.Time;
-            dtpHoraEntrada.Location = new Point(18, 47);
+            dtpHoraEntrada.Location = new Point(21, 63);
+            dtpHoraEntrada.Margin = new Padding(3, 4, 3, 4);
             dtpHoraEntrada.Name = "dtpHoraEntrada";
             dtpHoraEntrada.ShowUpDown = true;
-            dtpHoraEntrada.Size = new Size(122, 29);
+            dtpHoraEntrada.Size = new Size(139, 34);
             dtpHoraEntrada.TabIndex = 0;
             // 
             // btnGuardar
@@ -335,12 +359,14 @@ namespace ProyectoRegistroAsistencia
             btnGuardar.ForeColor = Color.White;
             btnGuardar.Image = (Image)resources.GetObject("btnGuardar.Image");
             btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGuardar.Location = new Point(10, 475);
+            btnGuardar.Location = new Point(11, 633);
+            btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(180, 40);
+            btnGuardar.Size = new Size(206, 53);
             btnGuardar.TabIndex = 4;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // btnCancelar
             // 
@@ -349,19 +375,21 @@ namespace ProyectoRegistroAsistencia
             btnCancelar.ForeColor = Color.White;
             btnCancelar.Image = (Image)resources.GetObject("btnCancelar.Image");
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(293, 475);
+            btnCancelar.Location = new Point(335, 633);
+            btnCancelar.Margin = new Padding(3, 4, 3, 4);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(180, 40);
+            btnCancelar.Size = new Size(206, 53);
             btnCancelar.TabIndex = 5;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // frmAsignacionHorarios
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
-            ClientSize = new Size(484, 532);
+            ClientSize = new Size(553, 709);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
             Controls.Add(grpHorario);
@@ -369,6 +397,7 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(grpDatosTrabajador);
             Controls.Add(grpBuscarTrabajador);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmAsignacionHorarios";
@@ -394,7 +423,6 @@ namespace ProyectoRegistroAsistencia
         private Label lblClaveTrabaj;
         private TextBox txtPuesto;
         private TextBox txtDepartamento;
-        private TextBox txtSemestre;
         private TextBox txtBuscarNombreCompleto;
         private Label lblPuesto;
         private Label lblDepartamento;
@@ -413,5 +441,6 @@ namespace ProyectoRegistroAsistencia
         private CheckBox chkMartes;
         private CheckBox chkLunes;
         private Label lblDias;
+        private ComboBox cmbSemestre;
     }
 }
