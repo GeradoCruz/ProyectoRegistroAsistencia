@@ -67,8 +67,7 @@ namespace ProyectoRegistroAsistencia
                     {
                         comando.Parameters.AddWithValue("@desde", desde.ToString("yyyy-MM-dd"));
                         comando.Parameters.AddWithValue("@hasta", hasta.ToString("yyyy-MM-dd"));
-                        if (idDepartamento != 0)
-                            comando.Parameters.AddWithValue("@idDepartamento", idDepartamento);
+                        comando.Parameters.AddWithValue("@idDepartamento", idDepartamento);
 
                         using (consulta = new MySqlDataAdapter(comando))
                         {

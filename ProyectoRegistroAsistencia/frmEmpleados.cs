@@ -47,7 +47,7 @@ namespace ProyectoRegistroAsistencia
         }
         public void btnEditar_Click(object? sender, EventArgs e)
         {
-            if (ban!=1)
+            if (ban != 1)
             {
                 MessageBox.Show("Selecciona un empleado de la lista para editar.", "Staff Asistence",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);

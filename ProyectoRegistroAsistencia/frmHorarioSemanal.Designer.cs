@@ -72,7 +72,7 @@ namespace ProyectoRegistroAsistencia
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             lblDepartamento.Location = new Point(12, 127);
             lblDepartamento.Name = "lblDepartamento";
-            lblDepartamento.Size = new Size(143, 28);
+            lblDepartamento.Size = new Size(113, 21);
             lblDepartamento.TabIndex = 5;
             lblDepartamento.Text = "Departamento:";
             // 
@@ -83,7 +83,7 @@ namespace ProyectoRegistroAsistencia
             cmbDepartamento.FormattingEnabled = true;
             cmbDepartamento.Location = new Point(12, 154);
             cmbDepartamento.Name = "cmbDepartamento";
-            cmbDepartamento.Size = new Size(242, 36);
+            cmbDepartamento.Size = new Size(242, 29);
             cmbDepartamento.TabIndex = 6;
             // 
             // btnBuscar
@@ -92,9 +92,9 @@ namespace ProyectoRegistroAsistencia
             btnBuscar.BackColor = Color.FromArgb(43, 76, 140);
             btnBuscar.ForeColor = Color.White;
             btnBuscar.Image = (Image)resources.GetObject("btnBuscar.Image");
-            btnBuscar.Location = new Point(432, 143);
+            btnBuscar.Location = new Point(502, 143);
             btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(200, 40);
+            btnBuscar.Size = new Size(180, 40);
             btnBuscar.TabIndex = 10;
             btnBuscar.Text = "Buscar";
             btnBuscar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -107,9 +107,9 @@ namespace ProyectoRegistroAsistencia
             btnAsignarHorario.BackColor = Color.FromArgb(43, 76, 140);
             btnAsignarHorario.ForeColor = Color.White;
             btnAsignarHorario.Image = (Image)resources.GetObject("btnAsignarHorario.Image");
-            btnAsignarHorario.Location = new Point(853, 143);
+            btnAsignarHorario.Location = new Point(875, 143);
             btnAsignarHorario.Name = "btnAsignarHorario";
-            btnAsignarHorario.Size = new Size(200, 40);
+            btnAsignarHorario.Size = new Size(180, 40);
             btnAsignarHorario.TabIndex = 11;
             btnAsignarHorario.Text = "Asignar Horario";
             btnAsignarHorario.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -117,6 +117,10 @@ namespace ProyectoRegistroAsistencia
             // 
             // dgvHorarios
             // 
+            dgvHorarios.AllowUserToAddRows = false;
+            dgvHorarios.AllowUserToDeleteRows = false;
+            dgvHorarios.AllowUserToResizeColumns = false;
+            dgvHorarios.AllowUserToResizeRows = false;
             dgvHorarios.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvHorarios.BackgroundColor = Color.FromArgb(240, 242, 245);
             dgvHorarios.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
@@ -138,7 +142,9 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvHorarios.DefaultCellStyle = dataGridViewCellStyle2;
             dgvHorarios.Location = new Point(12, 204);
+            dgvHorarios.MultiSelect = false;
             dgvHorarios.Name = "dgvHorarios";
+            dgvHorarios.ReadOnly = true;
             dgvHorarios.RowHeadersWidth = 51;
             dgvHorarios.Size = new Size(1044, 427);
             dgvHorarios.TabIndex = 12;
@@ -148,9 +154,9 @@ namespace ProyectoRegistroAsistencia
             btnLimpiar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnLimpiar.BackColor = Color.FromArgb(43, 76, 140);
             btnLimpiar.Image = (Image)resources.GetObject("btnLimpiar.Image");
-            btnLimpiar.Location = new Point(643, 143);
+            btnLimpiar.Location = new Point(691, 143);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(200, 40);
+            btnLimpiar.Size = new Size(180, 40);
             btnLimpiar.TabIndex = 13;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -159,7 +165,7 @@ namespace ProyectoRegistroAsistencia
             // 
             // frmHorarioSemanal
             // 
-            AutoScaleDimensions = new SizeF(11F, 28F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);
