@@ -5,10 +5,11 @@ using QuestPDF.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ClosedXML.Excel;
 
 namespace ProyectoRegistroAsistencia
 {
@@ -53,7 +54,7 @@ namespace ProyectoRegistroAsistencia
                                  "CONCAT(t.nombre, ' ', t.a_paterno, ' ', IFNULL(t.a_materno,'')) AS Trabajador, " +
                                  "d.nombre_departamento AS Departamento, " +
                                  "COUNT(DISTINCT a.fecha) AS 'Días Asistidos', " +
-                                 "(DATEDIFF(@hasta, @desde) + 1) - COUNT(DISTINCT a.fecha) AS 'Faltas' " +
+                                 "(DATEDIFF(@desde, @hasta) + 1) - COUNT(DISTINCT a.fecha) AS 'Faltas' " +
                                  "FROM tbltrabajador t " +
                                  "INNER JOIN tbldepartamento d ON t.id_departamento = d.id_departamento " +
                                  "INNER JOIN tblasistencia a ON a.id_trabajador = t.id_trabajador " +
@@ -123,6 +124,7 @@ namespace ProyectoRegistroAsistencia
                                     col.Item().PaddingTop(5).LineHorizontal(1).LineColor(Colors.Grey.Lighten2);
                                 });
 
+                                row.ConstantItem(15); // espacio entre el texto y el logo
                           
                                 //if (Properties.Resources.images != null)
                                 //{
