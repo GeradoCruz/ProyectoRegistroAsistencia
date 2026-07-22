@@ -15,6 +15,7 @@ namespace ProyectoRegistroAsistencia
     {
         clsReportes reportes;
         DataTable tabla;
+        int idDepartamento;
         public frmReportes()
         {
             InitializeComponent();
@@ -54,18 +55,36 @@ namespace ProyectoRegistroAsistencia
 
             try
             {
-                int idDepartamento = Convert.ToInt32(cmbDepartamento.SelectedValue);
+                idDepartamento = Convert.ToInt32(cmbDepartamento.SelectedValue);
 
                 if (rdbSemanal.Checked)
                 {
                     tabla = reportes.ConsultarAsistenciaSemanal(dtpFechaInicio.Value, dtpFechaFin.Value, idDepartamento);
                     dgvReporte.DataSource = tabla;
                 }
-               
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnPdf_Click(object sender, EventArgs e)
+        {
+            reportes = new clsReportes();
+            if (rdbSemanal.Checked == true)
+            {
+                reportes.ExportarPDF(tabla, "Reporte de Asistencia Semanal", "Asistencia Semanal.pdf");
+            }
+        }
+
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            reportes = new clsReportes();
+            if (rdbSemanal.Checked == true)
+            {
+                reportes.ExportarExcel(tabla, "Reporte de Asistencia Semanal", "Asistencia Semanal.xlsx");
             }
         }
     }
