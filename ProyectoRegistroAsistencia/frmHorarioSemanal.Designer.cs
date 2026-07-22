@@ -141,11 +141,13 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvHorarios.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvHorarios.EnableHeadersVisualStyles = false;
             dgvHorarios.Location = new Point(12, 204);
             dgvHorarios.MultiSelect = false;
             dgvHorarios.Name = "dgvHorarios";
             dgvHorarios.ReadOnly = true;
             dgvHorarios.RowHeadersWidth = 51;
+            dgvHorarios.RowTemplate.Height = 40;
             dgvHorarios.Size = new Size(1044, 427);
             dgvHorarios.TabIndex = 12;
             // 

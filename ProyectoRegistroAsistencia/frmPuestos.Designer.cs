@@ -154,9 +154,11 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvPuestos.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvPuestos.EnableHeadersVisualStyles = false;
             dgvPuestos.Location = new Point(12, 220);
             dgvPuestos.Name = "dgvPuestos";
             dgvPuestos.ReadOnly = true;
+            dgvPuestos.RowTemplate.Height = 40;
             dgvPuestos.Size = new Size(1044, 427);
             dgvPuestos.TabIndex = 18;
             // 
