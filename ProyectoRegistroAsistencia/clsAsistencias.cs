@@ -23,7 +23,7 @@ namespace ProyectoRegistroAsistencia
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT A.id_asistencia AS id_Asistencia," +
+                    string sql = "SELECT T.clave_trabajador AS Clave_Trabajador, " +
                         "CONCAT(T.nombre,'',  T.a_paterno,' ', T.a_materno) AS Trabajador," +
                         "A.registro  AS Registro," +
                         "A.fecha AS Fecha " +
@@ -53,7 +53,7 @@ namespace ProyectoRegistroAsistencia
 
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT A.id_asistencia AS Id_Asistencia, " +
+                    string sql = "SELECT T.clave_trabajador AS Clave_Trabajador,"+
                                  "CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS Trabajador, " +
                                  "A.registro AS Registro, " +
                                  "A.fecha AS Fecha " +
