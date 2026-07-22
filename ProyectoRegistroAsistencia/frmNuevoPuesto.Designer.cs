@@ -43,9 +43,9 @@ namespace ProyectoRegistroAsistencia
             lblDepartamento = new Label();
             pnlPuesto.SuspendLayout();
             SuspendLayout();
-            //
+            // 
             // lblTitulo
-            //
+            // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -55,9 +55,9 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.Size = new Size(151, 30);
             lblTitulo.TabIndex = 3;
             lblTitulo.Text = "Nuevo Puesto";
-            //
+            // 
             // lblNombrePuesto
-            //
+            // 
             lblNombrePuesto.AutoSize = true;
             lblNombrePuesto.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblNombrePuesto.ForeColor = Color.FromArgb(108, 117, 125);
@@ -67,9 +67,9 @@ namespace ProyectoRegistroAsistencia
             lblNombrePuesto.Size = new Size(147, 21);
             lblNombrePuesto.TabIndex = 5;
             lblNombrePuesto.Text = "Nombre del puesto:";
-            //
+            // 
             // txtNombrePuesto
-            //
+            // 
             txtNombrePuesto.BackColor = Color.White;
             txtNombrePuesto.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtNombrePuesto.ForeColor = Color.FromArgb(108, 117, 125);
@@ -78,9 +78,9 @@ namespace ProyectoRegistroAsistencia
             txtNombrePuesto.Name = "txtNombrePuesto";
             txtNombrePuesto.Size = new Size(314, 29);
             txtNombrePuesto.TabIndex = 4;
-            //
+            // 
             // btnGuardar
-            //
+            // 
             btnGuardar.BackColor = Color.FromArgb(43, 76, 140);
             btnGuardar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGuardar.ForeColor = Color.White;
@@ -93,9 +93,9 @@ namespace ProyectoRegistroAsistencia
             btnGuardar.TabIndex = 0;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
-            //
+            // 
             // btnCancelar
-            //
+            // 
             btnCancelar.BackColor = Color.FromArgb(108, 117, 125);
             btnCancelar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCancelar.ForeColor = Color.White;
@@ -108,9 +108,9 @@ namespace ProyectoRegistroAsistencia
             btnCancelar.TabIndex = 1;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
-            //
+            // 
             // txtDescripcion
-            //
+            // 
             txtDescripcion.BackColor = Color.White;
             txtDescripcion.ForeColor = Color.FromArgb(108, 117, 125);
             txtDescripcion.Location = new Point(49, 185);
@@ -119,20 +119,20 @@ namespace ProyectoRegistroAsistencia
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(319, 105);
             txtDescripcion.TabIndex = 7;
-            //
+            // 
             // lblDescripcion
-            //
+            // 
             lblDescripcion.AutoSize = true;
             lblDescripcion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDescripcion.ForeColor = Color.FromArgb(108, 117, 125);
             lblDescripcion.Location = new Point(49, 153);
             lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(94, 21);
+            lblDescripcion.Size = new Size(100, 21);
             lblDescripcion.TabIndex = 6;
             lblDescripcion.Text = "Descripci�n:";
-            //
+            // 
             // pnlPuesto
-            //
+            // 
             pnlPuesto.BorderStyle = BorderStyle.FixedSingle;
             pnlPuesto.Controls.Add(textBox1);
             pnlPuesto.Controls.Add(label1);
@@ -143,9 +143,9 @@ namespace ProyectoRegistroAsistencia
             pnlPuesto.Name = "pnlPuesto";
             pnlPuesto.Size = new Size(370, 235);
             pnlPuesto.TabIndex = 8;
-            //
+            // 
             // textBox1
-            //
+            // 
             textBox1.BackColor = Color.White;
             textBox1.ForeColor = Color.FromArgb(108, 117, 125);
             textBox1.Location = new Point(21, 116);
@@ -154,9 +154,9 @@ namespace ProyectoRegistroAsistencia
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(319, 105);
             textBox1.TabIndex = 3;
-            //
+            // 
             // label1
-            //
+            // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(108, 117, 125);
@@ -164,10 +164,10 @@ namespace ProyectoRegistroAsistencia
             label1.Name = "label1";
             label1.Size = new Size(94, 21);
             label1.TabIndex = 2;
-            label1.Text = "Descripci�n:";
-            //
+            label1.Text = "Descripcion:";
+            // 
             // txtDepartamento
-            //
+            // 
             txtDepartamento.BackColor = Color.White;
             txtDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
@@ -176,9 +176,9 @@ namespace ProyectoRegistroAsistencia
             txtDepartamento.Name = "txtDepartamento";
             txtDepartamento.Size = new Size(319, 29);
             txtDepartamento.TabIndex = 1;
-            //
+            // 
             // lblDepartamento
-            //
+            // 
             lblDepartamento.AutoSize = true;
             lblDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
@@ -187,9 +187,9 @@ namespace ProyectoRegistroAsistencia
             lblDepartamento.Size = new Size(113, 21);
             lblDepartamento.TabIndex = 0;
             lblDepartamento.Text = "Departamento:";
-            //
+            // 
             // frmNuevoPuesto
-            //
+            // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);

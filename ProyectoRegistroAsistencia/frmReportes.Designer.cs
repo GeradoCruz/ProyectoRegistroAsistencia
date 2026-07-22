@@ -179,7 +179,7 @@ namespace ProyectoRegistroAsistencia
             dgvReporte.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(43, 76, 140);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.White;
             dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(74, 126, 193);
             dataGridViewCellStyle1.SelectionForeColor = Color.White;
@@ -188,7 +188,7 @@ namespace ProyectoRegistroAsistencia
             dgvReporte.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(108, 117, 125);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = Color.White;
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(74, 126, 193);
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
@@ -215,6 +215,7 @@ namespace ProyectoRegistroAsistencia
             btnPdf.TabIndex = 32;
             btnPdf.Text = "Exportar PDF";
             btnPdf.UseVisualStyleBackColor = false;
+            btnPdf.Click += btnPdf_Click;
             // 
             // btnExcel
             // 
@@ -229,6 +230,7 @@ namespace ProyectoRegistroAsistencia
             btnExcel.TabIndex = 33;
             btnExcel.Text = "Exportar Excel";
             btnExcel.UseVisualStyleBackColor = false;
+            btnExcel.Click += btnExcel_Click;
             // 
             // btnImprimir
             // 
@@ -247,6 +249,7 @@ namespace ProyectoRegistroAsistencia
             // rdbSemanal
             // 
             rdbSemanal.AutoSize = true;
+            rdbSemanal.Checked = true;
             rdbSemanal.Location = new Point(191, 109);
             rdbSemanal.Name = "rdbSemanal";
             rdbSemanal.Size = new Size(161, 25);
@@ -262,7 +265,6 @@ namespace ProyectoRegistroAsistencia
             rdbMensual.Name = "rdbMensual";
             rdbMensual.Size = new Size(235, 25);
             rdbMensual.TabIndex = 36;
-            rdbMensual.TabStop = true;
             rdbMensual.Text = "Tardanzas y Faltas(Mensuales)";
             rdbMensual.UseVisualStyleBackColor = true;
             // 
@@ -273,7 +275,6 @@ namespace ProyectoRegistroAsistencia
             rdbHistorial.Name = "rdbHistorial";
             rdbHistorial.Size = new Size(158, 25);
             rdbHistorial.TabIndex = 37;
-            rdbHistorial.TabStop = true;
             rdbHistorial.Text = "Historial Individual";
             rdbHistorial.UseVisualStyleBackColor = true;
             // 
