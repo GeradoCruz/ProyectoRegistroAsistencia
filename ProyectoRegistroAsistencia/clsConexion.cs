@@ -6,7 +6,7 @@ namespace ProyectoRegistroAsistencia
 {
     internal class clsConexion
     {
-       private string host = "189.240.192.140";
+        private string host = "189.240.192.140";
         private string bd = "equipo1_staff_asistence";
         private string user = "usuario1GB";
         private string password = "equipo1gb";

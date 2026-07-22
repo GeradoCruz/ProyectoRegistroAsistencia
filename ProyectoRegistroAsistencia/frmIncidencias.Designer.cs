@@ -166,9 +166,11 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvIncidencias.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvIncidencias.EnableHeadersVisualStyles = false;
             dgvIncidencias.Location = new Point(12, 171);
             dgvIncidencias.Name = "dgvIncidencias";
             dgvIncidencias.ReadOnly = true;
+            dgvIncidencias.RowTemplate.Height = 40;
             dgvIncidencias.Size = new Size(1044, 427);
             dgvIncidencias.TabIndex = 17;
             // 

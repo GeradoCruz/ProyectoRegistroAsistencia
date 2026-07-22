@@ -117,9 +117,11 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvDepartamentos.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvDepartamentos.EnableHeadersVisualStyles = false;
             dgvDepartamentos.Location = new Point(11, 200);
             dgvDepartamentos.Name = "dgvDepartamentos";
             dgvDepartamentos.ReadOnly = true;
+            dgvDepartamentos.RowTemplate.Height = 40;
             dgvDepartamentos.Size = new Size(1044, 427);
             dgvDepartamentos.TabIndex = 15;
             // 
