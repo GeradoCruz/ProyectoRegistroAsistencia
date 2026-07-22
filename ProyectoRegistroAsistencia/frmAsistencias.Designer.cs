@@ -73,7 +73,7 @@ namespace ProyectoRegistroAsistencia
             lblFecha.ForeColor = Color.FromArgb(108, 117, 125);
             lblFecha.Location = new Point(12, 146);
             lblFecha.Name = "lblFecha";
-            lblFecha.Size = new Size(53, 21);
+            lblFecha.Size = new Size(66, 28);
             lblFecha.TabIndex = 2;
             lblFecha.Text = "Fecha:";
             // 
@@ -83,7 +83,7 @@ namespace ProyectoRegistroAsistencia
             lblClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
             lblClaveTrabajador.Location = new Point(220, 146);
             lblClaveTrabajador.Name = "lblClaveTrabajador";
-            lblClaveTrabajador.Size = new Size(150, 21);
+            lblClaveTrabajador.Size = new Size(188, 28);
             lblClaveTrabajador.TabIndex = 3;
             lblClaveTrabajador.Text = "Clave de Trabajador:";
             // 
@@ -92,7 +92,7 @@ namespace ProyectoRegistroAsistencia
             dtpFiltroAsistencia.Format = DateTimePickerFormat.Custom;
             dtpFiltroAsistencia.Location = new Point(12, 170);
             dtpFiltroAsistencia.Name = "dtpFiltroAsistencia";
-            dtpFiltroAsistencia.Size = new Size(200, 29);
+            dtpFiltroAsistencia.Size = new Size(200, 34);
             dtpFiltroAsistencia.TabIndex = 4;
             // 
             // txtClaveTrabajador
@@ -100,7 +100,7 @@ namespace ProyectoRegistroAsistencia
             txtClaveTrabajador.BackColor = Color.White;
             txtClaveTrabajador.Location = new Point(220, 170);
             txtClaveTrabajador.Name = "txtClaveTrabajador";
-            txtClaveTrabajador.Size = new Size(200, 29);
+            txtClaveTrabajador.Size = new Size(200, 34);
             txtClaveTrabajador.TabIndex = 5;
             // 
             // btnLimpiar
@@ -116,6 +116,7 @@ namespace ProyectoRegistroAsistencia
             btnLimpiar.TabIndex = 6;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = false;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // btnBuscar
             // 
@@ -130,6 +131,7 @@ namespace ProyectoRegistroAsistencia
             btnBuscar.TabIndex = 7;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = false;
+            btnBuscar.Click += btnBuscar_Click;
             // 
             // dgvRegistros
             // 
@@ -160,12 +162,13 @@ namespace ProyectoRegistroAsistencia
             dgvRegistros.Location = new Point(11, 219);
             dgvRegistros.Name = "dgvRegistros";
             dgvRegistros.ReadOnly = true;
+            dgvRegistros.RowHeadersWidth = 51;
             dgvRegistros.Size = new Size(1044, 427);
             dgvRegistros.TabIndex = 8;
             // 
             // frmAsistencias
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);
