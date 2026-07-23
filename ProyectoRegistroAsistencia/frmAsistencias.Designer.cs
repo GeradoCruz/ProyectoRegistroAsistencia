@@ -97,11 +97,11 @@ namespace ProyectoRegistroAsistencia
             // 
             // txtApellido
             // 
-            txtClaveTrabajador.BackColor = Color.White;
-            txtClaveTrabajador.Location = new Point(220, 168);
-            txtClaveTrabajador.Name = "txtClaveTrabajador";
-            txtClaveTrabajador.Size = new Size(200, 29);
-            txtClaveTrabajador.TabIndex = 5;
+            txtApellido.BackColor = Color.White;
+            txtApellido.Location = new Point(220, 168);
+            txtApellido.Name = "txtApellido";
+            txtApellido.Size = new Size(200, 29);
+            txtApellido.TabIndex = 5;
             // 
             // btnLimpiar
             // 
@@ -144,23 +144,23 @@ namespace ProyectoRegistroAsistencia
             dgvRegistros.BorderStyle = BorderStyle.None;
             dgvRegistros.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
             dgvRegistros.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(35, 45, 92);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(63, 90, 166);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvRegistros.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(35, 45, 92);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(63, 90, 166);
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvRegistros.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvRegistros.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(28, 32, 51);
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(63, 90, 166);
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvRegistros.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.White;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(28, 32, 51);
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(63, 90, 166);
+            dataGridViewCellStyle4.SelectionForeColor = Color.White;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgvRegistros.DefaultCellStyle = dataGridViewCellStyle4;
             dgvRegistros.EnableHeadersVisualStyles = false;
             dgvRegistros.GridColor = Color.FromArgb(221, 225, 232);
             dgvRegistros.Location = new Point(11, 217);
