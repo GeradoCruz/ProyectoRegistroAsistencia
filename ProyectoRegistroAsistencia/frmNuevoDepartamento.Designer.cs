@@ -122,7 +122,8 @@ namespace ProyectoRegistroAsistencia
             btnGuardar.TabIndex = 2;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
-            // 
+            btnGuardar.Click += btnGuardar_Click;
+            //
             // btnCancelar
             // 
             btnCancelar.BackColor = Color.FromArgb(108, 117, 125);
@@ -137,7 +138,8 @@ namespace ProyectoRegistroAsistencia
             btnCancelar.TabIndex = 3;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
-            // 
+            btnCancelar.Click += btnCancelar_Click;
+            //
             // frmNuevoDepartamento
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -164,12 +166,12 @@ namespace ProyectoRegistroAsistencia
 
         #endregion
 
-        private Label lblTitulo;
+        public Label lblTitulo;
         private Panel pnlDepartamento;
         private Label lblDescripcion;
-        private TextBox txtDepartamento;
+        public TextBox txtDepartamento;
         private Label lblDepartamento;
-        private TextBox txtDescripcion;
+        public TextBox txtDescripcion;
         private Button btnGuardar;
         private Button btnCancelar;
     }
