@@ -165,10 +165,12 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvEmpleados.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvEmpleados.EnableHeadersVisualStyles = false;
             dgvEmpleados.Location = new Point(11, 179);
             dgvEmpleados.Name = "dgvEmpleados";
             dgvEmpleados.ReadOnly = true;
             dgvEmpleados.RowHeadersWidth = 51;
+            dgvEmpleados.RowTemplate.Height = 40;
             dgvEmpleados.Size = new Size(1044, 427);
             dgvEmpleados.TabIndex = 10;
             dgvEmpleados.SelectionChanged += dgvEmpleados_SelectionChanged;
