@@ -101,7 +101,7 @@ namespace ProyectoRegistroAsistencia
                     ? Convert.ToInt32(cmbTipoIncidencia.SelectedValue)
                     : 0;
 
-                dgvIncidencias.DataSource = incidencias.FiltrarBusqueda(fecha, clave, idTipo);
+                dgvIncidencias.DataSource = incidencias.FiltrarBusqueda(fecha, nombre, idTipo);
             }
             catch (Exception ex)
             {

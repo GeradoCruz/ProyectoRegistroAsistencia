@@ -88,23 +88,23 @@ namespace ProyectoRegistroAsistencia
             lblFecha.Text = "Fecha:";
             // 
             // txtNombreTrabajador
-            // 
-            txtClaveTrabajador.BackColor = Color.White;
-            txtClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
-            txtClaveTrabajador.Location = new Point(223, 126);
-            txtClaveTrabajador.Name = "txtClaveTrabajador";
-            txtClaveTrabajador.Size = new Size(200, 29);
-            txtClaveTrabajador.TabIndex = 9;
-            // 
+            //
+            txtNombreTrabajador.BackColor = Color.White;
+            txtNombreTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
+            txtNombreTrabajador.Location = new Point(223, 126);
+            txtNombreTrabajador.Name = "txtNombreTrabajador";
+            txtNombreTrabajador.Size = new Size(200, 29);
+            txtNombreTrabajador.TabIndex = 9;
+            //
             // lblNombreTrabajador
-            // 
-            lblClaveTrabajador.AutoSize = true;
-            lblClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
-            lblClaveTrabajador.Location = new Point(225, 95);
-            lblClaveTrabajador.Name = "lblClaveTrabajador";
-            lblClaveTrabajador.Size = new Size(150, 21);
-            lblClaveTrabajador.TabIndex = 8;
-            lblClaveTrabajador.Text = "Clave de Trabajador:";
+            //
+            lblNombreTrabajador.AutoSize = true;
+            lblNombreTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
+            lblNombreTrabajador.Location = new Point(225, 95);
+            lblNombreTrabajador.Name = "lblNombreTrabajador";
+            lblNombreTrabajador.Size = new Size(150, 21);
+            lblNombreTrabajador.TabIndex = 8;
+            lblNombreTrabajador.Text = "Nombre del Trabajador:";
             // 
             // lblTipoIncidencia
             // 

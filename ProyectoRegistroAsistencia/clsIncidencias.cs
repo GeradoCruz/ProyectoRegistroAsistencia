@@ -74,7 +74,7 @@ namespace ProyectoRegistroAsistencia
             return tabla;
         }
 
-        public DataTable FiltrarBusqueda(DateTime? fecha, string claveTrabajador, int idTipoIncidencia)
+        public DataTable FiltrarBusqueda(DateTime? fecha, string nombreTrabajador, int idTipoIncidencia)
         {
             tabla = new DataTable();
             try
