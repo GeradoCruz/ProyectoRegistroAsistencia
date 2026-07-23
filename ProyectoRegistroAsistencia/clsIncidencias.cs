@@ -107,11 +107,13 @@ namespace ProyectoRegistroAsistencia
                             cmd.Parameters.AddWithValue("@fecha", fecha.Value.ToString("yyyy-MM-dd"));
                         }
 
-                        // 2. Filtro por Clave de Trabajador (si el texto no está vacío)
-                        if (!string.IsNullOrWhiteSpace(claveTrabajador))
+
+                        // 2. Filtro por Nombre del Trabajador----------------CORREGIDO
+                        if (!string.IsNullOrWhiteSpace(nombreTrabajador))
                         {
-                            sql += " AND T.clave_trabajador = @clave";
-                            cmd.Parameters.AddWithValue("@clave", claveTrabajador.Trim());
+                            sql += @" AND ( T.nombre LIKE @nombre OR T.a_paterno LIKE @nombre OR T.a_materno LIKE @nombre)";
+
+                            cmd.Parameters.AddWithValue("@nombre","%" + nombreTrabajador.Trim() + "%");
                         }
 
                         // 3. Filtro por Tipo de Incidencia (0 = "-- Todos --", no se filtra)

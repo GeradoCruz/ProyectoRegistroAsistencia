@@ -42,9 +42,9 @@ namespace ProyectoRegistroAsistencia
                 clsAsistencias asistencia = new clsAsistencias();
 
                 DateTime fecha = dtpFiltroAsistencia.Value.Date;
-                string clave = txtClaveTrabajador.Text.Trim();
+                string apellido = txtApellido.Text.Trim();
 
-                DataTable resultado = asistencia.BusquedaFecha(fecha, clave);
+                DataTable resultado = asistencia.BusquedaFecha(fecha, apellido);
 
                 dgvRegistros.DataSource = resultado;
 
@@ -67,7 +67,7 @@ namespace ProyectoRegistroAsistencia
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             dtpFiltroAsistencia.Value = DateTime.Now;
-            txtClaveTrabajador.Clear();
+            txtApellido.Clear();
             clsAsistencias asistencia = new clsAsistencias();
             dgvRegistros.DataSource = asistencia.CargaDataGrid();
 

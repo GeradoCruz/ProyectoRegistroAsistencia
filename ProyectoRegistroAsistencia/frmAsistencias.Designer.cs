@@ -29,14 +29,14 @@ namespace ProyectoRegistroAsistencia
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAsistencias));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             lblTitulo = new Label();
             lblSubtitulo = new Label();
             lblFecha = new Label();
             lblClaveTrabajador = new Label();
             dtpFiltroAsistencia = new DateTimePicker();
-            txtClaveTrabajador = new TextBox();
+            txtApellido = new TextBox();
             btnLimpiar = new Button();
             btnBuscar = new Button();
             dgvRegistros = new DataGridView();
@@ -85,7 +85,7 @@ namespace ProyectoRegistroAsistencia
             lblClaveTrabajador.Name = "lblClaveTrabajador";
             lblClaveTrabajador.Size = new Size(150, 21);
             lblClaveTrabajador.TabIndex = 3;
-            lblClaveTrabajador.Text = "Clave de Trabajador:";
+            lblClaveTrabajador.Text = "Apellido:";
             // 
             // dtpFiltroAsistencia
             // 
@@ -95,7 +95,7 @@ namespace ProyectoRegistroAsistencia
             dtpFiltroAsistencia.Size = new Size(200, 29);
             dtpFiltroAsistencia.TabIndex = 4;
             // 
-            // txtClaveTrabajador
+            // txtApellido
             // 
             txtClaveTrabajador.BackColor = Color.White;
             txtClaveTrabajador.Location = new Point(220, 168);
@@ -181,7 +181,7 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(dgvRegistros);
             Controls.Add(btnBuscar);
             Controls.Add(btnLimpiar);
-            Controls.Add(txtClaveTrabajador);
+            Controls.Add(txtApellido);
             Controls.Add(dtpFiltroAsistencia);
             Controls.Add(lblClaveTrabajador);
             Controls.Add(lblFecha);
@@ -202,7 +202,7 @@ namespace ProyectoRegistroAsistencia
         private Label lblFecha;
         private Label lblClaveTrabajador;
         private DateTimePicker dtpFiltroAsistencia;
-        private TextBox txtClaveTrabajador;
+        private TextBox txtApellido;
         private Button btnLimpiar;
         private Button btnBuscar;
         private DataGridView dgvRegistros;

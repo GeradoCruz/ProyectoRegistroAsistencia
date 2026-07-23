@@ -35,8 +35,8 @@ namespace ProyectoRegistroAsistencia
             lblSubtitulo = new Label();
             dtpFecha = new DateTimePicker();
             lblFecha = new Label();
-            txtClaveTrabajador = new TextBox();
-            lblClaveTrabajador = new Label();
+            txtNombreTrabajador = new TextBox();
+            lblNombreTrabajador = new Label();
             lblTipoIncidencia = new Label();
             cmbTipoIncidencia = new ComboBox();
             btnBuscar = new Button();
@@ -87,7 +87,7 @@ namespace ProyectoRegistroAsistencia
             lblFecha.TabIndex = 6;
             lblFecha.Text = "Fecha:";
             // 
-            // txtClaveTrabajador
+            // txtNombreTrabajador
             // 
             txtClaveTrabajador.BackColor = Color.White;
             txtClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
@@ -96,7 +96,7 @@ namespace ProyectoRegistroAsistencia
             txtClaveTrabajador.Size = new Size(200, 29);
             txtClaveTrabajador.TabIndex = 9;
             // 
-            // lblClaveTrabajador
+            // lblNombreTrabajador
             // 
             lblClaveTrabajador.AutoSize = true;
             lblClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
@@ -194,7 +194,7 @@ namespace ProyectoRegistroAsistencia
             btnJustificar.TabIndex = 18;
             btnJustificar.Text = "Justificar";
             btnJustificar.UseVisualStyleBackColor = false;
-            btnJustificar.Click += btnJustificar_Click_1;
+            btnJustificar.Click += btnJustificar_Click;
             // 
             // frmIncidencias
             // 
@@ -207,8 +207,8 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(btnBuscar);
             Controls.Add(cmbTipoIncidencia);
             Controls.Add(lblTipoIncidencia);
-            Controls.Add(txtClaveTrabajador);
-            Controls.Add(lblClaveTrabajador);
+            Controls.Add(txtNombreTrabajador);
+            Controls.Add(lblNombreTrabajador);
             Controls.Add(dtpFecha);
             Controls.Add(lblFecha);
             Controls.Add(lblSubtitulo);
@@ -232,8 +232,8 @@ namespace ProyectoRegistroAsistencia
         private Label lblSubtitulo;
         private DateTimePicker dtpFecha;
         private Label lblFecha;
-        private TextBox txtClaveTrabajador;
-        private Label lblClaveTrabajador;
+        private TextBox txtNombreTrabajador;
+        private Label lblNombreTrabajador;
         private Label lblTipoIncidencia;
         private ComboBox cmbTipoIncidencia;
         private Button btnBuscar;

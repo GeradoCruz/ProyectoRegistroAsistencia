@@ -19,6 +19,14 @@ namespace ProyectoRegistroAsistencia
         {
             InitializeComponent();
 
+            cmbTipoIncidencia.Items.Clear();
+            cmbTipoIncidencia.Items.Add("Todos");
+            cmbTipoIncidencia.Items.Add("Falta");
+            cmbTipoIncidencia.Items.Add("Retardo");
+
+            cmbTipoIncidencia.SelectedIndex = 0;
+            cmbTipoIncidencia.DropDownStyle = ComboBoxStyle.DropDownList;
+
             dtpFecha.ShowCheckBox = true;
             dtpFecha.Checked = false;
 
@@ -30,7 +38,6 @@ namespace ProyectoRegistroAsistencia
             try
             {
                 dgvIncidencias.DataSource = incidencias.CargarDataGrid();
-                //aqui iria el codigo para ocultar la columna de id_incidencia----------------------------------------------------------
                 dgvIncidencias.Columns["id_incidencia"].Visible = false;
 
             }
@@ -68,37 +75,12 @@ namespace ProyectoRegistroAsistencia
         }
         private void RefrescarGrid()
         {
-            // TODO: volver a cargar dgvIncidencias desde la base de datos
+           
             dgvIncidencias.DataSource = incidencias.CargarDataGrid();
             dgvIncidencias.Columns["id_incidencia"].Visible = false;
         }
 
-        private void btnJustificar_Click(object? sender, EventArgs e)
-        {
-            if (dgvIncidencias.CurrentRow == null)
-            {
-                MessageBox.Show("Selecciona una incidencia.");
-                return;
-            }
 
-            int id = Convert.ToInt32(
-                dgvIncidencias.CurrentRow.Cells["id_incidencia"].Value);
-
-            string nombre = dgvIncidencias.CurrentRow.Cells["Nombre completo"].Value.ToString();
-            string departamento = dgvIncidencias.CurrentRow.Cells["Nombre departamento"].Value.ToString();
-            string incidencia = dgvIncidencias.CurrentRow.Cells["Tipo de incidencia"].Value.ToString();
-            DateTime fecha = Convert.ToDateTime(dgvIncidencias.CurrentRow.Cells["Fecha"].Value);
-
-            using (frmJustificante frm = new frmJustificante())
-            {
-                frm.CargarDatos(id, nombre, departamento, incidencia, fecha);
-
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    RefrescarGrid();
-                }
-            }
-        }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -112,7 +94,7 @@ namespace ProyectoRegistroAsistencia
                     fecha = dtpFecha.Value.Date;
                 }
 
-                string clave = txtClaveTrabajador.Text.Trim();
+                string nombre = txtNombreTrabajador.Text.Trim();
 
                 // idTipo = 0 ("-- Todos --") significa que no se filtra por tipo
                 int idTipo = cmbTipoIncidencia.SelectedValue != null
@@ -127,7 +109,7 @@ namespace ProyectoRegistroAsistencia
             }
         }
 
-        private void btnJustificar_Click_1(object sender, EventArgs e)
+        private void btnJustificar_Click(object sender, EventArgs e)
         {
             if (dgvIncidencias.CurrentRow == null)
             {
@@ -138,10 +120,17 @@ namespace ProyectoRegistroAsistencia
             int id = Convert.ToInt32(
                 dgvIncidencias.CurrentRow.Cells["id_incidencia"].Value);
 
-            string nombre = dgvIncidencias.CurrentRow.Cells["Nombre completo"].Value.ToString();
-            string departamento = dgvIncidencias.CurrentRow.Cells["Nombre departamento"].Value.ToString();
-            string incidencia = dgvIncidencias.CurrentRow.Cells["Tipo de incidencia"].Value.ToString();
-            DateTime fecha = Convert.ToDateTime(dgvIncidencias.CurrentRow.Cells["Fecha"].Value);
+            string nombre = dgvIncidencias.CurrentRow
+                .Cells["Nombre completo"].Value.ToString();
+
+            string departamento = dgvIncidencias.CurrentRow
+                .Cells["Nombre departamento"].Value.ToString();
+
+            string incidencia = dgvIncidencias.CurrentRow
+                .Cells["Tipo de incidencia"].Value.ToString();
+
+            DateTime fecha = Convert.ToDateTime(
+                dgvIncidencias.CurrentRow.Cells["Fecha"].Value);
 
             using (frmJustificante frm = new frmJustificante())
             {
@@ -153,33 +142,7 @@ namespace ProyectoRegistroAsistencia
                 }
             }
         }
-        public void GuardarJustificacion(int idIncidencia, string justificacion)
-        {
-            try
-            {
-                clsConexion conexionBD = new clsConexion();
-
-                using (var conexion = conexionBD.AbrirConexion())
-                {
-                    string sql = @"UPDATE tblincidencias
-                           SET justificacion=@justificacion
-                           WHERE id_incidencia=@id";
-
-                    using (MySqlCommand cmd = new MySqlCommand(sql, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@justificacion", justificacion);
-                        cmd.Parameters.AddWithValue("@id", idIncidencia);
-
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al guardar la justificación: " + ex.Message);
-            }
-        }
     }
-    
+
 
 }
