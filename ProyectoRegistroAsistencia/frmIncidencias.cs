@@ -43,24 +43,31 @@ namespace ProyectoRegistroAsistencia
         private void RefrescarGrid()
         {
             // TODO: volver a cargar dgvIncidencias desde la base de datos
+            dgvIncidencias.DataSource = incidencias.CargarDataGrid();
+            dgvIncidencias.Columns["id_incidencia"].Visible = false;
         }
 
         private void btnJustificar_Click(object? sender, EventArgs e)
         {
             if (dgvIncidencias.CurrentRow == null)
             {
-                MessageBox.Show("Selecciona una incidencia de la lista para justificar.", "Staff Asistence",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Selecciona una incidencia.");
                 return;
-
             }
 
-            using (var frm = new frmJustificante())
-            {
-                // TODO: precargar los datos de la incidencia seleccionada
-                // frm.CargarDatos(nombre, departamento, incidencia, fecha);
+            int id = Convert.ToInt32(
+                dgvIncidencias.CurrentRow.Cells["id_incidencia"].Value);
 
-                if (frm.ShowDialog(this) == DialogResult.OK)
+            string nombre = dgvIncidencias.CurrentRow.Cells["Nombre completo"].Value.ToString();
+            string departamento = dgvIncidencias.CurrentRow.Cells["Nombre departamento"].Value.ToString();
+            string incidencia = dgvIncidencias.CurrentRow.Cells["Tipo de incidencia"].Value.ToString();
+            DateTime fecha = Convert.ToDateTime(dgvIncidencias.CurrentRow.Cells["Fecha"].Value);
+
+            using (frmJustificante frm = new frmJustificante())
+            {
+                frm.CargarDatos(id, nombre, departamento, incidencia, fecha);
+
+                if (frm.ShowDialog() == DialogResult.OK)
                 {
                     RefrescarGrid();
                 }
@@ -104,17 +111,51 @@ namespace ProyectoRegistroAsistencia
                 return;
             }
 
+            int id = Convert.ToInt32(
+                dgvIncidencias.CurrentRow.Cells["id_incidencia"].Value);
+
             string nombre = dgvIncidencias.CurrentRow.Cells["Nombre completo"].Value.ToString();
             string departamento = dgvIncidencias.CurrentRow.Cells["Nombre departamento"].Value.ToString();
             string incidencia = dgvIncidencias.CurrentRow.Cells["Tipo de incidencia"].Value.ToString();
             DateTime fecha = Convert.ToDateTime(dgvIncidencias.CurrentRow.Cells["Fecha"].Value);
 
-            frmJustificante frm = new frmJustificante();
+            using (frmJustificante frm = new frmJustificante())
+            {
+                frm.CargarDatos(id, nombre, departamento, incidencia, fecha);
 
-            frm.CargarDatos(nombre, departamento, incidencia, fecha);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    RefrescarGrid();
+                }
+            }
+        }
+        public void GuardarJustificacion(int idIncidencia, string justificacion)
+        {
+            try
+            {
+                clsConexion conexionBD = new clsConexion();
 
-            frm.ShowDialog();
+                using (var conexion = conexionBD.AbrirConexion())
+                {
+                    string sql = @"UPDATE tblincidencias
+                           SET justificacion=@justificacion
+                           WHERE id_incidencia=@id";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@justificacion", justificacion);
+                        cmd.Parameters.AddWithValue("@id", idIncidencia);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al guardar la justificación: " + ex.Message);
+            }
         }
     }
+    
 
 }

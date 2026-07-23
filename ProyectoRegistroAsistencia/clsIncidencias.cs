@@ -102,7 +102,32 @@ namespace ProyectoRegistroAsistencia
 
             return tabla;
         }
-        
-        
+        public void GuardarJustificacion(int idIncidencia, string justificacion)
+        {
+            try
+            {
+                clsConexion conexionBD = new clsConexion();
+
+                using (var conexion = conexionBD.AbrirConexion())
+                {
+                    string sql = @"UPDATE tblincidencias
+                           SET justificacion = @justificacion
+                           WHERE id_incidencia = @id";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@justificacion", justificacion);
+                        cmd.Parameters.AddWithValue("@id", idIncidencia);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al guardar la justificación: " + ex.Message);
+            }
+        }
+
     }
 }
