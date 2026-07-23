@@ -1,3 +1,4 @@
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,12 +13,149 @@ namespace ProyectoRegistroAsistencia
 {
     public partial class frmIncidencias : Form
     {
+        clsIncidencias incidencias;
+
         public frmIncidencias()
         {
             InitializeComponent();
 
+            dtpFecha.ShowCheckBox = true;
+            dtpFecha.Checked = false;
+
+            incidencias = new clsIncidencias();
+            dgvIncidencias.DataSource = null;
+            dgvIncidencias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            try
+            {
+                dgvIncidencias.DataSource = incidencias.CargarDataGrid();
+                //aqui iria el codigo para ocultar la columna de id_incidencia----------------------------------------------------------
+                dgvIncidencias.Columns["id_incidencia"].Visible = false;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+
+        }
+        private void RefrescarGrid()
+        {
+            // TODO: volver a cargar dgvIncidencias desde la base de datos
+            dgvIncidencias.DataSource = incidencias.CargarDataGrid();
+            dgvIncidencias.Columns["id_incidencia"].Visible = false;
         }
 
+        private void btnJustificar_Click(object? sender, EventArgs e)
+        {
+            if (dgvIncidencias.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona una incidencia.");
+                return;
+            }
 
+            int id = Convert.ToInt32(
+                dgvIncidencias.CurrentRow.Cells["id_incidencia"].Value);
+
+            string nombre = dgvIncidencias.CurrentRow.Cells["Nombre completo"].Value.ToString();
+            string departamento = dgvIncidencias.CurrentRow.Cells["Nombre departamento"].Value.ToString();
+            string incidencia = dgvIncidencias.CurrentRow.Cells["Tipo de incidencia"].Value.ToString();
+            DateTime fecha = Convert.ToDateTime(dgvIncidencias.CurrentRow.Cells["Fecha"].Value);
+
+            using (frmJustificante frm = new frmJustificante())
+            {
+                frm.CargarDatos(id, nombre, departamento, incidencia, fecha);
+
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    RefrescarGrid();
+                }
+            }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DateTime? fecha = null;
+
+                // Solo se usa la fecha si la casilla del DateTimePicker está marcada
+                if (dtpFecha.Checked)
+                {
+                    fecha = dtpFecha.Value.Date;
+                }
+
+                string clave = txtClaveTrabajador.Text.Trim();
+
+                int? tipo = null;
+
+                if (cmbTipoIncidencia.SelectedValue != null)
+                {
+                    tipo = Convert.ToInt32(cmbTipoIncidencia.SelectedValue);
+                }
+
+                dgvIncidencias.DataSource = incidencias.FiltrarBusqueda(fecha, clave, tipo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnJustificar_Click_1(object sender, EventArgs e)
+        {
+            if (dgvIncidencias.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona una incidencia.");
+                return;
+            }
+
+            int id = Convert.ToInt32(
+                dgvIncidencias.CurrentRow.Cells["id_incidencia"].Value);
+
+            string nombre = dgvIncidencias.CurrentRow.Cells["Nombre completo"].Value.ToString();
+            string departamento = dgvIncidencias.CurrentRow.Cells["Nombre departamento"].Value.ToString();
+            string incidencia = dgvIncidencias.CurrentRow.Cells["Tipo de incidencia"].Value.ToString();
+            DateTime fecha = Convert.ToDateTime(dgvIncidencias.CurrentRow.Cells["Fecha"].Value);
+
+            using (frmJustificante frm = new frmJustificante())
+            {
+                frm.CargarDatos(id, nombre, departamento, incidencia, fecha);
+
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    RefrescarGrid();
+                }
+            }
+        }
+        public void GuardarJustificacion(int idIncidencia, string justificacion)
+        {
+            try
+            {
+                clsConexion conexionBD = new clsConexion();
+
+                using (var conexion = conexionBD.AbrirConexion())
+                {
+                    string sql = @"UPDATE tblincidencias
+                           SET justificacion=@justificacion
+                           WHERE id_incidencia=@id";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@justificacion", justificacion);
+                        cmd.Parameters.AddWithValue("@id", idIncidencia);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al guardar la justificación: " + ex.Message);
+            }
+        }
     }
+    
+
 }
