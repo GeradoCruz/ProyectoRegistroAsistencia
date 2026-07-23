@@ -1,4 +1,4 @@
-﻿using MySqlConnector;
+using MySqlConnector;
 using System;
 using System.Data;
 
@@ -26,13 +26,13 @@ namespace ProyectoRegistroAsistencia
         {
             try
             {
-               
+
                 var conexion = new MySqlConnection(CadenaRemota);
                 conexion.Open();
                 return conexion;
             }
-           catch
-            {
+            catch
+            { 
                 try
                 {
                     //si el remoto falla, intenta con la base local de respaldo

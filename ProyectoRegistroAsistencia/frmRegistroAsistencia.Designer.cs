@@ -68,9 +68,9 @@ namespace ProyectoRegistroAsistencia
             groupBox1.FlatStyle = FlatStyle.Popup;
             groupBox1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox1.ForeColor = Color.FromArgb(108, 117, 125);
-            groupBox1.Location = new Point(375, 25);
+            groupBox1.Location = new Point(335, 25);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(253, 386);
+            groupBox1.Size = new Size(293, 386);
             groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
             groupBox1.Text = "Camara Activo";
@@ -81,7 +81,7 @@ namespace ProyectoRegistroAsistencia
             pcbCamara.BorderStyle = BorderStyle.FixedSingle;
             pcbCamara.Location = new Point(6, 28);
             pcbCamara.Name = "pcbCamara";
-            pcbCamara.Size = new Size(241, 352);
+            pcbCamara.Size = new Size(281, 352);
             pcbCamara.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbCamara.TabIndex = 8;
             pcbCamara.TabStop = false;
@@ -100,7 +100,7 @@ namespace ProyectoRegistroAsistencia
             // pcbRegistro
             // 
             pcbRegistro.Image = (Image)resources.GetObject("pcbRegistro.Image");
-            pcbRegistro.Location = new Point(107, 85);
+            pcbRegistro.Location = new Point(95, 85);
             pcbRegistro.Name = "pcbRegistro";
             pcbRegistro.Size = new Size(136, 139);
             pcbRegistro.SizeMode = PictureBoxSizeMode.StretchImage;
