@@ -43,7 +43,7 @@ namespace ProyectoRegistroAsistencia
         }
 
 
-        public DataTable BusquedaFecha(DateTime fecha, string clave)
+        public DataTable BusquedaFecha(DateTime fecha, string apellido)
         {
             tabla = new DataTable();
 
@@ -61,18 +61,18 @@ namespace ProyectoRegistroAsistencia
                                  "INNER JOIN tbltrabajador T ON A.id_trabajador = T.id_trabajador " +
                                  "WHERE DATE(A.fecha) = @fecha ";
 
-                    if (!string.IsNullOrEmpty(clave))
+                    if (!string.IsNullOrEmpty(apellido))
                     {
-                        sql += "AND T.clave_trabajador = @clave ";
+                        sql += "AND T.a_paterno LIKE @apellido ";
                     }
 
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
                         consultar.Parameters.AddWithValue("@fecha", fecha.Date);
 
-                        if (!string.IsNullOrEmpty(clave))
+                        if (!string.IsNullOrEmpty(apellido))
                         {
-                            consultar.Parameters.AddWithValue("@clave", clave);
+                            consultar.Parameters.AddWithValue("@apellido", "%" + apellido + "%");
                         }
 
                         using (consulta = new MySqlDataAdapter (consultar))

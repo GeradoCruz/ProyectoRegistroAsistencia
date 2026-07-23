@@ -40,7 +40,7 @@ namespace ProyectoRegistroAsistencia
             return tabla;
         }
 
-        public DataTable FiltrarBusqueda(DateTime? fecha, string claveTrabajador, int? tipoIncidencia) 
+        public DataTable FiltrarBusqueda(DateTime? fecha, string nombreTrabajador, string tipoIncidencia)
         {
             tabla = new DataTable();
             try
@@ -72,18 +72,20 @@ namespace ProyectoRegistroAsistencia
                             cmd.Parameters.AddWithValue("@fecha", fecha.Value.ToString("yyyy-MM-dd"));
                         }
 
-                        // 2. Filtro por Clave de Trabajador (si el texto no está vacío)
-                        if (!string.IsNullOrWhiteSpace(claveTrabajador))
+
+                        // 2. Filtro por Nombre del Trabajador----------------CORREGIDO
+                        if (!string.IsNullOrWhiteSpace(nombreTrabajador))
                         {
-                            sql += " AND T.clave_trabajador = @clave";
-                            cmd.Parameters.AddWithValue("@clave", claveTrabajador.Trim());
+                            sql += @" AND ( T.nombre LIKE @nombre OR T.a_paterno LIKE @nombre OR T.a_materno LIKE @nombre)";
+
+                            cmd.Parameters.AddWithValue("@nombre","%" + nombreTrabajador.Trim() + "%");
                         }
 
-                        // 3. Filtro por Tipo de Incidencia (si se seleccionó una opción válida, ej. id > 0)
-                        if (tipoIncidencia.HasValue && tipoIncidencia.Value > 0)
+                        // 3. Filtro por Tipo de Incidencia (si se seleccionó una opción válida)
+                        if (!string.IsNullOrWhiteSpace(tipoIncidencia))
                         {
-                            sql += " AND I.id_tipo_incidencia = @tipo";
-                            cmd.Parameters.AddWithValue("@tipo", tipoIncidencia.Value);
+                            sql += " AND I.tipo_incidencia = @tipo";
+                            cmd.Parameters.AddWithValue("@tipo", tipoIncidencia);
                         }
 
                         cmd.CommandText = sql;

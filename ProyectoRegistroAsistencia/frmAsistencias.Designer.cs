@@ -29,14 +29,14 @@ namespace ProyectoRegistroAsistencia
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAsistencias));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             lblTitulo = new Label();
             lblSubtitulo = new Label();
             lblFecha = new Label();
             lblClaveTrabajador = new Label();
             dtpFiltroAsistencia = new DateTimePicker();
-            txtClaveTrabajador = new TextBox();
+            txtApellido = new TextBox();
             btnLimpiar = new Button();
             btnBuscar = new Button();
             dgvRegistros = new DataGridView();
@@ -83,9 +83,9 @@ namespace ProyectoRegistroAsistencia
             lblClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
             lblClaveTrabajador.Location = new Point(220, 146);
             lblClaveTrabajador.Name = "lblClaveTrabajador";
-            lblClaveTrabajador.Size = new Size(188, 28);
+            lblClaveTrabajador.Size = new Size(90, 28);
             lblClaveTrabajador.TabIndex = 3;
-            lblClaveTrabajador.Text = "Clave de Trabajador:";
+            lblClaveTrabajador.Text = "Apellido:";
             // 
             // dtpFiltroAsistencia
             // 
@@ -95,13 +95,13 @@ namespace ProyectoRegistroAsistencia
             dtpFiltroAsistencia.Size = new Size(200, 34);
             dtpFiltroAsistencia.TabIndex = 4;
             // 
-            // txtClaveTrabajador
+            // txtApellido
             // 
-            txtClaveTrabajador.BackColor = Color.White;
-            txtClaveTrabajador.Location = new Point(220, 170);
-            txtClaveTrabajador.Name = "txtClaveTrabajador";
-            txtClaveTrabajador.Size = new Size(200, 34);
-            txtClaveTrabajador.TabIndex = 5;
+            txtApellido.BackColor = Color.White;
+            txtApellido.Location = new Point(220, 170);
+            txtApellido.Name = "txtApellido";
+            txtApellido.Size = new Size(200, 34);
+            txtApellido.TabIndex = 5;
             // 
             // btnLimpiar
             // 
@@ -142,27 +142,28 @@ namespace ProyectoRegistroAsistencia
             dgvRegistros.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvRegistros.BackgroundColor = Color.FromArgb(240, 242, 245);
             dgvRegistros.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(43, 76, 140);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(74, 126, 193);
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvRegistros.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(43, 76, 140);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(74, 126, 193);
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvRegistros.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvRegistros.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(108, 117, 125);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(74, 126, 193);
-            dataGridViewCellStyle2.SelectionForeColor = Color.White;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvRegistros.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(108, 117, 125);
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(74, 126, 193);
+            dataGridViewCellStyle4.SelectionForeColor = Color.White;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgvRegistros.DefaultCellStyle = dataGridViewCellStyle4;
             dgvRegistros.EnableHeadersVisualStyles = false;
             dgvRegistros.Location = new Point(11, 219);
             dgvRegistros.Name = "dgvRegistros";
             dgvRegistros.ReadOnly = true;
+            dgvRegistros.RowHeadersWidth = 51;
             dgvRegistros.RowTemplate.Height = 40;
             dgvRegistros.Size = new Size(1044, 427);
             dgvRegistros.TabIndex = 8;
@@ -176,7 +177,7 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(dgvRegistros);
             Controls.Add(btnBuscar);
             Controls.Add(btnLimpiar);
-            Controls.Add(txtClaveTrabajador);
+            Controls.Add(txtApellido);
             Controls.Add(dtpFiltroAsistencia);
             Controls.Add(lblClaveTrabajador);
             Controls.Add(lblFecha);
@@ -197,7 +198,7 @@ namespace ProyectoRegistroAsistencia
         private Label lblFecha;
         private Label lblClaveTrabajador;
         private DateTimePicker dtpFiltroAsistencia;
-        private TextBox txtClaveTrabajador;
+        private TextBox txtApellido;
         private Button btnLimpiar;
         private Button btnBuscar;
         private DataGridView dgvRegistros;
