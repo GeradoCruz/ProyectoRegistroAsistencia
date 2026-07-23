@@ -12,7 +12,6 @@ namespace ProyectoRegistroAsistencia
         private string password = "equipo1gb";
         private string port = "3306";
         
-        
         //datos del servidor local 
         private string hostLocal = "localhost";
         private string bdLocal = "equipo1_staff_asistence";
@@ -33,7 +32,7 @@ namespace ProyectoRegistroAsistencia
                 return conexion;
             }
             catch
-            {
+            { 
                 try
                 {
                     //si el remoto falla, intenta con la base local de respaldo

@@ -53,39 +53,35 @@ namespace ProyectoRegistroAsistencia
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            // TODO: precargar los datos del empleado seleccionado en frmNuevoEmpleado
-            using (var frm = new frmNuevoEmpleado())
-            {
                 datosE = new frmNuevoEmpleado();
                 if (dgvEmpleados.CurrentRow == null) return;
-                try
-                {
-                    datosE.lblTitulo.Text = "Actualización del Empleado";
-                    datosE.ClaveTrabajador = dgvEmpleados.CurrentRow.Cells["Clave Trabajador"].Value.ToString();
+            try
+            {
+                datosE.lblTitulo.Text = "Actualización del Empleado";
+                datosE.ClaveTrabajador = dgvEmpleados.CurrentRow.Cells["Clave Trabajador"].Value.ToString();
 
-                    datosE.txtClaveTrabajador.Text = dgvEmpleados.CurrentRow.Cells["Clave Trabajador"].Value.ToString();
-                    datosE.txtNombre.Text = dgvEmpleados.CurrentRow.Cells["Nombre"].Value.ToString();
-                    datosE.txtApellidoPaterno.Text = dgvEmpleados.CurrentRow.Cells["Apellido Paterno"].Value.ToString();
-                    datosE.txtApellidoMaterno.Text = dgvEmpleados.CurrentRow.Cells["Apellido Materno"].Value.ToString();
-                    datosE.txtLocalidad.Text = dgvEmpleados.CurrentRow.Cells["Localidad"].Value.ToString();
-                    datosE.txtMunicipio.Text = dgvEmpleados.CurrentRow.Cells["Municipio"].Value.ToString();
-                    datosE.rdbHombre.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "Hombre";
-                    datosE.rdbMujer.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "Mujer";
-                    datosE.txtCorreoInstitucional.Text = dgvEmpleados.CurrentRow.Cells["Correo Institucional"].Value.ToString();
-                    datosE.txtTelefono.Text = dgvEmpleados.CurrentRow.Cells["Telefono"].Value.ToString();
-                    datosE.txtCodigoPostal.Text = dgvEmpleados.CurrentRow.Cells["Codigo Postal"].Value.ToString();
-                    datosE.txtNumCalle.Text = dgvEmpleados.CurrentRow.Cells["Numero Calle"].Value.ToString();
-                    datosE.cmbDepartamento.SelectedValue = dgvEmpleados.CurrentRow.Cells["id_departamento"].Value;
-                    datosE.cmbPuesto.SelectedValue = dgvEmpleados.CurrentRow.Cells["id_puesto"].Value;
+                datosE.txtClaveTrabajador.Text = dgvEmpleados.CurrentRow.Cells["Clave Trabajador"].Value.ToString();
+                datosE.txtNombre.Text = dgvEmpleados.CurrentRow.Cells["Nombre"].Value.ToString();
+                datosE.txtApellidoPaterno.Text = dgvEmpleados.CurrentRow.Cells["Apellido Paterno"].Value.ToString();
+                datosE.txtApellidoMaterno.Text = dgvEmpleados.CurrentRow.Cells["Apellido Materno"].Value.ToString();
+                datosE.txtLocalidad.Text = dgvEmpleados.CurrentRow.Cells["Localidad"].Value.ToString();
+                datosE.txtMunicipio.Text = dgvEmpleados.CurrentRow.Cells["Municipio"].Value.ToString();
+                datosE.rdbHombre.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "Hombre";
+                datosE.rdbMujer.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "Mujer";
+                datosE.txtCorreoInstitucional.Text = dgvEmpleados.CurrentRow.Cells["Correo Institucional"].Value.ToString();
+                datosE.txtTelefono.Text = dgvEmpleados.CurrentRow.Cells["Telefono"].Value.ToString();
+                datosE.txtCodigoPostal.Text = dgvEmpleados.CurrentRow.Cells["Codigo Postal"].Value.ToString();
+                datosE.txtNumCalle.Text = dgvEmpleados.CurrentRow.Cells["Numero Calle"].Value.ToString();
+                datosE.cmbDepartamento.SelectedValue = dgvEmpleados.CurrentRow.Cells["id_departamento"].Value;
+                datosE.cmbPuesto.SelectedValue = dgvEmpleados.CurrentRow.Cells["id_puesto"].Value;
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al seleccionar el empleado: " + ex.Message);
-                }
-                datosE.ShowDialog();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al seleccionar el empleado: " + ex.Message);
+            }
+            datosE.ShowDialog();
+            CargarDataGrid();
         }
         public void CargarCombo()
         {
@@ -134,23 +130,12 @@ namespace ProyectoRegistroAsistencia
         }
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            if (txtBuscarEmpleado.Text != "") return;
-
             empleados = new clsEmpleados();
-            claveTrabajador = txtBuscarEmpleado.Text;
-            dgvEmpleados.DataSource = null;
-            dgvEmpleados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            string filtro = txtBuscarEmpleado.Text.Trim();
+
             try
             {
-                if (claveTrabajador != "")
-                {
-                    dgvEmpleados.DataSource = empleados.BuscarEmpleado(claveTrabajador);
-
-                }
-                else
-                {
-                    dgvEmpleados.DataSource = empleados.Consultar();
-                }
+                dgvEmpleados.DataSource = empleados.BuscarEmpleado(filtro);
             }
             catch (Exception ex)
             {
@@ -177,28 +162,7 @@ namespace ProyectoRegistroAsistencia
                     ((ComboBox)control).SelectedIndex = 0;
                 }
             }
-        }
-
-        private void btnBuscar_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtBuscarEmpleado.Text))
-            {
-                CargarDataGrid();
-                return;
-            }
-            empleados = new clsEmpleados();
-            dgvEmpleados.DataSource = null;
-            dgvEmpleados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            try
-            {
-                empleados.ClaveTrabajador = txtBuscarEmpleado.Text;
-                dgvEmpleados.DataSource = empleados.Consultar();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            CargarDataGrid();
         }
     }
 }

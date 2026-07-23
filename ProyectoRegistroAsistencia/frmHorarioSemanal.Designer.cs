@@ -31,6 +31,8 @@ namespace ProyectoRegistroAsistencia
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHorarioSemanal));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             lblTitulo = new Label();
             lblSubtitulo = new Label();
             lblDepartamento = new Label();
@@ -39,7 +41,9 @@ namespace ProyectoRegistroAsistencia
             btnAsignarHorario = new Button();
             dgvHorarios = new DataGridView();
             btnLimpiar = new Button();
+            dgvDiasHorarios = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dgvHorarios).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvDiasHorarios).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -83,7 +87,7 @@ namespace ProyectoRegistroAsistencia
             cmbDepartamento.FormattingEnabled = true;
             cmbDepartamento.Location = new Point(12, 154);
             cmbDepartamento.Name = "cmbDepartamento";
-            cmbDepartamento.Size = new Size(242, 29);
+            cmbDepartamento.Size = new Size(269, 36);
             cmbDepartamento.TabIndex = 6;
             // 
             // btnBuscar
@@ -147,8 +151,7 @@ namespace ProyectoRegistroAsistencia
             dgvHorarios.Name = "dgvHorarios";
             dgvHorarios.ReadOnly = true;
             dgvHorarios.RowHeadersWidth = 51;
-            dgvHorarios.RowTemplate.Height = 40;
-            dgvHorarios.Size = new Size(1044, 427);
+            dgvHorarios.Size = new Size(551, 427);
             dgvHorarios.TabIndex = 12;
             // 
             // btnLimpiar
@@ -165,12 +168,41 @@ namespace ProyectoRegistroAsistencia
             btnLimpiar.UseVisualStyleBackColor = false;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
+            // dgvDiasHorarios
+            // 
+            dgvDiasHorarios.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            dgvDiasHorarios.BackgroundColor = Color.FromArgb(240, 242, 245);
+            dgvDiasHorarios.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(43, 76, 140);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(74, 126, 193);
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvDiasHorarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dgvDiasHorarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(108, 117, 125);
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(74, 126, 193);
+            dataGridViewCellStyle4.SelectionForeColor = Color.White;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgvDiasHorarios.DefaultCellStyle = dataGridViewCellStyle4;
+            dgvDiasHorarios.Location = new Point(569, 204);
+            dgvDiasHorarios.Name = "dgvDiasHorarios";
+            dgvDiasHorarios.RowHeadersWidth = 51;
+            dgvDiasHorarios.Size = new Size(484, 427);
+            dgvDiasHorarios.TabIndex = 12;
+            // 
             // frmHorarioSemanal
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);
+            Controls.Add(dgvDiasHorarios);
             Controls.Add(btnLimpiar);
             Controls.Add(dgvHorarios);
             Controls.Add(btnAsignarHorario);
@@ -184,6 +216,7 @@ namespace ProyectoRegistroAsistencia
             Margin = new Padding(4);
             Name = "frmHorarioSemanal";
             ((System.ComponentModel.ISupportInitialize)dgvHorarios).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvDiasHorarios).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -198,5 +231,6 @@ namespace ProyectoRegistroAsistencia
         private Button btnAsignarHorario;
         private DataGridView dgvHorarios;
         private Button btnLimpiar;
+        private DataGridView dgvDiasHorarios;
     }
 }

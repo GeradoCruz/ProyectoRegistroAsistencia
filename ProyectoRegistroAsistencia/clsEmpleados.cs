@@ -14,6 +14,7 @@ namespace ProyectoRegistroAsistencia
         private string apellidoMaterno;
         private string departamento;
         private string puesto;
+        private DateTime fechaIngreso;
         private int numeroCalle;
         private int codigoPostal;
         private string municipio;
@@ -69,7 +70,7 @@ namespace ProyectoRegistroAsistencia
                                 "ORDER BY clave_trabajador ASC; ";
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
-                        consultar.Parameters.AddWithValue("@claveTrabajador", "%" + claveTrabajador + "%");
+                        consultar.Parameters.AddWithValue("@Clave Trabajador", "%" + claveTrabajador + "%");
                         using (consulta = new MySqlDataAdapter(consultar))
                         { 
                             consulta.Fill(tabla);
@@ -98,8 +99,8 @@ namespace ProyectoRegistroAsistencia
                             switch (tipoOperacion)
                             {
                                 case 0:
-                                    string sqlInsertar = "INSERT INTO tbltrabajador (clave_trabajador, nombre, a_paterno, a_materno, telefono, email, sexo, municipio, localidad, cp, numero_calle, id_departamento, id_puesto) " +
-                                        "VALUES (@'Clave Trabajador', @nombre, @'Apellido Paterno', @'Apellido Materno', @telefono, @'Correo Electronico', @genero, @municipio, @localidad, @'Codigo Postal', @'Numero Calle', @Departamento, @Puesto)";
+                                    string sqlInsertar = "INSERT INTO tbltrabajador (clave_trabajador, nombre, a_paterno, a_materno, telefono, email, sexo, fecha_ingreso, municipio, localidad, cp, numero_calle, id_departamento, id_puesto) " +
+                                        "VALUES (@'Clave Trabajador', @nombre, @'Apellido Paterno', @'Apellido Materno', @telefono, @'Correo Electronico', @genero, CURDATE(), @municipio, @localidad, @'Codigo Postal', @'Numero Calle', @Departamento, @Puesto)";
                                     using (comando = new MySqlCommand(sqlInsertar, conexion, transaccion))
                                     {
                                             comando.Parameters.AddWithValue("@'Clave Trabajador'", claveTrabajador);
@@ -109,6 +110,7 @@ namespace ProyectoRegistroAsistencia
                                             comando.Parameters.AddWithValue("@telefono", telefono);
                                             comando.Parameters.AddWithValue("@'Correo Electronico'", correoElectronico);
                                             comando.Parameters.AddWithValue("@genero", genero);
+                                            comando.Parameters.AddWithValue("@'fecha Ingreso'", fechaIngreso);
                                             comando.Parameters.AddWithValue("@municipio", municipio);
                                             comando.Parameters.AddWithValue("@localidad", localidad);
                                             comando.Parameters.AddWithValue("@'Codigo Postal'", codigoPostal);
@@ -247,11 +249,29 @@ namespace ProyectoRegistroAsistencia
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT * FROM tbltrabajador " +
-                        "WHERE clave_trabajador LIKE @filtro "+
-                        "OR nombre LIKE @filtro "+
-                        "OR apellido_paterno LIKE @filtro "+
-                        "OR apellido_materno LIKE @filtro ";
+                    string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
+                                "T.nombre AS Nombre, " +
+                                "T.a_paterno AS 'Apellido Paterno', " +
+                                "T.a_materno AS 'Apellido Materno', " +
+                                "T.telefono AS Telefono, " +
+                                "T.email AS 'Correo Institucional', " +
+                                "T.sexo AS Genero, " +
+                                "T.municipio AS Municipio, " +
+                                "T.localidad AS Localidad, " +
+                                "T.cp AS 'Codigo Postal', " +
+                                "T.numero_calle AS 'Numero Calle', " +
+                                "T.id_departamento, " +
+                                "T.id_puesto, " +
+                                "T.estatus AS Estatus, " +
+                                "D.nombre_departamento AS Departamento, " +
+                                "P.nombre_puesto AS Puesto " +
+                                "FROM tbltrabajador T " +
+                                "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento " +
+                                "INNER JOIN tblpuestos P ON T.id_puesto = P.id_Puesto " +
+                                "WHERE clave_trabajador LIKE @filtro " +
+                                "OR nombre LIKE @filtro "+
+                                "OR a_paterno LIKE @filtro "+
+                                "OR a_materno LIKE @filtro ";
                     using (var comando = new MySqlCommand(sql, conexion))
                     {
                         comando.Parameters.AddWithValue("@filtro", "%" + filtro + "%");

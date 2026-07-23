@@ -76,7 +76,7 @@ namespace ProyectoRegistroAsistencia
             lblTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
             lblTrabajador.Location = new Point(13, 95);
             lblTrabajador.Name = "lblTrabajador";
-            lblTrabajador.Size = new Size(177, 21);
+            lblTrabajador.Size = new Size(223, 28);
             lblTrabajador.TabIndex = 2;
             lblTrabajador.Text = "Clave/nombre/apellidos";
             // 
@@ -86,7 +86,7 @@ namespace ProyectoRegistroAsistencia
             txtBuscarEmpleado.ForeColor = Color.FromArgb(108, 117, 125);
             txtBuscarEmpleado.Location = new Point(13, 128);
             txtBuscarEmpleado.Name = "txtBuscarEmpleado";
-            txtBuscarEmpleado.Size = new Size(200, 29);
+            txtBuscarEmpleado.Size = new Size(200, 34);
             txtBuscarEmpleado.TabIndex = 3;
             // 
             // lblDepartamento
@@ -95,7 +95,7 @@ namespace ProyectoRegistroAsistencia
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             lblDepartamento.Location = new Point(219, 95);
             lblDepartamento.Name = "lblDepartamento";
-            lblDepartamento.Size = new Size(113, 21);
+            lblDepartamento.Size = new Size(143, 28);
             lblDepartamento.TabIndex = 4;
             lblDepartamento.Text = "Departamento:";
             // 
@@ -106,7 +106,7 @@ namespace ProyectoRegistroAsistencia
             cmbDepartamento.FormattingEnabled = true;
             cmbDepartamento.Location = new Point(219, 128);
             cmbDepartamento.Name = "cmbDepartamento";
-            cmbDepartamento.Size = new Size(200, 29);
+            cmbDepartamento.Size = new Size(200, 36);
             cmbDepartamento.TabIndex = 5;
             // 
             // btnBuscar
@@ -168,6 +168,7 @@ namespace ProyectoRegistroAsistencia
             dgvEmpleados.EnableHeadersVisualStyles = false;
             dgvEmpleados.Location = new Point(11, 179);
             dgvEmpleados.Name = "dgvEmpleados";
+            dgvEmpleados.ReadOnly = true;
             dgvEmpleados.RowHeadersWidth = 51;
             dgvEmpleados.RowTemplate.Height = 40;
             dgvEmpleados.Size = new Size(1044, 427);
@@ -221,7 +222,7 @@ namespace ProyectoRegistroAsistencia
             // 
             // frmEmpleados
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);
