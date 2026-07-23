@@ -30,6 +30,8 @@ namespace ProyectoRegistroAsistencia
             dtpFecha.ShowCheckBox = true;
             dtpFecha.Checked = false;
 
+            CargarComboTipos();
+
             incidencias = new clsIncidencias();
             dgvIncidencias.DataSource = null;
             dgvIncidencias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -46,6 +48,30 @@ namespace ProyectoRegistroAsistencia
 
 
 
+        }
+
+        private void CargarComboTipos()
+        {
+            incidencias = new clsIncidencias();
+            try
+            {
+                DataTable dtTipos = incidencias.ObtenerTiposIncidencia();
+
+                DataRow filaTodos = dtTipos.NewRow();
+                filaTodos["id_tipo_incidencia"] = 0;
+                filaTodos["nombre_tipo"] = "-- Todos --";
+                dtTipos.Rows.InsertAt(filaTodos, 0);
+
+                cmbTipoIncidencia.DataSource = dtTipos;
+                cmbTipoIncidencia.DisplayMember = "nombre_tipo";
+                cmbTipoIncidencia.ValueMember = "id_tipo_incidencia";
+                cmbTipoIncidencia.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los tipos de incidencia: " + ex.Message,
+                    "Staff Asistence", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void RefrescarGrid()
         {
@@ -70,18 +96,12 @@ namespace ProyectoRegistroAsistencia
 
                 string nombre = txtNombreTrabajador.Text.Trim();
 
-                string? tipo = null;
+                // idTipo = 0 ("-- Todos --") significa que no se filtra por tipo
+                int idTipo = cmbTipoIncidencia.SelectedValue != null
+                    ? Convert.ToInt32(cmbTipoIncidencia.SelectedValue)
+                    : 0;
 
-                if (cmbTipoIncidencia.SelectedItem != null &&
-                    cmbTipoIncidencia.SelectedItem.ToString() != "Todos")
-                {
-                    tipo = cmbTipoIncidencia.SelectedItem.ToString();
-                }
-
-
-                //le puse nombre------------------------------------------------------------------
-                dgvIncidencias.DataSource = incidencias.FiltrarBusqueda(fecha, nombre, tipo);
-                dgvIncidencias.Columns["id_incidencia"].Visible = false;
+                dgvIncidencias.DataSource = incidencias.FiltrarBusqueda(fecha, clave, idTipo);
             }
             catch (Exception ex)
             {
