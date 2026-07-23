@@ -1,4 +1,4 @@
-using System;
+using System.Data;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace ProyectoRegistroAsistencia
 {
@@ -18,8 +19,11 @@ namespace ProyectoRegistroAsistencia
         {
             InitializeComponent();
             btnAsignarHorario.Click += btnAsignarHorario_Click;
+            dgvHorarios.CellClick += dgvHorarios_CellClick;
             cargarCombo();
             cargarGrid();
+            cargarGridDiasHorario(1);
+
         }
         public void cargarGrid()
         {
@@ -30,7 +34,7 @@ namespace ProyectoRegistroAsistencia
             {
                 dgvHorarios.DataSource = horario.cargarDataGrid();
                 dgvHorarios.Columns["id_trabajador"].Visible = false;
-                dgvHorarios.Columns["id_semestre"].Visible = false;
+                
             }
             catch (Exception ex)
             {
@@ -38,6 +42,37 @@ namespace ProyectoRegistroAsistencia
                 MessageBox.Show(ex.Message);
             }
 
+        }
+        //Evento que se dispara cuando se selecciona una fila en el DataGridView dgvHorarios
+        private void dgvHorarios_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;          
+            try
+            {
+                int idTrabajador = Convert.ToInt32(dgvHorarios.Rows[e.RowIndex].Cells["id_trabajador"].Value);
+                cargarGridDiasHorario(idTrabajador);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public void cargarGridDiasHorario(int idTrabajador)
+        {
+            horario = new clsHorarioSemanal();
+            try
+            {
+
+                dgvDiasHorarios.DataSource = null;
+                dgvDiasHorarios.DataSource = horario.cargarDataGridDiasHorarios(idTrabajador);
+                dgvDiasHorarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private void RefrescarGrid()
         {
