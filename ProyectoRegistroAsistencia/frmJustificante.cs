@@ -17,5 +17,12 @@ namespace ProyectoRegistroAsistencia
             InitializeComponent();
 
         }
+        public void CargarDatos(string nombre, string departamento, string incidencia, DateTime fecha)
+        {
+            txtNombre.Text = nombre;
+            txtDepartamento.Text = departamento;
+            txtIncidencia.Text = incidencia;
+            dtpFecha.Value = fecha;
+        }
     }
 }

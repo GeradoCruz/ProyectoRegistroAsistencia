@@ -28,6 +28,9 @@ namespace ProyectoRegistroAsistencia
             try
             {
                 dgvIncidencias.DataSource = incidencias.CargarDataGrid();
+                //aqui iria el codigo para ocultar la columna de id_incidencia----------------------------------------------------------
+                dgvIncidencias.Columns["id_incidencia"].Visible = false;
+
             }
             catch (Exception ex)
             {
@@ -91,6 +94,26 @@ namespace ProyectoRegistroAsistencia
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnJustificar_Click_1(object sender, EventArgs e)
+        {
+            if (dgvIncidencias.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona una incidencia.");
+                return;
+            }
+
+            string nombre = dgvIncidencias.CurrentRow.Cells["Nombre completo"].Value.ToString();
+            string departamento = dgvIncidencias.CurrentRow.Cells["Nombre departamento"].Value.ToString();
+            string incidencia = dgvIncidencias.CurrentRow.Cells["Tipo de incidencia"].Value.ToString();
+            DateTime fecha = Convert.ToDateTime(dgvIncidencias.CurrentRow.Cells["Fecha"].Value);
+
+            frmJustificante frm = new frmJustificante();
+
+            frm.CargarDatos(nombre, departamento, incidencia, fecha);
+
+            frm.ShowDialog();
         }
     }
 

@@ -26,7 +26,7 @@ namespace ProyectoRegistroAsistencia
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT \r\n                    T.clave_trabajador AS 'Clave trabajador',\r\n                    CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS 'Nombre completo',\r\n                    D.nombre_departamento AS 'Nombre departamento',\r\n                    I.tipo_incidencia AS 'Tipo de incidencia',\r\n                    I.justificacion AS 'Justificaciones',\r\n                    I.fecha AS Fecha\r\n                FROM tblincidencias I\r\n                INNER JOIN tbltrabajador T ON T.id_trabajador = I.id_trabajador\r\n                INNER JOIN tbldepartamento D ON D.id_departamento = T.id_departamento";
+                    string sql = "SELECT \r\n       I.id_incidencia,             T.clave_trabajador AS 'Clave trabajador',\r\n                    CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS 'Nombre completo',\r\n                    D.nombre_departamento AS 'Nombre departamento',\r\n                    I.tipo_incidencia AS 'Tipo de incidencia',\r\n                    I.justificacion AS 'Justificaciones',\r\n                    I.fecha AS Fecha\r\n                FROM tblincidencias I\r\n                INNER JOIN tbltrabajador T ON T.id_trabajador = I.id_trabajador\r\n                INNER JOIN tbldepartamento D ON D.id_departamento = T.id_departamento";
                     using (consulta = new MySqlDataAdapter(sql, conexion))
                     {
                         consulta.Fill(tabla);
@@ -48,7 +48,8 @@ namespace ProyectoRegistroAsistencia
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = @"SELECT 
+                    string sql = @"SELECT
+                                    I.id_incidencia,
                                     T.clave_trabajador AS 'Clave trabajador',
                                     CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS 'Nombre completo',
                                     D.nombre_departamento AS 'Nombre departamento',
@@ -59,7 +60,7 @@ namespace ProyectoRegistroAsistencia
                                 INNER JOIN tbltrabajador T ON T.id_trabajador = I.id_trabajador
                                 INNER JOIN tbldepartamento D ON D.id_departamento = T.id_departamento
                                 WHERE 1=1";
-
+                      
                     using (var cmd = new MySqlCommand())
                     {
                         cmd.Connection = conexion;

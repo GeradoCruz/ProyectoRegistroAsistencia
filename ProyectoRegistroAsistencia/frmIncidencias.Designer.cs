@@ -183,6 +183,7 @@ namespace ProyectoRegistroAsistencia
             btnJustificar.TabIndex = 18;
             btnJustificar.Text = "Justificar";
             btnJustificar.UseVisualStyleBackColor = false;
+            btnJustificar.Click += btnJustificar_Click_1;
             // 
             // frmIncidencias
             // 
