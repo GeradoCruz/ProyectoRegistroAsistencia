@@ -94,10 +94,6 @@ namespace ProyectoRegistroAsistencia
                 MessageBox.Show("No hay datos para convertir a PDF", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            //Abre la ventana para guardar el archivo pdf
-            SaveFileDialog guardarArchivo = new SaveFileDialog();
-            guardarArchivo.FileName = nombreArchivoSugerido;
-            guardarArchivo.Filter = "Archivos PDF (*.pdf)|*.pdf";
 
             if (guardarArchivo.ShowDialog() == DialogResult.OK)
             {
