@@ -12,7 +12,7 @@ namespace ProyectoRegistroAsistencia
             // see https://aka.ms/applicationconfiguration.
             QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
             ApplicationConfiguration.Initialize();
-            Application.Run(new frmRegistroAsistencia());
+            Application.Run(new frmIncidencias());
         }
     }
 }
