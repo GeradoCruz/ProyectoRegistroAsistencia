@@ -5,10 +5,11 @@ using QuestPDF.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ClosedXML.Excel;
 
 namespace ProyectoRegistroAsistencia
 {
@@ -53,7 +54,7 @@ namespace ProyectoRegistroAsistencia
                                  "CONCAT(t.nombre, ' ', t.a_paterno, ' ', IFNULL(t.a_materno,'')) AS Trabajador, " +
                                  "d.nombre_departamento AS Departamento, " +
                                  "COUNT(DISTINCT a.fecha) AS 'Días Asistidos', " +
-                                 "(DATEDIFF(@hasta, @desde) + 1) - COUNT(DISTINCT a.fecha) AS 'Faltas' " +
+                                 "(DATEDIFF(@desde, @hasta) + 1) - COUNT(DISTINCT a.fecha) AS 'Faltas' " +
                                  "FROM tbltrabajador t " +
                                  "INNER JOIN tbldepartamento d ON t.id_departamento = d.id_departamento " +
                                  "INNER JOIN tblasistencia a ON a.id_trabajador = t.id_trabajador " +
@@ -67,8 +68,7 @@ namespace ProyectoRegistroAsistencia
                     {
                         comando.Parameters.AddWithValue("@desde", desde.ToString("yyyy-MM-dd"));
                         comando.Parameters.AddWithValue("@hasta", hasta.ToString("yyyy-MM-dd"));
-                        if (idDepartamento != 0)
-                            comando.Parameters.AddWithValue("@idDepartamento", idDepartamento);
+                        comando.Parameters.AddWithValue("@idDepartamento", idDepartamento);
 
                         using (consulta = new MySqlDataAdapter(comando))
                         {
@@ -115,23 +115,24 @@ namespace ProyectoRegistroAsistencia
                             //Agregar Titulo al reporte
                             page.Header().Row(row =>
                             {
-                                row.RelativeItem().AlignLeft().AlignMiddle().Column(col =>
+                                row.AutoItem().AlignMiddle().Column(col =>
                                 {
-                                    col.Item().Text("UNIVERSIDAD TECNOLOGICA DE LA HUASTECA HIDALGUENSE")
-                                    .FontSize(18)
-                                    .Bold()
-                                    .FontColor("#10407A");
+                                    col.Item().Text("STAFF ASISTENCE")
+                                        .FontSize(18)
+                                        .Bold()
+                                        .FontColor("#10407A");
                                     col.Item().PaddingTop(5).LineHorizontal(1).LineColor(Colors.Grey.Lighten2);
                                 });
 
-                          
-                                //if (Properties.Resources.images != null)
-                                //{
-                                //    byte[] bytesLogo = Properties.Resources.images;
-                                //    row.ConstantItem(90).AlignRight().AlignMiddle().Image(bytesLogo);
-                                //}
+                                row.ConstantItem(15); // espacio entre el texto y el logo
 
-                             
+                                if (Properties.Resources.LOGO != null)
+                                {
+                                    byte[] bytesLogo = Properties.Resources.LOGO;
+                                    row.ConstantItem(90).AlignMiddle().Image(bytesLogo);
+                                }
+
+
                                 /*if (Properties.Resources.logo_uthh_completo_small != null)
                                 {
                                     row.ConstantItem(540).AlignLeft().AlignMiddle().Image(Properties.Resources.logo_uthh_completo_small).FitArea();
@@ -211,7 +212,7 @@ namespace ProyectoRegistroAsistencia
                         });
                     }).GeneratePdf(guardarArchivo.FileName);
 
-                    MessageBox.Show("Reporte institucional generado con �xito.", "�xito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Reporte institucional generado con exito.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -219,6 +220,81 @@ namespace ProyectoRegistroAsistencia
                 }
             }
         }//Finaliza el metodo de conversion
+
+        public void ExportarExcel(DataTable tabla, string tituloReporte, string nombreArchivoSugerido)
+        {
+            if (tabla == null || tabla.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay datos para convertir a Excel", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            SaveFileDialog guardarArchivo = new SaveFileDialog();
+            guardarArchivo.FileName = nombreArchivoSugerido;
+            guardarArchivo.Filter = "Archivos Excel (*.xlsx)|*.xlsx";
+
+            if (guardarArchivo.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (var workbook = new XLWorkbook())
+                    {
+                        var hoja = workbook.Worksheets.Add("Reporte");
+                        int totalColumnas = tabla.Columns.Count;
+
+                        // Título del reporte (fila 1, combinada)
+                        hoja.Range(1, 1, 1, totalColumnas).Merge();
+                        hoja.Cell(1, 1).Value = tituloReporte;
+                        hoja.Cell(1, 1).Style.Font.Bold = true;
+                        hoja.Cell(1, 1).Style.Font.FontSize = 14;
+                        hoja.Cell(1, 1).Style.Font.FontColor = XLColor.FromHtml("#10407A");
+                        hoja.Cell(1, 1).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+                        // Encabezados de columna (fila 3)
+                        int filaEncabezado = 3;
+                        for (int col = 0; col < totalColumnas; col++)
+                        {
+                            var celda = hoja.Cell(filaEncabezado, col + 1);
+                            celda.Value = tabla.Columns[col].ColumnName;
+                            celda.Style.Font.Bold = true;
+                            celda.Style.Font.FontColor = XLColor.White;
+                            celda.Style.Fill.BackgroundColor = XLColor.FromHtml("#4272CB");
+                            celda.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        }
+
+                        // Filas de datos, con bandas alternadas igual que en el PDF
+                        int filaActual = filaEncabezado + 1;
+                        bool alternarFila = true;
+                        foreach (DataRow fila in tabla.Rows)
+                        {
+                            for (int col = 0; col < totalColumnas; col++)
+                            {
+                                var celda = hoja.Cell(filaActual, col + 1);
+                                celda.Value = fila[col].ToString();
+                                celda.Style.Fill.BackgroundColor = alternarFila
+                                    ? XLColor.FromHtml("#E6E8F5")
+                                    : XLColor.White;
+                                celda.Style.Border.BottomBorder = XLBorderStyleValues.Thin;
+                                celda.Style.Border.BottomBorderColor = XLColor.LightGray;
+                            }
+                            alternarFila = !alternarFila;
+                            filaActual++;
+                        }
+
+                        // Ajusta el ancho de columnas automáticamente al contenido
+                        hoja.Columns().AdjustToContents();
+
+                        workbook.SaveAs(guardarArchivo.FileName);
+                    }
+
+                    MessageBox.Show("Reporte institucional generado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al generar el Excel: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
 
     }
 
