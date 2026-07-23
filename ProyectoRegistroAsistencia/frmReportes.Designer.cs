@@ -60,9 +60,9 @@ namespace ProyectoRegistroAsistencia
             cmbDepartamento.Name = "cmbDepartamento";
             cmbDepartamento.Size = new Size(200, 29);
             cmbDepartamento.TabIndex = 27;
-            //
+            // 
             // lblDepartamento
-            //
+            // 
             lblDepartamento.AutoSize = true;
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             lblDepartamento.Location = new Point(444, 154);
@@ -70,7 +70,7 @@ namespace ProyectoRegistroAsistencia
             lblDepartamento.Size = new Size(113, 21);
             lblDepartamento.TabIndex = 26;
             lblDepartamento.Text = "Departamento:";
-            //
+            // 
             // dtpFechaFin
             // 
             dtpFechaFin.Format = DateTimePickerFormat.Custom;
@@ -113,9 +113,9 @@ namespace ProyectoRegistroAsistencia
             lblSubtitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblSubtitulo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblSubtitulo.Location = new Point(172, 53);
+            lblSubtitulo.Location = new Point(318, 56);
             lblSubtitulo.Name = "lblSubtitulo";
-            lblSubtitulo.Size = new Size(621, 25);
+            lblSubtitulo.Size = new Size(326, 25);
             lblSubtitulo.TabIndex = 21;
             lblSubtitulo.Text = "Consulte el resumen de asistencias";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -125,9 +125,9 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblTitulo.Location = new Point(216, 16);
+            lblTitulo.Location = new Point(275, 9);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(506, 30);
+            lblTitulo.Size = new Size(447, 30);
             lblTitulo.TabIndex = 20;
             lblTitulo.Text = "Reportes Semanal/Mensuales de Asistencia";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -230,9 +230,9 @@ namespace ProyectoRegistroAsistencia
             btnImprimir.Text = "Imprimir";
             btnImprimir.UseVisualStyleBackColor = false;
             btnImprimir.Click += btnImprimir_Click;
-            //
+            // 
             // rdbSemanal
-            //
+            // 
             rdbSemanal.AutoSize = true;
             rdbSemanal.Checked = true;
             rdbSemanal.Location = new Point(191, 109);
@@ -242,9 +242,9 @@ namespace ProyectoRegistroAsistencia
             rdbSemanal.TabStop = true;
             rdbSemanal.Text = "Asistencia Semanal";
             rdbSemanal.UseVisualStyleBackColor = true;
-            //
+            // 
             // rdbMensual
-            //
+            // 
             rdbMensual.AutoSize = true;
             rdbMensual.Location = new Point(390, 109);
             rdbMensual.Name = "rdbMensual";
@@ -252,17 +252,17 @@ namespace ProyectoRegistroAsistencia
             rdbMensual.TabIndex = 36;
             rdbMensual.Text = "Tardanzas y Faltas(Mensuales)";
             rdbMensual.UseVisualStyleBackColor = true;
-            //
+            // 
             // rdbIncidencias
-            //
+            // 
             rdbIncidencias.AutoSize = true;
             rdbIncidencias.Location = new Point(651, 109);
             rdbIncidencias.Name = "rdbIncidencias";
-            rdbIncidencias.Size = new Size(158, 25);
+            rdbIncidencias.Size = new Size(205, 25);
             rdbIncidencias.TabIndex = 37;
             rdbIncidencias.Text = "Incidencias por Empleado";
             rdbIncidencias.UseVisualStyleBackColor = true;
-            //
+            // 
             // gpbOpciones
             // 
             gpbOpciones.Location = new Point(184, 84);
