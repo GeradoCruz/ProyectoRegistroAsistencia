@@ -1,4 +1,5 @@
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace ProyectoRegistroAsistencia
 {
     public partial class frmEmpleados : Form
@@ -37,6 +38,8 @@ namespace ProyectoRegistroAsistencia
                 dgvEmpleados.Columns["Numero Calle"].Visible = false;
                 dgvEmpleados.Columns["Codigo Postal"].Visible = false;
                 dgvEmpleados.Columns["Municipio"].Visible = false;
+                dgvEmpleados.Columns["Correo Institucional"].Visible = false;
+                dgvEmpleados.Columns["Genero"].Visible = false;
                 dgvEmpleados.Columns["Localidad"].Visible = false;
                 dgvEmpleados.Columns["Telefono"].Visible = false;
             }
@@ -132,7 +135,7 @@ namespace ProyectoRegistroAsistencia
         {
             empleados = new clsEmpleados();
             string filtro = txtBuscarEmpleado.Text.Trim();
-
+            string departamento = cmbDepartamento.SelectedValue.ToString();
             try
             {
                 dgvEmpleados.DataSource = empleados.BuscarEmpleado(filtro);

@@ -49,9 +49,7 @@ namespace ProyectoRegistroAsistencia
                 using (var conexion = conexionBD.AbrirConexion())
                 {
                     string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
-                                "T.nombre AS Nombre, " +
-                                "T.a_paterno AS 'Apellido Paterno', " +
-                                "T.a_materno AS 'Apellido Materno', " +
+                                "Concat(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS Nombre, " +
                                 "T.telefono AS Telefono, " +
                                 "T.email AS 'Correo Institucional', " +
                                 "T.sexo AS Genero, " +
@@ -66,8 +64,7 @@ namespace ProyectoRegistroAsistencia
                                 "P.nombre_puesto AS Puesto " +
                                 "FROM tbltrabajador T " +
                                 "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento " +
-                                "INNER JOIN tblpuestos P ON T.id_puesto = P.id_Puesto " +
-                                "ORDER BY clave_trabajador ASC; ";
+                                "INNER JOIN tblpuestos P ON T.id_puesto = P.id_Puesto ";
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
                         consultar.Parameters.AddWithValue("@Clave Trabajador", "%" + claveTrabajador + "%");
@@ -249,29 +246,12 @@ namespace ProyectoRegistroAsistencia
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
-                                "T.nombre AS Nombre, " +
-                                "T.a_paterno AS 'Apellido Paterno', " +
-                                "T.a_materno AS 'Apellido Materno', " +
-                                "T.telefono AS Telefono, " +
-                                "T.email AS 'Correo Institucional', " +
-                                "T.sexo AS Genero, " +
-                                "T.municipio AS Municipio, " +
-                                "T.localidad AS Localidad, " +
-                                "T.cp AS 'Codigo Postal', " +
-                                "T.numero_calle AS 'Numero Calle', " +
-                                "T.id_departamento, " +
-                                "T.id_puesto, " +
-                                "T.estatus AS Estatus, " +
-                                "D.nombre_departamento AS Departamento, " +
-                                "P.nombre_puesto AS Puesto " +
-                                "FROM tbltrabajador T " +
-                                "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento " +
-                                "INNER JOIN tblpuestos P ON T.id_puesto = P.id_Puesto " +
+                    string sql = "SELECT *FROM tbltrabajador" +
                                 "WHERE clave_trabajador LIKE @filtro " +
                                 "OR nombre LIKE @filtro "+
                                 "OR a_paterno LIKE @filtro "+
-                                "OR a_materno LIKE @filtro ";
+                                "OR a_materno LIKE @filtro "+
+                                "OR departamento LIKE @filtro";
                     using (var comando = new MySqlCommand(sql, conexion))
                     {
                         comando.Parameters.AddWithValue("@filtro", "%" + filtro + "%");
