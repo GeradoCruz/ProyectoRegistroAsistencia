@@ -170,6 +170,10 @@ namespace ProyectoRegistroAsistencia
             // 
             // dgvReporte
             // 
+            dgvReporte.AllowUserToAddRows = false;
+            dgvReporte.AllowUserToDeleteRows = false;
+            dgvReporte.AllowUserToResizeColumns = false;
+            dgvReporte.AllowUserToResizeRows = false;
             dgvReporte.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvReporte.BackgroundColor = Color.FromArgb(240, 242, 245);
             dgvReporte.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
@@ -193,6 +197,7 @@ namespace ProyectoRegistroAsistencia
             dgvReporte.EnableHeadersVisualStyles = false;
             dgvReporte.Location = new Point(10, 220);
             dgvReporte.Name = "dgvReporte";
+            dgvReporte.ReadOnly = true;
             dgvReporte.RowTemplate.Height = 40;
             dgvReporte.Size = new Size(1046, 429);
             dgvReporte.TabIndex = 30;

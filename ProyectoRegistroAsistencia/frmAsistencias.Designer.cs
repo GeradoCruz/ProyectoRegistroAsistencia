@@ -42,9 +42,9 @@ namespace ProyectoRegistroAsistencia
             dgvRegistros = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dgvRegistros).BeginInit();
             SuspendLayout();
-            //
+            // 
             // lblTitulo
-            //
+            // 
             lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -54,9 +54,9 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Gestión de Asistencias";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
-            //
+            // 
             // lblSubtitulo
-            //
+            // 
             lblSubtitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblSubtitulo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -66,9 +66,9 @@ namespace ProyectoRegistroAsistencia
             lblSubtitulo.TabIndex = 1;
             lblSubtitulo.Text = "Consulte todos los registros de un empleado en una fecha especifica";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
-            //
+            // 
             // lblFecha
-            //
+            // 
             lblFecha.AutoSize = true;
             lblFecha.ForeColor = Color.FromArgb(108, 117, 125);
             lblFecha.Location = new Point(12, 146);
@@ -76,9 +76,9 @@ namespace ProyectoRegistroAsistencia
             lblFecha.Size = new Size(53, 21);
             lblFecha.TabIndex = 2;
             lblFecha.Text = "Fecha:";
-            //
+            // 
             // lblClaveTrabajador
-            //
+            // 
             lblClaveTrabajador.AutoSize = true;
             lblClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
             lblClaveTrabajador.Location = new Point(220, 146);
@@ -86,25 +86,25 @@ namespace ProyectoRegistroAsistencia
             lblClaveTrabajador.Size = new Size(150, 21);
             lblClaveTrabajador.TabIndex = 3;
             lblClaveTrabajador.Text = "Clave de Trabajador:";
-            //
+            // 
             // dtpFiltroAsistencia
-            //
+            // 
             dtpFiltroAsistencia.Format = DateTimePickerFormat.Custom;
             dtpFiltroAsistencia.Location = new Point(12, 170);
             dtpFiltroAsistencia.Name = "dtpFiltroAsistencia";
             dtpFiltroAsistencia.Size = new Size(200, 29);
             dtpFiltroAsistencia.TabIndex = 4;
-            //
+            // 
             // txtClaveTrabajador
-            //
+            // 
             txtClaveTrabajador.BackColor = Color.White;
             txtClaveTrabajador.Location = new Point(220, 170);
             txtClaveTrabajador.Name = "txtClaveTrabajador";
             txtClaveTrabajador.Size = new Size(200, 29);
             txtClaveTrabajador.TabIndex = 5;
-            //
+            // 
             // btnLimpiar
-            //
+            // 
             btnLimpiar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnLimpiar.BackColor = Color.FromArgb(43, 76, 140);
             btnLimpiar.ForeColor = Color.White;
@@ -116,9 +116,9 @@ namespace ProyectoRegistroAsistencia
             btnLimpiar.TabIndex = 6;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = false;
-            //
+            // 
             // btnBuscar
-            //
+            // 
             btnBuscar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnBuscar.BackColor = Color.FromArgb(43, 76, 140);
             btnBuscar.ForeColor = Color.White;
@@ -130,9 +130,13 @@ namespace ProyectoRegistroAsistencia
             btnBuscar.TabIndex = 7;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = false;
-            //
+            // 
             // dgvRegistros
-            //
+            // 
+            dgvRegistros.AllowUserToAddRows = false;
+            dgvRegistros.AllowUserToDeleteRows = false;
+            dgvRegistros.AllowUserToResizeColumns = false;
+            dgvRegistros.AllowUserToResizeRows = false;
             dgvRegistros.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvRegistros.BackgroundColor = Color.FromArgb(240, 242, 245);
             dgvRegistros.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
@@ -155,11 +159,12 @@ namespace ProyectoRegistroAsistencia
             dgvRegistros.DefaultCellStyle = dataGridViewCellStyle2;
             dgvRegistros.Location = new Point(11, 219);
             dgvRegistros.Name = "dgvRegistros";
+            dgvRegistros.ReadOnly = true;
             dgvRegistros.Size = new Size(1044, 427);
             dgvRegistros.TabIndex = 8;
-            //
+            // 
             // frmAsistencias
-            //
+            // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);

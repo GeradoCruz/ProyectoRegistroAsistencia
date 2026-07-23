@@ -45,9 +45,9 @@ namespace ProyectoRegistroAsistencia
             btnDarBaja = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvEmpleados).BeginInit();
             SuspendLayout();
-            //
+            // 
             // lblTitulo
-            //
+            // 
             lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -57,9 +57,9 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Empleados";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
-            //
+            // 
             // lblSubtitulo
-            //
+            // 
             lblSubtitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblSubtitulo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -69,48 +69,48 @@ namespace ProyectoRegistroAsistencia
             lblSubtitulo.TabIndex = 1;
             lblSubtitulo.Text = "Gestion del Personal de la Institución";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
-            //
+            // 
             // lblTrabajador
-            //
+            // 
             lblTrabajador.AutoSize = true;
             lblTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
             lblTrabajador.Location = new Point(13, 95);
             lblTrabajador.Name = "lblTrabajador";
-            lblTrabajador.Size = new Size(177, 21);
+            lblTrabajador.Size = new Size(223, 28);
             lblTrabajador.TabIndex = 2;
             lblTrabajador.Text = "Clave/nombre/apellidos";
-            //
+            // 
             // txtBuscarEmpleado
-            //
+            // 
             txtBuscarEmpleado.BackColor = Color.White;
             txtBuscarEmpleado.ForeColor = Color.FromArgb(108, 117, 125);
             txtBuscarEmpleado.Location = new Point(13, 128);
             txtBuscarEmpleado.Name = "txtBuscarEmpleado";
-            txtBuscarEmpleado.Size = new Size(200, 29);
+            txtBuscarEmpleado.Size = new Size(200, 34);
             txtBuscarEmpleado.TabIndex = 3;
-            //
+            // 
             // lblDepartamento
-            //
+            // 
             lblDepartamento.AutoSize = true;
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             lblDepartamento.Location = new Point(219, 95);
             lblDepartamento.Name = "lblDepartamento";
-            lblDepartamento.Size = new Size(113, 21);
+            lblDepartamento.Size = new Size(143, 28);
             lblDepartamento.TabIndex = 4;
             lblDepartamento.Text = "Departamento:";
-            //
+            // 
             // cmbDepartamento
-            //
+            // 
             cmbDepartamento.BackColor = Color.White;
             cmbDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             cmbDepartamento.FormattingEnabled = true;
             cmbDepartamento.Location = new Point(219, 128);
             cmbDepartamento.Name = "cmbDepartamento";
-            cmbDepartamento.Size = new Size(200, 29);
+            cmbDepartamento.Size = new Size(200, 36);
             cmbDepartamento.TabIndex = 5;
-            //
+            // 
             // btnBuscar
-            //
+            // 
             btnBuscar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnBuscar.BackColor = Color.FromArgb(43, 76, 140);
             btnBuscar.ForeColor = Color.White;
@@ -122,9 +122,10 @@ namespace ProyectoRegistroAsistencia
             btnBuscar.TabIndex = 9;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = false;
-            //
+            btnBuscar.Click += btnBuscar_Click;
+            // 
             // btnLimpiar
-            //
+            // 
             btnLimpiar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnLimpiar.BackColor = Color.FromArgb(43, 76, 140);
             btnLimpiar.ForeColor = Color.White;
@@ -136,9 +137,14 @@ namespace ProyectoRegistroAsistencia
             btnLimpiar.TabIndex = 8;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = false;
-            //
+            btnLimpiar.Click += btnLimpiar_Click;
+            // 
             // dgvEmpleados
-            //
+            // 
+            dgvEmpleados.AllowUserToAddRows = false;
+            dgvEmpleados.AllowUserToDeleteRows = false;
+            dgvEmpleados.AllowUserToResizeColumns = false;
+            dgvEmpleados.AllowUserToResizeRows = false;
             dgvEmpleados.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvEmpleados.BackgroundColor = Color.FromArgb(240, 242, 245);
             dgvEmpleados.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
@@ -161,11 +167,14 @@ namespace ProyectoRegistroAsistencia
             dgvEmpleados.DefaultCellStyle = dataGridViewCellStyle2;
             dgvEmpleados.Location = new Point(11, 179);
             dgvEmpleados.Name = "dgvEmpleados";
+            dgvEmpleados.ReadOnly = true;
+            dgvEmpleados.RowHeadersWidth = 51;
             dgvEmpleados.Size = new Size(1044, 427);
             dgvEmpleados.TabIndex = 10;
-            //
+            dgvEmpleados.SelectionChanged += dgvEmpleados_SelectionChanged;
+            // 
             // btnNuevo
-            //
+            // 
             btnNuevo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnNuevo.BackColor = Color.FromArgb(43, 76, 140);
             btnNuevo.ForeColor = Color.White;
@@ -177,9 +186,10 @@ namespace ProyectoRegistroAsistencia
             btnNuevo.TabIndex = 11;
             btnNuevo.Text = "Nuevo";
             btnNuevo.UseVisualStyleBackColor = false;
-            //
+            btnNuevo.Click += btnNuevo_Click;
+            // 
             // btnEditar
-            //
+            // 
             btnEditar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnEditar.BackColor = Color.FromArgb(43, 76, 140);
             btnEditar.ForeColor = Color.White;
@@ -191,9 +201,10 @@ namespace ProyectoRegistroAsistencia
             btnEditar.TabIndex = 12;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = false;
-            //
+            btnEditar.Click += btnEditar_Click;
+            // 
             // btnDarBaja
-            //
+            // 
             btnDarBaja.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnDarBaja.BackColor = Color.FromArgb(108, 117, 125);
             btnDarBaja.ForeColor = Color.White;
@@ -205,10 +216,11 @@ namespace ProyectoRegistroAsistencia
             btnDarBaja.TabIndex = 13;
             btnDarBaja.Text = "Dar de Baja";
             btnDarBaja.UseVisualStyleBackColor = false;
-            //
+            btnDarBaja.Click += btnDarBaja_Click;
+            // 
             // frmEmpleados
-            //
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            // 
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);
@@ -242,7 +254,7 @@ namespace ProyectoRegistroAsistencia
         private ComboBox cmbDepartamento;
         private Button btnBuscar;
         private Button btnLimpiar;
-        private DataGridView dgvEmpleados;
+        public DataGridView dgvEmpleados;
         private Button btnNuevo;
         private Button btnEditar;
         private Button btnDarBaja;
