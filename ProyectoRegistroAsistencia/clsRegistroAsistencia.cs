@@ -198,6 +198,7 @@ namespace ProyectoRegistroAsistencia
                     {
                         comando.Parameters.AddWithValue("@idTrabajador", idTrabajador);
                         comando.Parameters.AddWithValue("@idDia", idDia);
+                        
                         horaEntrada = comando.ExecuteScalar().ToString();
                     }
                 }

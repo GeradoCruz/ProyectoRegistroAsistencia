@@ -57,7 +57,7 @@ namespace ProyectoRegistroAsistencia
                 if (dgvEmpleados.CurrentRow == null) return;
             try
             {
-                datosE.lblTitulo.Text = "Actualización del Empleado";
+                datosE.lblTitulo.Text = "Actualizaciï¿½n del Empleado";
                 datosE.ClaveTrabajador = dgvEmpleados.CurrentRow.Cells["Clave Trabajador"].Value.ToString();
 
                 datosE.txtClaveTrabajador.Text = dgvEmpleados.CurrentRow.Cells["Clave Trabajador"].Value.ToString();
@@ -110,12 +110,21 @@ namespace ProyectoRegistroAsistencia
 
         public void btnDarBaja_Click(object sender, EventArgs e)
         {
-            var respuesta = MessageBox.Show("¿Deseas dar de baja a este empleado?", "Advertencia",
+            if (ban != 1 || dgvEmpleados.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona un empleado de la lista para dar de baja.", "Staff Asistence",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var respuesta = MessageBox.Show("Deseas dar de baja a este empleado?", "Advertencia",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (respuesta == DialogResult.Yes)
             {
                 try
                 {
+                    claveTrabajador = dgvEmpleados.CurrentRow.Cells["Clave Trabajador"].Value.ToString();
+
                     empleados = new clsEmpleados();
                     empleados.ClaveTrabajador = claveTrabajador;
                     string resultado = empleados.DarDeBaja();
