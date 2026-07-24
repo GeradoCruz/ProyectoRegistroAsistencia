@@ -28,7 +28,7 @@ namespace ProyectoRegistroAsistencia
                         "A.registro  AS Registro," +
                         "A.fecha AS Fecha " +
                         "FROM tblasistencia A " +
-                        "INNER JOIN tbltrabajador T ON A.id_trabajador = T.id_departamento;";
+                        "INNER JOIN tbltrabajador T ON A.id_trabajador = T.id_trabajador;";
                     using (consulta = new MySqlDataAdapter(sql, conexion))
                     {
                         consulta.Fill(tabla);
@@ -61,9 +61,9 @@ namespace ProyectoRegistroAsistencia
                                  "INNER JOIN tbltrabajador T ON A.id_trabajador = T.id_trabajador " +
                                  "WHERE DATE(A.fecha) = @fecha ";
 
-                    if (!string.IsNullOrEmpty(apellido))
+                    if (!string.IsNullOrWhiteSpace(apellido))
                     {
-                        sql += "AND T.a_paterno LIKE @apellido ";
+                        sql += " AND CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) LIKE @apellido";
                     }
 
                     using (var consultar = new MySqlCommand(sql, conexion))
