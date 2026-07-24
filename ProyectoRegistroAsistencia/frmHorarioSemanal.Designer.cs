@@ -42,6 +42,8 @@ namespace ProyectoRegistroAsistencia
             dgvHorarios = new DataGridView();
             btnLimpiar = new Button();
             dgvDiasHorarios = new DataGridView();
+            txtApellido = new TextBox();
+            lblNombreApellido = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvHorarios).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvDiasHorarios).BeginInit();
             SuspendLayout();
@@ -85,9 +87,9 @@ namespace ProyectoRegistroAsistencia
             cmbDepartamento.BackColor = Color.White;
             cmbDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             cmbDepartamento.FormattingEnabled = true;
-            cmbDepartamento.Location = new Point(12, 154);
+            cmbDepartamento.Location = new Point(12, 156);
             cmbDepartamento.Name = "cmbDepartamento";
-            cmbDepartamento.Size = new Size(269, 36);
+            cmbDepartamento.Size = new Size(240, 36);
             cmbDepartamento.TabIndex = 6;
             // 
             // btnBuscar
@@ -189,12 +191,31 @@ namespace ProyectoRegistroAsistencia
             dgvDiasHorarios.Size = new Size(484, 427);
             dgvDiasHorarios.TabIndex = 12;
             // 
+            // txtApellido
+            // 
+            txtApellido.Location = new Point(258, 156);
+            txtApellido.Name = "txtApellido";
+            txtApellido.Size = new Size(159, 34);
+            txtApellido.TabIndex = 14;
+            // 
+            // lblNombreApellido
+            // 
+            lblNombreApellido.AutoSize = true;
+            lblNombreApellido.ForeColor = Color.FromArgb(108, 117, 125);
+            lblNombreApellido.Location = new Point(254, 127);
+            lblNombreApellido.Name = "lblNombreApellido";
+            lblNombreApellido.Size = new Size(172, 28);
+            lblNombreApellido.TabIndex = 15;
+            lblNombreApellido.Text = "Nombre/apellidos";
+            // 
             // frmHorarioSemanal
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);
+            Controls.Add(lblNombreApellido);
+            Controls.Add(txtApellido);
             Controls.Add(dgvDiasHorarios);
             Controls.Add(btnLimpiar);
             Controls.Add(dgvHorarios);
@@ -225,5 +246,7 @@ namespace ProyectoRegistroAsistencia
         private DataGridView dgvHorarios;
         private Button btnLimpiar;
         private DataGridView dgvDiasHorarios;
+        private TextBox txtApellido;
+        private Label lblNombreApellido;
     }
 }

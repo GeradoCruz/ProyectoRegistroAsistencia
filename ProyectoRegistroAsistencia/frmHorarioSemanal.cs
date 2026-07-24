@@ -20,7 +20,7 @@ namespace ProyectoRegistroAsistencia
             InitializeComponent();
             btnAsignarHorario.Click += btnAsignarHorario_Click;
             dgvHorarios.CellClick += dgvHorarios_CellClick;
-            cargarCombo();
+            cargarComboBox();
             cargarGrid();
             cargarGridDiasHorario(1);
 
@@ -34,7 +34,7 @@ namespace ProyectoRegistroAsistencia
             {
                 dgvHorarios.DataSource = horario.cargarDataGrid();
                 dgvHorarios.Columns["id_trabajador"].Visible = false;
-                
+
             }
             catch (Exception ex)
             {
@@ -46,7 +46,7 @@ namespace ProyectoRegistroAsistencia
         //Evento que se dispara cuando se selecciona una fila en el DataGridView dgvHorarios
         private void dgvHorarios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;          
+            if (e.RowIndex < 0) return;
             try
             {
                 int idTrabajador = Convert.ToInt32(dgvHorarios.Rows[e.RowIndex].Cells["id_trabajador"].Value);
@@ -89,7 +89,7 @@ namespace ProyectoRegistroAsistencia
                 }
             }
         }
-        public void cargarCombo()
+        public void cargarComboBox()
         {
             horario = new clsHorarioSemanal();
             try
@@ -112,34 +112,39 @@ namespace ProyectoRegistroAsistencia
         }
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            if (cmbDepartamento.SelectedValue == null) return;
-
-            idDepartamento = Convert.ToInt32(cmbDepartamento.SelectedValue);
-
             horario = new clsHorarioSemanal();
-            dgvHorarios.DataSource = null;
+
+            string apellido = txtApellido.Text.Trim();
+
             try
             {
-                if (idDepartamento == 0)
+                if (!string.IsNullOrWhiteSpace(apellido))
                 {
-                    dgvHorarios.DataSource = horario.cargarDataGrid();
+                    dgvHorarios.DataSource = horario.BusquedaNombreApellido(apellido);
                 }
                 else
                 {
-                    dgvHorarios.DataSource = horario.consultar(idDepartamento);
+                    if (cmbDepartamento.SelectedValue == null)
+                        return;
+
+                    idDepartamento = Convert.ToInt32(cmbDepartamento.SelectedValue);
+
+                    if (idDepartamento == 0)
+                    {
+                        dgvHorarios.DataSource = horario.cargarDataGrid();
+                    }
+                    else
+                    {
+                        dgvHorarios.DataSource = horario.consultarPorBusquedaDepartamento(idDepartamento);
+                    }
                 }
 
-
+                dgvHorarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            dgvHorarios.Columns["id_trabajador"].Visible = false;
-            dgvHorarios.Columns["id_semestre"].Visible = false;
-            dgvHorarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
