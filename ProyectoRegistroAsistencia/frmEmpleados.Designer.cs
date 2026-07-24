@@ -51,7 +51,7 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblTitulo.Location = new Point(340, 10);
+            lblTitulo.Location = new Point(340, 9);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(301, 30);
             lblTitulo.TabIndex = 0;
@@ -74,9 +74,9 @@ namespace ProyectoRegistroAsistencia
             // 
             lblTrabajador.AutoSize = true;
             lblTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
-            lblTrabajador.Location = new Point(13, 95);
+            lblTrabajador.Location = new Point(13, 94);
             lblTrabajador.Name = "lblTrabajador";
-            lblTrabajador.Size = new Size(223, 28);
+            lblTrabajador.Size = new Size(177, 21);
             lblTrabajador.TabIndex = 2;
             lblTrabajador.Text = "Clave/nombre/apellidos";
             // 
@@ -84,18 +84,18 @@ namespace ProyectoRegistroAsistencia
             // 
             txtBuscarEmpleado.BackColor = Color.White;
             txtBuscarEmpleado.ForeColor = Color.FromArgb(108, 117, 125);
-            txtBuscarEmpleado.Location = new Point(13, 128);
+            txtBuscarEmpleado.Location = new Point(13, 127);
             txtBuscarEmpleado.Name = "txtBuscarEmpleado";
-            txtBuscarEmpleado.Size = new Size(200, 34);
+            txtBuscarEmpleado.Size = new Size(200, 29);
             txtBuscarEmpleado.TabIndex = 3;
             // 
             // lblDepartamento
             // 
             lblDepartamento.AutoSize = true;
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDepartamento.Location = new Point(219, 95);
+            lblDepartamento.Location = new Point(219, 94);
             lblDepartamento.Name = "lblDepartamento";
-            lblDepartamento.Size = new Size(143, 28);
+            lblDepartamento.Size = new Size(113, 21);
             lblDepartamento.TabIndex = 4;
             lblDepartamento.Text = "Departamento:";
             // 
@@ -104,9 +104,9 @@ namespace ProyectoRegistroAsistencia
             cmbDepartamento.BackColor = Color.White;
             cmbDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             cmbDepartamento.FormattingEnabled = true;
-            cmbDepartamento.Location = new Point(219, 128);
+            cmbDepartamento.Location = new Point(219, 127);
             cmbDepartamento.Name = "cmbDepartamento";
-            cmbDepartamento.Size = new Size(200, 36);
+            cmbDepartamento.Size = new Size(200, 29);
             cmbDepartamento.TabIndex = 5;
             // 
             // btnBuscar
@@ -116,7 +116,7 @@ namespace ProyectoRegistroAsistencia
             btnBuscar.ForeColor = Color.White;
             btnBuscar.Image = (Image)resources.GetObject("btnBuscar.Image");
             btnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnBuscar.Location = new Point(876, 121);
+            btnBuscar.Location = new Point(876, 120);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Size = new Size(180, 40);
             btnBuscar.TabIndex = 9;
@@ -131,7 +131,7 @@ namespace ProyectoRegistroAsistencia
             btnLimpiar.ForeColor = Color.White;
             btnLimpiar.Image = (Image)resources.GetObject("btnLimpiar.Image");
             btnLimpiar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnLimpiar.Location = new Point(688, 121);
+            btnLimpiar.Location = new Point(688, 120);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(180, 40);
             btnLimpiar.TabIndex = 8;
@@ -147,28 +147,33 @@ namespace ProyectoRegistroAsistencia
             dgvEmpleados.AllowUserToResizeRows = false;
             dgvEmpleados.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvEmpleados.BackgroundColor = Color.FromArgb(240, 242, 245);
+            dgvEmpleados.BorderStyle = BorderStyle.None;
+            dgvEmpleados.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
             dgvEmpleados.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(43, 76, 140);
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(35, 45, 92);
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(74, 126, 193);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle1.SelectionForeColor = Color.White;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvEmpleados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvEmpleados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvEmpleados.ColumnHeadersHeight = 40;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(108, 117, 125);
+            dataGridViewCellStyle2.BackColor = Color.White;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(74, 126, 193);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(28, 32, 51);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvEmpleados.DefaultCellStyle = dataGridViewCellStyle2;
             dgvEmpleados.EnableHeadersVisualStyles = false;
-            dgvEmpleados.Location = new Point(11, 179);
+            dgvEmpleados.GridColor = Color.FromArgb(221, 225, 232);
+            dgvEmpleados.Location = new Point(11, 178);
+            dgvEmpleados.MultiSelect = false;
             dgvEmpleados.Name = "dgvEmpleados";
             dgvEmpleados.ReadOnly = true;
+            dgvEmpleados.RowHeadersVisible = false;
             dgvEmpleados.RowHeadersWidth = 51;
             dgvEmpleados.RowTemplate.Height = 40;
             dgvEmpleados.Size = new Size(1044, 427);
@@ -182,7 +187,7 @@ namespace ProyectoRegistroAsistencia
             btnNuevo.ForeColor = Color.White;
             btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
             btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNuevo.Location = new Point(514, 614);
+            btnNuevo.Location = new Point(514, 613);
             btnNuevo.Name = "btnNuevo";
             btnNuevo.Size = new Size(180, 40);
             btnNuevo.TabIndex = 11;
@@ -197,7 +202,7 @@ namespace ProyectoRegistroAsistencia
             btnEditar.ForeColor = Color.White;
             btnEditar.Image = (Image)resources.GetObject("btnEditar.Image");
             btnEditar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEditar.Location = new Point(700, 614);
+            btnEditar.Location = new Point(700, 613);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(180, 40);
             btnEditar.TabIndex = 12;
@@ -212,7 +217,7 @@ namespace ProyectoRegistroAsistencia
             btnDarBaja.ForeColor = Color.White;
             btnDarBaja.Image = (Image)resources.GetObject("btnDarBaja.Image");
             btnDarBaja.ImageAlign = ContentAlignment.MiddleLeft;
-            btnDarBaja.Location = new Point(884, 614);
+            btnDarBaja.Location = new Point(884, 613);
             btnDarBaja.Name = "btnDarBaja";
             btnDarBaja.Size = new Size(180, 40);
             btnDarBaja.TabIndex = 13;
@@ -222,7 +227,7 @@ namespace ProyectoRegistroAsistencia
             // 
             // frmEmpleados
             // 
-            AutoScaleDimensions = new SizeF(11F, 28F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);

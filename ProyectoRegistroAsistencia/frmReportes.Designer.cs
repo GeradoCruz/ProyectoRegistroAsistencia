@@ -33,8 +33,6 @@ namespace ProyectoRegistroAsistencia
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             cmbDepartamento = new ComboBox();
             lblDepartamento = new Label();
-            txtClaveTrabajador = new TextBox();
-            lblClaveTrabajador = new Label();
             dtpFechaFin = new DateTimePicker();
             lblFechaFin = new Label();
             dtpFechaInicio = new DateTimePicker();
@@ -48,7 +46,7 @@ namespace ProyectoRegistroAsistencia
             btnImprimir = new Button();
             rdbSemanal = new RadioButton();
             rdbMensual = new RadioButton();
-            rdbHistorial = new RadioButton();
+            rdbIncidencias = new RadioButton();
             gpbOpciones = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)dgvReporte).BeginInit();
             SuspendLayout();
@@ -58,39 +56,20 @@ namespace ProyectoRegistroAsistencia
             cmbDepartamento.BackColor = Color.White;
             cmbDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             cmbDepartamento.FormattingEnabled = true;
-            cmbDepartamento.Location = new Point(661, 178);
+            cmbDepartamento.Location = new Point(444, 178);
             cmbDepartamento.Name = "cmbDepartamento";
             cmbDepartamento.Size = new Size(200, 29);
-            cmbDepartamento.TabIndex = 29;
+            cmbDepartamento.TabIndex = 27;
             // 
             // lblDepartamento
             // 
             lblDepartamento.AutoSize = true;
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDepartamento.Location = new Point(661, 154);
+            lblDepartamento.Location = new Point(444, 154);
             lblDepartamento.Name = "lblDepartamento";
             lblDepartamento.Size = new Size(113, 21);
-            lblDepartamento.TabIndex = 28;
+            lblDepartamento.TabIndex = 26;
             lblDepartamento.Text = "Departamento:";
-            // 
-            // txtClaveTrabajador
-            // 
-            txtClaveTrabajador.BackColor = Color.White;
-            txtClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
-            txtClaveTrabajador.Location = new Point(444, 178);
-            txtClaveTrabajador.Name = "txtClaveTrabajador";
-            txtClaveTrabajador.Size = new Size(200, 29);
-            txtClaveTrabajador.TabIndex = 27;
-            // 
-            // lblClaveTrabajador
-            // 
-            lblClaveTrabajador.AutoSize = true;
-            lblClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
-            lblClaveTrabajador.Location = new Point(446, 154);
-            lblClaveTrabajador.Name = "lblClaveTrabajador";
-            lblClaveTrabajador.Size = new Size(150, 21);
-            lblClaveTrabajador.TabIndex = 26;
-            lblClaveTrabajador.Text = "Clave de Trabajador:";
             // 
             // dtpFechaFin
             // 
@@ -134,9 +113,9 @@ namespace ProyectoRegistroAsistencia
             lblSubtitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblSubtitulo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblSubtitulo.Location = new Point(172, 53);
+            lblSubtitulo.Location = new Point(318, 56);
             lblSubtitulo.Name = "lblSubtitulo";
-            lblSubtitulo.Size = new Size(621, 25);
+            lblSubtitulo.Size = new Size(326, 25);
             lblSubtitulo.TabIndex = 21;
             lblSubtitulo.Text = "Consulte el resumen de asistencias";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -146,9 +125,9 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblTitulo.Location = new Point(216, 16);
+            lblTitulo.Location = new Point(275, 9);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(506, 30);
+            lblTitulo.Size = new Size(447, 30);
             lblTitulo.TabIndex = 20;
             lblTitulo.Text = "Reportes Semanal/Mensuales de Asistencia";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -176,28 +155,33 @@ namespace ProyectoRegistroAsistencia
             dgvReporte.AllowUserToResizeRows = false;
             dgvReporte.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvReporte.BackgroundColor = Color.FromArgb(240, 242, 245);
+            dgvReporte.BorderStyle = BorderStyle.None;
+            dgvReporte.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
             dgvReporte.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(43, 76, 140);
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(35, 45, 92);
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(74, 126, 193);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle1.SelectionForeColor = Color.White;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvReporte.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvReporte.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvReporte.ColumnHeadersHeight = 40;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(108, 117, 125);
+            dataGridViewCellStyle2.BackColor = Color.White;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(74, 126, 193);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(28, 32, 51);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvReporte.DefaultCellStyle = dataGridViewCellStyle2;
             dgvReporte.EnableHeadersVisualStyles = false;
+            dgvReporte.GridColor = Color.FromArgb(221, 225, 232);
             dgvReporte.Location = new Point(10, 220);
+            dgvReporte.MultiSelect = false;
             dgvReporte.Name = "dgvReporte";
             dgvReporte.ReadOnly = true;
+            dgvReporte.RowHeadersVisible = false;
             dgvReporte.RowTemplate.Height = 40;
             dgvReporte.Size = new Size(1046, 429);
             dgvReporte.TabIndex = 30;
@@ -245,6 +229,7 @@ namespace ProyectoRegistroAsistencia
             btnImprimir.TabIndex = 34;
             btnImprimir.Text = "Imprimir";
             btnImprimir.UseVisualStyleBackColor = false;
+            btnImprimir.Click += btnImprimir_Click;
             // 
             // rdbSemanal
             // 
@@ -268,15 +253,15 @@ namespace ProyectoRegistroAsistencia
             rdbMensual.Text = "Tardanzas y Faltas(Mensuales)";
             rdbMensual.UseVisualStyleBackColor = true;
             // 
-            // rdbHistorial
+            // rdbIncidencias
             // 
-            rdbHistorial.AutoSize = true;
-            rdbHistorial.Location = new Point(651, 109);
-            rdbHistorial.Name = "rdbHistorial";
-            rdbHistorial.Size = new Size(158, 25);
-            rdbHistorial.TabIndex = 37;
-            rdbHistorial.Text = "Historial Individual";
-            rdbHistorial.UseVisualStyleBackColor = true;
+            rdbIncidencias.AutoSize = true;
+            rdbIncidencias.Location = new Point(651, 109);
+            rdbIncidencias.Name = "rdbIncidencias";
+            rdbIncidencias.Size = new Size(205, 25);
+            rdbIncidencias.TabIndex = 37;
+            rdbIncidencias.Text = "Incidencias por Empleado";
+            rdbIncidencias.UseVisualStyleBackColor = true;
             // 
             // gpbOpciones
             // 
@@ -293,7 +278,7 @@ namespace ProyectoRegistroAsistencia
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 719);
-            Controls.Add(rdbHistorial);
+            Controls.Add(rdbIncidencias);
             Controls.Add(rdbMensual);
             Controls.Add(rdbSemanal);
             Controls.Add(btnImprimir);
@@ -301,8 +286,6 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(btnPdf);
             Controls.Add(cmbDepartamento);
             Controls.Add(lblDepartamento);
-            Controls.Add(txtClaveTrabajador);
-            Controls.Add(lblClaveTrabajador);
             Controls.Add(dtpFechaFin);
             Controls.Add(lblFechaFin);
             Controls.Add(dtpFechaInicio);
@@ -325,8 +308,6 @@ namespace ProyectoRegistroAsistencia
 
         private ComboBox cmbDepartamento;
         private Label lblDepartamento;
-        private TextBox txtClaveTrabajador;
-        private Label lblClaveTrabajador;
         private DateTimePicker dtpFechaFin;
         private Label lblFechaFin;
         private DateTimePicker dtpFechaInicio;
@@ -340,7 +321,7 @@ namespace ProyectoRegistroAsistencia
         private Button btnImprimir;
         private RadioButton rdbSemanal;
         private RadioButton rdbMensual;
-        private RadioButton rdbHistorial;
+        private RadioButton rdbIncidencias;
         private GroupBox gpbOpciones;
     }
 }
