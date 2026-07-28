@@ -1,4 +1,4 @@
-﻿using MySqlConnector;
+using MySqlConnector;
 using System;
 using System.Data;
 
@@ -12,12 +12,11 @@ namespace ProyectoRegistroAsistencia
         private string password = "equipo1gb";
         private string port = "3306";
         
-        
         //datos del servidor local 
         private string hostLocal = "localhost";
         private string bdLocal = "equipo1_staff_asistence";
         private string usuarioLocal = "root";
-        private string passwordLocal = "";
+        private string passwordLocal = "root";
         private string puertoLocal = "3306";
 
         private string CadenaRemota => $"server={host}; database={bd}; user={user}; password={password}; port={port}; CharSet=utf8mb4;";
@@ -33,7 +32,7 @@ namespace ProyectoRegistroAsistencia
                 return conexion;
             }
             catch
-            {
+            { 
                 try
                 {
                     //si el remoto falla, intenta con la base local de respaldo

@@ -59,5 +59,15 @@ namespace ProyectoRegistroAsistencia.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Byte[].
+        /// </summary>
+        internal static byte[] LOGO {
+            get {
+                object obj = ResourceManager.GetObject("LOGO", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

@@ -12,10 +12,76 @@ namespace ProyectoRegistroAsistencia
 {
     public partial class frmNuevoDepartamento : Form
     {
+        clsDepartamentos departamentos;
+
+        // 0 mientras sea un departamento nuevo; se llena con el Id real cuando se abre para editar
+        public int IdDepartamento { get; set; } = 0;
+
         public frmNuevoDepartamento()
         {
-            InitializeComponent();   
+            InitializeComponent();
         }
 
+        private bool ValidarCampos()
+        {
+            if (string.IsNullOrWhiteSpace(txtDepartamento.Text))
+            {
+                MessageBox.Show("Escribe el nombre del departamento.", "Staff Asistence",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDepartamento.Focus();
+                return false;
+            }
+
+            if (txtDepartamento.Text.Trim().Length < 3)
+            {
+                MessageBox.Show("El nombre del departamento debe tener al menos 3 caracteres.", "Staff Asistence",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDepartamento.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (!ValidarCampos()) return;
+
+            try
+            {
+                int tipoOperacion = IdDepartamento == 0 ? 0 : 1;
+
+                departamentos = new clsDepartamentos();
+                departamentos.IdDepartamento = IdDepartamento;
+                departamentos.NombreDepartamento = txtDepartamento.Text.Trim();
+                departamentos.Descripcion = string.IsNullOrWhiteSpace(txtDescripcion.Text) ? null : txtDescripcion.Text.Trim();
+
+                string msg;
+
+                if (tipoOperacion == 1)
+                {
+                    var resp = MessageBox.Show("¿Confirmas que deseas actualizar este departamento?",
+                        "Confirmar actualización", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (resp != DialogResult.Yes) return;
+                }
+
+                msg = departamentos.GuardarActualizar(tipoOperacion);
+                MessageBox.Show(msg, "Staff Asistence", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "No se pudo guardar el departamento",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
     }
 }

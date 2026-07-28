@@ -114,31 +114,21 @@ namespace ProyectoRegistroAsistencia
         {
             horario = new clsHorarioSemanal();
 
-            string apellido = txtApellido.Text.Trim();
-
             try
             {
-                if (!string.IsNullOrWhiteSpace(apellido))
+                if (cmbDepartamento.SelectedValue == null)
+                    return;
+
+                idDepartamento = Convert.ToInt32(cmbDepartamento.SelectedValue);
+
+                if (idDepartamento == 0)
                 {
-                    dgvHorarios.DataSource = horario.BusquedaNombreApellido(apellido);
+                    dgvHorarios.DataSource = horario.cargarDataGrid();
                 }
                 else
                 {
-                    if (cmbDepartamento.SelectedValue == null)
-                        return;
-
-                    idDepartamento = Convert.ToInt32(cmbDepartamento.SelectedValue);
-
-                    if (idDepartamento == 0)
-                    {
-                        dgvHorarios.DataSource = horario.cargarDataGrid();
-                    }
-                    else
-                    {
-                        dgvHorarios.DataSource = horario.consultarPorBusquedaDepartamento(idDepartamento);
-                    }
+                    dgvHorarios.DataSource = horario.consultarPorBusquedaDepartamento(idDepartamento);
                 }
-
                 dgvHorarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             }
             catch (Exception ex)
@@ -151,6 +141,29 @@ namespace ProyectoRegistroAsistencia
         {
             cmbDepartamento.SelectedIndex = 0; // vuelve a "Selecciona una Carrera"
             cargarGrid();
+        }
+
+        private void txtApellido_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                horario = new clsHorarioSemanal();
+
+                string apellido = txtApellido.Text.Trim();
+
+                if (!string.IsNullOrWhiteSpace(apellido))
+                {
+                    dgvHorarios.DataSource = horario.BusquedaNombreApellido(apellido);
+                }
+                else
+                {
+                    cargarGrid();
+                }
+            }
+            catch
+            {
+                // No mostrar mensajes mientras escribe
+            }
         }
     }
 }
