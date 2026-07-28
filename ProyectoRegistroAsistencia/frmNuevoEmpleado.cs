@@ -62,6 +62,9 @@ namespace ProyectoRegistroAsistencia
                 datosE.dgvEmpleados.Columns["id_departamento"].Visible = false;
                 datosE.dgvEmpleados.Columns["id_puesto"].Visible = false;
                 datosE.dgvEmpleados.Columns["Estatus"].Visible = false;
+                datosE.dgvEmpleados.Columns["Nombre"].Visible = false;
+                datosE.dgvEmpleados.Columns["Apellido Paterno"].Visible = false;
+                datosE.dgvEmpleados.Columns["Apellido Materno"].Visible = false;
                 datosE.dgvEmpleados.Columns["Numero Calle"].Visible = false;
                 datosE.dgvEmpleados.Columns["Codigo Postal"].Visible = false;
                 datosE.dgvEmpleados.Columns["Municipio"].Visible = false;
