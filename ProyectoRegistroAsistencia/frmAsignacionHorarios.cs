@@ -40,6 +40,26 @@ namespace ProyectoRegistroAsistencia
             try
             {
                 horario.buscarTrabajador();
+                // Primero revisamos si ya tiene todos los días completos
+                DataTable revisarDiasFaltas = horario.diasFaltantes(horario.IdTrabajador);
+                if(revisarDiasFaltas.Rows.Count ==0)
+                {
+                    txtBuscarNombreCompleto.Clear();
+                    txtDepartamento.Clear();
+                    txtPuesto.Clear();
+                    cmbSemestre.SelectedIndex = 0;
+
+                    CheckBox[] checksDiasLimpiar = { chkLunes, chkMartes, chkMiercoles, chkJueves, chkViernes };
+                    foreach (CheckBox chk in checksDiasLimpiar)
+                    {
+                        chk.Checked = false;
+                        chk.Enabled = false;
+                    }
+                    MessageBox.Show("El empleado tiene todos los horarios asignados", "Staff Asistense",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
                 txtBuscarNombreCompleto.Text = horario.NombreTrabajador;
                 txtDepartamento.Text = horario.Departamento;
                 txtPuesto.Text = horario.Puesto;
