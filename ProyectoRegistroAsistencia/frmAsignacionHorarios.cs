@@ -65,16 +65,22 @@ namespace ProyectoRegistroAsistencia
 
                 DataTable diasFalta = horario.diasFaltantes(horario.IdTrabajador);
 
-                if (diasFalta.Rows.Count > 0 && diasFalta.Rows.Count < 5)
+                if (diasFalta.Rows.Count > 0 )
                 {
                     string mensaje = "Días pendientes por asignar:\n";
                     foreach (DataRow fila in diasFalta.Rows)
                     {
                         mensaje += "- " + fila["nombre_dia"].ToString() + "\n";
                     }
+                    if(horario.IdSemestre == 0)
+                    {
+                        mensaje += "¡¡Avisó¡¡";
+                        mensaje += "\n-Seleccione un Semestre";
+                    }
                     MessageBox.Show(mensaje, "Staff Asistence",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+
 
             }
             catch (Exception ex)

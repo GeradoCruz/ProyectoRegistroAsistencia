@@ -51,21 +51,50 @@ namespace ProyectoRegistroAsistencia
                 clsConexion conexionDB = new clsConexion();
                 using (var conexion = conexionDB.AbrirConexion())
                 {
-                    string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
+                    string sql = "SELECT T.id_trabajador," +
+                                    "T.clave_trabajador AS 'Clave Trabajador', " +
                                     "CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS 'Nombre Completo', " +
-                                    "Dd.nombre_dia AS Dia, " +
-                                    "H.hora_entrada AS 'Hora Entrada', " +
-                                    "H.hora_salida AS 'Hora Salida', " +
-                                    "H.id_trabajador, " +
-                                    "H.id_semestre, " +
-                                    "S.semestre AS Semestre " +
-                                    "FROM tblhorario_trabajo H " +
-                                    "INNER JOIN tbltrabajador T ON H.id_trabajador = T.id_trabajador " +
-                                    "INNER JOIN tblsemestres S ON H.id_semestre = S.id_semestre " +
-                                    "INNER JOIN tbldias Dd ON H.id_dia = Dd.id_dia;";
+                                    "P.nombre_puesto AS Puesto, " +
+                                    "D.nombre_departamento AS Departamento " +                                   
+                                    "FROM tbltrabajador T " +
+                                    "INNER JOIN tblpuestos P ON T.id_puesto = P.id_puesto " +
+                                    "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento "+
+                                    "ORDER BY T.id_trabajador"; 
                     using (consulta = new MySqlDataAdapter(sql, conexion))
                     {
-                        consulta.Fill(tabla);
+                        consulta.Fill(tabla);       
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error en la tabla " + ex.Message);
+            }
+            return tabla;
+        }
+        public DataTable cargarDataGridDiasHorarios(int idTrabajador)
+        {
+            tabla = new DataTable();
+
+            try
+            {
+                clsConexion conexionDB = new clsConexion();
+                using (var conexion = conexionDB.AbrirConexion())
+                {
+                    string sql = "SELECT Dd.nombre_dia AS Dia, " +
+                         "H.hora_entrada AS 'Hora Entrada', " +
+                         "H.hora_salida AS 'Hora Salida' " +
+                         "FROM tblhorario_trabajo H " +
+                         "INNER JOIN tbldias Dd ON H.id_dia = Dd.id_dia " +
+                         "WHERE H.id_trabajador = @trabajador " +
+                         "ORDER BY Dd.id_dia";
+                    using (var consultar = new MySqlCommand(sql, conexion))
+                    {
+                        consultar.Parameters.AddWithValue("@trabajador", idTrabajador);
+                        using (consulta = new MySqlDataAdapter(consultar))
+                        {
+                            consulta.Fill(tabla);
+                        }
                     }
                 }
             }
