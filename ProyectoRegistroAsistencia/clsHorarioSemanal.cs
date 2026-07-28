@@ -126,7 +126,7 @@ namespace ProyectoRegistroAsistencia
             }
             return tabla;
         }
-        public DataTable consultar(int id_departamento)
+        public DataTable consultarPorBusquedaDepartamento(int id_departamento)
         {
             tabla = new DataTable();
             try
@@ -136,19 +136,10 @@ namespace ProyectoRegistroAsistencia
                 {
                     string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
                                   "CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS 'Nombre Completo', " +
-                                  "D.nombre_departamento AS Departamento, " +
-                                  "Dd.nombre_dia AS Dia, " +
-                                  "H.hora_entrada AS 'Hora Entrada', " +
-                                  "H.hora_salida AS 'Hora Salida', " +
-                                  "H.id_trabajador, " +
-                                  "H.id_semestre, " +
-                                  "S.semestre AS Semestre " +
-                                  "FROM tblhorario_trabajo H " +
-                                  "INNER JOIN tbltrabajador T ON H.id_trabajador = T.id_trabajador " +
-                                  "INNER JOIN tbldias Dd ON H.id_dia = Dd.id_dia " +
-                                  "INNER JOIN tblsemestres S ON H.id_semestre = S.id_semestre " +
+                                  "D.nombre_departamento AS Departamento " +                               
+                                  "FROM tbltrabajador T " +                       
                                   "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento " +
-                                  "WHERE T.id_departamento = @id_departamento;";
+                                  "WHERE D.id_departamento = @id_departamento;";
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
                         consultar.Parameters.AddWithValue("@id_departamento", id_departamento);
@@ -163,6 +154,49 @@ namespace ProyectoRegistroAsistencia
             {
                 throw new Exception("Error en la consulta" + ex.Message);
             }
+            return tabla;
+        }
+        public DataTable BusquedaNombreApellido(string apellido)
+        {
+            tabla = new DataTable();
+
+            try
+            {
+                clsConexion conexionBD = new clsConexion();
+
+                using (var conexion = conexionBD.AbrirConexion())
+                {
+                    string sql = "SELECT T.id_trabajador, " +
+                                 "T.clave_trabajador AS 'Clave Trabajador', " +
+                                 "CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS 'Nombre Completo', " +
+                                 "D.nombre_departamento AS Departamento " +
+                                 "FROM tbltrabajador T " +
+                                 "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento ";
+
+                    if (!string.IsNullOrWhiteSpace(apellido))
+                    {
+                        sql += "WHERE CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) LIKE @apellido";
+                    }
+
+                    using (var consultar = new MySqlCommand(sql, conexion))
+                    {
+                        if (!string.IsNullOrWhiteSpace(apellido))
+                        {
+                            consultar.Parameters.AddWithValue("@apellido", "%" + apellido + "%");
+                        }
+
+                        using (consulta = new MySqlDataAdapter(consultar))
+                        {
+                            consulta.Fill(tabla);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al buscar el trabajador: " + ex.Message);
+            }
+
             return tabla;
         }
         public void buscarTrabajador()
