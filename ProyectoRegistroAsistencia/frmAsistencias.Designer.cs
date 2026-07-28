@@ -36,7 +36,7 @@ namespace ProyectoRegistroAsistencia
             lblFecha = new Label();
             lblClaveTrabajador = new Label();
             dtpFiltroAsistencia = new DateTimePicker();
-            txtClaveTrabajador = new TextBox();
+            txtApellido = new TextBox();
             btnLimpiar = new Button();
             btnBuscar = new Button();
             dgvRegistros = new DataGridView();
@@ -48,7 +48,7 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblTitulo.Location = new Point(306, 31);
+            lblTitulo.Location = new Point(306, 28);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(413, 30);
             lblTitulo.TabIndex = 0;
@@ -60,7 +60,7 @@ namespace ProyectoRegistroAsistencia
             lblSubtitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblSubtitulo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblSubtitulo.Location = new Point(139, 77);
+            lblSubtitulo.Location = new Point(139, 75);
             lblSubtitulo.Name = "lblSubtitulo";
             lblSubtitulo.Size = new Size(771, 25);
             lblSubtitulo.TabIndex = 1;
@@ -71,9 +71,9 @@ namespace ProyectoRegistroAsistencia
             // 
             lblFecha.AutoSize = true;
             lblFecha.ForeColor = Color.FromArgb(108, 117, 125);
-            lblFecha.Location = new Point(12, 146);
+            lblFecha.Location = new Point(12, 144);
             lblFecha.Name = "lblFecha";
-            lblFecha.Size = new Size(53, 21);
+            lblFecha.Size = new Size(66, 28);
             lblFecha.TabIndex = 2;
             lblFecha.Text = "Fecha:";
             // 
@@ -81,27 +81,28 @@ namespace ProyectoRegistroAsistencia
             // 
             lblClaveTrabajador.AutoSize = true;
             lblClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
-            lblClaveTrabajador.Location = new Point(220, 146);
+            lblClaveTrabajador.Location = new Point(220, 144);
             lblClaveTrabajador.Name = "lblClaveTrabajador";
-            lblClaveTrabajador.Size = new Size(150, 21);
+            lblClaveTrabajador.Size = new Size(90, 28);
             lblClaveTrabajador.TabIndex = 3;
-            lblClaveTrabajador.Text = "Clave de Trabajador:";
+            lblClaveTrabajador.Text = "Apellido:";
             // 
             // dtpFiltroAsistencia
             // 
             dtpFiltroAsistencia.Format = DateTimePickerFormat.Custom;
-            dtpFiltroAsistencia.Location = new Point(12, 170);
+            dtpFiltroAsistencia.Location = new Point(12, 168);
             dtpFiltroAsistencia.Name = "dtpFiltroAsistencia";
-            dtpFiltroAsistencia.Size = new Size(200, 29);
+            dtpFiltroAsistencia.Size = new Size(200, 34);
             dtpFiltroAsistencia.TabIndex = 4;
             // 
-            // txtClaveTrabajador
+            // txtApellido
             // 
-            txtClaveTrabajador.BackColor = Color.White;
-            txtClaveTrabajador.Location = new Point(220, 170);
-            txtClaveTrabajador.Name = "txtClaveTrabajador";
-            txtClaveTrabajador.Size = new Size(200, 29);
-            txtClaveTrabajador.TabIndex = 5;
+            txtApellido.BackColor = Color.White;
+            txtApellido.Location = new Point(220, 168);
+            txtApellido.Name = "txtApellido";
+            txtApellido.Size = new Size(200, 34);
+            txtApellido.TabIndex = 5;
+            txtApellido.TextChanged += txtApellido_TextChanged;
             // 
             // btnLimpiar
             // 
@@ -110,12 +111,13 @@ namespace ProyectoRegistroAsistencia
             btnLimpiar.ForeColor = Color.White;
             btnLimpiar.Image = (Image)resources.GetObject("btnLimpiar.Image");
             btnLimpiar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnLimpiar.Location = new Point(690, 163);
+            btnLimpiar.Location = new Point(690, 161);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(180, 40);
             btnLimpiar.TabIndex = 6;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = false;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // btnBuscar
             // 
@@ -124,12 +126,13 @@ namespace ProyectoRegistroAsistencia
             btnBuscar.ForeColor = Color.White;
             btnBuscar.Image = (Image)resources.GetObject("btnBuscar.Image");
             btnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnBuscar.Location = new Point(879, 163);
+            btnBuscar.Location = new Point(879, 161);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Size = new Size(180, 40);
             btnBuscar.TabIndex = 7;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = false;
+            btnBuscar.Click += btnBuscar_Click;
             // 
             // dgvRegistros
             // 
@@ -139,40 +142,48 @@ namespace ProyectoRegistroAsistencia
             dgvRegistros.AllowUserToResizeRows = false;
             dgvRegistros.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvRegistros.BackgroundColor = Color.FromArgb(240, 242, 245);
+            dgvRegistros.BorderStyle = BorderStyle.None;
+            dgvRegistros.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
             dgvRegistros.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(43, 76, 140);
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(35, 45, 92);
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(74, 126, 193);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle1.SelectionForeColor = Color.White;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvRegistros.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvRegistros.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRegistros.ColumnHeadersHeight = 40;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(108, 117, 125);
+            dataGridViewCellStyle2.BackColor = Color.White;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(74, 126, 193);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(28, 32, 51);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvRegistros.DefaultCellStyle = dataGridViewCellStyle2;
-            dgvRegistros.Location = new Point(11, 219);
+            dgvRegistros.EnableHeadersVisualStyles = false;
+            dgvRegistros.GridColor = Color.FromArgb(221, 225, 232);
+            dgvRegistros.Location = new Point(11, 217);
+            dgvRegistros.MultiSelect = false;
             dgvRegistros.Name = "dgvRegistros";
             dgvRegistros.ReadOnly = true;
+            dgvRegistros.RowHeadersVisible = false;
+            dgvRegistros.RowHeadersWidth = 51;
+            dgvRegistros.RowTemplate.Height = 40;
             dgvRegistros.Size = new Size(1044, 427);
             dgvRegistros.TabIndex = 8;
             // 
             // frmAsistencias
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);
             Controls.Add(dgvRegistros);
             Controls.Add(btnBuscar);
             Controls.Add(btnLimpiar);
-            Controls.Add(txtClaveTrabajador);
+            Controls.Add(txtApellido);
             Controls.Add(dtpFiltroAsistencia);
             Controls.Add(lblClaveTrabajador);
             Controls.Add(lblFecha);
@@ -193,7 +204,7 @@ namespace ProyectoRegistroAsistencia
         private Label lblFecha;
         private Label lblClaveTrabajador;
         private DateTimePicker dtpFiltroAsistencia;
-        private TextBox txtClaveTrabajador;
+        private TextBox txtApellido;
         private Button btnLimpiar;
         private Button btnBuscar;
         private DataGridView dgvRegistros;

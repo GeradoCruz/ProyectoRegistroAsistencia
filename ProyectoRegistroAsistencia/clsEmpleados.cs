@@ -214,26 +214,23 @@ namespace ProyectoRegistroAsistencia
             {
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    using (var transaccion = conexion.BeginTransaction())
-                    {
                         try
                         {
-                            string sqlEmpleados = "DELETE FROM empleados WHERE id_empleado = @id_empleado";
-                            using (comando = new MySqlCommand(sqlEmpleados, conexion, transaccion))
+                            string sqlEmpleados = "UPDATE tbltrabajador SET estatus = 'inactivo' WHERE clave_trabajador = @claveTrabajador;";
+                               
+                            using (comando = new MySqlCommand(sqlEmpleados, conexion))
                             {
-                                comando.Parameters.AddWithValue("@id_empleado", claveTrabajador);
+                                comando.Parameters.AddWithValue("@claveTrabajador", claveTrabajador);
                                 comando.ExecuteNonQuery();
                             }
-                            transaccion.Commit();
+                            
                             msg = "Empleado dado de baja correctamente";
                         }
                         catch (Exception ex)
                         {
-                            transaccion.Rollback();
                             throw new Exception("Error en la operacion. Se cancelaron los cambios:" + ex.Message);
                         }
                     }
-                }
             }
             catch (Exception ex)
             {

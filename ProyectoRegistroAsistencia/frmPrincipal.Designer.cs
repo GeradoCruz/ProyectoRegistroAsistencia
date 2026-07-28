@@ -201,9 +201,9 @@
             lblSistema.ForeColor = Color.White;
             lblSistema.Location = new Point(39, 176);
             lblSistema.Name = "lblSistema";
-            lblSistema.Size = new Size(129, 23);
+            lblSistema.Size = new Size(136, 23);
             lblSistema.TabIndex = 1;
-            lblSistema.Text = "Staff Asistence";
+            lblSistema.Text = "Staff Assistence";
             // 
             // pcbLogo
             // 
@@ -330,9 +330,9 @@
             pcbModulo.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbModulo.TabIndex = 0;
             pcbModulo.TabStop = false;
-            //
+            // 
             // lblModuloPrefijo
-            //
+            // 
             lblModuloPrefijo.AutoSize = true;
             lblModuloPrefijo.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblModuloPrefijo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -341,9 +341,9 @@
             lblModuloPrefijo.Size = new Size(64, 20);
             lblModuloPrefijo.TabIndex = 1;
             lblModuloPrefijo.Text = "Módulo:";
-            //
+            // 
             // lblModuloValor
-            //
+            // 
             lblModuloValor.AutoSize = true;
             lblModuloValor.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblModuloValor.ForeColor = Color.FromArgb(43, 76, 140);
@@ -352,7 +352,7 @@
             lblModuloValor.Size = new Size(33, 20);
             lblModuloValor.TabIndex = 2;
             lblModuloValor.Text = "----";
-            //
+            // 
             // lblBienvenida
             // 
             lblBienvenida.Anchor = AnchorStyles.Top | AnchorStyles.Right;
