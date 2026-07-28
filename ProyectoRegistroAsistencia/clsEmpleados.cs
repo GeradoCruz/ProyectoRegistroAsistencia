@@ -49,6 +49,9 @@ namespace ProyectoRegistroAsistencia
                 using (var conexion = conexionBD.AbrirConexion())
                 {
                     string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
+                                "T.nombre AS Nombre, " +
+                                "T.a_paterno AS 'Apellido Paterno', " +
+                                "T.a_materno AS 'Apellido Materno', " +
                                 "Concat(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS Nombre, " +
                                 "T.telefono AS Telefono, " +
                                 "T.email AS 'Correo Institucional', " +
