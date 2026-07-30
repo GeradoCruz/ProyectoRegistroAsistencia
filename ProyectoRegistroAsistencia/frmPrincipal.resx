@@ -171,18 +171,7 @@
 </value>
   </data>
   <data name="btnDepartamentos.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACMAAAAZCAYAAAC7OJeSAAAABGdBTUEAALGPC/xhBQAAAepJREFUSEvd
-        lj9LHVEQxd9TAzYiVprK4qGC2FgGbB9WWkabEE0IIb2fQAsbP0IqOyVdKgUD6YJlIJ2VTYiEBEQw5t8v
-        HDkDw+UJj3U3ggcuZ/fcmblnd/bubqvVB4ABoF1oE8AKsAecAm+BdeBhEddWftZqATAJPAf2gS/0xpmN
-        vQCmyhqV4CvSGAEeA++By2Lh3x5/03HGT+cpX3Wua5Zr9QW35wHwKC2ghftBjlO+6lRvVyQDnXQHzoFv
-        wHfzhRcUZ11xccc6uV4lJDMzqQVLwBgwbn5pXZx1xQnKm8n1KuEGMwtFzKr11UJfaNJM4CvwOQ21RRBn
-        XXGB2s3EA/kJ+AAcm0+si7OuOEF5tZuJNs0XMcvWlwt93nojbQozT4BpYM68YV2cdcU1ZuY2qN3MHxfe
-        8av+lfm1dXHWFScor3Yz0abpIqZrvVvoapXQSJtiN+0CW8A2sAm8AX6ZdS5d84oTGtlNt0FjZnQXrswf
-        vWuemXWe5xs3Ex8/4aCIP7AeH9XAfzHzDhgChs06F+7EzJHnh8xH1hs1o22qZ0BDf28/fHzo+TBzaF3z
-        iouc69dBXWZm01VmHHs+zOgj2QuzuV4lxP8qMAqspfHUvOj5ML1YzMcYzfXuD/xXr91SjsEibrBHjEZf
-        d+Qfb0DMXM2ZKkcAAAAASUVORK5CYII=
-</value>
+    <value>iVBORw0KGgoAAAANSUhEUgAAACMAAAAZCAYAAAC7OJeSAAACw0lEQVR4nNWWPYhUZxSGnzOz60/Q1bUyGyWLnSCIthYB0UYkkIDpAsFoEZA0S1xIwMJCUbEREoJ2igiKlgkxuAmSIiQpAqKW6oKNLoh/447uzGNxz7DXQXfvrLriae495zvf9733PX8X3hdRI58r1M9K9r7O2nyCqefzEwv5S13fvf6mpFbRrw48AKaA/9XD6sKIaKn1eWGpxMxW9X6+71An1HF1W7fvfIDZoj5Sl6c+oP6coTurrkz722OoC8xDdWmZAXWTelV9rH6TIau9FVCvAqP2l9b61FF1Sj1R3ter9PWKLyJaQKtjiIgp4FCGanPHby5gqlZT54K6+rm6HUBdpe5UPwIaQDNZmVOYqjITQBNYDZwv2b4EDgB7gcdALZlDrXfeq0pVZgT6gbvAEWB/2i8Bx4E/KHrQOnVE7SuDetNgoGh8DWAMuJy2WwnkBrAo10eAG+pXANkYX7+6upreXXVd9hbT/kOqo+r36t/qIvWQOqle78y0KoB6DdMd4CCwL+2/AT8BFymYWRARkxExCqyhCONp9WREOBugXkq7DjxhOj8AxlO/CSwAnqqLgeGIuA7sURsUiU5EzFjyVZkJYBL4mIKFMbUGfA2cA3ZTVNMj4FvgmrpevQB8B9yucklVZsrV9CNwLyLa6mXgDPAn8GmedwX4BbhHkehrKUL4evKSQbk49WF1TZfvUfWfl5yxSx2vct9sYYpMukjfZpbsf8Cv6lBpTpn+dXVQ/ULdSLJfpZpmDFPOHdSp1NvqIHAKGAI+iIhn6dMuXKKlbgCOAb9ThMrZkndGMPklg8AzYCnQVgdyz4fAALAkbQILKZhZAqwA/gUmgGXFcS6LiPuzAXoVmBH1aeZKK5vbE1+UZja3RsnWyN+JbmmqI3NihqKEOxNYit7SD7SZ/oXoL/m3mK66dvrXcn8r77rYMyvvSp4Dx+NVZ974LtAAAAAASUVORK5CYII=</value>
   </data>
   <data name="btnHorarios.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

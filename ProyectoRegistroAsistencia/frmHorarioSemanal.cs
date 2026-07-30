@@ -18,7 +18,7 @@ namespace ProyectoRegistroAsistencia
         public frmHorarioSemanal()
         {
             InitializeComponent();
-            cargarCombo();
+            cargarComboBox();
             cargarGrid();
             cargarGridDiasHorario(1);
 
@@ -125,16 +125,18 @@ namespace ProyectoRegistroAsistencia
                 }
                 else
                 {
-                    dgvListaEmpleados.DataSource = horario.consultar(idDepartamento);
+                    dgvListaEmpleados.DataSource = horario.consultarPorBusquedaDepartamento(idDepartamento);
                 }
-                dgvHorarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dgvListaEmpleados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            dgvListaEmpleados.Columns["id_trabajador"].Visible = false;
-            dgvListaEmpleados.Columns["id_semestre"].Visible = false;
+            if (dgvListaEmpleados.Columns.Contains("id_trabajador"))
+                dgvListaEmpleados.Columns["id_trabajador"].Visible = false;
+            if (dgvListaEmpleados.Columns.Contains("id_semestre"))
+                dgvListaEmpleados.Columns["id_semestre"].Visible = false;
             dgvListaEmpleados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
         }
@@ -155,7 +157,7 @@ namespace ProyectoRegistroAsistencia
 
                 if (!string.IsNullOrWhiteSpace(apellido))
                 {
-                    dgvHorarios.DataSource = horario.BusquedaNombreApellido(apellido);
+                    dgvListaEmpleados.DataSource = horario.BusquedaNombreApellido(apellido);
                 }
                 else
                 {

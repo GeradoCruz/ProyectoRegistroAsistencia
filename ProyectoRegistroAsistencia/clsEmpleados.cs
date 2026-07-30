@@ -238,7 +238,7 @@ namespace ProyectoRegistroAsistencia
             }
             return msg;
         }
-        public DataTable BuscarEmpleado(string filtro)
+        public DataTable BuscarEmpleado(string filtro, string idDepartamento)
         {
             tabla = new DataTable();
             try
@@ -265,13 +265,17 @@ namespace ProyectoRegistroAsistencia
                                 "FROM tbltrabajador T " +
                                 "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento " +
                                 "INNER JOIN tblpuestos P ON T.id_puesto = P.id_Puesto " +
-                                "WHERE T.nombre LIKE @filtro " +
+                                "WHERE (T.nombre LIKE @filtro " +
                                 "OR T.a_paterno LIKE @filtro "+
                                 "OR T.a_materno LIKE @filtro "+
-                                "OR D.nombre_departamento LIKE @filtro";
+                                "OR D.nombre_departamento LIKE @filtro) " +
+                                "AND (@idDepartamento = 0 OR T.id_departamento = @idDepartamento)";
                     using (var comando = new MySqlCommand(sql, conexion))
                     {
                         comando.Parameters.AddWithValue("@filtro", "%" + filtro + "%");
+                        int idDepartamentoValor = 0;
+                        int.TryParse(idDepartamento, out idDepartamentoValor);
+                        comando.Parameters.AddWithValue("@idDepartamento", idDepartamentoValor);
                         using (consulta = new MySqlDataAdapter(comando))
                         {
                             consulta.Fill(tabla);
