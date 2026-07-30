@@ -16,15 +16,13 @@ namespace ProyectoRegistroAsistencia
         public frmAsignacionHorarios()
         {
             InitializeComponent();
-            btnGuardar.Click += btnGuardar_Click;
-            btnCancelar.Click += btnCancelar_Click;
             CargarComboSemestre();
         }
 
         private void btnBuscar_Click(object? sender, EventArgs e)
         {
             
-            if (string.IsNullOrWhiteSpace(txtBusacarClave.Text))
+            if (string.IsNullOrWhiteSpace(txtBuscarClave.Text))
             {
                 MessageBox.Show("Escribe la clave del trabajador a buscar.", "Staff Asistence",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -35,12 +33,12 @@ namespace ProyectoRegistroAsistencia
             // txtBuscarNombreCompleto, txtDepartamento, txtPuesto y txtSemestre
 
             horario = new clsHorarioSemanal();
-            horario.ClaveTrabajador = txtBusacarClave.Text;
+            horario.ClaveTrabajador = txtBuscarClave.Text;
 
             try
             {
                 horario.buscarTrabajador();
-                txtBuscarNombreCompleto.Text = horario.NombreTrabajador;
+                txtNombreCompleto.Text = horario.NombreTrabajador;
                 txtDepartamento.Text = horario.Departamento;
                 txtPuesto.Text = horario.Puesto;
 
@@ -90,7 +88,7 @@ namespace ProyectoRegistroAsistencia
         }
         private bool ValidarCampos()
         {
-            if (string.IsNullOrWhiteSpace(txtBuscarNombreCompleto.Text))
+            if (string.IsNullOrWhiteSpace(txtNombreCompleto.Text))
             {
                 MessageBox.Show("Primero busca un trabajador valido.", "Staff Asistence",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
