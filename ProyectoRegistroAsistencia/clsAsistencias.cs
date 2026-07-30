@@ -12,9 +12,6 @@ namespace ProyectoRegistroAsistencia
     {
         private DataTable tabla;
         private MySqlDataAdapter consulta;
-        private DataTable clave;
-        private DataTable fecha;
-        private MySqlCommand comando;
         public DataTable CargaDataGrid()
         {
             tabla = new DataTable();
