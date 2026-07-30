@@ -73,7 +73,7 @@ namespace ProyectoRegistroAsistencia
             lblFecha.ForeColor = Color.FromArgb(108, 117, 125);
             lblFecha.Location = new Point(12, 144);
             lblFecha.Name = "lblFecha";
-            lblFecha.Size = new Size(53, 21);
+            lblFecha.Size = new Size(66, 28);
             lblFecha.TabIndex = 2;
             lblFecha.Text = "Fecha:";
             // 
@@ -93,7 +93,7 @@ namespace ProyectoRegistroAsistencia
             dtpFiltroAsistencia.Format = DateTimePickerFormat.Custom;
             dtpFiltroAsistencia.Location = new Point(12, 168);
             dtpFiltroAsistencia.Name = "dtpFiltroAsistencia";
-            dtpFiltroAsistencia.Size = new Size(200, 29);
+            dtpFiltroAsistencia.Size = new Size(200, 34);
             dtpFiltroAsistencia.TabIndex = 4;
             // 
             // txtApellido
@@ -102,8 +102,9 @@ namespace ProyectoRegistroAsistencia
             txtApellido.ForeColor = Color.FromArgb(64, 64, 64);
             txtApellido.Location = new Point(220, 168);
             txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(200, 29);
+            txtApellido.Size = new Size(200, 34);
             txtApellido.TabIndex = 5;
+            txtApellido.TextChanged += txtApellido_TextChanged;
             // 
             // btnLimpiar
             // 
@@ -171,13 +172,14 @@ namespace ProyectoRegistroAsistencia
             dgvRegistros.Name = "dgvRegistros";
             dgvRegistros.ReadOnly = true;
             dgvRegistros.RowHeadersVisible = false;
+            dgvRegistros.RowHeadersWidth = 51;
             dgvRegistros.RowTemplate.Height = 40;
             dgvRegistros.Size = new Size(1044, 427);
             dgvRegistros.TabIndex = 8;
             // 
             // frmAsistencias
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);

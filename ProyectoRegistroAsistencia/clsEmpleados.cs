@@ -49,7 +49,10 @@ namespace ProyectoRegistroAsistencia
                 using (var conexion = conexionBD.AbrirConexion())
                 {
                     string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
-                                "CONCAT(T.nombre,' ', T.a_paterno,' ', T.a_materno) AS Trabajador, "+
+                                "CONCAT(T.nombre,' ', T.a_paterno,' ', T.a_materno) AS 'Nombre Completo', " +
+                                "T.nombre AS Nombre, " +
+                                "T.a_paterno AS 'Apellido Paterno', " +
+                                "T.a_materno AS 'Apellido Materno', " +
                                 "T.sexo AS Genero, " +
                                 "T.municipio AS Municipio, " +
                                 "T.localidad AS Localidad, " +
@@ -64,9 +67,7 @@ namespace ProyectoRegistroAsistencia
                                 "T.email AS 'Correo Institucional' " +
                                 "FROM tbltrabajador T " +
                                 "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento " +
-                                "INNER JOIN tblpuestos P ON T.id_puesto = P.id_Puesto " +
-                                "WHERE T.estatus = 'activo' "+
-                                "ORDER BY clave_trabajador ASC ";
+                                "INNER JOIN tblpuestos P ON T.id_puesto = P.id_Puesto ";
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
                         consultar.Parameters.AddWithValue("@Clave Trabajador", "%" + claveTrabajador + "%");
@@ -103,10 +104,10 @@ namespace ProyectoRegistroAsistencia
                                     using (comando = new MySqlCommand(sqlInsertar, conexion, transaccion))
                                     {
                                             comando.Parameters.AddWithValue("@'Clave Trabajador'", claveTrabajador);
-                                            comando.Parameters.AddWithValue("@nombre", nombre);
+                                            comando.Parameters.AddWithValue("@Nombre", nombre);
                                             comando.Parameters.AddWithValue("@'Apellido Paterno'", apellidoPaterno);
                                             comando.Parameters.AddWithValue("@'Apellido Materno'", apellidoMaterno);
-                                            comando.Parameters.AddWithValue("@telefono", telefono);
+                                            comando.Parameters.AddWithValue("@Telefono", telefono);
                                             comando.Parameters.AddWithValue("@'Correo Electronico'", correoElectronico);
                                             comando.Parameters.AddWithValue("@genero", genero);
                                             comando.Parameters.AddWithValue("@'fecha Ingreso'", fechaIngreso);
@@ -129,7 +130,7 @@ namespace ProyectoRegistroAsistencia
                                         comando.Parameters.AddWithValue("@nombre", nombre);
                                         comando.Parameters.AddWithValue("@'Apellido Paterno'", apellidoPaterno);
                                         comando.Parameters.AddWithValue("@'Apellido Materno'", apellidoMaterno);
-                                        comando.Parameters.AddWithValue("@telefono", telefono);
+                                        comando.Parameters.AddWithValue("@Telefono", telefono);
                                         comando.Parameters.AddWithValue("@'Correo Electronico'", correoElectronico);
                                         comando.Parameters.AddWithValue("@genero", genero);
                                         comando.Parameters.AddWithValue("@municipio", municipio);
@@ -237,7 +238,7 @@ namespace ProyectoRegistroAsistencia
             }
             return msg;
         }
-        public DataTable BuscarEmpleado(string filtro)
+        public DataTable BuscarEmpleado(string filtro, string idDepartamento)
         {
             tabla = new DataTable();
             try
@@ -264,13 +265,17 @@ namespace ProyectoRegistroAsistencia
                                 "FROM tbltrabajador T " +
                                 "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento " +
                                 "INNER JOIN tblpuestos P ON T.id_puesto = P.id_Puesto " +
-                                "WHERE clave_trabajador LIKE @filtro " +
-                                "OR nombre LIKE @filtro "+
-                                "OR a_paterno LIKE @filtro "+
-                                "OR a_materno LIKE @filtro ";
+                                "WHERE (T.nombre LIKE @filtro " +
+                                "OR T.a_paterno LIKE @filtro "+
+                                "OR T.a_materno LIKE @filtro "+
+                                "OR D.nombre_departamento LIKE @filtro) " +
+                                "AND (@idDepartamento = 0 OR T.id_departamento = @idDepartamento)";
                     using (var comando = new MySqlCommand(sql, conexion))
                     {
                         comando.Parameters.AddWithValue("@filtro", "%" + filtro + "%");
+                        int idDepartamentoValor = 0;
+                        int.TryParse(idDepartamento, out idDepartamentoValor);
+                        comando.Parameters.AddWithValue("@idDepartamento", idDepartamentoValor);
                         using (consulta = new MySqlDataAdapter(comando))
                         {
                             consulta.Fill(tabla);

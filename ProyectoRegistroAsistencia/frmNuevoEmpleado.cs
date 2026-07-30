@@ -62,6 +62,9 @@ namespace ProyectoRegistroAsistencia
                 datosE.dgvEmpleados.Columns["id_departamento"].Visible = false;
                 datosE.dgvEmpleados.Columns["id_puesto"].Visible = false;
                 datosE.dgvEmpleados.Columns["Estatus"].Visible = false;
+                datosE.dgvEmpleados.Columns["Nombre"].Visible = false;
+                datosE.dgvEmpleados.Columns["Apellido Paterno"].Visible = false;
+                datosE.dgvEmpleados.Columns["Apellido Materno"].Visible = false;
                 datosE.dgvEmpleados.Columns["Numero Calle"].Visible = false;
                 datosE.dgvEmpleados.Columns["Codigo Postal"].Visible = false;
                 datosE.dgvEmpleados.Columns["Municipio"].Visible = false;
@@ -87,7 +90,8 @@ namespace ProyectoRegistroAsistencia
                 empleados.Nombre =string.IsNullOrEmpty(txtNombre.Text) ? null : txtNombre.Text;
                 empleados.ApellidoPaterno = string.IsNullOrEmpty(txtApellidoPaterno.Text) ? null : txtApellidoPaterno.Text;
                 empleados.ApellidoMaterno = string.IsNullOrEmpty(txtApellidoMaterno.Text) ? null : txtApellidoMaterno.Text;
-                empleados.Genero = char.Parse(rdbHombre.Checked ? "M" : "F");
+                empleados.Genero = rdbHombre.Checked ? 'H' : 'M';
+                empleados.Genero = rdbMujer.Checked ? 'M' : 'H';
                 empleados.Departamento = Convert.ToString(cmbDepartamento.SelectedValue);
                 empleados.Puesto = Convert.ToString(cmbPuesto.SelectedValue);
                 empleados.NumeroCalle = string.IsNullOrEmpty(txtNumCalle.Text) ? 0 : Convert.ToInt32(txtNumCalle.Text);
