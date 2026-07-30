@@ -72,5 +72,22 @@ namespace ProyectoRegistroAsistencia
             dgvRegistros.DataSource = asistencia.CargaDataGrid();
 
         }
+
+        private void txtApellido_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                clsAsistencias asistencia = new clsAsistencias();
+
+                DateTime fecha = dtpFiltroAsistencia.Value.Date;
+                string apellido = txtApellido.Text.Trim();
+
+                dgvRegistros.DataSource = asistencia.BusquedaFecha(fecha, apellido);
+            }
+            catch
+            {
+                // No mostrar mensajes mientras escribe
+            }
+        }
     }
 }

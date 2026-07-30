@@ -67,9 +67,7 @@ namespace ProyectoRegistroAsistencia
                                 "T.email AS 'Correo Institucional' " +
                                 "FROM tbltrabajador T " +
                                 "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento " +
-                                "INNER JOIN tblpuestos P ON T.id_puesto = P.id_Puesto " +
-                                "WHERE T.estatus = 'activo' "+
-                                "ORDER BY clave_trabajador ASC ";
+                                "INNER JOIN tblpuestos P ON T.id_puesto = P.id_Puesto ";
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
                         consultar.Parameters.AddWithValue("@Clave Trabajador", "%" + claveTrabajador + "%");

@@ -65,14 +65,14 @@ namespace ProyectoRegistroAsistencia
 
                 if (diasFalta.Rows.Count > 0 )
                 {
-                    string mensaje = "Días pendientes por asignar:\n";
+                    string mensaje = "DÃ­as pendientes por asignar:\n";
                     foreach (DataRow fila in diasFalta.Rows)
                     {
                         mensaje += "- " + fila["nombre_dia"].ToString() + "\n";
                     }
                     if(horario.IdSemestre == 0)
                     {
-                        mensaje += "¡¡Avisó¡¡";
+                        mensaje += "Â¡Â¡AvisÃ³Â¡Â¡";
                         mensaje += "\n-Seleccione un Semestre";
                     }
                     MessageBox.Show(mensaje, "Staff Asistence",
@@ -102,7 +102,7 @@ namespace ProyectoRegistroAsistencia
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            // la validación extra para que no se guarde semestre con 0:
+            // la validaciÃ³n extra para que no se guarde semestre con 0:
             if (cmbSemestre.SelectedValue == null || Convert.ToInt32(cmbSemestre.SelectedValue) == 0)
             {
                 MessageBox.Show("Selecciona un semestre.", "Staff Asistence",
@@ -122,10 +122,10 @@ namespace ProyectoRegistroAsistencia
                 // Guardamos las horas seleccionadas
                 horario.HoraEntrada = dtpHoraEntrada.Value.ToString("HH:mm:ss");
                 horario.HoraSalida = dtpHoraSalida.Value.ToString("HH:mm:ss");
-                horario.IdSemestre = Convert.ToInt32(cmbSemestre.SelectedValue); // toma el valor del combo, no el que trajo la búsqueda
+                horario.IdSemestre = Convert.ToInt32(cmbSemestre.SelectedValue); // toma el valor del combo, no el que trajo la bÃºsqueda
 
 
-                // Guardar los días seleccionados
+                // Guardar los dÃ­as seleccionados
 
                 CheckBox[] checksDias = { chkLunes, chkMartes, chkMiercoles, chkJueves, chkViernes };
                 for (int i = 0; i < checksDias.Length; i++)
