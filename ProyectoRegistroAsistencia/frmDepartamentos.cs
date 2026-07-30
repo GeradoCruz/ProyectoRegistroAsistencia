@@ -25,11 +25,11 @@ namespace ProyectoRegistroAsistencia
         {
             departamentos = new clsDepartamentos();
             dgvDepartamentos.DataSource = null;
-            dgvDepartamentos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvDepartamentos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             try
             {
                 dgvDepartamentos.DataSource = departamentos.Consultar("");
-                dgvDepartamentos.Columns["Id"].Visible = false;
+                dgvDepartamentos.Columns["Descripcion"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -45,7 +45,7 @@ namespace ProyectoRegistroAsistencia
                 idDepartamentoSeleccionado = 0;
                 return;
             }
-            idDepartamentoSeleccionado = Convert.ToInt32(dgvDepartamentos.CurrentRow.Cells["Id"].Value);
+            idDepartamentoSeleccionado = Convert.ToInt32(dgvDepartamentos.CurrentRow.Cells["Clave"].Value);
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -73,7 +73,7 @@ namespace ProyectoRegistroAsistencia
                 try
                 {
                     frm.lblTitulo.Text = "Editar Departamento";
-                    frm.IdDepartamento = Convert.ToInt32(dgvDepartamentos.CurrentRow.Cells["Id"].Value);
+                    frm.IdDepartamento = Convert.ToInt32(dgvDepartamentos.CurrentRow.Cells["Clave"].Value);
                     frm.txtDepartamento.Text = dgvDepartamentos.CurrentRow.Cells["Departamento"].Value.ToString();
                     frm.txtDescripcion.Text = dgvDepartamentos.CurrentRow.Cells["Descripcion"].Value?.ToString();
                 }
@@ -110,7 +110,7 @@ namespace ProyectoRegistroAsistencia
             try
             {
                 departamentos = new clsDepartamentos();
-                departamentos.IdDepartamento = Convert.ToInt32(dgvDepartamentos.CurrentRow.Cells["Id"].Value);
+                departamentos.IdDepartamento = Convert.ToInt32(dgvDepartamentos.CurrentRow.Cells["Clave"].Value);
                 string resultado = departamentos.DarDeBaja();
                 MessageBox.Show(resultado, "Staff Asistence", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarDataGrid();

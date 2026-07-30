@@ -71,44 +71,44 @@ namespace ProyectoRegistroAsistencia
             btnEditar.ForeColor = Color.White;
             btnEditar.Image = (Image)resources.GetObject("btnEditar.Image");
             btnEditar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEditar.Location = new Point(877, 144);
+            btnEditar.Location = new Point(688, 144);
             btnEditar.Name = "btnEditar";
             btnEditar.Size = new Size(180, 40);
             btnEditar.TabIndex = 14;
             btnEditar.Text = "Editar";
             btnEditar.UseVisualStyleBackColor = false;
             btnEditar.Click += btnEditar_Click;
-            //
+            // 
             // btnNuevo
-            //
+            // 
             btnNuevo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnNuevo.BackColor = Color.FromArgb(43, 76, 140);
             btnNuevo.ForeColor = Color.White;
             btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
             btnNuevo.ImageAlign = ContentAlignment.MiddleLeft;
-            btnNuevo.Location = new Point(691, 144);
+            btnNuevo.Location = new Point(502, 144);
             btnNuevo.Name = "btnNuevo";
             btnNuevo.Size = new Size(180, 40);
             btnNuevo.TabIndex = 13;
             btnNuevo.Text = "Nuevo";
             btnNuevo.UseVisualStyleBackColor = false;
             btnNuevo.Click += btnNuevo_Click;
-            //
+            // 
             // btnDarBaja
-            //
+            // 
             btnDarBaja.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnDarBaja.BackColor = Color.FromArgb(108, 117, 125);
             btnDarBaja.ForeColor = Color.White;
             btnDarBaja.Image = (Image)resources.GetObject("btnDarBaja.Image");
             btnDarBaja.ImageAlign = ContentAlignment.MiddleLeft;
-            btnDarBaja.Location = new Point(505, 144);
+            btnDarBaja.Location = new Point(875, 144);
             btnDarBaja.Name = "btnDarBaja";
             btnDarBaja.Size = new Size(180, 40);
             btnDarBaja.TabIndex = 16;
             btnDarBaja.Text = "Dar de Baja";
             btnDarBaja.UseVisualStyleBackColor = false;
             btnDarBaja.Click += btnDarBaja_Click;
-            //
+            // 
             // dgvDepartamentos
             // 
             dgvDepartamentos.AllowUserToAddRows = false;
@@ -116,6 +116,7 @@ namespace ProyectoRegistroAsistencia
             dgvDepartamentos.AllowUserToResizeColumns = false;
             dgvDepartamentos.AllowUserToResizeRows = false;
             dgvDepartamentos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvDepartamentos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvDepartamentos.BackgroundColor = Color.FromArgb(240, 242, 245);
             dgvDepartamentos.BorderStyle = BorderStyle.None;
             dgvDepartamentos.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
@@ -148,9 +149,9 @@ namespace ProyectoRegistroAsistencia
             dgvDepartamentos.Size = new Size(1044, 427);
             dgvDepartamentos.TabIndex = 15;
             dgvDepartamentos.SelectionChanged += dgvDepartamentos_SelectionChanged;
-            //
+            // 
             // frmDepartamentos
-            //
+            // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
@@ -162,8 +163,10 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(lblSubtitulo);
             Controls.Add(lblTitulo);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ForeColor = Color.FromArgb(108, 117, 125);
             Margin = new Padding(4);
             Name = "frmDepartamentos";
+            ShowIcon = false;
             ((System.ComponentModel.ISupportInitialize)dgvDepartamentos).EndInit();
             ResumeLayout(false);
         }

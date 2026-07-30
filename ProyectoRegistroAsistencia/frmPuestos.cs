@@ -13,6 +13,7 @@ namespace ProyectoRegistroAsistencia
     public partial class frmPuestos : Form
     {
         clsPuestos puestos;
+        int idPuestoSeleccionado = 0; // 0 = no hay ninguna fila seleccionada
 
         public frmPuestos()
         {
@@ -20,15 +21,15 @@ namespace ProyectoRegistroAsistencia
             CargarDataGrid();
         }
 
-        public void CargarDataGrid(string filtro = "")
+        public void CargarDataGrid()
         {
             puestos = new clsPuestos();
             dgvPuestos.DataSource = null;
-            dgvPuestos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvPuestos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             try
             {
-                dgvPuestos.DataSource = puestos.Consultar(filtro);
-                dgvPuestos.Columns["Id"].Visible = false;
+                dgvPuestos.DataSource = puestos.Consultar();
+                dgvPuestos.Columns["Descripcion"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -39,18 +40,12 @@ namespace ProyectoRegistroAsistencia
 
         private void dgvPuestos_SelectionChanged(object sender, EventArgs e)
         {
-            // El renglón seleccionado se toma directo del grid al editar/eliminar
-        }
-
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            CargarDataGrid(txtBuscarPuesto.Text.Trim());
-        }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            txtBuscarPuesto.Clear();
-            CargarDataGrid();
+            if (dgvPuestos.CurrentRow == null)
+            {
+                idPuestoSeleccionado = 0;
+                return;
+            }
+            idPuestoSeleccionado = Convert.ToInt32(dgvPuestos.CurrentRow.Cells["Clave"].Value);
         }
 
         private void btnNuevo_Click(object sender, EventArgs e)
@@ -78,7 +73,7 @@ namespace ProyectoRegistroAsistencia
                 try
                 {
                     frm.lblTitulo.Text = "Editar Puesto";
-                    frm.IdPuesto = Convert.ToInt32(dgvPuestos.CurrentRow.Cells["Id"].Value);
+                    frm.IdPuesto = Convert.ToInt32(dgvPuestos.CurrentRow.Cells["Clave"].Value);
                     frm.txtNombrePuesto.Text = dgvPuestos.CurrentRow.Cells["Puesto"].Value.ToString();
                     frm.txtDescripcion.Text = dgvPuestos.CurrentRow.Cells["Descripcion"].Value?.ToString();
                 }
@@ -115,7 +110,7 @@ namespace ProyectoRegistroAsistencia
             try
             {
                 puestos = new clsPuestos();
-                puestos.IdPuesto = Convert.ToInt32(dgvPuestos.CurrentRow.Cells["Id"].Value);
+                puestos.IdPuesto = Convert.ToInt32(dgvPuestos.CurrentRow.Cells["Clave"].Value);
                 string resultado = puestos.DarDeBaja();
                 MessageBox.Show(resultado, "Staff Asistence", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarDataGrid();

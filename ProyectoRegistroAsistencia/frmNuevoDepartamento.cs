@@ -83,5 +83,10 @@ namespace ProyectoRegistroAsistencia
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+        private void frmNuevoDepartamento_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -34,11 +34,15 @@ namespace ProyectoRegistroAsistencia
                 dgvEmpleados.Columns["id_departamento"].Visible = false;
                 dgvEmpleados.Columns["id_puesto"].Visible = false;
                 dgvEmpleados.Columns["Estatus"].Visible = false;
+                dgvEmpleados.Columns["Nombre"].Visible = false;
+                dgvEmpleados.Columns["Apellido Paterno"].Visible = false;
+                dgvEmpleados.Columns["Apellido Materno"].Visible = false;
                 dgvEmpleados.Columns["Numero Calle"].Visible = false;
                 dgvEmpleados.Columns["Codigo Postal"].Visible = false;
                 dgvEmpleados.Columns["Municipio"].Visible = false;
                 dgvEmpleados.Columns["Localidad"].Visible = false;
                 dgvEmpleados.Columns["Telefono"].Visible = false;
+                dgvEmpleados.Columns["Genero"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -59,15 +63,14 @@ namespace ProyectoRegistroAsistencia
             {
                 datosE.lblTitulo.Text = "Actualizaci�n del Empleado";
                 datosE.ClaveTrabajador = dgvEmpleados.CurrentRow.Cells["Clave Trabajador"].Value.ToString();
-
                 datosE.txtClaveTrabajador.Text = dgvEmpleados.CurrentRow.Cells["Clave Trabajador"].Value.ToString();
                 datosE.txtNombre.Text = dgvEmpleados.CurrentRow.Cells["Nombre"].Value.ToString();
                 datosE.txtApellidoPaterno.Text = dgvEmpleados.CurrentRow.Cells["Apellido Paterno"].Value.ToString();
                 datosE.txtApellidoMaterno.Text = dgvEmpleados.CurrentRow.Cells["Apellido Materno"].Value.ToString();
                 datosE.txtLocalidad.Text = dgvEmpleados.CurrentRow.Cells["Localidad"].Value.ToString();
                 datosE.txtMunicipio.Text = dgvEmpleados.CurrentRow.Cells["Municipio"].Value.ToString();
-                datosE.rdbHombre.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "Hombre";
-                datosE.rdbMujer.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "Mujer";
+                datosE.rdbHombre.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "M";
+                datosE.rdbMujer.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "F";
                 datosE.txtCorreoInstitucional.Text = dgvEmpleados.CurrentRow.Cells["Correo Institucional"].Value.ToString();
                 datosE.txtTelefono.Text = dgvEmpleados.CurrentRow.Cells["Telefono"].Value.ToString();
                 datosE.txtCodigoPostal.Text = dgvEmpleados.CurrentRow.Cells["Codigo Postal"].Value.ToString();
@@ -141,10 +144,10 @@ namespace ProyectoRegistroAsistencia
         {
             empleados = new clsEmpleados();
             string filtro = txtBuscarEmpleado.Text.Trim();
-
+            string idDepartamento = cmbDepartamento.SelectedValue?.ToString();
             try
             {
-                dgvEmpleados.DataSource = empleados.BuscarEmpleado(filtro);
+                dgvEmpleados.DataSource = empleados.BuscarEmpleado(filtro, idDepartamento);
             }
             catch (Exception ex)
             {
