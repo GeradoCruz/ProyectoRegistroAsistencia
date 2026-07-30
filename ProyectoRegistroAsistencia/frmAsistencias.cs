@@ -13,10 +13,16 @@ namespace ProyectoRegistroAsistencia
     public partial class frmAsistencias : Form
     {
         clsAsistencias asistencia;
+        private bool fechaSeleccionada = false;
         public frmAsistencias()
         {
             InitializeComponent();
             CargarGrid();
+        }
+
+        private void dtpFiltroAsistencia_ValueChanged(object sender, EventArgs e)
+        {
+            fechaSeleccionada = true;
         }
 
         public void CargarGrid()
@@ -41,7 +47,7 @@ namespace ProyectoRegistroAsistencia
             {
                 clsAsistencias asistencia = new clsAsistencias();
 
-                DateTime fecha = dtpFiltroAsistencia.Value.Date;
+                DateTime? fecha = fechaSeleccionada ? dtpFiltroAsistencia.Value.Date : (DateTime?)null;
                 string apellido = txtApellido.Text.Trim();
 
                 DataTable resultado = asistencia.BusquedaFecha(fecha, apellido);
@@ -67,6 +73,7 @@ namespace ProyectoRegistroAsistencia
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             dtpFiltroAsistencia.Value = DateTime.Now;
+            fechaSeleccionada = false;
             txtApellido.Clear();
             clsAsistencias asistencia = new clsAsistencias();
             dgvRegistros.DataSource = asistencia.CargaDataGrid();
@@ -79,7 +86,7 @@ namespace ProyectoRegistroAsistencia
             {
                 clsAsistencias asistencia = new clsAsistencias();
 
-                DateTime fecha = dtpFiltroAsistencia.Value.Date;
+                DateTime? fecha = fechaSeleccionada ? dtpFiltroAsistencia.Value.Date : (DateTime?)null;
                 string apellido = txtApellido.Text.Trim();
 
                 dgvRegistros.DataSource = asistencia.BusquedaFecha(fecha, apellido);

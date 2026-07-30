@@ -48,7 +48,7 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblTitulo.Location = new Point(306, 28);
+            lblTitulo.Location = new Point(306, 27);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(413, 30);
             lblTitulo.TabIndex = 0;
@@ -60,7 +60,7 @@ namespace ProyectoRegistroAsistencia
             lblSubtitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblSubtitulo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblSubtitulo.Location = new Point(139, 75);
+            lblSubtitulo.Location = new Point(139, 74);
             lblSubtitulo.Name = "lblSubtitulo";
             lblSubtitulo.Size = new Size(771, 25);
             lblSubtitulo.TabIndex = 1;
@@ -73,7 +73,7 @@ namespace ProyectoRegistroAsistencia
             lblFecha.ForeColor = Color.FromArgb(108, 117, 125);
             lblFecha.Location = new Point(12, 144);
             lblFecha.Name = "lblFecha";
-            lblFecha.Size = new Size(66, 28);
+            lblFecha.Size = new Size(53, 21);
             lblFecha.TabIndex = 2;
             lblFecha.Text = "Fecha:";
             // 
@@ -93,16 +93,17 @@ namespace ProyectoRegistroAsistencia
             dtpFiltroAsistencia.Format = DateTimePickerFormat.Custom;
             dtpFiltroAsistencia.Location = new Point(12, 168);
             dtpFiltroAsistencia.Name = "dtpFiltroAsistencia";
-            dtpFiltroAsistencia.Size = new Size(200, 34);
+            dtpFiltroAsistencia.Size = new Size(200, 29);
             dtpFiltroAsistencia.TabIndex = 4;
-            // 
+            dtpFiltroAsistencia.ValueChanged += dtpFiltroAsistencia_ValueChanged;
+            //
             // txtApellido
             // 
             txtApellido.BackColor = Color.White;
             txtApellido.ForeColor = Color.FromArgb(64, 64, 64);
             txtApellido.Location = new Point(220, 168);
             txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(200, 34);
+            txtApellido.Size = new Size(200, 29);
             txtApellido.TabIndex = 5;
             txtApellido.TextChanged += txtApellido_TextChanged;
             // 
@@ -165,7 +166,6 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvRegistros.DefaultCellStyle = dataGridViewCellStyle2;
             dgvRegistros.EnableHeadersVisualStyles = false;
-            dgvRegistros.ForeColor = Color.FromArgb(28, 32, 51);
             dgvRegistros.GridColor = Color.FromArgb(221, 225, 232);
             dgvRegistros.Location = new Point(11, 217);
             dgvRegistros.MultiSelect = false;
@@ -179,7 +179,7 @@ namespace ProyectoRegistroAsistencia
             // 
             // frmAsistencias
             // 
-            AutoScaleDimensions = new SizeF(11F, 28F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);
