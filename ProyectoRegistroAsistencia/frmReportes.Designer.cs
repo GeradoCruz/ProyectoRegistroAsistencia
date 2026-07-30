@@ -48,6 +48,8 @@ namespace ProyectoRegistroAsistencia
             rdbMensual = new RadioButton();
             rdbIncidencias = new RadioButton();
             gpbOpciones = new GroupBox();
+            lblApellidos = new Label();
+            txtApellidos = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvReporte).BeginInit();
             SuspendLayout();
             // 
@@ -56,7 +58,7 @@ namespace ProyectoRegistroAsistencia
             cmbDepartamento.BackColor = Color.White;
             cmbDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             cmbDepartamento.FormattingEnabled = true;
-            cmbDepartamento.Location = new Point(444, 178);
+            cmbDepartamento.Location = new Point(439, 178);
             cmbDepartamento.Name = "cmbDepartamento";
             cmbDepartamento.Size = new Size(200, 29);
             cmbDepartamento.TabIndex = 27;
@@ -65,7 +67,7 @@ namespace ProyectoRegistroAsistencia
             // 
             lblDepartamento.AutoSize = true;
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDepartamento.Location = new Point(444, 154);
+            lblDepartamento.Location = new Point(440, 154);
             lblDepartamento.Name = "lblDepartamento";
             lblDepartamento.Size = new Size(113, 21);
             lblDepartamento.TabIndex = 26;
@@ -74,7 +76,7 @@ namespace ProyectoRegistroAsistencia
             // dtpFechaFin
             // 
             dtpFechaFin.Format = DateTimePickerFormat.Custom;
-            dtpFechaFin.Location = new Point(227, 178);
+            dtpFechaFin.Location = new Point(222, 178);
             dtpFechaFin.Name = "dtpFechaFin";
             dtpFechaFin.Size = new Size(200, 29);
             dtpFechaFin.TabIndex = 25;
@@ -83,7 +85,7 @@ namespace ProyectoRegistroAsistencia
             // 
             lblFechaFin.AutoSize = true;
             lblFechaFin.ForeColor = Color.FromArgb(108, 117, 125);
-            lblFechaFin.Location = new Point(227, 154);
+            lblFechaFin.Location = new Point(223, 154);
             lblFechaFin.Name = "lblFechaFin";
             lblFechaFin.Size = new Size(52, 21);
             lblFechaFin.TabIndex = 24;
@@ -92,7 +94,7 @@ namespace ProyectoRegistroAsistencia
             // dtpFechaInicio
             // 
             dtpFechaInicio.Format = DateTimePickerFormat.Custom;
-            dtpFechaInicio.Location = new Point(10, 178);
+            dtpFechaInicio.Location = new Point(5, 178);
             dtpFechaInicio.Name = "dtpFechaInicio";
             dtpFechaInicio.Size = new Size(200, 29);
             dtpFechaInicio.TabIndex = 23;
@@ -101,7 +103,7 @@ namespace ProyectoRegistroAsistencia
             // 
             lblFechaInicio.AutoSize = true;
             lblFechaInicio.ForeColor = Color.FromArgb(108, 117, 125);
-            lblFechaInicio.Location = new Point(10, 154);
+            lblFechaInicio.Location = new Point(6, 154);
             lblFechaInicio.Name = "lblFechaInicio";
             lblFechaInicio.Size = new Size(56, 21);
             lblFechaInicio.TabIndex = 22;
@@ -176,6 +178,7 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvReporte.DefaultCellStyle = dataGridViewCellStyle2;
             dgvReporte.EnableHeadersVisualStyles = false;
+            dgvReporte.ForeColor = Color.FromArgb(28, 32, 51);
             dgvReporte.GridColor = Color.FromArgb(221, 225, 232);
             dgvReporte.Location = new Point(10, 220);
             dgvReporte.MultiSelect = false;
@@ -235,6 +238,7 @@ namespace ProyectoRegistroAsistencia
             // 
             rdbSemanal.AutoSize = true;
             rdbSemanal.Checked = true;
+            rdbSemanal.ForeColor = Color.FromArgb(108, 117, 125);
             rdbSemanal.Location = new Point(191, 109);
             rdbSemanal.Name = "rdbSemanal";
             rdbSemanal.Size = new Size(161, 25);
@@ -246,6 +250,7 @@ namespace ProyectoRegistroAsistencia
             // rdbMensual
             // 
             rdbMensual.AutoSize = true;
+            rdbMensual.ForeColor = Color.FromArgb(108, 117, 125);
             rdbMensual.Location = new Point(390, 109);
             rdbMensual.Name = "rdbMensual";
             rdbMensual.Size = new Size(235, 25);
@@ -256,6 +261,7 @@ namespace ProyectoRegistroAsistencia
             // rdbIncidencias
             // 
             rdbIncidencias.AutoSize = true;
+            rdbIncidencias.ForeColor = Color.FromArgb(108, 117, 125);
             rdbIncidencias.Location = new Point(651, 109);
             rdbIncidencias.Name = "rdbIncidencias";
             rdbIncidencias.Size = new Size(205, 25);
@@ -265,12 +271,30 @@ namespace ProyectoRegistroAsistencia
             // 
             // gpbOpciones
             // 
+            gpbOpciones.ForeColor = Color.FromArgb(108, 117, 125);
             gpbOpciones.Location = new Point(184, 84);
             gpbOpciones.Name = "gpbOpciones";
-            gpbOpciones.Size = new Size(653, 59);
+            gpbOpciones.Size = new Size(674, 59);
             gpbOpciones.TabIndex = 38;
             gpbOpciones.TabStop = false;
             gpbOpciones.Text = "Opciones";
+            // 
+            // lblApellidos
+            // 
+            lblApellidos.AutoSize = true;
+            lblApellidos.ForeColor = Color.FromArgb(108, 117, 125);
+            lblApellidos.Location = new Point(661, 146);
+            lblApellidos.Name = "lblApellidos";
+            lblApellidos.Size = new Size(77, 21);
+            lblApellidos.TabIndex = 39;
+            lblApellidos.Text = "Apellidos:";
+            // 
+            // txtApellidos
+            // 
+            txtApellidos.Location = new Point(658, 178);
+            txtApellidos.Name = "txtApellidos";
+            txtApellidos.Size = new Size(200, 29);
+            txtApellidos.TabIndex = 40;
             // 
             // frmReportes
             // 
@@ -278,6 +302,8 @@ namespace ProyectoRegistroAsistencia
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 719);
+            Controls.Add(txtApellidos);
+            Controls.Add(lblApellidos);
             Controls.Add(rdbIncidencias);
             Controls.Add(rdbMensual);
             Controls.Add(rdbSemanal);
@@ -299,6 +325,7 @@ namespace ProyectoRegistroAsistencia
             ForeColor = SystemColors.ControlText;
             Margin = new Padding(4);
             Name = "frmReportes";
+            ShowIcon = false;
             ((System.ComponentModel.ISupportInitialize)dgvReporte).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -323,5 +350,7 @@ namespace ProyectoRegistroAsistencia
         private RadioButton rdbMensual;
         private RadioButton rdbIncidencias;
         private GroupBox gpbOpciones;
+        private Label lblApellidos;
+        private TextBox txtApellidos;
     }
 }

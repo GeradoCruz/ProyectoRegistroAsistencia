@@ -18,8 +18,8 @@ namespace ProyectoRegistroAsistencia
         public string NombrePuesto { get => nombrePuesto; set => nombrePuesto = value; }
         public string Descripcion { get => descripcion; set => descripcion = value; }
 
-        // Trae todos los puestos para llenar el DataGridView (filtrando por nombre si se busca algo)
-        public DataTable Consultar(string filtro)
+        // Trae todos los puestos para llenar el DataGridView
+        public DataTable Consultar()
         {
             tabla = new DataTable();
             try
@@ -27,15 +27,14 @@ namespace ProyectoRegistroAsistencia
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT id_puesto AS 'Id', " +
+                    string sql = "SELECT id_puesto AS 'Clave', " +
                                  "nombre_puesto AS 'Puesto', " +
                                  "descripcion AS 'Descripcion' " +
                                  "FROM tblpuestos " +
-                                 "WHERE estatus = 'activo' AND nombre_puesto LIKE @filtro " +
-                                 "ORDER BY nombre_puesto ASC;";
+                                 "WHERE estatus = 'activo' " +
+                                 "ORDER BY id_puesto ASC;";
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
-                        consultar.Parameters.AddWithValue("@filtro", "%" + (filtro ?? "") + "%");
                         using (consulta = new MySqlDataAdapter(consultar))
                         {
                             consulta.Fill(tabla);

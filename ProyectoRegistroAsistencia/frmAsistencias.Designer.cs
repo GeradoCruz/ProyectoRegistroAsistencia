@@ -34,7 +34,7 @@ namespace ProyectoRegistroAsistencia
             lblTitulo = new Label();
             lblSubtitulo = new Label();
             lblFecha = new Label();
-            lblClaveTrabajador = new Label();
+            lblApellidos = new Label();
             dtpFiltroAsistencia = new DateTimePicker();
             txtApellido = new TextBox();
             btnLimpiar = new Button();
@@ -64,7 +64,7 @@ namespace ProyectoRegistroAsistencia
             lblSubtitulo.Name = "lblSubtitulo";
             lblSubtitulo.Size = new Size(771, 25);
             lblSubtitulo.TabIndex = 1;
-            lblSubtitulo.Text = "Consulte todos los registros de un empleado en una fecha especifica";
+            lblSubtitulo.Text = "Consulte todos los registros de un empleado en una fecha específica";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblFecha
@@ -77,18 +77,19 @@ namespace ProyectoRegistroAsistencia
             lblFecha.TabIndex = 2;
             lblFecha.Text = "Fecha:";
             // 
-            // lblClaveTrabajador
+            // lblApellidos
             // 
-            lblClaveTrabajador.AutoSize = true;
-            lblClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
-            lblClaveTrabajador.Location = new Point(220, 144);
-            lblClaveTrabajador.Name = "lblClaveTrabajador";
-            lblClaveTrabajador.Size = new Size(90, 28);
-            lblClaveTrabajador.TabIndex = 3;
-            lblClaveTrabajador.Text = "Apellido:";
+            lblApellidos.AutoSize = true;
+            lblApellidos.ForeColor = Color.FromArgb(108, 117, 125);
+            lblApellidos.Location = new Point(220, 144);
+            lblApellidos.Name = "lblApellidos";
+            lblApellidos.Size = new Size(77, 21);
+            lblApellidos.TabIndex = 3;
+            lblApellidos.Text = "Apellidos:";
             // 
             // dtpFiltroAsistencia
             // 
+            dtpFiltroAsistencia.CalendarTitleForeColor = SystemColors.ControlText;
             dtpFiltroAsistencia.Format = DateTimePickerFormat.Custom;
             dtpFiltroAsistencia.Location = new Point(12, 168);
             dtpFiltroAsistencia.Name = "dtpFiltroAsistencia";
@@ -98,6 +99,7 @@ namespace ProyectoRegistroAsistencia
             // txtApellido
             // 
             txtApellido.BackColor = Color.White;
+            txtApellido.ForeColor = Color.FromArgb(64, 64, 64);
             txtApellido.Location = new Point(220, 168);
             txtApellido.Name = "txtApellido";
             txtApellido.Size = new Size(200, 34);
@@ -163,6 +165,7 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvRegistros.DefaultCellStyle = dataGridViewCellStyle2;
             dgvRegistros.EnableHeadersVisualStyles = false;
+            dgvRegistros.ForeColor = Color.FromArgb(28, 32, 51);
             dgvRegistros.GridColor = Color.FromArgb(221, 225, 232);
             dgvRegistros.Location = new Point(11, 217);
             dgvRegistros.MultiSelect = false;
@@ -185,13 +188,15 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(btnLimpiar);
             Controls.Add(txtApellido);
             Controls.Add(dtpFiltroAsistencia);
-            Controls.Add(lblClaveTrabajador);
+            Controls.Add(lblApellidos);
             Controls.Add(lblFecha);
             Controls.Add(lblSubtitulo);
             Controls.Add(lblTitulo);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ForeColor = SystemColors.ControlText;
             Margin = new Padding(4);
             Name = "frmAsistencias";
+            ShowIcon = false;
             ((System.ComponentModel.ISupportInitialize)dgvRegistros).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -202,7 +207,7 @@ namespace ProyectoRegistroAsistencia
         private Label lblTitulo;
         private Label lblSubtitulo;
         private Label lblFecha;
-        private Label lblClaveTrabajador;
+        private Label lblApellidos;
         private DateTimePicker dtpFiltroAsistencia;
         private TextBox txtApellido;
         private Button btnLimpiar;

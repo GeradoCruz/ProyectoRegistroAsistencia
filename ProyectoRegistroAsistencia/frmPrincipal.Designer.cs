@@ -204,6 +204,7 @@
             lblSistema.Size = new Size(136, 23);
             lblSistema.TabIndex = 1;
             lblSistema.Text = "Staff Assistence";
+            lblSistema.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pcbLogo
             // 
@@ -275,7 +276,7 @@
             // lblAyuda
             // 
             lblAyuda.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblAyuda.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblAyuda.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblAyuda.ForeColor = Color.FromArgb(108, 117, 125);
             lblAyuda.Location = new Point(910, 15);
             lblAyuda.Name = "lblAyuda";
@@ -314,7 +315,7 @@
             // 
             pcbUsuario.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pcbUsuario.Image = (Image)resources.GetObject("pcbUsuario.Image");
-            pcbUsuario.Location = new Point(641, 8);
+            pcbUsuario.Location = new Point(627, 8);
             pcbUsuario.Name = "pcbUsuario";
             pcbUsuario.Size = new Size(30, 30);
             pcbUsuario.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -336,6 +337,7 @@
             lblModuloPrefijo.AutoSize = true;
             lblModuloPrefijo.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblModuloPrefijo.ForeColor = Color.FromArgb(108, 117, 125);
+            lblModuloPrefijo.ImageAlign = ContentAlignment.TopLeft;
             lblModuloPrefijo.Location = new Point(52, 16);
             lblModuloPrefijo.Name = "lblModuloPrefijo";
             lblModuloPrefijo.Size = new Size(64, 20);
@@ -345,7 +347,7 @@
             // lblModuloValor
             // 
             lblModuloValor.AutoSize = true;
-            lblModuloValor.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblModuloValor.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblModuloValor.ForeColor = Color.FromArgb(43, 76, 140);
             lblModuloValor.Location = new Point(122, 16);
             lblModuloValor.Name = "lblModuloValor";
@@ -356,13 +358,13 @@
             // lblBienvenida
             // 
             lblBienvenida.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblBienvenida.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblBienvenida.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblBienvenida.ForeColor = Color.FromArgb(108, 117, 125);
-            lblBienvenida.Location = new Point(673, 16);
+            lblBienvenida.Location = new Point(660, 16);
             lblBienvenida.Name = "lblBienvenida";
-            lblBienvenida.Size = new Size(185, 20);
+            lblBienvenida.Size = new Size(198, 20);
             lblBienvenida.TabIndex = 4;
-            lblBienvenida.Text = "Bienvenido administrador:";
+            lblBienvenida.Text = "Bienvenido Administrador:";
             lblBienvenida.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlHeaderBorde
@@ -386,6 +388,7 @@
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
             Name = "frmPrincipal";
+            ShowIcon = false;
             Text = "Administración";
             WindowState = FormWindowState.Maximized;
             Load += frmPrincipal_Load;
