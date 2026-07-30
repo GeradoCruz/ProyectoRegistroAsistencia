@@ -39,6 +39,7 @@ namespace ProyectoRegistroAsistencia
                 dgvEmpleados.Columns["Municipio"].Visible = false;
                 dgvEmpleados.Columns["Localidad"].Visible = false;
                 dgvEmpleados.Columns["Telefono"].Visible = false;
+                dgvEmpleados.Columns["Genero"].Visible = false;
             }
             catch (Exception ex)
             {

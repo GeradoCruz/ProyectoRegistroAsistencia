@@ -43,10 +43,10 @@ namespace ProyectoRegistroAsistencia
             cmbDepartamento = new ComboBox();
             btnBuscar = new Button();
             btnAsignarHorario = new Button();
-            dgvHorarios = new DataGridView();
+            dgvListaEmpleados = new DataGridView();
             btnLimpiar = new Button();
             dgvDiasHorarios = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dgvHorarios).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvListaEmpleados).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvDiasHorarios).BeginInit();
             SuspendLayout();
             // 
@@ -69,7 +69,7 @@ namespace ProyectoRegistroAsistencia
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
             lblSubtitulo.Location = new Point(217, 67);
             lblSubtitulo.Name = "lblSubtitulo";
-            lblSubtitulo.Size = new Size(548, 36);
+            lblSubtitulo.Size = new Size(548, 30);
             lblSubtitulo.TabIndex = 2;
             lblSubtitulo.Text = "Gestión de los horarios de cada empleado";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -83,11 +83,12 @@ namespace ProyectoRegistroAsistencia
             lblDepartamento.Size = new Size(113, 21);
             lblDepartamento.TabIndex = 5;
             lblDepartamento.Text = "Departamento:";
+            lblDepartamento.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cmbDepartamento
             // 
             cmbDepartamento.BackColor = Color.White;
-            cmbDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
+            cmbDepartamento.ForeColor = Color.FromArgb(64, 64, 64);
             cmbDepartamento.FormattingEnabled = true;
             cmbDepartamento.Location = new Point(12, 154);
             cmbDepartamento.Name = "cmbDepartamento";
@@ -100,12 +101,12 @@ namespace ProyectoRegistroAsistencia
             btnBuscar.BackColor = Color.FromArgb(43, 76, 140);
             btnBuscar.ForeColor = Color.White;
             btnBuscar.Image = (Image)resources.GetObject("btnBuscar.Image");
+            btnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
             btnBuscar.Location = new Point(502, 143);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Size = new Size(180, 40);
             btnBuscar.TabIndex = 10;
             btnBuscar.Text = "Buscar";
-            btnBuscar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnBuscar.UseVisualStyleBackColor = false;
             btnBuscar.Click += btnBuscar_Click;
             // 
@@ -115,25 +116,26 @@ namespace ProyectoRegistroAsistencia
             btnAsignarHorario.BackColor = Color.FromArgb(43, 76, 140);
             btnAsignarHorario.ForeColor = Color.White;
             btnAsignarHorario.Image = (Image)resources.GetObject("btnAsignarHorario.Image");
+            btnAsignarHorario.ImageAlign = ContentAlignment.MiddleLeft;
             btnAsignarHorario.Location = new Point(875, 143);
             btnAsignarHorario.Name = "btnAsignarHorario";
             btnAsignarHorario.Size = new Size(180, 40);
             btnAsignarHorario.TabIndex = 11;
             btnAsignarHorario.Text = "Asignar Horario";
-            btnAsignarHorario.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnAsignarHorario.UseVisualStyleBackColor = false;
+            btnAsignarHorario.Click += btnAsignarHorario_Click;
             // 
-            // dgvHorarios
+            // dgvListaEmpleados
             // 
-            dgvHorarios.AllowUserToAddRows = false;
-            dgvHorarios.AllowUserToDeleteRows = false;
-            dgvHorarios.AllowUserToResizeColumns = false;
-            dgvHorarios.AllowUserToResizeRows = false;
-            dgvHorarios.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvHorarios.BackgroundColor = Color.FromArgb(240, 242, 245);
-            dgvHorarios.BorderStyle = BorderStyle.None;
-            dgvHorarios.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
-            dgvHorarios.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
+            dgvListaEmpleados.AllowUserToAddRows = false;
+            dgvListaEmpleados.AllowUserToDeleteRows = false;
+            dgvListaEmpleados.AllowUserToResizeColumns = false;
+            dgvListaEmpleados.AllowUserToResizeRows = false;
+            dgvListaEmpleados.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvListaEmpleados.BackgroundColor = Color.FromArgb(240, 242, 245);
+            dgvListaEmpleados.BorderStyle = BorderStyle.None;
+            dgvListaEmpleados.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
+            dgvListaEmpleados.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(35, 45, 92);
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -141,8 +143,8 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle1.SelectionForeColor = Color.White;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvHorarios.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvHorarios.ColumnHeadersHeight = 40;
+            dgvListaEmpleados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgvListaEmpleados.ColumnHeadersHeight = 40;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.White;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -150,13 +152,13 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvHorarios.DefaultCellStyle = dataGridViewCellStyle2;
-            dgvHorarios.EnableHeadersVisualStyles = false;
-            dgvHorarios.GridColor = Color.FromArgb(221, 225, 232);
-            dgvHorarios.Location = new Point(12, 204);
-            dgvHorarios.MultiSelect = false;
-            dgvHorarios.Name = "dgvHorarios";
-            dgvHorarios.ReadOnly = true;
+            dgvListaEmpleados.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvListaEmpleados.EnableHeadersVisualStyles = false;
+            dgvListaEmpleados.GridColor = Color.FromArgb(221, 225, 232);
+            dgvListaEmpleados.Location = new Point(12, 204);
+            dgvListaEmpleados.MultiSelect = false;
+            dgvListaEmpleados.Name = "dgvListaEmpleados";
+            dgvListaEmpleados.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(35, 45, 92);
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -164,30 +166,32 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle3.SelectionForeColor = Color.White;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgvHorarios.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dgvHorarios.RowHeadersVisible = false;
-            dgvHorarios.RowHeadersWidth = 51;
+            dgvListaEmpleados.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dgvListaEmpleados.RowHeadersVisible = false;
+            dgvListaEmpleados.RowHeadersWidth = 51;
             dataGridViewCellStyle4.BackColor = Color.White;
             dataGridViewCellStyle4.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle4.ForeColor = Color.FromArgb(28, 32, 51);
             dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle4.SelectionForeColor = Color.White;
-            dgvHorarios.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            dgvHorarios.RowTemplate.Height = 40;
-            dgvHorarios.Size = new Size(551, 427);
-            dgvHorarios.TabIndex = 12;
+            dgvListaEmpleados.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dgvListaEmpleados.RowTemplate.Height = 40;
+            dgvListaEmpleados.Size = new Size(551, 427);
+            dgvListaEmpleados.TabIndex = 12;
+            dgvListaEmpleados.CellClick += dgvHorarios_CellClick;
             // 
             // btnLimpiar
             // 
             btnLimpiar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnLimpiar.BackColor = Color.FromArgb(43, 76, 140);
+            btnLimpiar.ForeColor = Color.White;
             btnLimpiar.Image = (Image)resources.GetObject("btnLimpiar.Image");
+            btnLimpiar.ImageAlign = ContentAlignment.MiddleLeft;
             btnLimpiar.Location = new Point(691, 143);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(180, 40);
             btnLimpiar.TabIndex = 13;
             btnLimpiar.Text = "Limpiar";
-            btnLimpiar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnLimpiar.UseVisualStyleBackColor = false;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
@@ -253,7 +257,7 @@ namespace ProyectoRegistroAsistencia
             ClientSize = new Size(1068, 659);
             Controls.Add(dgvDiasHorarios);
             Controls.Add(btnLimpiar);
-            Controls.Add(dgvHorarios);
+            Controls.Add(dgvListaEmpleados);
             Controls.Add(btnAsignarHorario);
             Controls.Add(btnBuscar);
             Controls.Add(cmbDepartamento);
@@ -261,10 +265,11 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(lblSubtitulo);
             Controls.Add(lblTitulo);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ForeColor = Color.White;
+            ForeColor = Color.FromArgb(108, 117, 125);
             Margin = new Padding(4);
             Name = "frmHorarioSemanal";
-            ((System.ComponentModel.ISupportInitialize)dgvHorarios).EndInit();
+            ShowIcon = false;
+            ((System.ComponentModel.ISupportInitialize)dgvListaEmpleados).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvDiasHorarios).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -278,7 +283,7 @@ namespace ProyectoRegistroAsistencia
         private ComboBox cmbDepartamento;
         private Button btnBuscar;
         private Button btnAsignarHorario;
-        private DataGridView dgvHorarios;
+        private DataGridView dgvListaEmpleados;
         private Button btnLimpiar;
         private DataGridView dgvDiasHorarios;
     }

@@ -49,11 +49,7 @@ namespace ProyectoRegistroAsistencia
                 using (var conexion = conexionBD.AbrirConexion())
                 {
                     string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
-                                "T.nombre AS Nombre, " +
-                                "T.a_paterno AS 'Apellido Paterno', " +
-                                "T.a_materno AS 'Apellido Materno', " +
-                                "T.telefono AS Telefono, " +
-                                "T.email AS 'Correo Institucional', " +
+                                "CONCAT(T.nombre,' ', T.a_paterno,' ', T.a_materno) AS Trabajador, "+
                                 "T.sexo AS Genero, " +
                                 "T.municipio AS Municipio, " +
                                 "T.localidad AS Localidad, " +
@@ -63,7 +59,9 @@ namespace ProyectoRegistroAsistencia
                                 "T.id_puesto, " +
                                 "T.estatus AS Estatus, " +
                                 "D.nombre_departamento AS Departamento, " +
-                                "P.nombre_puesto AS Puesto " +
+                                "P.nombre_puesto AS Puesto, " +
+                                "T.telefono AS Telefono, " +
+                                "T.email AS 'Correo Institucional' " +
                                 "FROM tbltrabajador T " +
                                 "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento " +
                                 "INNER JOIN tblpuestos P ON T.id_puesto = P.id_Puesto " +
