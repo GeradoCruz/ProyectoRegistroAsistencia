@@ -12,9 +12,6 @@ namespace ProyectoRegistroAsistencia
     {
         private DataTable tabla;
         private MySqlDataAdapter consulta;
-        private DataTable clave;
-        private DataTable fecha;
-        private MySqlCommand comando;
         public DataTable CargaDataGrid()
         {
             tabla = new DataTable();
@@ -46,7 +43,7 @@ namespace ProyectoRegistroAsistencia
         }
 
 
-        public DataTable BusquedaFecha(DateTime fecha, string apellido)
+        public DataTable BusquedaFecha(DateTime? fecha, string apellido)
         {
             tabla = new DataTable();
 
@@ -61,8 +58,12 @@ namespace ProyectoRegistroAsistencia
                                  "A.registro AS Registro, " +
                                  "A.fecha AS Fecha " +
                                  "FROM tblasistencia A " +
-                                 "INNER JOIN tbltrabajador T ON A.id_trabajador = T.id_trabajador " +
-                                 "WHERE DATE(A.fecha) = @fecha ";
+                                 "INNER JOIN tbltrabajador T ON A.id_trabajador = T.id_trabajador ";
+
+                    if (fecha.HasValue)
+                    {
+                        sql += " AND DATE(A.fecha) = @fecha";
+                    }
 
                     if (!string.IsNullOrWhiteSpace(apellido))
                     {
@@ -71,7 +72,10 @@ namespace ProyectoRegistroAsistencia
 
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
-                        consultar.Parameters.AddWithValue("@fecha", fecha.Date);
+                        if (fecha.HasValue)
+                        {
+                            consultar.Parameters.AddWithValue("@fecha", fecha.Value.Date);
+                        }
 
                         if (!string.IsNullOrEmpty(apellido))
                         {

@@ -255,7 +255,7 @@ namespace ProyectoRegistroAsistencia
             // 
             txtApellido.Location = new Point(258, 156);
             txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(159, 34);
+            txtApellido.Size = new Size(200, 29);
             txtApellido.TabIndex = 14;
             // 
             // lblNombreApellido
@@ -264,7 +264,7 @@ namespace ProyectoRegistroAsistencia
             lblNombreApellido.ForeColor = Color.FromArgb(108, 117, 125);
             lblNombreApellido.Location = new Point(254, 127);
             lblNombreApellido.Name = "lblNombreApellido";
-            lblNombreApellido.Size = new Size(172, 28);
+            lblNombreApellido.Size = new Size(136, 21);
             lblNombreApellido.TabIndex = 15;
             lblNombreApellido.Text = "Nombre/apellidos";
             // 
