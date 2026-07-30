@@ -18,8 +18,6 @@ namespace ProyectoRegistroAsistencia
         public frmHorarioSemanal()
         {
             InitializeComponent();
-            btnAsignarHorario.Click += btnAsignarHorario_Click;
-            dgvHorarios.CellClick += dgvHorarios_CellClick;
             cargarCombo();
             cargarGrid();
             cargarGridDiasHorario(1);
@@ -28,12 +26,12 @@ namespace ProyectoRegistroAsistencia
         public void cargarGrid()
         {
             horario = new clsHorarioSemanal();
-            dgvHorarios.DataSource = null;
-            dgvHorarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvListaEmpleados.DataSource = null;
+            dgvListaEmpleados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             try
             {
-                dgvHorarios.DataSource = horario.cargarDataGrid();
-                dgvHorarios.Columns["id_trabajador"].Visible = false;
+                dgvListaEmpleados.DataSource = horario.cargarDataGrid();
+                dgvListaEmpleados.Columns["id_trabajador"].Visible = false;
                 
             }
             catch (Exception ex)
@@ -49,7 +47,7 @@ namespace ProyectoRegistroAsistencia
             if (e.RowIndex < 0) return;          
             try
             {
-                int idTrabajador = Convert.ToInt32(dgvHorarios.Rows[e.RowIndex].Cells["id_trabajador"].Value);
+                int idTrabajador = Convert.ToInt32(dgvListaEmpleados.Rows[e.RowIndex].Cells["id_trabajador"].Value);
                 cargarGridDiasHorario(idTrabajador);
             }
             catch (Exception ex)
@@ -117,16 +115,16 @@ namespace ProyectoRegistroAsistencia
             idDepartamento = Convert.ToInt32(cmbDepartamento.SelectedValue);
 
             horario = new clsHorarioSemanal();
-            dgvHorarios.DataSource = null;
+            dgvListaEmpleados.DataSource = null;
             try
             {
                 if (idDepartamento == 0)
                 {
-                    dgvHorarios.DataSource = horario.cargarDataGrid();
+                    dgvListaEmpleados.DataSource = horario.cargarDataGrid();
                 }
                 else
                 {
-                    dgvHorarios.DataSource = horario.consultar(idDepartamento);
+                    dgvListaEmpleados.DataSource = horario.consultar(idDepartamento);
                 }
 
 
@@ -136,9 +134,9 @@ namespace ProyectoRegistroAsistencia
             {
                 MessageBox.Show(ex.Message);
             }
-            dgvHorarios.Columns["id_trabajador"].Visible = false;
-            dgvHorarios.Columns["id_semestre"].Visible = false;
-            dgvHorarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvListaEmpleados.Columns["id_trabajador"].Visible = false;
+            dgvListaEmpleados.Columns["id_semestre"].Visible = false;
+            dgvListaEmpleados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
         }
 
