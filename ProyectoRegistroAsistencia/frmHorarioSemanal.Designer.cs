@@ -82,7 +82,7 @@ namespace ProyectoRegistroAsistencia
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             lblDepartamento.Location = new Point(12, 127);
             lblDepartamento.Name = "lblDepartamento";
-            lblDepartamento.Size = new Size(113, 21);
+            lblDepartamento.Size = new Size(143, 28);
             lblDepartamento.TabIndex = 5;
             lblDepartamento.Text = "Departamento:";
             lblDepartamento.TextAlign = ContentAlignment.MiddleLeft;
@@ -94,7 +94,7 @@ namespace ProyectoRegistroAsistencia
             cmbDepartamento.FormattingEnabled = true;
             cmbDepartamento.Location = new Point(12, 156);
             cmbDepartamento.Name = "cmbDepartamento";
-            cmbDepartamento.Size = new Size(200, 29);
+            cmbDepartamento.Size = new Size(200, 36);
             cmbDepartamento.TabIndex = 6;
             // 
             // btnBuscar
@@ -150,7 +150,7 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.White;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(28, 32, 51);
+            dataGridViewCellStyle2.ForeColor = Color.White;
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
@@ -176,11 +176,11 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle4.ForeColor = Color.FromArgb(28, 32, 51);
             dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle4.SelectionForeColor = Color.White;
-            dgvListaEmpleados.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            dgvListaEmpleados.RowTemplate.Height = 40;
-            dgvListaEmpleados.Size = new Size(551, 427);
-            dgvListaEmpleados.TabIndex = 12;
-            dgvListaEmpleados.CellClick += dgvHorarios_CellClick;
+            dgvHorarios.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dgvHorarios.RowTemplate.Height = 40;
+            dgvHorarios.Size = new Size(551, 427);
+            dgvHorarios.TabIndex = 12;
+            dgvHorarios.CellClick += dgvHorarios_CellClick;
             // 
             // btnLimpiar
             // 
@@ -220,7 +220,7 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = Color.White;
             dataGridViewCellStyle6.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(28, 32, 51);
+            dataGridViewCellStyle6.ForeColor = Color.White;
             dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle6.SelectionForeColor = Color.White;
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
@@ -257,6 +257,7 @@ namespace ProyectoRegistroAsistencia
             txtApellido.Name = "txtApellido";
             txtApellido.Size = new Size(200, 29);
             txtApellido.TabIndex = 14;
+            txtApellido.TextChanged += txtApellido_TextChanged;
             // 
             // lblNombreApellido
             // 
@@ -270,7 +271,7 @@ namespace ProyectoRegistroAsistencia
             // 
             // frmHorarioSemanal
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);
