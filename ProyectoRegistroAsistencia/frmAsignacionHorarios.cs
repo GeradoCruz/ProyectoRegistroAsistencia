@@ -26,7 +26,7 @@ namespace ProyectoRegistroAsistencia
         private void btnBuscar_Click(object? sender, EventArgs e)
         {
             
-            if (string.IsNullOrWhiteSpace(txtBusacarClave.Text))
+            if (string.IsNullOrWhiteSpace(txtBuscarClave.Text))
             {
                 MessageBox.Show("Escribe la clave del trabajador a buscar.", "Staff Asistence",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -37,32 +37,12 @@ namespace ProyectoRegistroAsistencia
             // txtBuscarNombreCompleto, txtDepartamento, txtPuesto y txtSemestre
 
             horario = new clsHorarioSemanal();
-            horario.ClaveTrabajador = txtBusacarClave.Text;
+            horario.ClaveTrabajador = txtBuscarClave.Text;
 
             try
             {
                 horario.buscarTrabajador();
-                // Primero revisamos si ya tiene todos los días completos
-                DataTable revisarDiasFaltas = horario.diasFaltantes(horario.IdTrabajador);
-                if(revisarDiasFaltas.Rows.Count ==0)
-                {
-                    txtBuscarNombreCompleto.Clear();
-                    txtDepartamento.Clear();
-                    txtPuesto.Clear();
-                    cmbSemestre.SelectedIndex = 0;
-
-                    CheckBox[] checksDiasLimpiar = { chkLunes, chkMartes, chkMiercoles, chkJueves, chkViernes };
-                    foreach (CheckBox chk in checksDiasLimpiar)
-                    {
-                        chk.Checked = false;
-                        chk.Enabled = false;
-                    }
-                    MessageBox.Show("El empleado tiene todos los horarios asignados", "Staff Asistense",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                txtBuscarNombreCompleto.Text = horario.NombreTrabajador;
+                txtNombreCompleto.Text = horario.NombreTrabajador;
                 txtDepartamento.Text = horario.Departamento;
                 txtPuesto.Text = horario.Puesto;
 
@@ -89,14 +69,14 @@ namespace ProyectoRegistroAsistencia
 
                 if (diasFalta.Rows.Count > 0 )
                 {
-                    string mensaje = "Días pendientes por asignar:\n";
+                    string mensaje = "DÃ­as pendientes por asignar:\n";
                     foreach (DataRow fila in diasFalta.Rows)
                     {
                         mensaje += "- " + fila["nombre_dia"].ToString() + "\n";
                     }
                     if(horario.IdSemestre == 0)
                     {
-                        mensaje += "¡¡Avisó¡¡";
+                        mensaje += "Â¡Â¡AvisÃ³Â¡Â¡";
                         mensaje += "\n-Seleccione un Semestre";
                     }
                     MessageBox.Show(mensaje, "Staff Asistence",
@@ -112,7 +92,7 @@ namespace ProyectoRegistroAsistencia
         }
         private bool ValidarCampos()
         {
-            if (string.IsNullOrWhiteSpace(txtBuscarNombreCompleto.Text))
+            if (string.IsNullOrWhiteSpace(txtNombreCompleto.Text))
             {
                 MessageBox.Show("Primero busca un trabajador valido.", "Staff Asistence",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -126,7 +106,7 @@ namespace ProyectoRegistroAsistencia
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            // la validación extra para que no se guarde semestre con 0:
+            // la validaciÃ³n extra para que no se guarde semestre con 0:
             if (cmbSemestre.SelectedValue == null || Convert.ToInt32(cmbSemestre.SelectedValue) == 0)
             {
                 MessageBox.Show("Selecciona un semestre.", "Staff Asistence",
@@ -146,10 +126,10 @@ namespace ProyectoRegistroAsistencia
                 // Guardamos las horas seleccionadas
                 horario.HoraEntrada = dtpHoraEntrada.Value.ToString("HH:mm:ss");
                 horario.HoraSalida = dtpHoraSalida.Value.ToString("HH:mm:ss");
-                horario.IdSemestre = Convert.ToInt32(cmbSemestre.SelectedValue); // toma el valor del combo, no el que trajo la búsqueda
+                horario.IdSemestre = Convert.ToInt32(cmbSemestre.SelectedValue); // toma el valor del combo, no el que trajo la bÃºsqueda
 
 
-                // Guardar los días seleccionados
+                // Guardar los dÃ­as seleccionados
 
                 CheckBox[] checksDias = { chkLunes, chkMartes, chkMiercoles, chkJueves, chkViernes };
                 for (int i = 0; i < checksDias.Length; i++)

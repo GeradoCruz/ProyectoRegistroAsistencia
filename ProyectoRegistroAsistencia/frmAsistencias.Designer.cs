@@ -34,7 +34,7 @@ namespace ProyectoRegistroAsistencia
             lblTitulo = new Label();
             lblSubtitulo = new Label();
             lblFecha = new Label();
-            lblClaveTrabajador = new Label();
+            lblApellidos = new Label();
             dtpFiltroAsistencia = new DateTimePicker();
             txtApellido = new TextBox();
             btnLimpiar = new Button();
@@ -48,7 +48,7 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblTitulo.Location = new Point(306, 28);
+            lblTitulo.Location = new Point(306, 27);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(413, 30);
             lblTitulo.TabIndex = 0;
@@ -60,11 +60,11 @@ namespace ProyectoRegistroAsistencia
             lblSubtitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblSubtitulo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblSubtitulo.Location = new Point(139, 75);
+            lblSubtitulo.Location = new Point(139, 74);
             lblSubtitulo.Name = "lblSubtitulo";
             lblSubtitulo.Size = new Size(771, 25);
             lblSubtitulo.TabIndex = 1;
-            lblSubtitulo.Text = "Consulte todos los registros de un empleado en una fecha especifica";
+            lblSubtitulo.Text = "Consulte todos los registros de un empleado en una fecha específica";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblFecha
@@ -73,34 +73,37 @@ namespace ProyectoRegistroAsistencia
             lblFecha.ForeColor = Color.FromArgb(108, 117, 125);
             lblFecha.Location = new Point(12, 144);
             lblFecha.Name = "lblFecha";
-            lblFecha.Size = new Size(66, 28);
+            lblFecha.Size = new Size(53, 21);
             lblFecha.TabIndex = 2;
             lblFecha.Text = "Fecha:";
             // 
-            // lblClaveTrabajador
+            // lblApellidos
             // 
-            lblClaveTrabajador.AutoSize = true;
-            lblClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
-            lblClaveTrabajador.Location = new Point(220, 144);
-            lblClaveTrabajador.Name = "lblClaveTrabajador";
-            lblClaveTrabajador.Size = new Size(90, 28);
-            lblClaveTrabajador.TabIndex = 3;
-            lblClaveTrabajador.Text = "Apellido:";
+            lblApellidos.AutoSize = true;
+            lblApellidos.ForeColor = Color.FromArgb(108, 117, 125);
+            lblApellidos.Location = new Point(220, 144);
+            lblApellidos.Name = "lblApellidos";
+            lblApellidos.Size = new Size(77, 21);
+            lblApellidos.TabIndex = 3;
+            lblApellidos.Text = "Apellidos:";
             // 
             // dtpFiltroAsistencia
             // 
+            dtpFiltroAsistencia.CalendarTitleForeColor = SystemColors.ControlText;
             dtpFiltroAsistencia.Format = DateTimePickerFormat.Custom;
             dtpFiltroAsistencia.Location = new Point(12, 168);
             dtpFiltroAsistencia.Name = "dtpFiltroAsistencia";
-            dtpFiltroAsistencia.Size = new Size(200, 34);
+            dtpFiltroAsistencia.Size = new Size(200, 29);
             dtpFiltroAsistencia.TabIndex = 4;
-            // 
+            dtpFiltroAsistencia.ValueChanged += dtpFiltroAsistencia_ValueChanged;
+            //
             // txtApellido
             // 
             txtApellido.BackColor = Color.White;
+            txtApellido.ForeColor = Color.FromArgb(64, 64, 64);
             txtApellido.Location = new Point(220, 168);
             txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(200, 34);
+            txtApellido.Size = new Size(200, 29);
             txtApellido.TabIndex = 5;
             txtApellido.TextChanged += txtApellido_TextChanged;
             // 
@@ -176,7 +179,7 @@ namespace ProyectoRegistroAsistencia
             // 
             // frmAsistencias
             // 
-            AutoScaleDimensions = new SizeF(11F, 28F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);
@@ -185,13 +188,15 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(btnLimpiar);
             Controls.Add(txtApellido);
             Controls.Add(dtpFiltroAsistencia);
-            Controls.Add(lblClaveTrabajador);
+            Controls.Add(lblApellidos);
             Controls.Add(lblFecha);
             Controls.Add(lblSubtitulo);
             Controls.Add(lblTitulo);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ForeColor = SystemColors.ControlText;
             Margin = new Padding(4);
             Name = "frmAsistencias";
+            ShowIcon = false;
             ((System.ComponentModel.ISupportInitialize)dgvRegistros).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -202,7 +207,7 @@ namespace ProyectoRegistroAsistencia
         private Label lblTitulo;
         private Label lblSubtitulo;
         private Label lblFecha;
-        private Label lblClaveTrabajador;
+        private Label lblApellidos;
         private DateTimePicker dtpFiltroAsistencia;
         private TextBox txtApellido;
         private Button btnLimpiar;

@@ -62,9 +62,9 @@ namespace ProyectoRegistroAsistencia
             lblSubtitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblSubtitulo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblSubtitulo.Location = new Point(109, 52);
+            lblSubtitulo.Location = new Point(185, 52);
             lblSubtitulo.Name = "lblSubtitulo";
-            lblSubtitulo.Size = new Size(790, 41);
+            lblSubtitulo.Size = new Size(608, 30);
             lblSubtitulo.TabIndex = 5;
             lblSubtitulo.Text = "Consulte todas las incidencias de un empleado en una fecha especifica";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -86,25 +86,27 @@ namespace ProyectoRegistroAsistencia
             lblFecha.Size = new Size(53, 21);
             lblFecha.TabIndex = 6;
             lblFecha.Text = "Fecha:";
+            lblFecha.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtNombreTrabajador
-            //
+            // 
             txtNombreTrabajador.BackColor = Color.White;
-            txtNombreTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
+            txtNombreTrabajador.ForeColor = Color.FromArgb(64, 64, 64);
             txtNombreTrabajador.Location = new Point(223, 126);
             txtNombreTrabajador.Name = "txtNombreTrabajador";
             txtNombreTrabajador.Size = new Size(200, 29);
             txtNombreTrabajador.TabIndex = 9;
-            //
+            // 
             // lblNombreTrabajador
-            //
+            // 
             lblNombreTrabajador.AutoSize = true;
             lblNombreTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
             lblNombreTrabajador.Location = new Point(225, 95);
             lblNombreTrabajador.Name = "lblNombreTrabajador";
-            lblNombreTrabajador.Size = new Size(150, 21);
+            lblNombreTrabajador.Size = new Size(174, 21);
             lblNombreTrabajador.TabIndex = 8;
             lblNombreTrabajador.Text = "Nombre del Trabajador:";
+            lblNombreTrabajador.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblTipoIncidencia
             // 
@@ -115,12 +117,13 @@ namespace ProyectoRegistroAsistencia
             lblTipoIncidencia.Size = new Size(134, 21);
             lblTipoIncidencia.TabIndex = 10;
             lblTipoIncidencia.Text = "Tipo de Incidencia";
+            lblTipoIncidencia.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cmbTipoIncidencia
             // 
             cmbTipoIncidencia.BackColor = Color.White;
             cmbTipoIncidencia.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbTipoIncidencia.ForeColor = Color.FromArgb(108, 117, 125);
+            cmbTipoIncidencia.ForeColor = Color.FromArgb(64, 64, 64);
             cmbTipoIncidencia.FormattingEnabled = true;
             cmbTipoIncidencia.Location = new Point(432, 126);
             cmbTipoIncidencia.Name = "cmbTipoIncidencia";
@@ -214,8 +217,10 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(lblSubtitulo);
             Controls.Add(lblTitulo);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ForeColor = Color.FromArgb(108, 117, 125);
             Margin = new Padding(4);
             Name = "frmIncidencias";
+            ShowIcon = false;
             ((System.ComponentModel.ISupportInitialize)dgvIncidencias).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -27,12 +27,12 @@ namespace ProyectoRegistroAsistencia
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT id_departamento AS 'Id', " +
+                    string sql = "SELECT id_departamento AS 'Clave', " +
                                  "nombre_departamento AS 'Departamento', " +
                                  "descripcion AS 'Descripcion' " +
                                  "FROM tbldepartamento " +
                                  "WHERE estatus = 'activo' AND nombre_departamento LIKE @filtro " +
-                                 "ORDER BY nombre_departamento ASC;";
+                                 "ORDER BY id_departamento ASC;";
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
                         consultar.Parameters.AddWithValue("@filtro", "%" + (filtro ?? "") + "%");

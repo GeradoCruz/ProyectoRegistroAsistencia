@@ -29,7 +29,7 @@ namespace ProyectoRegistroAsistencia
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAccesoAdmin));
-            lblAcceso = new Label();
+            lblTitulo = new Label();
             lblUsuario = new Label();
             pcbUsuario = new PictureBox();
             txtUsuario = new TextBox();
@@ -41,110 +41,115 @@ namespace ProyectoRegistroAsistencia
             ((System.ComponentModel.ISupportInitialize)pcbUsuario).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcbPassword).BeginInit();
             SuspendLayout();
-            //
-            // lblAcceso
-            //
-            lblAcceso.AutoSize = true;
-            lblAcceso.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAcceso.ForeColor = Color.FromArgb(108, 117, 125);
-            lblAcceso.Location = new Point(102, 32);
-            lblAcceso.Name = "lblAcceso";
-            lblAcceso.Size = new Size(271, 32);
-            lblAcceso.TabIndex = 0;
-            lblAcceso.Text = "Acceso Administrativo";
-            //
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
+            lblTitulo.Location = new Point(25, 9);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(330, 32);
+            lblTitulo.TabIndex = 0;
+            lblTitulo.Text = "Acceso Administrativo";
+            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // lblUsuario
-            //
+            // 
+            lblUsuario.Anchor = AnchorStyles.None;
             lblUsuario.AutoSize = true;
             lblUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblUsuario.ForeColor = Color.FromArgb(108, 117, 125);
-            lblUsuario.Location = new Point(83, 116);
+            lblUsuario.Location = new Point(25, 80);
             lblUsuario.Name = "lblUsuario";
             lblUsuario.Size = new Size(73, 21);
             lblUsuario.TabIndex = 1;
             lblUsuario.Text = "Usuario:";
-            //
+            lblUsuario.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // pcbUsuario
-            //
+            // 
             pcbUsuario.BackColor = Color.White;
             pcbUsuario.Image = (Image)resources.GetObject("pcbUsuario.Image");
-            pcbUsuario.Location = new Point(83, 154);
+            pcbUsuario.Location = new Point(25, 105);
             pcbUsuario.Name = "pcbUsuario";
             pcbUsuario.Size = new Size(35, 28);
             pcbUsuario.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbUsuario.TabIndex = 2;
             pcbUsuario.TabStop = false;
-            //
+            // 
             // txtUsuario
-            //
+            // 
             txtUsuario.BackColor = Color.White;
             txtUsuario.ForeColor = Color.FromArgb(64, 64, 64);
-            txtUsuario.Location = new Point(117, 154);
+            txtUsuario.Location = new Point(59, 105);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(296, 29);
             txtUsuario.TabIndex = 3;
-            //
+            // 
             // lblPassword
-            //
+            // 
             lblPassword.AutoSize = true;
             lblPassword.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPassword.ForeColor = Color.FromArgb(108, 117, 125);
-            lblPassword.Location = new Point(83, 216);
+            lblPassword.Location = new Point(25, 156);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(100, 21);
             lblPassword.TabIndex = 4;
             lblPassword.Text = "Contraseña:";
-            //
+            lblPassword.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // pcbPassword
-            //
+            // 
             pcbPassword.BackColor = Color.White;
             pcbPassword.Image = (Image)resources.GetObject("pcbPassword.Image");
-            pcbPassword.Location = new Point(83, 258);
+            pcbPassword.Location = new Point(25, 180);
             pcbPassword.Name = "pcbPassword";
             pcbPassword.Size = new Size(35, 28);
             pcbPassword.SizeMode = PictureBoxSizeMode.StretchImage;
             pcbPassword.TabIndex = 5;
             pcbPassword.TabStop = false;
-            //
+            // 
             // txtPassword
-            //
+            // 
             txtPassword.BackColor = Color.White;
             txtPassword.ForeColor = Color.FromArgb(64, 64, 64);
-            txtPassword.Location = new Point(117, 258);
+            txtPassword.Location = new Point(59, 180);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(296, 29);
             txtPassword.TabIndex = 6;
             txtPassword.UseSystemPasswordChar = true;
-            //
+            // 
             // btnInicioSesion
-            //
+            // 
             btnInicioSesion.BackColor = Color.FromArgb(43, 76, 140);
             btnInicioSesion.ForeColor = Color.White;
-            btnInicioSesion.Location = new Point(80, 318);
+            btnInicioSesion.Location = new Point(22, 236);
             btnInicioSesion.Name = "btnInicioSesion";
             btnInicioSesion.Size = new Size(333, 40);
             btnInicioSesion.TabIndex = 7;
             btnInicioSesion.Text = "Iniciar Sesión";
             btnInicioSesion.UseVisualStyleBackColor = false;
             btnInicioSesion.Click += btnInicioSesion_Click;
-            //
+            // 
             // lblCancelar
-            //
-            lblCancelar.AutoSize = true;
+            // 
+            lblCancelar.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblCancelar.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblCancelar.ForeColor = Color.FromArgb(108, 117, 125);
-            lblCancelar.Location = new Point(116, 390);
+            lblCancelar.Location = new Point(25, 303);
             lblCancelar.Name = "lblCancelar";
-            lblCancelar.Size = new Size(238, 20);
+            lblCancelar.Size = new Size(330, 20);
             lblCancelar.TabIndex = 8;
             lblCancelar.Text = "Presione Esc para cancelar y volver";
-            //
+            lblCancelar.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // frmAccesoAdmin
-            //
+            // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
-            ClientSize = new Size(468, 473);
+            ClientSize = new Size(390, 357);
             Controls.Add(lblCancelar);
             Controls.Add(btnInicioSesion);
             Controls.Add(pcbPassword);
@@ -153,11 +158,12 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(lblPassword);
             Controls.Add(txtUsuario);
             Controls.Add(lblUsuario);
-            Controls.Add(lblAcceso);
+            Controls.Add(lblTitulo);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
             Name = "frmAccesoAdmin";
-            StartPosition = FormStartPosition.CenterParent;
+            ShowIcon = false;
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Staff Asistence";
             KeyDown += frmAccesoAdmin_KeyDown;
             ((System.ComponentModel.ISupportInitialize)pcbUsuario).EndInit();
@@ -168,7 +174,7 @@ namespace ProyectoRegistroAsistencia
 
         #endregion
 
-        private Label lblAcceso;
+        private Label lblTitulo;
         private Label lblUsuario;
         private PictureBox pcbUsuario;
         private TextBox txtUsuario;
