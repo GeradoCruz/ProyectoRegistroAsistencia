@@ -10,11 +10,7 @@ namespace ProyectoRegistroAsistencia
 {
     internal class clsHorarioSemanal
     {
-        private int id_departamento;
-
-        private MySqlDataAdapter consulta;
-        private DataTable tabla;
-
+        //Variables para obtener los datos del trabajador
         private string claveTrabajador;
         private string nombreTrabajador;
         private string departamento;
@@ -44,7 +40,7 @@ namespace ProyectoRegistroAsistencia
 
         public DataTable cargarDataGrid()
         {
-            tabla = new DataTable();
+            DataTable tabla = new DataTable();
 
             try
             {
@@ -60,7 +56,7 @@ namespace ProyectoRegistroAsistencia
                                     "INNER JOIN tblpuestos P ON T.id_puesto = P.id_puesto " +
                                     "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento "+
                                     "ORDER BY T.id_trabajador"; 
-                    using (consulta = new MySqlDataAdapter(sql, conexion))
+                    using (var consulta = new MySqlDataAdapter(sql, conexion))
                     {
                         consulta.Fill(tabla);       
                     }
@@ -74,7 +70,7 @@ namespace ProyectoRegistroAsistencia
         }
         public DataTable cargarDataGridDiasHorarios(int idTrabajador)
         {
-            tabla = new DataTable();
+            DataTable tabla = new DataTable();
 
             try
             {
@@ -91,7 +87,7 @@ namespace ProyectoRegistroAsistencia
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
                         consultar.Parameters.AddWithValue("@trabajador", idTrabajador);
-                        using (consulta = new MySqlDataAdapter(consultar))
+                        using (var consulta = new MySqlDataAdapter(consultar))
                         {
                             consulta.Fill(tabla);
                         }
@@ -106,7 +102,7 @@ namespace ProyectoRegistroAsistencia
         }
         public DataTable ObtenerDepartamento()
         {
-            tabla = new DataTable();
+            DataTable tabla = new DataTable();
             try
             {
                 clsConexion conexionBD = new clsConexion();
@@ -114,7 +110,7 @@ namespace ProyectoRegistroAsistencia
                 {
 
                     string sql = "SELECT id_departamento,nombre_departamento FROM  tbldepartamento;";
-                    using (consulta = new MySqlDataAdapter(sql, conexion))
+                    using (var consulta = new MySqlDataAdapter(sql, conexion))
                     {
                         consulta.Fill(tabla);
                     }
@@ -128,22 +124,25 @@ namespace ProyectoRegistroAsistencia
         }
         public DataTable consultarPorBusquedaDepartamento(int id_departamento)
         {
-            tabla = new DataTable();
+            DataTable tabla = new DataTable();
             try
             {
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
+                    string sql = "SELECT T.id_trabajador, "+"" +
+                                  "T.clave_trabajador AS 'Clave Trabajador', " +
                                   "CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS 'Nombre Completo', " +
+                                  "P.nombre_puesto AS Puesto," +
                                   "D.nombre_departamento AS Departamento " +                               
-                                  "FROM tbltrabajador T " +                       
+                                  "FROM tbltrabajador T " +
+                                  "INNER JOIN tblpuestos P ON T.id_puesto = P.id_puesto " +
                                   "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento " +
                                   "WHERE D.id_departamento = @id_departamento;";
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
                         consultar.Parameters.AddWithValue("@id_departamento", id_departamento);
-                        using (consulta = new MySqlDataAdapter(consultar))
+                        using (var consulta = new MySqlDataAdapter(consultar))
                         {
                             consulta.Fill(tabla);
                         }
@@ -158,7 +157,7 @@ namespace ProyectoRegistroAsistencia
         }
         public DataTable BusquedaNombreApellido(string apellido)
         {
-            tabla = new DataTable();
+            DataTable tabla = new DataTable();
 
             try
             {
@@ -185,7 +184,7 @@ namespace ProyectoRegistroAsistencia
                             consultar.Parameters.AddWithValue("@apellido", "%" + apellido + "%");
                         }
 
-                        using (consulta = new MySqlDataAdapter(consultar))
+                        using (var consulta = new MySqlDataAdapter(consultar))
                         {
                             consulta.Fill(tabla);
                         }
@@ -321,7 +320,7 @@ namespace ProyectoRegistroAsistencia
         }
         public DataTable diasFaltantes(int idTrabajador)
         {
-            tabla = new DataTable();
+            DataTable tabla = new DataTable();
             try
             {
                 clsConexion conexionBD = new clsConexion();
@@ -336,7 +335,7 @@ namespace ProyectoRegistroAsistencia
                     using (MySqlCommand comando = new MySqlCommand(sql,conexion))
                     {
                         comando.Parameters.AddWithValue("@trabajador", idTrabajador);
-                        using (consulta = new MySqlDataAdapter(comando))
+                        using (var consulta = new MySqlDataAdapter(comando))
                         {
                             consulta.Fill(tabla);
                         }
@@ -352,14 +351,14 @@ namespace ProyectoRegistroAsistencia
         }
         public DataTable ObtenerSemestres()
         {
-            tabla = new DataTable();
+            DataTable tabla = new DataTable();
             try
             {
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
                     string sql = "SELECT id_semestre, semestre FROM tblsemestres;";
-                    using (consulta = new MySqlDataAdapter(sql, conexion))
+                    using (var consulta = new MySqlDataAdapter(sql, conexion))
                     {
                         consulta.Fill(tabla);
                     }
