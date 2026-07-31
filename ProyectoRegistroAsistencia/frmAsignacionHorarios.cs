@@ -13,11 +13,13 @@ namespace ProyectoRegistroAsistencia
     public partial class frmAsignacionHorarios : Form
     {
         private clsHorarioSemanal horario;
+        private int idTrabajadorAsignado;
+
+        public int IdTrabajadorAsignado { get => idTrabajadorAsignado; set => idTrabajadorAsignado = value; }
+
         public frmAsignacionHorarios()
         {
             InitializeComponent();
-            btnGuardar.Click += btnGuardar_Click;
-            btnCancelar.Click += btnCancelar_Click;
             CargarComboSemestre();
         }
 
@@ -75,7 +77,7 @@ namespace ProyectoRegistroAsistencia
 
 
                 CheckBox[] checksDias = { chkLunes, chkMartes, chkMiercoles, chkJueves, chkViernes };
-                for (int i = 0; i < checksDias.Length; i++)
+                for (int i = 0; i < checksDias.Length; i++) 
                 {
                     int idDia = i + 1;
                     checksDias[i].Checked = false;
@@ -161,6 +163,7 @@ namespace ProyectoRegistroAsistencia
                 }
 
                 MessageBox.Show("Los horarios se guardaron correctamente.");
+                IdTrabajadorAsignado = horario.IdTrabajador;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
 
