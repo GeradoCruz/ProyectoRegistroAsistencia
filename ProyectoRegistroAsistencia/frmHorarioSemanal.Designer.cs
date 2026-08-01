@@ -156,6 +156,7 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvListaEmpleados.DefaultCellStyle = dataGridViewCellStyle2;
             dgvListaEmpleados.EnableHeadersVisualStyles = false;
+            dgvListaEmpleados.ForeColor = Color.FromArgb(28, 32, 51);
             dgvListaEmpleados.GridColor = Color.FromArgb(221, 225, 232);
             dgvListaEmpleados.Location = new Point(12, 204);
             dgvListaEmpleados.MultiSelect = false;
@@ -226,6 +227,7 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
             dgvDiasHorarios.DefaultCellStyle = dataGridViewCellStyle6;
             dgvDiasHorarios.EnableHeadersVisualStyles = false;
+            dgvDiasHorarios.ForeColor = Color.FromArgb(28, 32, 51);
             dgvDiasHorarios.GridColor = Color.FromArgb(221, 225, 232);
             dgvDiasHorarios.Location = new Point(569, 204);
             dgvDiasHorarios.MultiSelect = false;

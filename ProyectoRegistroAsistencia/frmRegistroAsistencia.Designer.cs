@@ -37,7 +37,6 @@ namespace ProyectoRegistroAsistencia
             pcbRegistro = new PictureBox();
             lblClaveTrabajador = new Label();
             txtClaveTrabajador = new TextBox();
-            btnRegistrar = new Button();
             lblAdministrador = new Label();
             tmrCamara = new System.Windows.Forms.Timer(components);
             pnlFormulario.SuspendLayout();
@@ -55,7 +54,6 @@ namespace ProyectoRegistroAsistencia
             pnlFormulario.Controls.Add(pcbRegistro);
             pnlFormulario.Controls.Add(lblClaveTrabajador);
             pnlFormulario.Controls.Add(txtClaveTrabajador);
-            pnlFormulario.Controls.Add(btnRegistrar);
             pnlFormulario.Controls.Add(lblAdministrador);
             pnlFormulario.Location = new Point(21, 15);
             pnlFormulario.Name = "pnlFormulario";
@@ -73,7 +71,7 @@ namespace ProyectoRegistroAsistencia
             grpCamaraActivo.Size = new Size(293, 386);
             grpCamaraActivo.TabIndex = 9;
             grpCamaraActivo.TabStop = false;
-            grpCamaraActivo.Text = "Cámara Activo";
+            grpCamaraActivo.Text = "Cï¿½mara Activo";
             // 
             // pcbCamara
             // 
@@ -125,26 +123,15 @@ namespace ProyectoRegistroAsistencia
             txtClaveTrabajador.Name = "txtClaveTrabajador";
             txtClaveTrabajador.Size = new Size(270, 29);
             txtClaveTrabajador.TabIndex = 3;
-            // 
-            // btnRegistrar
-            // 
-            btnRegistrar.BackColor = Color.FromArgb(43, 76, 140);
-            btnRegistrar.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnRegistrar.ForeColor = Color.White;
-            btnRegistrar.Location = new Point(34, 316);
-            btnRegistrar.Name = "btnRegistrar";
-            btnRegistrar.Size = new Size(270, 40);
-            btnRegistrar.TabIndex = 4;
-            btnRegistrar.Text = "Registrar";
-            btnRegistrar.UseVisualStyleBackColor = false;
-            btnRegistrar.Click += btnRegistrar_Click;
-            // 
+            // Al presionar Enter en este campo se registra la asistencia (ya no hay botÃ³n).
+            txtClaveTrabajador.KeyDown += txtClaveTrabajador_KeyDown;
+            //
             // lblAdministrador
-            // 
+            //
             lblAdministrador.AutoSize = true;
             lblAdministrador.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblAdministrador.ForeColor = Color.FromArgb(108, 117, 125);
-            lblAdministrador.Location = new Point(40, 371);
+            lblAdministrador.Location = new Point(40, 326);
             lblAdministrador.Name = "lblAdministrador";
             lblAdministrador.Size = new Size(257, 40);
             lblAdministrador.TabIndex = 5;
@@ -187,7 +174,6 @@ namespace ProyectoRegistroAsistencia
         private PictureBox pcbRegistro;
         private Label lblClaveTrabajador;
         private TextBox txtClaveTrabajador;
-        private Button btnRegistrar;
         private Label lblAdministrador;
         private System.Windows.Forms.Timer tmrCamara;
         private GroupBox grpCamaraActivo;

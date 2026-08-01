@@ -15,20 +15,24 @@ using ClosedXML.Excel;
 
 namespace ProyectoRegistroAsistencia
 {
+    // Consultas SQL de los reportes + generación de PDF/Excel/impresión.
     internal class clsReportes
     {
         private DataTable tabla;
         private MySqlDataAdapter consulta;
         private MySqlCommand comando;
 
+        // Catálogo de departamentos activos (para el combo del formulario).
         public DataTable obtenerDepartamentos()
         {
             tabla = new DataTable();
             try
             {
+                // Abrir conexión
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
+                    // Consultar y llenar la tabla
                     string sql = "SELECT id_departamento, nombre_departamento FROM tbldepartamento WHERE estatus = 'activo';";
                     using (consulta = new MySqlDataAdapter(sql, conexion))
                     {
@@ -38,16 +42,17 @@ namespace ProyectoRegistroAsistencia
             }
             catch (Exception ex)
             {
+                // Error de conexión o de consulta
                 throw new Exception("Error al obtener el catalogo de Departamentos: " + ex.Message);
             }
             return tabla;
         }
 
-        // Cuenta los días hábiles (lunes a viernes) entre dos fechas, incluyendo ambos extremos.
-        // Sábado y domingo no se trabajan, así que no cuentan como días que se puedan faltar.
+        // Cuenta días de lunes a viernes entre dos fechas (sábado/domingo no cuentan).
         private int ContarDiasHabiles(DateTime desde, DateTime hasta)
         {
             int diasHabiles = 0;
+            // Recorrer día por día del rango y sumar solo lunes a viernes
             for (DateTime fecha = desde.Date; fecha <= hasta.Date; fecha = fecha.AddDays(1))
             {
                 if (fecha.DayOfWeek != DayOfWeek.Saturday && fecha.DayOfWeek != DayOfWeek.Sunday)
@@ -58,92 +63,56 @@ namespace ProyectoRegistroAsistencia
             return diasHabiles;
         }
 
-        // Reporte 1: cuántos días asistió y cuántos faltó cada trabajador en el rango de fechas,
-        // contando solo días hábiles (lunes a viernes) como días que se debían trabajar.
-        public DataTable ConsultarAsistenciaSemanal(DateTime desde, DateTime hasta, int idDepartamento)
+        // Reporte de Asistencia y Puntualidad: puntual/retardo/falta por trabajador en el rango.
+        public DataTable ConsultarTardanzasFaltas(DateTime desde, DateTime hasta, int idDepartamento, string apellidos = "")
         {
             tabla = new DataTable();
             try
             {
+                // Calcular datos base antes de armar la consulta
                 int totalDiasHabiles = ContarDiasHabiles(desde, hasta);
+                bool filtrarApellidos = !string.IsNullOrWhiteSpace(apellidos);
 
+                // Abrir conexión
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT t.clave_trabajador AS Clave, " +
-                                 "CONCAT(t.nombre, ' ', t.a_paterno, ' ', IFNULL(t.a_materno,'')) AS Trabajador, " +
-                                 "d.nombre_departamento AS Departamento, " +
-                                 "COUNT(DISTINCT a.fecha) AS 'Días Asistidos', " +
-                                 "@totalDiasHabiles - COUNT(DISTINCT a.fecha) AS 'Faltas' " +
-                                 "FROM tbltrabajador t " +
-                                 "INNER JOIN tbldepartamento d ON t.id_departamento = d.id_departamento " +
-                                 "LEFT JOIN tblasistencia a ON a.id_trabajador = t.id_trabajador " +
-                                 "AND a.fecha BETWEEN @desde AND @hasta " +
-                                 "AND WEEKDAY(a.fecha) < 5 " +
-                                 "WHERE t.estatus = 'activo' " +
-                                 (idDepartamento != 0 ? "AND t.id_departamento = @idDepartamento " : "") +
-                                 "GROUP BY t.id_trabajador " +
-                                 "ORDER BY d.nombre_departamento, t.nombre;";
-
-                    using (var cmd = new MySqlCommand(sql, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@desde", desde.ToString("yyyy-MM-dd"));
-                        cmd.Parameters.AddWithValue("@hasta", hasta.ToString("yyyy-MM-dd"));
-                        cmd.Parameters.AddWithValue("@idDepartamento", idDepartamento);
-                        cmd.Parameters.AddWithValue("@totalDiasHabiles", totalDiasHabiles);
-
-                        using (consulta = new MySqlDataAdapter(cmd))
-                        {
-                            consulta.Fill(tabla);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al consultar asistencia semanal: " + ex.Message);
-            }
-            return tabla;
-        }
-
-        // Reporte 2: por cada trabajador, cuántos días llegó puntual, con retardo o con falta.
-        public DataTable ConsultarTardanzasFaltas(DateTime desde, DateTime hasta, int idDepartamento)
-        {
-            tabla = new DataTable();
-            try
-            {
-                // Días hábiles (lunes a viernes) del rango: se calculan aquí, en C#.
-                int totalDiasHabiles = ContarDiasHabiles(desde, hasta);
-
-                clsConexion conexionBD = new clsConexion();
-                using (var conexion = conexionBD.AbrirConexion())
-                {
+                    // Armar el SQL (WEEKDAY < 5 en cada subconsulta = ignora sábado/domingo)
                     string sql =
                         "SELECT t.clave_trabajador AS Clave, " +
                         "CONCAT(t.nombre, ' ', t.a_paterno, ' ', IFNULL(t.a_materno,'')) AS Trabajador, " +
                         "d.nombre_departamento AS Departamento, " +
+                        "p.nombre_puesto AS Puesto, " +
                         "(SELECT COUNT(*) FROM tblasistencia a " +
                         " WHERE a.id_trabajador = t.id_trabajador AND a.estatus_registro = 'Puntual' " +
-                        " AND a.fecha BETWEEN @desde AND @hasta) AS Puntual, " +
+                        " AND a.fecha BETWEEN @desde AND @hasta AND WEEKDAY(a.fecha) < 5) AS Puntual, " +
                         "(SELECT COUNT(*) FROM tblasistencia a " +
                         " WHERE a.id_trabajador = t.id_trabajador AND a.estatus_registro = 'Retardo' " +
-                        " AND a.fecha BETWEEN @desde AND @hasta) AS Retardo, " +
+                        " AND a.fecha BETWEEN @desde AND @hasta AND WEEKDAY(a.fecha) < 5) AS Retardo, " +
                         "@totalDiasHabiles - (SELECT COUNT(*) FROM tblasistencia a " +
                         " WHERE a.id_trabajador = t.id_trabajador AND a.estatus_registro IN ('Puntual','Retardo') " +
-                        " AND a.fecha BETWEEN @desde AND @hasta) AS Falta " +
+                        " AND a.fecha BETWEEN @desde AND @hasta AND WEEKDAY(a.fecha) < 5) AS Falta " +
                         "FROM tbltrabajador t " +
                         "INNER JOIN tbldepartamento d ON d.id_departamento = t.id_departamento " +
+                        "INNER JOIN tblpuestos p ON p.id_puesto = t.id_puesto " +
                         "WHERE t.estatus = 'activo' " +
                         (idDepartamento != 0 ? "AND t.id_departamento = @idDepartamento " : "") +
+                        (filtrarApellidos ? "AND (t.a_paterno LIKE @apellidos OR t.a_materno LIKE @apellidos) " : "") +
                         "ORDER BY d.nombre_departamento, t.nombre;";
 
+                    // Ejecutar la consulta con sus parámetros
                     using (var cmd = new MySqlCommand(sql, conexion))
                     {
                         cmd.Parameters.AddWithValue("@desde", desde.ToString("yyyy-MM-dd"));
                         cmd.Parameters.AddWithValue("@hasta", hasta.ToString("yyyy-MM-dd"));
                         cmd.Parameters.AddWithValue("@idDepartamento", idDepartamento);
                         cmd.Parameters.AddWithValue("@totalDiasHabiles", totalDiasHabiles);
+                        if (filtrarApellidos)
+                        {
+                            cmd.Parameters.AddWithValue("@apellidos", "%" + apellidos.Trim() + "%");
+                        }
 
+                        // Llenar la tabla de resultados
                         using (consulta = new MySqlDataAdapter(cmd))
                         {
                             consulta.Fill(tabla);
@@ -158,19 +127,24 @@ namespace ProyectoRegistroAsistencia
             return tabla;
         }
 
-        // Reporte 3: por cada trabajador, cuántas incidencias tiene registradas en el rango de fechas,
-        // separadas por tipo (faltas/retardos) y por si están justificadas o no.
-        public DataTable ConsultarIncidenciasPorEmpleado(DateTime desde, DateTime hasta, int idDepartamento)
+        // Reporte de Incidencias: faltas/retardos formales por trabajador, justificados o no.
+        public DataTable ConsultarIncidenciasPorEmpleado(DateTime desde, DateTime hasta, int idDepartamento, string apellidos = "")
         {
             tabla = new DataTable();
             try
             {
+                // Filtro opcional de apellidos
+                bool filtrarApellidos = !string.IsNullOrWhiteSpace(apellidos);
+
+                // Abrir conexión
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
+                    // Armar el SQL (SUM(CASE...) agrupa cada incidencia según tipo y justificación)
                     string sql = "SELECT t.clave_trabajador AS Clave, " +
                                  "CONCAT(t.nombre, ' ', t.a_paterno, ' ', IFNULL(t.a_materno,'')) AS Trabajador, " +
                                  "d.nombre_departamento AS Departamento, " +
+                                 "p.nombre_puesto AS Puesto, " +
                                  "SUM(CASE WHEN ti.nombre_tipo = 'Falta' THEN 1 ELSE 0 END) AS Faltas, " +
                                  "SUM(CASE WHEN ti.nombre_tipo = 'Retardo' THEN 1 ELSE 0 END) AS Retardos, " +
                                  "SUM(CASE WHEN i.justificacion IS NOT NULL THEN 1 ELSE 0 END) AS Justificadas, " +
@@ -178,18 +152,26 @@ namespace ProyectoRegistroAsistencia
                                  "FROM tblincidencias i " +
                                  "INNER JOIN tbltrabajador t ON t.id_trabajador = i.id_trabajador AND t.estatus = 'activo' " +
                                  "INNER JOIN tbldepartamento d ON d.id_departamento = t.id_departamento " +
+                                 "INNER JOIN tblpuestos p ON p.id_puesto = t.id_puesto " +
                                  "INNER JOIN tbltipoincidencias ti ON ti.id_tipo_incidencia = i.id_tipo_incidencia " +
                                  "WHERE i.fecha BETWEEN @desde AND @hasta " +
                                  (idDepartamento != 0 ? "AND t.id_departamento = @idDepartamento " : "") +
+                                 (filtrarApellidos ? "AND (t.a_paterno LIKE @apellidos OR t.a_materno LIKE @apellidos) " : "") +
                                  "GROUP BY t.id_trabajador " +
                                  "ORDER BY d.nombre_departamento, t.nombre;";
 
+                    // Ejecutar la consulta con sus parámetros
                     using (var cmd = new MySqlCommand(sql, conexion))
                     {
                         cmd.Parameters.AddWithValue("@desde", desde.ToString("yyyy-MM-dd"));
                         cmd.Parameters.AddWithValue("@hasta", hasta.ToString("yyyy-MM-dd"));
                         cmd.Parameters.AddWithValue("@idDepartamento", idDepartamento);
+                        if (filtrarApellidos)
+                        {
+                            cmd.Parameters.AddWithValue("@apellidos", "%" + apellidos.Trim() + "%");
+                        }
 
+                        // Llenar la tabla de resultados
                         using (consulta = new MySqlDataAdapter(cmd))
                         {
                             consulta.Fill(tabla);
@@ -204,8 +186,7 @@ namespace ProyectoRegistroAsistencia
             return tabla;
         }
 
-        // Arma el documento PDF a partir del DataTable; lo usan tanto ExportarPDF (guardar)
-        // como Imprimir (enviar directo a la impresora), para no duplicar el diseño del reporte.
+        // Arma el PDF del reporte (usado por ExportarPDF e Imprimir para no repetir el diseño).
         private IDocument CrearDocumentoPdf(DataTable tabla, string tituloReporte)
         {
             return Document.Create(container =>
@@ -306,8 +287,10 @@ namespace ProyectoRegistroAsistencia
             });
         }
 
+        // Exporta el reporte a PDF (pide dónde guardarlo).
         public void ExportarPDF(DataTable tabla, string tituloReporte, string nombreArchivoSugerido)
         {
+            // Validar que haya datos
             if (tabla == null || tabla.Rows.Count == 0)
             {
                 MessageBox.Show("No hay datos para convertir a PDF", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -322,6 +305,7 @@ namespace ProyectoRegistroAsistencia
             {
                 try
                 {
+                    // Generar y guardar el PDF
                     CrearDocumentoPdf(tabla, tituloReporte).GeneratePdf(guardarArchivo.FileName);
 
                     MessageBox.Show("Reporte institucional generado con exito.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -333,20 +317,22 @@ namespace ProyectoRegistroAsistencia
             }
         }//Finaliza el metodo de conversion
 
-        // Genera el PDF en una carpeta temporal y lo manda directo al diálogo de impresión
-        // del programa que el usuario tenga configurado para abrir PDFs (Adobe, Edge, etc.).
+        // Genera el PDF en una carpeta temporal y lo manda directo a imprimir.
         public void Imprimir(DataTable tabla, string tituloReporte)
         {
+            // Validar que haya datos
             if (tabla == null || tabla.Rows.Count == 0)
             {
                 MessageBox.Show("No hay datos para imprimir", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // Ruta temporal única para el PDF
             string rutaTemporal = Path.Combine(Path.GetTempPath(), $"Reporte_{Guid.NewGuid():N}.pdf");
 
             try
             {
+                // Generar el PDF y mandarlo a imprimir directo
                 CrearDocumentoPdf(tabla, tituloReporte).GeneratePdf(rutaTemporal);
 
                 var psi = new ProcessStartInfo(rutaTemporal)
@@ -358,8 +344,7 @@ namespace ProyectoRegistroAsistencia
             }
             catch (Exception)
             {
-                // Si el programa predeterminado para PDFs no soporta el comando de imprimir directo,
-                // al menos lo abrimos para que el usuario pueda imprimirlo manualmente.
+                // Si no se puede imprimir directo, al menos se abre el PDF para imprimirlo manualmente.
                 try
                 {
                     Process.Start(new ProcessStartInfo(rutaTemporal) { UseShellExecute = true });
@@ -373,14 +358,17 @@ namespace ProyectoRegistroAsistencia
             }
         }
 
+        // Exporta el reporte a Excel (pide dónde guardarlo).
         public void ExportarExcel(DataTable tabla, string tituloReporte, string nombreArchivoSugerido)
         {
+            // Validar que haya datos
             if (tabla == null || tabla.Rows.Count == 0)
             {
                 MessageBox.Show("No hay datos para convertir a Excel", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // Diálogo para elegir dónde guardar
             SaveFileDialog guardarArchivo = new SaveFileDialog();
             guardarArchivo.FileName = nombreArchivoSugerido;
             guardarArchivo.Filter = "Archivos Excel (*.xlsx)|*.xlsx";
