@@ -133,12 +133,13 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.White;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(28, 32, 51);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(108, 117, 125);
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvDepartamentos.DefaultCellStyle = dataGridViewCellStyle2;
             dgvDepartamentos.EnableHeadersVisualStyles = false;
+            dgvDepartamentos.ForeColor = Color.FromArgb(28, 32, 51);
             dgvDepartamentos.GridColor = Color.FromArgb(221, 225, 232);
             dgvDepartamentos.Location = new Point(11, 200);
             dgvDepartamentos.MultiSelect = false;

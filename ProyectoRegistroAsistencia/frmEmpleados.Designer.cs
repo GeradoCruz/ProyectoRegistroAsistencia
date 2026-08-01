@@ -171,6 +171,7 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvEmpleados.DefaultCellStyle = dataGridViewCellStyle2;
             dgvEmpleados.EnableHeadersVisualStyles = false;
+            dgvEmpleados.ForeColor = Color.FromArgb(28, 32, 51);
             dgvEmpleados.GridColor = Color.FromArgb(221, 225, 232);
             dgvEmpleados.Location = new Point(11, 178);
             dgvEmpleados.MultiSelect = false;
