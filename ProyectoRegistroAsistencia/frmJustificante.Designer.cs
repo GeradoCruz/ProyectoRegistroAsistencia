@@ -30,18 +30,18 @@ namespace ProyectoRegistroAsistencia
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmJustificante));
             lblTitulo = new Label();
-            lblNombre = new Label();
-            lblDepartamento = new Label();
-            lblFecha = new Label();
-            lblIncidencia = new Label();
-            lblJustificante = new Label();
             btnGuardar = new Button();
             btnCancelar = new Button();
-            txtNombre = new TextBox();
+            lblFecha = new Label();
+            lblIncidencia = new Label();
+            lblDepartamento = new Label();
             txtJustificante = new TextBox();
-            txtIncidencia = new TextBox();
+            txtNombre = new TextBox();
+            lblJustificante = new Label();
             txtDepartamento = new TextBox();
+            lblNombre = new Label();
             dtpFecha = new DateTimePicker();
+            txtIncidencia = new TextBox();
             gpbDatos = new GroupBox();
             gpbDatos.SuspendLayout();
             SuspendLayout();
@@ -58,70 +58,6 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Justificante de Incidencia";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // lblNombre
-            // 
-            lblNombre.AutoSize = true;
-            lblNombre.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblNombre.ForeColor = Color.FromArgb(108, 117, 125);
-            lblNombre.Location = new Point(19, 29);
-            lblNombre.Margin = new Padding(4, 0, 4, 0);
-            lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(71, 21);
-            lblNombre.TabIndex = 1;
-            lblNombre.Text = "Nombre:";
-            lblNombre.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // lblDepartamento
-            // 
-            lblDepartamento.AutoSize = true;
-            lblDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDepartamento.Location = new Point(225, 29);
-            lblDepartamento.Margin = new Padding(4, 0, 4, 0);
-            lblDepartamento.Name = "lblDepartamento";
-            lblDepartamento.Size = new Size(113, 21);
-            lblDepartamento.TabIndex = 3;
-            lblDepartamento.Text = "Departamento:";
-            lblDepartamento.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // lblFecha
-            // 
-            lblFecha.AutoSize = true;
-            lblFecha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblFecha.ForeColor = Color.FromArgb(108, 117, 125);
-            lblFecha.Location = new Point(19, 106);
-            lblFecha.Margin = new Padding(4, 0, 4, 0);
-            lblFecha.Name = "lblFecha";
-            lblFecha.Size = new Size(53, 21);
-            lblFecha.TabIndex = 4;
-            lblFecha.Text = "Fecha:";
-            lblFecha.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // lblIncidencia
-            // 
-            lblIncidencia.AutoSize = true;
-            lblIncidencia.ForeColor = Color.FromArgb(108, 117, 125);
-            lblIncidencia.Location = new Point(225, 106);
-            lblIncidencia.Margin = new Padding(4, 0, 4, 0);
-            lblIncidencia.Name = "lblIncidencia";
-            lblIncidencia.Size = new Size(82, 21);
-            lblIncidencia.TabIndex = 5;
-            lblIncidencia.Text = "Incidencia:";
-            lblIncidencia.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // lblJustificante
-            // 
-            lblJustificante.AutoSize = true;
-            lblJustificante.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblJustificante.ForeColor = Color.FromArgb(108, 117, 125);
-            lblJustificante.Location = new Point(15, 186);
-            lblJustificante.Margin = new Padding(4, 0, 4, 0);
-            lblJustificante.Name = "lblJustificante";
-            lblJustificante.Size = new Size(87, 21);
-            lblJustificante.TabIndex = 6;
-            lblJustificante.Text = "Justificante";
-            lblJustificante.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // btnGuardar
             // 
@@ -154,16 +90,43 @@ namespace ProyectoRegistroAsistencia
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
             // 
-            // txtNombre
+            // lblFecha
             // 
-            txtNombre.BackColor = Color.White;
-            txtNombre.Enabled = false;
-            txtNombre.ForeColor = Color.FromArgb(64, 64, 64);
-            txtNombre.Location = new Point(17, 63);
-            txtNombre.Margin = new Padding(4);
-            txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(200, 29);
-            txtNombre.TabIndex = 9;
+            lblFecha.AutoSize = true;
+            lblFecha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblFecha.ForeColor = Color.FromArgb(108, 117, 125);
+            lblFecha.Location = new Point(19, 106);
+            lblFecha.Margin = new Padding(4, 0, 4, 0);
+            lblFecha.Name = "lblFecha";
+            lblFecha.Size = new Size(53, 21);
+            lblFecha.TabIndex = 4;
+            lblFecha.Text = "Fecha:";
+            lblFecha.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lblIncidencia
+            // 
+            lblIncidencia.AutoSize = true;
+            lblIncidencia.ForeColor = Color.FromArgb(108, 117, 125);
+            lblIncidencia.Location = new Point(225, 106);
+            lblIncidencia.Margin = new Padding(4, 0, 4, 0);
+            lblIncidencia.Name = "lblIncidencia";
+            lblIncidencia.Size = new Size(82, 21);
+            lblIncidencia.TabIndex = 5;
+            lblIncidencia.Text = "Incidencia:";
+            lblIncidencia.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lblDepartamento
+            // 
+            lblDepartamento.AutoSize = true;
+            lblDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
+            lblDepartamento.Location = new Point(225, 29);
+            lblDepartamento.Margin = new Padding(4, 0, 4, 0);
+            lblDepartamento.Name = "lblDepartamento";
+            lblDepartamento.Size = new Size(113, 21);
+            lblDepartamento.TabIndex = 3;
+            lblDepartamento.Text = "Departamento:";
+            lblDepartamento.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtJustificante
             // 
@@ -176,16 +139,29 @@ namespace ProyectoRegistroAsistencia
             txtJustificante.Size = new Size(407, 82);
             txtJustificante.TabIndex = 10;
             // 
-            // txtIncidencia
+            // txtNombre
             // 
-            txtIncidencia.BackColor = Color.White;
-            txtIncidencia.Enabled = false;
-            txtIncidencia.ForeColor = Color.FromArgb(64, 64, 64);
-            txtIncidencia.Location = new Point(225, 140);
-            txtIncidencia.Margin = new Padding(4);
-            txtIncidencia.Name = "txtIncidencia";
-            txtIncidencia.Size = new Size(200, 29);
-            txtIncidencia.TabIndex = 11;
+            txtNombre.BackColor = Color.White;
+            txtNombre.Enabled = false;
+            txtNombre.ForeColor = Color.FromArgb(64, 64, 64);
+            txtNombre.Location = new Point(17, 63);
+            txtNombre.Margin = new Padding(4);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(200, 29);
+            txtNombre.TabIndex = 9;
+            // 
+            // lblJustificante
+            // 
+            lblJustificante.AutoSize = true;
+            lblJustificante.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblJustificante.ForeColor = Color.FromArgb(108, 117, 125);
+            lblJustificante.Location = new Point(15, 186);
+            lblJustificante.Margin = new Padding(4, 0, 4, 0);
+            lblJustificante.Name = "lblJustificante";
+            lblJustificante.Size = new Size(87, 21);
+            lblJustificante.TabIndex = 6;
+            lblJustificante.Text = "Justificante";
+            lblJustificante.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtDepartamento
             // 
@@ -199,6 +175,19 @@ namespace ProyectoRegistroAsistencia
             txtDepartamento.Size = new Size(200, 29);
             txtDepartamento.TabIndex = 12;
             // 
+            // lblNombre
+            // 
+            lblNombre.AutoSize = true;
+            lblNombre.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNombre.ForeColor = Color.FromArgb(108, 117, 125);
+            lblNombre.Location = new Point(19, 29);
+            lblNombre.Margin = new Padding(4, 0, 4, 0);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(71, 21);
+            lblNombre.TabIndex = 1;
+            lblNombre.Text = "Nombre:";
+            lblNombre.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // dtpFecha
             // 
             dtpFecha.CustomFormat = "dd/MM/yyyy";
@@ -210,6 +199,17 @@ namespace ProyectoRegistroAsistencia
             dtpFecha.Name = "dtpFecha";
             dtpFecha.Size = new Size(200, 29);
             dtpFecha.TabIndex = 13;
+            // 
+            // txtIncidencia
+            // 
+            txtIncidencia.BackColor = Color.White;
+            txtIncidencia.Enabled = false;
+            txtIncidencia.ForeColor = Color.FromArgb(64, 64, 64);
+            txtIncidencia.Location = new Point(225, 140);
+            txtIncidencia.Margin = new Padding(4);
+            txtIncidencia.Name = "txtIncidencia";
+            txtIncidencia.Size = new Size(200, 29);
+            txtIncidencia.TabIndex = 11;
             // 
             // gpbDatos
             // 
@@ -261,18 +261,18 @@ namespace ProyectoRegistroAsistencia
         #endregion
 
         private Label lblTitulo;
-        private Label lblNombre;
-        private Label lblDepartamento;
+        private Button btnGuardar;
+        private Button btnCancelar;
         private Label lblFecha;
         private Label lblIncidencia;
-        private Label lblJustificante;
-        private Button btnGuardar;
-        private TextBox txtNombre;
+        private Label lblDepartamento;
         private TextBox txtJustificante;
-        private TextBox txtIncidencia;
+        private TextBox txtNombre;
+        private Label lblJustificante;
         private TextBox txtDepartamento;
+        private Label lblNombre;
         private DateTimePicker dtpFecha;
+        private TextBox txtIncidencia;
         private GroupBox gpbDatos;
-        private Button btnCancelar;
     }
 }

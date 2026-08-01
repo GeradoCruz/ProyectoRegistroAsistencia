@@ -10,10 +10,11 @@ using System.Windows.Forms;
 
 namespace ProyectoRegistroAsistencia
 {
+    // Pantalla de Reportes: lee los filtros, llama a clsReportes y muestra/exporta el resultado.
     public partial class frmReportes : Form
     {
         clsReportes reportes;
-        DataTable tabla;
+        DataTable tabla; // último reporte generado, lo usan Exportar/Imprimir
         int idDepartamento;
 
         public frmReportes()
@@ -22,12 +23,14 @@ namespace ProyectoRegistroAsistencia
             CargarCombo();
         }
 
+        // Llena el combo Departamento (incluye opción "todos" con id 0).
         public void CargarCombo()
         {
             reportes = new clsReportes();
 
             try
             {
+                // Traer el catálogo y agregar la opción "todos" al inicio
                 DataTable dtDepartamentos = reportes.obtenerDepartamentos();
 
                 DataRow filaDepartamento = dtDepartamentos.NewRow();
@@ -48,15 +51,15 @@ namespace ProyectoRegistroAsistencia
             }
         }
 
-        // Título del reporte seleccionado actualmente, se usa para el PDF, Excel e Impresión
+        // Título del reporte activo (para el PDF, Excel e impresión).
         private string ObtenerTitulo()
         {
-            if (rdbSemanal.Checked) return "Reporte de Asistencia Semanal";
-            if (rdbMensual.Checked) return "Reporte de Tardanzas y Faltas";
+            if (rdbAsistencia.Checked) return "Reporte de Asistencia y Puntualidad";
             if (rdbIncidencias.Checked) return "Reporte de Incidencias por Empleado";
             return "Reporte";
         }
 
+        // "Desde" no puede ser mayor que "Hasta".
         private bool ValidarFechas()
         {
             if (dtpFechaInicio.Value.Date > dtpFechaFin.Value.Date)
@@ -68,8 +71,10 @@ namespace ProyectoRegistroAsistencia
             return true;
         }
 
+        // Genera el reporte según el radio button activo y lo muestra en el grid.
         private void btnGenerar_Click(object sender, EventArgs e)
         {
+            // Validar rango de fechas antes de consultar
             if (!ValidarFechas()) return;
 
             reportes = new clsReportes();
@@ -78,21 +83,21 @@ namespace ProyectoRegistroAsistencia
 
             try
             {
+                // Leer filtros de pantalla
                 idDepartamento = Convert.ToInt32(cmbDepartamento.SelectedValue);
+                string apellidos = txtApellidos.Text.Trim();
 
-                if (rdbSemanal.Checked)
+                // Elegir la consulta según el tipo de reporte seleccionado
+                if (rdbAsistencia.Checked)
                 {
-                    tabla = reportes.ConsultarAsistenciaSemanal(dtpFechaInicio.Value, dtpFechaFin.Value, idDepartamento);
-                }
-                else if (rdbMensual.Checked)
-                {
-                    tabla = reportes.ConsultarTardanzasFaltas(dtpFechaInicio.Value, dtpFechaFin.Value, idDepartamento);
+                    tabla = reportes.ConsultarTardanzasFaltas(dtpFechaInicio.Value, dtpFechaFin.Value, idDepartamento, apellidos);
                 }
                 else if (rdbIncidencias.Checked)
                 {
-                    tabla = reportes.ConsultarIncidenciasPorEmpleado(dtpFechaInicio.Value, dtpFechaFin.Value, idDepartamento);
+                    tabla = reportes.ConsultarIncidenciasPorEmpleado(dtpFechaInicio.Value, dtpFechaFin.Value, idDepartamento, apellidos);
                 }
 
+                // Mostrar resultado en el grid
                 dgvReporte.DataSource = tabla;
 
                 if (tabla == null || tabla.Rows.Count == 0)
@@ -108,6 +113,7 @@ namespace ProyectoRegistroAsistencia
             }
         }
 
+        // Evita exportar/imprimir si todavía no se generó un reporte con datos.
         private bool HayDatosParaExportar()
         {
             if (tabla == null || tabla.Rows.Count == 0)
@@ -126,6 +132,7 @@ namespace ProyectoRegistroAsistencia
             reportes = new clsReportes();
             try
             {
+                // Nombre de archivo sugerido = título del reporte con guiones bajos
                 reportes.ExportarPDF(tabla, ObtenerTitulo(), ObtenerTitulo().Replace(" ", "_") + ".pdf");
             }
             catch (Exception ex)
@@ -142,6 +149,7 @@ namespace ProyectoRegistroAsistencia
             reportes = new clsReportes();
             try
             {
+                // Nombre de archivo sugerido = título del reporte con guiones bajos
                 reportes.ExportarExcel(tabla, ObtenerTitulo(), ObtenerTitulo().Replace(" ", "_") + ".xlsx");
             }
             catch (Exception ex)
@@ -165,6 +173,21 @@ namespace ProyectoRegistroAsistencia
                 MessageBox.Show("No se pudo enviar el reporte a imprimir: " + ex.Message,
                     "Staff Asistence", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        // Regresa todos los filtros a su estado inicial y limpia el grid.
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            // Restablecer filtros
+            rdbAsistencia.Checked = true;
+            cmbDepartamento.SelectedIndex = 0;
+            txtApellidos.Clear();
+            dtpFechaInicio.Value = DateTime.Now;
+            dtpFechaFin.Value = DateTime.Now;
+
+            // Vaciar resultados
+            dgvReporte.DataSource = null;
+            tabla = null;
         }
     }
 }

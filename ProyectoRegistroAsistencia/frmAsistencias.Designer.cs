@@ -96,7 +96,7 @@ namespace ProyectoRegistroAsistencia
             dtpFiltroAsistencia.Size = new Size(200, 29);
             dtpFiltroAsistencia.TabIndex = 4;
             dtpFiltroAsistencia.ValueChanged += dtpFiltroAsistencia_ValueChanged;
-            //
+            // 
             // txtApellido
             // 
             txtApellido.BackColor = Color.White;
@@ -166,6 +166,7 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvRegistros.DefaultCellStyle = dataGridViewCellStyle2;
             dgvRegistros.EnableHeadersVisualStyles = false;
+            dgvRegistros.ForeColor = Color.FromArgb(28, 32, 51);
             dgvRegistros.GridColor = Color.FromArgb(221, 225, 232);
             dgvRegistros.Location = new Point(11, 217);
             dgvRegistros.MultiSelect = false;

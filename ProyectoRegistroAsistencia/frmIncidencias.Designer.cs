@@ -174,6 +174,7 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvIncidencias.DefaultCellStyle = dataGridViewCellStyle2;
             dgvIncidencias.EnableHeadersVisualStyles = false;
+            dgvIncidencias.ForeColor = Color.FromArgb(28, 32, 51);
             dgvIncidencias.GridColor = Color.FromArgb(221, 225, 232);
             dgvIncidencias.Location = new Point(12, 171);
             dgvIncidencias.MultiSelect = false;

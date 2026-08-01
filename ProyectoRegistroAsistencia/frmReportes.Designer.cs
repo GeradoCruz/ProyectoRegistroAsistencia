@@ -26,8 +26,11 @@ namespace ProyectoRegistroAsistencia
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
+        // Layout: gpbOpciones = tipo de reporte, gpbFiltros = fechas/depto/apellidos,
+        // dgvReporte = resultados, btnPdf/Excel/Imprimir = acciones abajo a la derecha.
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmReportes));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
@@ -44,30 +47,33 @@ namespace ProyectoRegistroAsistencia
             btnPdf = new Button();
             btnExcel = new Button();
             btnImprimir = new Button();
-            rdbSemanal = new RadioButton();
-            rdbMensual = new RadioButton();
+            rdbAsistencia = new RadioButton();
             rdbIncidencias = new RadioButton();
             gpbOpciones = new GroupBox();
             lblApellidos = new Label();
             txtApellidos = new TextBox();
+            btnLimpiar = new Button();
+            gpbFiltros = new GroupBox();
+            toolTipInfo = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)dgvReporte).BeginInit();
             SuspendLayout();
             // 
             // cmbDepartamento
             // 
             cmbDepartamento.BackColor = Color.White;
-            cmbDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
+            cmbDepartamento.ForeColor = Color.FromArgb(64, 64, 64);
             cmbDepartamento.FormattingEnabled = true;
-            cmbDepartamento.Location = new Point(439, 178);
+            cmbDepartamento.Location = new Point(460, 207);
             cmbDepartamento.Name = "cmbDepartamento";
-            cmbDepartamento.Size = new Size(200, 29);
+            cmbDepartamento.Size = new Size(190, 29);
             cmbDepartamento.TabIndex = 27;
+            toolTipInfo.SetToolTip(cmbDepartamento, "Filtra el reporte por departamento (opcional).");
             // 
             // lblDepartamento
             // 
             lblDepartamento.AutoSize = true;
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDepartamento.Location = new Point(440, 154);
+            lblDepartamento.Location = new Point(461, 184);
             lblDepartamento.Name = "lblDepartamento";
             lblDepartamento.Size = new Size(113, 21);
             lblDepartamento.TabIndex = 26;
@@ -76,16 +82,16 @@ namespace ProyectoRegistroAsistencia
             // dtpFechaFin
             // 
             dtpFechaFin.Format = DateTimePickerFormat.Custom;
-            dtpFechaFin.Location = new Point(222, 178);
+            dtpFechaFin.Location = new Point(245, 207);
             dtpFechaFin.Name = "dtpFechaFin";
-            dtpFechaFin.Size = new Size(200, 29);
+            dtpFechaFin.Size = new Size(180, 29);
             dtpFechaFin.TabIndex = 25;
             // 
             // lblFechaFin
             // 
             lblFechaFin.AutoSize = true;
             lblFechaFin.ForeColor = Color.FromArgb(108, 117, 125);
-            lblFechaFin.Location = new Point(223, 154);
+            lblFechaFin.Location = new Point(246, 184);
             lblFechaFin.Name = "lblFechaFin";
             lblFechaFin.Size = new Size(52, 21);
             lblFechaFin.TabIndex = 24;
@@ -94,16 +100,16 @@ namespace ProyectoRegistroAsistencia
             // dtpFechaInicio
             // 
             dtpFechaInicio.Format = DateTimePickerFormat.Custom;
-            dtpFechaInicio.Location = new Point(5, 178);
+            dtpFechaInicio.Location = new Point(30, 207);
             dtpFechaInicio.Name = "dtpFechaInicio";
-            dtpFechaInicio.Size = new Size(200, 29);
+            dtpFechaInicio.Size = new Size(180, 29);
             dtpFechaInicio.TabIndex = 23;
             // 
             // lblFechaInicio
             // 
             lblFechaInicio.AutoSize = true;
             lblFechaInicio.ForeColor = Color.FromArgb(108, 117, 125);
-            lblFechaInicio.Location = new Point(6, 154);
+            lblFechaInicio.Location = new Point(31, 184);
             lblFechaInicio.Name = "lblFechaInicio";
             lblFechaInicio.Size = new Size(56, 21);
             lblFechaInicio.TabIndex = 22;
@@ -131,7 +137,7 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(447, 30);
             lblTitulo.TabIndex = 20;
-            lblTitulo.Text = "Reportes Semanal/Mensuales de Asistencia";
+            lblTitulo.Text = "Reportes de Asistencia";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnGenerar
@@ -141,11 +147,12 @@ namespace ProyectoRegistroAsistencia
             btnGenerar.ForeColor = Color.White;
             btnGenerar.Image = (Image)resources.GetObject("btnGenerar.Image");
             btnGenerar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGenerar.Location = new Point(876, 171);
+            btnGenerar.Location = new Point(876, 192);
             btnGenerar.Name = "btnGenerar";
             btnGenerar.Size = new Size(180, 40);
             btnGenerar.TabIndex = 31;
             btnGenerar.Text = "Generar";
+            toolTipInfo.SetToolTip(btnGenerar, "Consulta el reporte con los filtros seleccionados.");
             btnGenerar.UseVisualStyleBackColor = false;
             btnGenerar.Click += btnGenerar_Click;
             // 
@@ -178,15 +185,14 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvReporte.DefaultCellStyle = dataGridViewCellStyle2;
             dgvReporte.EnableHeadersVisualStyles = false;
-            dgvReporte.ForeColor = Color.FromArgb(28, 32, 51);
             dgvReporte.GridColor = Color.FromArgb(221, 225, 232);
-            dgvReporte.Location = new Point(10, 220);
+            dgvReporte.Location = new Point(10, 272);
             dgvReporte.MultiSelect = false;
             dgvReporte.Name = "dgvReporte";
             dgvReporte.ReadOnly = true;
             dgvReporte.RowHeadersVisible = false;
             dgvReporte.RowTemplate.Height = 40;
-            dgvReporte.Size = new Size(1046, 429);
+            dgvReporte.Size = new Size(1046, 377);
             dgvReporte.TabIndex = 30;
             // 
             // btnPdf
@@ -234,56 +240,47 @@ namespace ProyectoRegistroAsistencia
             btnImprimir.UseVisualStyleBackColor = false;
             btnImprimir.Click += btnImprimir_Click;
             // 
-            // rdbSemanal
+            // rdbAsistencia
             // 
-            rdbSemanal.AutoSize = true;
-            rdbSemanal.Checked = true;
-            rdbSemanal.ForeColor = Color.FromArgb(108, 117, 125);
-            rdbSemanal.Location = new Point(191, 109);
-            rdbSemanal.Name = "rdbSemanal";
-            rdbSemanal.Size = new Size(161, 25);
-            rdbSemanal.TabIndex = 35;
-            rdbSemanal.TabStop = true;
-            rdbSemanal.Text = "Asistencia Semanal";
-            rdbSemanal.UseVisualStyleBackColor = true;
-            // 
-            // rdbMensual
-            // 
-            rdbMensual.AutoSize = true;
-            rdbMensual.ForeColor = Color.FromArgb(108, 117, 125);
-            rdbMensual.Location = new Point(390, 109);
-            rdbMensual.Name = "rdbMensual";
-            rdbMensual.Size = new Size(235, 25);
-            rdbMensual.TabIndex = 36;
-            rdbMensual.Text = "Tardanzas y Faltas(Mensuales)";
-            rdbMensual.UseVisualStyleBackColor = true;
+            rdbAsistencia.AutoSize = true;
+            rdbAsistencia.Checked = true;
+            rdbAsistencia.ForeColor = Color.FromArgb(108, 117, 125);
+            rdbAsistencia.Location = new Point(200, 118);
+            rdbAsistencia.Name = "rdbAsistencia";
+            rdbAsistencia.Size = new Size(196, 25);
+            rdbAsistencia.TabIndex = 35;
+            rdbAsistencia.TabStop = true;
+            rdbAsistencia.Text = "Asistencia y Puntualidad";
+            toolTipInfo.SetToolTip(rdbAsistencia, "Muestra, por trabajador, los días puntuales, con retardo y con falta en el rango de fechas.");
+            rdbAsistencia.UseVisualStyleBackColor = true;
             // 
             // rdbIncidencias
             // 
             rdbIncidencias.AutoSize = true;
             rdbIncidencias.ForeColor = Color.FromArgb(108, 117, 125);
-            rdbIncidencias.Location = new Point(651, 109);
+            rdbIncidencias.Location = new Point(470, 118);
             rdbIncidencias.Name = "rdbIncidencias";
             rdbIncidencias.Size = new Size(205, 25);
-            rdbIncidencias.TabIndex = 37;
+            rdbIncidencias.TabIndex = 36;
             rdbIncidencias.Text = "Incidencias por Empleado";
+            toolTipInfo.SetToolTip(rdbIncidencias, "Muestra incidencias registradas por trabajador, justificadas y sin justificar.");
             rdbIncidencias.UseVisualStyleBackColor = true;
             // 
             // gpbOpciones
             // 
             gpbOpciones.ForeColor = Color.FromArgb(108, 117, 125);
-            gpbOpciones.Location = new Point(184, 84);
+            gpbOpciones.Location = new Point(10, 90);
             gpbOpciones.Name = "gpbOpciones";
-            gpbOpciones.Size = new Size(674, 59);
+            gpbOpciones.Size = new Size(856, 62);
             gpbOpciones.TabIndex = 38;
             gpbOpciones.TabStop = false;
-            gpbOpciones.Text = "Opciones";
+            gpbOpciones.Text = "Tipo de Reporte";
             // 
             // lblApellidos
             // 
             lblApellidos.AutoSize = true;
             lblApellidos.ForeColor = Color.FromArgb(108, 117, 125);
-            lblApellidos.Location = new Point(661, 146);
+            lblApellidos.Location = new Point(686, 184);
             lblApellidos.Name = "lblApellidos";
             lblApellidos.Size = new Size(77, 21);
             lblApellidos.TabIndex = 39;
@@ -291,10 +288,36 @@ namespace ProyectoRegistroAsistencia
             // 
             // txtApellidos
             // 
-            txtApellidos.Location = new Point(658, 178);
+            txtApellidos.ForeColor = Color.FromArgb(64, 64, 64);
+            txtApellidos.Location = new Point(685, 207);
             txtApellidos.Name = "txtApellidos";
-            txtApellidos.Size = new Size(200, 29);
+            txtApellidos.Size = new Size(160, 29);
             txtApellidos.TabIndex = 40;
+            toolTipInfo.SetToolTip(txtApellidos, "Filtra por apellido paterno o materno (no distingue mayúsculas/minúsculas).");
+            // 
+            // btnLimpiar
+            // 
+            btnLimpiar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnLimpiar.BackColor = Color.FromArgb(108, 117, 125);
+            btnLimpiar.ForeColor = Color.White;
+            btnLimpiar.Location = new Point(876, 143);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(180, 40);
+            btnLimpiar.TabIndex = 41;
+            btnLimpiar.Text = "Limpiar";
+            toolTipInfo.SetToolTip(btnLimpiar, "Restablece todos los filtros a sus valores por defecto.");
+            btnLimpiar.UseVisualStyleBackColor = false;
+            btnLimpiar.Click += btnLimpiar_Click;
+            // 
+            // gpbFiltros
+            // 
+            gpbFiltros.ForeColor = Color.FromArgb(108, 117, 125);
+            gpbFiltros.Location = new Point(10, 166);
+            gpbFiltros.Name = "gpbFiltros";
+            gpbFiltros.Size = new Size(856, 92);
+            gpbFiltros.TabIndex = 42;
+            gpbFiltros.TabStop = false;
+            gpbFiltros.Text = "Filtros de Búsqueda";
             // 
             // frmReportes
             // 
@@ -302,11 +325,11 @@ namespace ProyectoRegistroAsistencia
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 719);
+            Controls.Add(btnLimpiar);
             Controls.Add(txtApellidos);
             Controls.Add(lblApellidos);
             Controls.Add(rdbIncidencias);
-            Controls.Add(rdbMensual);
-            Controls.Add(rdbSemanal);
+            Controls.Add(rdbAsistencia);
             Controls.Add(btnImprimir);
             Controls.Add(btnExcel);
             Controls.Add(btnPdf);
@@ -321,6 +344,7 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(btnGenerar);
             Controls.Add(dgvReporte);
             Controls.Add(gpbOpciones);
+            Controls.Add(gpbFiltros);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ForeColor = SystemColors.ControlText;
             Margin = new Padding(4);
@@ -346,11 +370,13 @@ namespace ProyectoRegistroAsistencia
         private Button btnPdf;
         private Button btnExcel;
         private Button btnImprimir;
-        private RadioButton rdbSemanal;
-        private RadioButton rdbMensual;
+        private RadioButton rdbAsistencia;
         private RadioButton rdbIncidencias;
         private GroupBox gpbOpciones;
         private Label lblApellidos;
         private TextBox txtApellidos;
+        private Button btnLimpiar;
+        private GroupBox gpbFiltros;
+        private ToolTip toolTipInfo;
     }
 }
