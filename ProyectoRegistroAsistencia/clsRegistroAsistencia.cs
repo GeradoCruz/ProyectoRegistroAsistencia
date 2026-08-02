@@ -56,9 +56,13 @@ namespace ProyectoRegistroAsistencia
 
                 // 4. Solo si es el PRIMER registro del día se clasifica (Puntual/Retardo/Falta)
                 string estatusRegistro = null;
+                bool sinHorarioAsignado = false;
                 if (registrosHoy == 0)
                 {
                     estatusRegistro = ClasificarPuntualidad(idTrabajadorEncontrado);
+                    // Si sigue siendo null, es porque no tiene horario asignado para hoy
+                    // (no porque no fuera el primer registro).
+                    sinHorarioAsignado = estatusRegistro == null;
                 }
 
                 // 5. Guardar el registro de asistencia en la base de datos
@@ -69,6 +73,10 @@ namespace ProyectoRegistroAsistencia
                 if (estatusRegistro == "Puntual" || estatusRegistro == "Retardo")
                 {
                     msg = "Se registró su asistencia correctamente. Estatus: " + estatusRegistro + ".";
+                }
+                else if (sinHorarioAsignado)
+                {
+                    msg = "Se registró su asistencia correctamente, pero no tiene un horario asignado para hoy.";
                 }
                 else
                 {
@@ -182,11 +190,11 @@ namespace ProyectoRegistroAsistencia
         }
 
         // Consulta la hora de entrada asignada al trabajador para un día en específico
-        // (tblhorario_trabajo). El trabajador ya tiene horario asignado antes de usar el
-        // sistema, así que aquí no se valida si existe o no.
+        // (tblhorario_trabajo). Si el trabajador no tiene horario asignado ese día,
+        // regresa null en vez de tronar, para que ClasificarPuntualidad lo pueda manejar.
         public string ObtenerHoraEntrada(int idTrabajador, int idDia)
         {
-            string horaEntrada = "";
+            string horaEntrada = null;
             try
             {
                 clsConexion conexionBD = new clsConexion();
@@ -198,8 +206,9 @@ namespace ProyectoRegistroAsistencia
                     {
                         comando.Parameters.AddWithValue("@idTrabajador", idTrabajador);
                         comando.Parameters.AddWithValue("@idDia", idDia);
-                        
-                        horaEntrada = comando.ExecuteScalar().ToString();
+
+                        object resultado = comando.ExecuteScalar();
+                        horaEntrada = (resultado == null || resultado == DBNull.Value) ? null : resultado.ToString();
                     }
                 }
             }
@@ -229,6 +238,12 @@ namespace ProyectoRegistroAsistencia
         {
             int idDia = ObtenerIdDia();
             string horaEntrada = ObtenerHoraEntrada(idTrabajador, idDia);
+
+            // Si no tiene horario asignado para hoy, no se puede clasificar.
+            if (string.IsNullOrEmpty(horaEntrada))
+            {
+                return null;
+            }
 
             int minutosEntrada = ConvertirHoraAMinutos(horaEntrada);
             int minutosRegistro = ConvertirHoraAMinutos(registro);

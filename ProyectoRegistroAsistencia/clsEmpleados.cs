@@ -1,4 +1,4 @@
-﻿using MySqlConnector;
+using MySqlConnector;
 using System.Data;
 using System.Runtime.InteropServices.Marshalling;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
@@ -72,7 +72,7 @@ namespace ProyectoRegistroAsistencia
                     {
                         consultar.Parameters.AddWithValue("@Clave Trabajador", "%" + claveTrabajador + "%");
                         using (consulta = new MySqlDataAdapter(consultar))
-                        { 
+                        {
                             consulta.Fill(tabla);
                         }
                     }
@@ -167,7 +167,7 @@ namespace ProyectoRegistroAsistencia
         public DataTable ObtenerDepartamentos()
         {
             tabla = new DataTable();
-            try 
+            try
             {
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion=conexionBD.AbrirConexion())
@@ -177,7 +177,7 @@ namespace ProyectoRegistroAsistencia
                     {
                         consulta.Fill(tabla);
                     }
-                }    
+                }
             }
             catch (Exception ex)
             {
@@ -217,13 +217,13 @@ namespace ProyectoRegistroAsistencia
                         try
                         {
                             string sqlEmpleados = "UPDATE tbltrabajador SET estatus = 'inactivo' WHERE clave_trabajador = @claveTrabajador;";
-                               
+
                             using (comando = new MySqlCommand(sqlEmpleados, conexion))
                             {
                                 comando.Parameters.AddWithValue("@claveTrabajador", claveTrabajador);
                                 comando.ExecuteNonQuery();
                             }
-                            
+
                             msg = "Empleado dado de baja correctamente";
                         }
                         catch (Exception ex)
@@ -238,6 +238,40 @@ namespace ProyectoRegistroAsistencia
             }
             return msg;
         }
+        // Verifica si ya existe un trabajador registrado con esa clave.
+        // claveOriginal se usa al editar, para no marcar como duplicada la propia clave del empleado.
+        public bool ExisteClave(string clave, string claveOriginal = null)
+        {
+            try
+            {
+                clsConexion conexionBD = new clsConexion();
+                using (var conexion = conexionBD.AbrirConexion())
+                {
+                    string sql = "SELECT COUNT(*) FROM tbltrabajador WHERE clave_trabajador = @clave";
+                    if (!string.IsNullOrEmpty(claveOriginal))
+                    {
+                        sql += " AND clave_trabajador <> @claveOriginal";
+                    }
+
+                    using (var comando = new MySqlCommand(sql, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@clave", clave);
+                        if (!string.IsNullOrEmpty(claveOriginal))
+                        {
+                            comando.Parameters.AddWithValue("@claveOriginal", claveOriginal);
+                        }
+
+                        int cantidad = Convert.ToInt32(comando.ExecuteScalar());
+                        return cantidad > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al verificar la clave: " + ex.Message);
+            }
+        }
+
         public DataTable BuscarEmpleado(string filtro, string idDepartamento)
         {
             tabla = new DataTable();
@@ -247,6 +281,7 @@ namespace ProyectoRegistroAsistencia
                 using (var conexion = conexionBD.AbrirConexion())
                 {
                     string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
+                                "CONCAT(T.nombre,' ', T.a_paterno,' ', T.a_materno) AS 'Nombre Completo', " +
                                 "T.nombre AS Nombre, " +
                                 "T.a_paterno AS 'Apellido Paterno', " +
                                 "T.a_materno AS 'Apellido Materno', " +

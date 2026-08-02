@@ -40,6 +40,22 @@ namespace ProyectoRegistroAsistencia
                 return false;
             }
 
+            if (txtDepartamento.Text.Trim().Length > 100)
+            {
+                MessageBox.Show("El nombre del departamento no debe exceder 100 caracteres.", "Staff Asistence",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDepartamento.Focus();
+                return false;
+            }
+
+            if (txtDescripcion.Text.Trim().Length > 255)
+            {
+                MessageBox.Show("La descripcion no debe exceder 255 caracteres.", "Staff Asistence",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDescripcion.Focus();
+                return false;
+            }
+
             return true;
         }
 
