@@ -71,7 +71,7 @@ namespace ProyectoRegistroAsistencia
             {
                 MessageBox.Show(ex.Message);
             }
-        }  
+        }
         private void btnAsignarHorario_Click(object? sender, EventArgs e)
         {
             using (var frm = new frmAsignacionHorarios())
@@ -114,10 +114,11 @@ namespace ProyectoRegistroAsistencia
                 MessageBox.Show("Error al rellenar los catálogos en los menús desplegables: " + ex.Message);
             }
         }
-        private void btnBuscar_Click(object sender, EventArgs e)
+        // Evento que se dispara cuando se selecciona un elemento en el ComboBox cmbDepartamento
+        private void cmbDepartamento_SelectionChangeCommitted(object sender, EventArgs e)
         {
             horario = new clsHorarioSemanal();
-
+            
             try
             {
                 if (cmbDepartamento.SelectedValue == null)
@@ -140,13 +141,13 @@ namespace ProyectoRegistroAsistencia
                 MessageBox.Show(ex.Message);
             }
         }
-
+        //Limpiar el dataGrid y vuelve al inicio
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             cmbDepartamento.SelectedIndex = 0; // vuelve a "Selecciona una Carrera"
             cargarGrid();
         }
-
+        //Evento que busca por medio del apellido 
         private void txtApellido_TextChanged(object sender, EventArgs e)
         {
             try

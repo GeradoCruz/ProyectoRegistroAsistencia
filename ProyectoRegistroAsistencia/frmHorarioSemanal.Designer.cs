@@ -41,7 +41,6 @@ namespace ProyectoRegistroAsistencia
             lblSubtitulo = new Label();
             lblDepartamento = new Label();
             cmbDepartamento = new ComboBox();
-            btnBuscar = new Button();
             btnAsignarHorario = new Button();
             dgvHorarios = new DataGridView();
             btnLimpiar = new Button();
@@ -95,21 +94,7 @@ namespace ProyectoRegistroAsistencia
             cmbDepartamento.Name = "cmbDepartamento";
             cmbDepartamento.Size = new Size(200, 36);
             cmbDepartamento.TabIndex = 6;
-            // 
-            // btnBuscar
-            // 
-            btnBuscar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnBuscar.BackColor = Color.FromArgb(43, 76, 140);
-            btnBuscar.ForeColor = Color.White;
-            btnBuscar.Image = (Image)resources.GetObject("btnBuscar.Image");
-            btnBuscar.Location = new Point(502, 143);
-            btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(180, 40);
-            btnBuscar.TabIndex = 10;
-            btnBuscar.Text = "Buscar";
-            btnBuscar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnBuscar.UseVisualStyleBackColor = false;
-            btnBuscar.Click += btnBuscar_Click;
+            cmbDepartamento.SelectionChangeCommitted += cmbDepartamento_SelectionChangeCommitted;
             // 
             // btnAsignarHorario
             // 
@@ -279,7 +264,6 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(btnLimpiar);
             Controls.Add(dgvHorarios);
             Controls.Add(btnAsignarHorario);
-            Controls.Add(btnBuscar);
             Controls.Add(cmbDepartamento);
             Controls.Add(lblDepartamento);
             Controls.Add(lblSubtitulo);
@@ -300,7 +284,6 @@ namespace ProyectoRegistroAsistencia
         private Label lblSubtitulo;
         private Label lblDepartamento;
         private ComboBox cmbDepartamento;
-        private Button btnBuscar;
         private Button btnAsignarHorario;
         private DataGridView dgvHorarios;
         private Button btnLimpiar;
