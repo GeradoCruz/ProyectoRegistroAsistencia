@@ -48,7 +48,17 @@ namespace ProyectoRegistroAsistencia
             camara.DetenerCamara();
         }
 
-        private void btnRegistrar_Click(object? sender, EventArgs e)
+        // Al presionar Enter en el campo de clave, se registra la asistencia (ya no hay botón).
+        private void txtClaveTrabajador_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // evita el "ding" y que el Enter siga propagándose
+                RegistrarAsistencia();
+            }
+        }
+
+        private void RegistrarAsistencia()
         {
             try
             {
@@ -71,7 +81,7 @@ namespace ProyectoRegistroAsistencia
 
                 if (registro.Exito)
                 {
-                    MessageBox.Show(msg, "�xito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(msg, "�xito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
