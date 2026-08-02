@@ -228,7 +228,7 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(233, 30);
             lblTitulo.TabIndex = 8;
-            lblTitulo.Text = "Asignacion de Horario";
+            lblTitulo.Text = "Asignación de Horario";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // cmbSemestre

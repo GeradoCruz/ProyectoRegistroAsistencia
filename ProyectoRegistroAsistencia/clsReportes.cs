@@ -5,7 +5,6 @@ using QuestPDF.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -127,8 +126,9 @@ namespace ProyectoRegistroAsistencia
             return tabla;
         }
 
-        // Reporte de Incidencias: faltas/retardos formales por trabajador, justificados o no.
-        public DataTable ConsultarIncidenciasPorEmpleado(DateTime desde, DateTime hasta, int idDepartamento, string apellidos = "")
+        // Reporte de Antigüedad: fecha de ingreso y tiempo trabajado (años/meses) por empleado activo.
+        // No usa rango de fechas, la antigüedad siempre se calcula contra la fecha de hoy (CURDATE()).
+        public DataTable ConsultarAntiguedad(int idDepartamento, string apellidos = "")
         {
             tabla = new DataTable();
             try
@@ -140,31 +140,25 @@ namespace ProyectoRegistroAsistencia
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    // Armar el SQL (SUM(CASE...) agrupa cada incidencia según tipo y justificación)
+                    // TIMESTAMPDIFF calcula años completos y, con el módulo 12, los meses restantes
                     string sql = "SELECT t.clave_trabajador AS Clave, " +
                                  "CONCAT(t.nombre, ' ', t.a_paterno, ' ', IFNULL(t.a_materno,'')) AS Trabajador, " +
                                  "d.nombre_departamento AS Departamento, " +
                                  "p.nombre_puesto AS Puesto, " +
-                                 "SUM(CASE WHEN ti.nombre_tipo = 'Falta' THEN 1 ELSE 0 END) AS Faltas, " +
-                                 "SUM(CASE WHEN ti.nombre_tipo = 'Retardo' THEN 1 ELSE 0 END) AS Retardos, " +
-                                 "SUM(CASE WHEN i.justificacion IS NOT NULL THEN 1 ELSE 0 END) AS Justificadas, " +
-                                 "SUM(CASE WHEN i.justificacion IS NULL THEN 1 ELSE 0 END) AS 'Sin Justificar' " +
-                                 "FROM tblincidencias i " +
-                                 "INNER JOIN tbltrabajador t ON t.id_trabajador = i.id_trabajador AND t.estatus = 'activo' " +
+                                 "t.fecha_ingreso AS 'Fecha de Ingreso', " +
+                                 "CONCAT(TIMESTAMPDIFF(YEAR, t.fecha_ingreso, CURDATE()), ' años, ', " +
+                                 "TIMESTAMPDIFF(MONTH, t.fecha_ingreso, CURDATE()) % 12, ' meses') AS Antigüedad " +
+                                 "FROM tbltrabajador t " +
                                  "INNER JOIN tbldepartamento d ON d.id_departamento = t.id_departamento " +
                                  "INNER JOIN tblpuestos p ON p.id_puesto = t.id_puesto " +
-                                 "INNER JOIN tbltipoincidencias ti ON ti.id_tipo_incidencia = i.id_tipo_incidencia " +
-                                 "WHERE i.fecha BETWEEN @desde AND @hasta " +
+                                 "WHERE t.estatus = 'activo' " +
                                  (idDepartamento != 0 ? "AND t.id_departamento = @idDepartamento " : "") +
                                  (filtrarApellidos ? "AND (t.a_paterno LIKE @apellidos OR t.a_materno LIKE @apellidos) " : "") +
-                                 "GROUP BY t.id_trabajador " +
-                                 "ORDER BY d.nombre_departamento, t.nombre;";
+                                 "ORDER BY t.fecha_ingreso ASC;";
 
                     // Ejecutar la consulta con sus parámetros
                     using (var cmd = new MySqlCommand(sql, conexion))
                     {
-                        cmd.Parameters.AddWithValue("@desde", desde.ToString("yyyy-MM-dd"));
-                        cmd.Parameters.AddWithValue("@hasta", hasta.ToString("yyyy-MM-dd"));
                         cmd.Parameters.AddWithValue("@idDepartamento", idDepartamento);
                         if (filtrarApellidos)
                         {
@@ -181,12 +175,64 @@ namespace ProyectoRegistroAsistencia
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al consultar las incidencias por empleado: " + ex.Message);
+                throw new Exception("Error al consultar la antigüedad: " + ex.Message);
             }
             return tabla;
         }
 
-        // Arma el PDF del reporte (usado por ExportarPDF e Imprimir para no repetir el diseño).
+        // Reporte de Empleados sin Horario Asignado: detecta activos sin registro en tblhorario_trabajo.
+        // Sirve para corregir casos que afectarían otros reportes (Puntualidad, Horas Trabajadas).
+        public DataTable ConsultarEmpleadosSinHorario(int idDepartamento, string apellidos = "")
+        {
+            tabla = new DataTable();
+            try
+            {
+                // Filtro opcional de apellidos
+                bool filtrarApellidos = !string.IsNullOrWhiteSpace(apellidos);
+
+                // Abrir conexión
+                clsConexion conexionBD = new clsConexion();
+                using (var conexion = conexionBD.AbrirConexion())
+                {
+                    // LEFT JOIN + IS NULL: trae solo a quienes no tienen ninguna fila en tblhorario_trabajo
+                    string sql = "SELECT t.clave_trabajador AS Clave, " +
+                                 "CONCAT(t.nombre, ' ', t.a_paterno, ' ', IFNULL(t.a_materno,'')) AS Trabajador, " +
+                                 "d.nombre_departamento AS Departamento, " +
+                                 "p.nombre_puesto AS Puesto " +
+                                 "FROM tbltrabajador t " +
+                                 "INNER JOIN tbldepartamento d ON d.id_departamento = t.id_departamento " +
+                                 "INNER JOIN tblpuestos p ON p.id_puesto = t.id_puesto " +
+                                 "LEFT JOIN tblhorario_trabajo h ON h.id_trabajador = t.id_trabajador " +
+                                 "WHERE t.estatus = 'activo' AND h.id_trabajador IS NULL " +
+                                 (idDepartamento != 0 ? "AND t.id_departamento = @idDepartamento " : "") +
+                                 (filtrarApellidos ? "AND (t.a_paterno LIKE @apellidos OR t.a_materno LIKE @apellidos) " : "") +
+                                 "ORDER BY Trabajador;";
+
+                    // Ejecutar la consulta con sus parámetros
+                    using (var cmd = new MySqlCommand(sql, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@idDepartamento", idDepartamento);
+                        if (filtrarApellidos)
+                        {
+                            cmd.Parameters.AddWithValue("@apellidos", "%" + apellidos.Trim() + "%");
+                        }
+
+                        // Llenar la tabla de resultados
+                        using (consulta = new MySqlDataAdapter(cmd))
+                        {
+                            consulta.Fill(tabla);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al consultar empleados sin horario: " + ex.Message);
+            }
+            return tabla;
+        }
+
+        // Arma el PDF del reporte (usado por ExportarPDF para no repetir el diseño).
         private IDocument CrearDocumentoPdf(DataTable tabla, string tituloReporte)
         {
             return Document.Create(container =>
@@ -198,23 +244,34 @@ namespace ProyectoRegistroAsistencia
                     page.PageColor(Colors.White);
                     page.DefaultTextStyle(x => x.FontFamily(Fonts.TimesNewRoman));
 
-                    //Agregar Titulo al reporte
-                    page.Header().Row(row =>
+                    // Encabezado: título + logo arriba, y debajo la fecha de generación y quién lo generó
+                    page.Header().Column(encabezado =>
                     {
-                        row.RelativeItem().AlignLeft().AlignMiddle().Column(col =>
+                        // Título a la izquierda y logo a la derecha, alineados en la misma fila
+                        encabezado.Item().Row(row =>
                         {
-                            col.Item().Text("SYSTEM STAFF ASISTENCE ")
-                            .FontSize(18)
-                            .Bold()
-                            .FontColor("#10407A");
-                            col.Item().PaddingTop(5).LineHorizontal(1).LineColor(Colors.Grey.Lighten2);
+                            row.RelativeItem().AlignLeft().AlignMiddle().Text("SYSTEM STAFF ASISTENCE")
+                                .FontSize(18).Bold().FontColor("#10407A");
+
+                            if (Properties.Resources.LOGO != null)
+                            {
+                                byte[] bytesLogo = Properties.Resources.LOGO;
+                                row.ConstantItem(90).AlignRight().AlignMiddle().Image(bytesLogo);
+                            }
                         });
 
-                        if (Properties.Resources.LOGO != null)
+                        // Línea separadora debajo del título y el logo
+                        encabezado.Item().PaddingTop(5).LineHorizontal(1).LineColor(Colors.Grey.Lighten2);
+
+                        // Fecha/hora de generación (izquierda) y usuario que lo generó (derecha)
+                        encabezado.Item().PaddingTop(4).Row(row =>
                         {
-                            byte[] bytesLogo = Properties.Resources.LOGO;
-                            row.ConstantItem(90).AlignRight().AlignMiddle().Image(bytesLogo);
-                        }
+                            row.RelativeItem().AlignLeft().Text($"Generado el: {DateTime.Now:dd/MM/yyyy HH:mm}")
+                                .FontSize(8).FontColor(Colors.Grey.Darken1);
+
+                            row.RelativeItem().AlignRight().Text($"Generado por: {clsLogin.usuarioActual}")
+                                .FontSize(8).FontColor(Colors.Grey.Darken1);
+                        });
                     });
 
                     // --- PARTE 2: CONTENIDO CENTRAL ---
@@ -316,47 +373,6 @@ namespace ProyectoRegistroAsistencia
                 }
             }
         }//Finaliza el metodo de conversion
-
-        // Genera el PDF en una carpeta temporal y lo manda directo a imprimir.
-        public void Imprimir(DataTable tabla, string tituloReporte)
-        {
-            // Validar que haya datos
-            if (tabla == null || tabla.Rows.Count == 0)
-            {
-                MessageBox.Show("No hay datos para imprimir", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Ruta temporal única para el PDF
-            string rutaTemporal = Path.Combine(Path.GetTempPath(), $"Reporte_{Guid.NewGuid():N}.pdf");
-
-            try
-            {
-                // Generar el PDF y mandarlo a imprimir directo
-                CrearDocumentoPdf(tabla, tituloReporte).GeneratePdf(rutaTemporal);
-
-                var psi = new ProcessStartInfo(rutaTemporal)
-                {
-                    UseShellExecute = true,
-                    Verb = "print"
-                };
-                Process.Start(psi);
-            }
-            catch (Exception)
-            {
-                // Si no se puede imprimir directo, al menos se abre el PDF para imprimirlo manualmente.
-                try
-                {
-                    Process.Start(new ProcessStartInfo(rutaTemporal) { UseShellExecute = true });
-                    MessageBox.Show("No se pudo enviar directo a la impresora. Se abrió el PDF para que lo imprimas manualmente (Ctrl+P).",
-                        "Staff Asistence", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception exAbrir)
-                {
-                    throw new Exception("No se pudo abrir el reporte para imprimir: " + exAbrir.Message);
-                }
-            }
-        }
 
         // Exporta el reporte a Excel (pide dónde guardarlo).
         public void ExportarExcel(DataTable tabla, string tituloReporte, string nombreArchivoSugerido)

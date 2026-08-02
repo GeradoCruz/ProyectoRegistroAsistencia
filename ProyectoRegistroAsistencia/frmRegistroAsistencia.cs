@@ -62,7 +62,7 @@ namespace ProyectoRegistroAsistencia
         {
             try
             {
-                string clave = string.IsNullOrEmpty(txtClaveTrabajador.Text) ? null : txtClaveTrabajador.Text;
+                string clave = string.IsNullOrWhiteSpace(txtClaveTrabajador.Text) ? null : txtClaveTrabajador.Text.Trim();
 
                 if (clave == null)
                 {

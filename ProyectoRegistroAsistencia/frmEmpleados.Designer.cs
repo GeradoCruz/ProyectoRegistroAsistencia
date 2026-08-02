@@ -37,7 +37,6 @@ namespace ProyectoRegistroAsistencia
             txtBuscarEmpleado = new TextBox();
             lblDepartamento = new Label();
             cmbDepartamento = new ComboBox();
-            btnBuscar = new Button();
             btnLimpiar = new Button();
             dgvEmpleados = new DataGridView();
             btnNuevo = new Button();
@@ -89,7 +88,8 @@ namespace ProyectoRegistroAsistencia
             txtBuscarEmpleado.Name = "txtBuscarEmpleado";
             txtBuscarEmpleado.Size = new Size(200, 29);
             txtBuscarEmpleado.TabIndex = 3;
-            // 
+            txtBuscarEmpleado.TextChanged += txtBuscarEmpleado_TextChanged;
+            //
             // lblDepartamento
             // 
             lblDepartamento.AutoSize = true;
@@ -110,22 +110,8 @@ namespace ProyectoRegistroAsistencia
             cmbDepartamento.Name = "cmbDepartamento";
             cmbDepartamento.Size = new Size(200, 29);
             cmbDepartamento.TabIndex = 5;
-            // 
-            // btnBuscar
-            // 
-            btnBuscar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnBuscar.BackColor = Color.FromArgb(43, 76, 140);
-            btnBuscar.ForeColor = Color.White;
-            btnBuscar.Image = (Image)resources.GetObject("btnBuscar.Image");
-            btnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnBuscar.Location = new Point(876, 120);
-            btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(180, 40);
-            btnBuscar.TabIndex = 9;
-            btnBuscar.Text = "Buscar";
-            btnBuscar.UseVisualStyleBackColor = false;
-            btnBuscar.Click += btnBuscar_Click;
-            // 
+            cmbDepartamento.SelectedIndexChanged += cmbDepartamento_SelectedIndexChanged;
+            //
             // btnLimpiar
             // 
             btnLimpiar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -133,7 +119,7 @@ namespace ProyectoRegistroAsistencia
             btnLimpiar.ForeColor = Color.White;
             btnLimpiar.Image = (Image)resources.GetObject("btnLimpiar.Image");
             btnLimpiar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnLimpiar.Location = new Point(688, 120);
+            btnLimpiar.Location = new Point(876, 127);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(180, 40);
             btnLimpiar.TabIndex = 8;
@@ -171,7 +157,6 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvEmpleados.DefaultCellStyle = dataGridViewCellStyle2;
             dgvEmpleados.EnableHeadersVisualStyles = false;
-            dgvEmpleados.ForeColor = Color.FromArgb(28, 32, 51);
             dgvEmpleados.GridColor = Color.FromArgb(221, 225, 232);
             dgvEmpleados.Location = new Point(11, 178);
             dgvEmpleados.MultiSelect = false;
@@ -239,7 +224,6 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(btnEditar);
             Controls.Add(btnNuevo);
             Controls.Add(dgvEmpleados);
-            Controls.Add(btnBuscar);
             Controls.Add(btnLimpiar);
             Controls.Add(cmbDepartamento);
             Controls.Add(lblDepartamento);
@@ -265,7 +249,6 @@ namespace ProyectoRegistroAsistencia
         private TextBox txtBuscarEmpleado;
         private Label lblDepartamento;
         private ComboBox cmbDepartamento;
-        private Button btnBuscar;
         private Button btnLimpiar;
         public DataGridView dgvEmpleados;
         private Button btnNuevo;

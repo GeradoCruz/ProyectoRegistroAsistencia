@@ -38,7 +38,6 @@ namespace ProyectoRegistroAsistencia
             dtpFiltroAsistencia = new DateTimePicker();
             txtApellido = new TextBox();
             btnLimpiar = new Button();
-            btnBuscar = new Button();
             dgvRegistros = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dgvRegistros).BeginInit();
             SuspendLayout();
@@ -114,28 +113,13 @@ namespace ProyectoRegistroAsistencia
             btnLimpiar.ForeColor = Color.White;
             btnLimpiar.Image = (Image)resources.GetObject("btnLimpiar.Image");
             btnLimpiar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnLimpiar.Location = new Point(690, 161);
+            btnLimpiar.Location = new Point(875, 157);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(180, 40);
             btnLimpiar.TabIndex = 6;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = false;
             btnLimpiar.Click += btnLimpiar_Click;
-            // 
-            // btnBuscar
-            // 
-            btnBuscar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnBuscar.BackColor = Color.FromArgb(43, 76, 140);
-            btnBuscar.ForeColor = Color.White;
-            btnBuscar.Image = (Image)resources.GetObject("btnBuscar.Image");
-            btnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnBuscar.Location = new Point(879, 161);
-            btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(180, 40);
-            btnBuscar.TabIndex = 7;
-            btnBuscar.Text = "Buscar";
-            btnBuscar.UseVisualStyleBackColor = false;
-            btnBuscar.Click += btnBuscar_Click;
             // 
             // dgvRegistros
             // 
@@ -166,7 +150,6 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvRegistros.DefaultCellStyle = dataGridViewCellStyle2;
             dgvRegistros.EnableHeadersVisualStyles = false;
-            dgvRegistros.ForeColor = Color.FromArgb(28, 32, 51);
             dgvRegistros.GridColor = Color.FromArgb(221, 225, 232);
             dgvRegistros.Location = new Point(11, 217);
             dgvRegistros.MultiSelect = false;
@@ -185,7 +168,6 @@ namespace ProyectoRegistroAsistencia
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);
             Controls.Add(dgvRegistros);
-            Controls.Add(btnBuscar);
             Controls.Add(btnLimpiar);
             Controls.Add(txtApellido);
             Controls.Add(dtpFiltroAsistencia);
@@ -212,7 +194,6 @@ namespace ProyectoRegistroAsistencia
         private DateTimePicker dtpFiltroAsistencia;
         private TextBox txtApellido;
         private Button btnLimpiar;
-        private Button btnBuscar;
         private DataGridView dgvRegistros;
     }
 }

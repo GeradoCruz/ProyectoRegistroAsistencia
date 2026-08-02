@@ -39,14 +39,14 @@ namespace ProyectoRegistroAsistencia
             lblNombreTrabajador = new Label();
             lblTipoIncidencia = new Label();
             cmbTipoIncidencia = new ComboBox();
-            btnBuscar = new Button();
+            btnLimpiar = new Button();
             dgvIncidencias = new DataGridView();
             btnJustificar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvIncidencias).BeginInit();
             SuspendLayout();
-            // 
+            //
             // lblTitulo
-            // 
+            //
             lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -56,9 +56,9 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.TabIndex = 4;
             lblTitulo.Text = "Incidencias";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
-            // 
+            //
             // lblSubtitulo
-            // 
+            //
             lblSubtitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblSubtitulo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
@@ -68,17 +68,19 @@ namespace ProyectoRegistroAsistencia
             lblSubtitulo.TabIndex = 5;
             lblSubtitulo.Text = "Consulte todas las incidencias de un empleado en una fecha especifica";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
-            // 
+            //
             // dtpFecha
-            // 
+            //
             dtpFecha.Format = DateTimePickerFormat.Custom;
             dtpFecha.Location = new Point(14, 126);
             dtpFecha.Name = "dtpFecha";
             dtpFecha.Size = new Size(200, 29);
             dtpFecha.TabIndex = 7;
-            // 
+            dtpFecha.ValueChanged += dtpFecha_ValueChanged;
+            dtpFecha.MouseUp += dtpFecha_MouseUp;
+            //
             // lblFecha
-            // 
+            //
             lblFecha.AutoSize = true;
             lblFecha.ForeColor = Color.FromArgb(108, 117, 125);
             lblFecha.Location = new Point(16, 95);
@@ -87,18 +89,19 @@ namespace ProyectoRegistroAsistencia
             lblFecha.TabIndex = 6;
             lblFecha.Text = "Fecha:";
             lblFecha.TextAlign = ContentAlignment.MiddleLeft;
-            // 
+            //
             // txtNombreTrabajador
-            // 
+            //
             txtNombreTrabajador.BackColor = Color.White;
             txtNombreTrabajador.ForeColor = Color.FromArgb(64, 64, 64);
             txtNombreTrabajador.Location = new Point(223, 126);
             txtNombreTrabajador.Name = "txtNombreTrabajador";
             txtNombreTrabajador.Size = new Size(200, 29);
             txtNombreTrabajador.TabIndex = 9;
-            // 
+            txtNombreTrabajador.TextChanged += txtNombreTrabajador_TextChanged;
+            //
             // lblNombreTrabajador
-            // 
+            //
             lblNombreTrabajador.AutoSize = true;
             lblNombreTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
             lblNombreTrabajador.Location = new Point(225, 95);
@@ -107,9 +110,9 @@ namespace ProyectoRegistroAsistencia
             lblNombreTrabajador.TabIndex = 8;
             lblNombreTrabajador.Text = "Nombre del Trabajador:";
             lblNombreTrabajador.TextAlign = ContentAlignment.MiddleLeft;
-            // 
+            //
             // lblTipoIncidencia
-            // 
+            //
             lblTipoIncidencia.AutoSize = true;
             lblTipoIncidencia.ForeColor = Color.FromArgb(108, 117, 125);
             lblTipoIncidencia.Location = new Point(434, 95);
@@ -118,9 +121,9 @@ namespace ProyectoRegistroAsistencia
             lblTipoIncidencia.TabIndex = 10;
             lblTipoIncidencia.Text = "Tipo de Incidencia";
             lblTipoIncidencia.TextAlign = ContentAlignment.MiddleLeft;
-            // 
+            //
             // cmbTipoIncidencia
-            // 
+            //
             cmbTipoIncidencia.BackColor = Color.White;
             cmbTipoIncidencia.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTipoIncidencia.ForeColor = Color.FromArgb(64, 64, 64);
@@ -129,24 +132,25 @@ namespace ProyectoRegistroAsistencia
             cmbTipoIncidencia.Name = "cmbTipoIncidencia";
             cmbTipoIncidencia.Size = new Size(200, 29);
             cmbTipoIncidencia.TabIndex = 11;
-            // 
-            // btnBuscar
-            // 
-            btnBuscar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnBuscar.BackColor = Color.FromArgb(43, 76, 140);
-            btnBuscar.ForeColor = Color.White;
-            btnBuscar.Image = (Image)resources.GetObject("btnBuscar.Image");
-            btnBuscar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnBuscar.Location = new Point(877, 119);
-            btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(180, 40);
-            btnBuscar.TabIndex = 16;
-            btnBuscar.Text = "Buscar";
-            btnBuscar.UseVisualStyleBackColor = false;
-            btnBuscar.Click += btnBuscar_Click;
-            // 
+            cmbTipoIncidencia.SelectedIndexChanged += cmbTipoIncidencia_SelectedIndexChanged;
+            //
+            // btnLimpiar
+            //
+            btnLimpiar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnLimpiar.BackColor = Color.FromArgb(43, 76, 140);
+            btnLimpiar.ForeColor = Color.White;
+            btnLimpiar.Image = (Image)resources.GetObject("btnLimpiar.Image");
+            btnLimpiar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnLimpiar.Location = new Point(877, 119);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(180, 40);
+            btnLimpiar.TabIndex = 16;
+            btnLimpiar.Text = "Limpiar";
+            btnLimpiar.UseVisualStyleBackColor = false;
+            btnLimpiar.Click += btnLimpiar_Click;
+            //
             // dgvIncidencias
-            // 
+            //
             dgvIncidencias.AllowUserToAddRows = false;
             dgvIncidencias.AllowUserToDeleteRows = false;
             dgvIncidencias.AllowUserToResizeColumns = false;
@@ -184,9 +188,9 @@ namespace ProyectoRegistroAsistencia
             dgvIncidencias.RowTemplate.Height = 40;
             dgvIncidencias.Size = new Size(1044, 427);
             dgvIncidencias.TabIndex = 17;
-            // 
+            //
             // btnJustificar
-            // 
+            //
             btnJustificar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnJustificar.BackColor = Color.FromArgb(43, 76, 140);
             btnJustificar.ForeColor = Color.White;
@@ -199,16 +203,16 @@ namespace ProyectoRegistroAsistencia
             btnJustificar.Text = "Justificar";
             btnJustificar.UseVisualStyleBackColor = false;
             btnJustificar.Click += btnJustificar_Click;
-            // 
+            //
             // frmIncidencias
-            // 
+            //
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);
             Controls.Add(btnJustificar);
             Controls.Add(dgvIncidencias);
-            Controls.Add(btnBuscar);
+            Controls.Add(btnLimpiar);
             Controls.Add(cmbTipoIncidencia);
             Controls.Add(lblTipoIncidencia);
             Controls.Add(txtNombreTrabajador);
@@ -227,11 +231,6 @@ namespace ProyectoRegistroAsistencia
             PerformLayout();
         }
 
-        private void dtpFecha_ValueChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
 
         private Label lblTitulo;
@@ -242,7 +241,7 @@ namespace ProyectoRegistroAsistencia
         private Label lblNombreTrabajador;
         private Label lblTipoIncidencia;
         private ComboBox cmbTipoIncidencia;
-        private Button btnBuscar;
+        private Button btnLimpiar;
         private DataGridView dgvIncidencias;
         private Button btnJustificar;
     }
