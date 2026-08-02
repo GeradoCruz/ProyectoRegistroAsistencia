@@ -117,29 +117,37 @@ namespace ProyectoRegistroAsistencia
                 return;
             }
 
-            int id = Convert.ToInt32(
-                dgvIncidencias.CurrentRow.Cells["id_incidencia"].Value);
-
-            string nombre = dgvIncidencias.CurrentRow
-                .Cells["Nombre completo"].Value.ToString();
-
-            string departamento = dgvIncidencias.CurrentRow
-                .Cells["Nombre departamento"].Value.ToString();
-
-            string incidencia = dgvIncidencias.CurrentRow
-                .Cells["Tipo de incidencia"].Value.ToString();
-
-            DateTime fecha = Convert.ToDateTime(
-                dgvIncidencias.CurrentRow.Cells["Fecha"].Value);
-
-            using (frmJustificante frm = new frmJustificante())
+            try
             {
-                frm.CargarDatos(id, nombre, departamento, incidencia, fecha);
+                int id = Convert.ToInt32(
+                    dgvIncidencias.CurrentRow.Cells["id_incidencia"].Value);
 
-                if (frm.ShowDialog() == DialogResult.OK)
+                string nombre = dgvIncidencias.CurrentRow
+                    .Cells["Nombre completo"].Value.ToString();
+
+                string departamento = dgvIncidencias.CurrentRow
+                    .Cells["Nombre departamento"].Value.ToString();
+
+                string incidencia = dgvIncidencias.CurrentRow
+                    .Cells["Tipo de incidencia"].Value.ToString();
+
+                DateTime fecha = Convert.ToDateTime(
+                    dgvIncidencias.CurrentRow.Cells["Fecha"].Value);
+
+                using (frmJustificante frm = new frmJustificante())
                 {
-                    RefrescarGrid();
+                    frm.CargarDatos(id, nombre, departamento, incidencia, fecha);
+
+                    if (frm.ShowDialog() == DialogResult.OK)
+                    {
+                        RefrescarGrid();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo abrir la justificación: " + ex.Message,
+                    "Staff Asistence", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

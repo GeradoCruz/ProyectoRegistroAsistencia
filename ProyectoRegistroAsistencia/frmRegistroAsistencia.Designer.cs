@@ -31,7 +31,7 @@ namespace ProyectoRegistroAsistencia
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRegistroAsistencia));
             pnlFormulario = new Panel();
-            groupBox1 = new GroupBox();
+            grpCamaraActivo = new GroupBox();
             pcbCamara = new PictureBox();
             lblTitulo = new Label();
             pcbRegistro = new PictureBox();
@@ -41,7 +41,7 @@ namespace ProyectoRegistroAsistencia
             lblAdministrador = new Label();
             tmrCamara = new System.Windows.Forms.Timer(components);
             pnlFormulario.SuspendLayout();
-            groupBox1.SuspendLayout();
+            grpCamaraActivo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbCamara).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcbRegistro).BeginInit();
             SuspendLayout();
@@ -50,7 +50,7 @@ namespace ProyectoRegistroAsistencia
             // 
             pnlFormulario.Anchor = AnchorStyles.None;
             pnlFormulario.BackColor = Color.White;
-            pnlFormulario.Controls.Add(groupBox1);
+            pnlFormulario.Controls.Add(grpCamaraActivo);
             pnlFormulario.Controls.Add(lblTitulo);
             pnlFormulario.Controls.Add(pcbRegistro);
             pnlFormulario.Controls.Add(lblClaveTrabajador);
@@ -62,18 +62,18 @@ namespace ProyectoRegistroAsistencia
             pnlFormulario.Size = new Size(641, 430);
             pnlFormulario.TabIndex = 0;
             // 
-            // groupBox1
+            // grpCamaraActivo
             // 
-            groupBox1.Controls.Add(pcbCamara);
-            groupBox1.FlatStyle = FlatStyle.Popup;
-            groupBox1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox1.ForeColor = Color.FromArgb(108, 117, 125);
-            groupBox1.Location = new Point(335, 25);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(293, 386);
-            groupBox1.TabIndex = 9;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Camara Activo";
+            grpCamaraActivo.Controls.Add(pcbCamara);
+            grpCamaraActivo.FlatStyle = FlatStyle.Popup;
+            grpCamaraActivo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            grpCamaraActivo.ForeColor = Color.FromArgb(108, 117, 125);
+            grpCamaraActivo.Location = new Point(335, 25);
+            grpCamaraActivo.Name = "grpCamaraActivo";
+            grpCamaraActivo.Size = new Size(293, 386);
+            grpCamaraActivo.TabIndex = 9;
+            grpCamaraActivo.TabStop = false;
+            grpCamaraActivo.Text = "Cámara Activo";
             // 
             // pcbCamara
             // 
@@ -167,6 +167,7 @@ namespace ProyectoRegistroAsistencia
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4);
             Name = "frmRegistroAsistencia";
+            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "StaffAsistence";
             WindowState = FormWindowState.Maximized;
@@ -174,7 +175,7 @@ namespace ProyectoRegistroAsistencia
             KeyDown += frmRegistroAsistencia_KeyDown;
             pnlFormulario.ResumeLayout(false);
             pnlFormulario.PerformLayout();
-            groupBox1.ResumeLayout(false);
+            grpCamaraActivo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pcbCamara).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcbRegistro).EndInit();
             ResumeLayout(false);
@@ -189,7 +190,7 @@ namespace ProyectoRegistroAsistencia
         private Button btnRegistrar;
         private Label lblAdministrador;
         private System.Windows.Forms.Timer tmrCamara;
-        private GroupBox groupBox1;
+        private GroupBox grpCamaraActivo;
         private PictureBox pcbCamara;
     }
 }

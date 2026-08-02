@@ -26,13 +26,13 @@ namespace ProyectoRegistroAsistencia
         public void cargarGrid()
         {
             horario = new clsHorarioSemanal();
-            dgvHorarios.DataSource = null;
-            dgvHorarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvListaEmpleados.DataSource = null;
+            dgvListaEmpleados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             try
             {
-                dgvHorarios.DataSource = horario.cargarDataGrid();
-                dgvHorarios.Columns["id_trabajador"].Visible = false;
-
+                dgvListaEmpleados.DataSource = horario.cargarDataGrid();
+                dgvListaEmpleados.Columns["id_trabajador"].Visible = false;
+                
             }
             catch (Exception ex)
             {
@@ -47,7 +47,7 @@ namespace ProyectoRegistroAsistencia
             if (e.RowIndex < 0) return;
             try
             {
-                int idTrabajador = Convert.ToInt32(dgvHorarios.Rows[e.RowIndex].Cells["id_trabajador"].Value);
+                int idTrabajador = Convert.ToInt32(dgvListaEmpleados.Rows[e.RowIndex].Cells["id_trabajador"].Value);
                 cargarGridDiasHorario(idTrabajador);
             }
             catch (Exception ex)
@@ -111,7 +111,7 @@ namespace ProyectoRegistroAsistencia
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al rellenar los catálogos en los menús desplegables: " + ex.Message);
+                MessageBox.Show("Error al rellenar los catÃ¡logos en los menÃºs desplegables: " + ex.Message);
             }
         }
         // Evento que se dispara cuando se selecciona un elemento en el ComboBox cmbDepartamento
@@ -128,18 +128,24 @@ namespace ProyectoRegistroAsistencia
 
                 if (idDepartamento == 0)
                 {
-                    dgvHorarios.DataSource = horario.cargarDataGrid();
+                    dgvListaEmpleados.DataSource = horario.cargarDataGrid();
                 }
                 else
                 {
-                    dgvHorarios.DataSource = horario.consultarPorBusquedaDepartamento(idDepartamento);
+                    dgvListaEmpleados.DataSource = horario.consultarPorBusquedaDepartamento(idDepartamento);
                 }
-                dgvHorarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                dgvListaEmpleados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            if (dgvListaEmpleados.Columns.Contains("id_trabajador"))
+                dgvListaEmpleados.Columns["id_trabajador"].Visible = false;
+            if (dgvListaEmpleados.Columns.Contains("id_semestre"))
+                dgvListaEmpleados.Columns["id_semestre"].Visible = false;
+            dgvListaEmpleados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
         }
         //Limpiar el dataGrid y vuelve al inicio
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -158,7 +164,7 @@ namespace ProyectoRegistroAsistencia
 
                 if (!string.IsNullOrWhiteSpace(apellido))
                 {
-                    dgvHorarios.DataSource = horario.BusquedaNombreApellido(apellido);
+                    dgvListaEmpleados.DataSource = horario.BusquedaNombreApellido(apellido);
                 }
                 else
                 {

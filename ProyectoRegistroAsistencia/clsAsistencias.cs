@@ -12,9 +12,6 @@ namespace ProyectoRegistroAsistencia
     {
         private DataTable tabla;
         private MySqlDataAdapter consulta;
-        private DataTable clave;
-        private DataTable fecha;
-        private MySqlCommand comando;
         public DataTable CargaDataGrid()
         {
             tabla = new DataTable();
@@ -23,12 +20,15 @@ namespace ProyectoRegistroAsistencia
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT T.clave_trabajador AS Clave_Trabajador, " +
-                        "CONCAT(T.nombre,'',  T.a_paterno,' ', T.a_materno) AS Trabajador," +
+                    string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
+                        "CONCAT(T.nombre,' ',  T.a_paterno,' ', T.a_materno) AS Trabajador," +
+                        "D.nombre_departamento AS Departamento," +
                         "A.registro  AS Registro," +
                         "A.fecha AS Fecha " +
                         "FROM tblasistencia A " +
-                        "INNER JOIN tbltrabajador T ON A.id_trabajador = T.id_trabajador;";
+                        "INNER JOIN tbltrabajador T ON T.id_trabajador = A.id_trabajador "+
+                        "INNER JOIN tbldepartamento D ON D.id_departamento = T.id_departamento;"; 
+                        
                     using (consulta = new MySqlDataAdapter(sql, conexion))
                     {
                         consulta.Fill(tabla);
@@ -43,7 +43,7 @@ namespace ProyectoRegistroAsistencia
         }
 
 
-        public DataTable BusquedaFecha(DateTime fecha, string apellido)
+        public DataTable BusquedaFecha(DateTime? fecha, string apellido)
         {
             tabla = new DataTable();
 
@@ -58,8 +58,12 @@ namespace ProyectoRegistroAsistencia
                                  "A.registro AS Registro, " +
                                  "A.fecha AS Fecha " +
                                  "FROM tblasistencia A " +
-                                 "INNER JOIN tbltrabajador T ON A.id_trabajador = T.id_trabajador " +
-                                 "WHERE DATE(A.fecha) = @fecha ";
+                                 "INNER JOIN tbltrabajador T ON A.id_trabajador = T.id_trabajador ";
+
+                    if (fecha.HasValue)
+                    {
+                        sql += " AND DATE(A.fecha) = @fecha";
+                    }
 
                     if (!string.IsNullOrWhiteSpace(apellido))
                     {
@@ -68,7 +72,10 @@ namespace ProyectoRegistroAsistencia
 
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
-                        consultar.Parameters.AddWithValue("@fecha", fecha.Date);
+                        if (fecha.HasValue)
+                        {
+                            consultar.Parameters.AddWithValue("@fecha", fecha.Value.Date);
+                        }
 
                         if (!string.IsNullOrEmpty(apellido))
                         {

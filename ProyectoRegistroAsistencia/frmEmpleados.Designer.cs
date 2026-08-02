@@ -76,14 +76,15 @@ namespace ProyectoRegistroAsistencia
             lblTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
             lblTrabajador.Location = new Point(13, 94);
             lblTrabajador.Name = "lblTrabajador";
-            lblTrabajador.Size = new Size(177, 21);
+            lblTrabajador.Size = new Size(141, 21);
             lblTrabajador.TabIndex = 2;
-            lblTrabajador.Text = "Clave/nombre/apellidos";
+            lblTrabajador.Text = "Nombre/Apellidos:";
+            lblTrabajador.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtBuscarEmpleado
             // 
             txtBuscarEmpleado.BackColor = Color.White;
-            txtBuscarEmpleado.ForeColor = Color.FromArgb(108, 117, 125);
+            txtBuscarEmpleado.ForeColor = Color.FromArgb(64, 64, 64);
             txtBuscarEmpleado.Location = new Point(13, 127);
             txtBuscarEmpleado.Name = "txtBuscarEmpleado";
             txtBuscarEmpleado.Size = new Size(200, 29);
@@ -93,18 +94,19 @@ namespace ProyectoRegistroAsistencia
             // 
             lblDepartamento.AutoSize = true;
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDepartamento.Location = new Point(219, 94);
+            lblDepartamento.Location = new Point(233, 94);
             lblDepartamento.Name = "lblDepartamento";
             lblDepartamento.Size = new Size(113, 21);
             lblDepartamento.TabIndex = 4;
             lblDepartamento.Text = "Departamento:";
+            lblDepartamento.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cmbDepartamento
             // 
             cmbDepartamento.BackColor = Color.White;
-            cmbDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
+            cmbDepartamento.ForeColor = Color.FromArgb(64, 64, 64);
             cmbDepartamento.FormattingEnabled = true;
-            cmbDepartamento.Location = new Point(219, 127);
+            cmbDepartamento.Location = new Point(233, 127);
             cmbDepartamento.Name = "cmbDepartamento";
             cmbDepartamento.Size = new Size(200, 29);
             cmbDepartamento.TabIndex = 5;
@@ -146,6 +148,7 @@ namespace ProyectoRegistroAsistencia
             dgvEmpleados.AllowUserToResizeColumns = false;
             dgvEmpleados.AllowUserToResizeRows = false;
             dgvEmpleados.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvEmpleados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvEmpleados.BackgroundColor = Color.FromArgb(240, 242, 245);
             dgvEmpleados.BorderStyle = BorderStyle.None;
             dgvEmpleados.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
@@ -244,8 +247,10 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(lblSubtitulo);
             Controls.Add(lblTitulo);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ForeColor = Color.FromArgb(108, 117, 125);
             Margin = new Padding(4);
             Name = "frmEmpleados";
+            ShowIcon = false;
             ((System.ComponentModel.ISupportInitialize)dgvEmpleados).EndInit();
             ResumeLayout(false);
             PerformLayout();
