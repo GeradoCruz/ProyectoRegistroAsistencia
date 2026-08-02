@@ -85,7 +85,7 @@ namespace ProyectoRegistroAsistencia
             gpbDireccion.Size = new Size(480, 134);
             gpbDireccion.TabIndex = 8;
             gpbDireccion.TabStop = false;
-            gpbDireccion.Text = "Dirección";
+            gpbDireccion.Text = "DirecciÃ³n";
             // 
             // txtCodigoPostal
             // 
@@ -93,7 +93,7 @@ namespace ProyectoRegistroAsistencia
             txtCodigoPostal.Location = new Point(257, 41);
             txtCodigoPostal.Name = "txtCodigoPostal";
             txtCodigoPostal.Size = new Size(200, 29);
-            txtCodigoPostal.TabIndex = 7;
+            txtCodigoPostal.TabIndex = 5;
             // 
             // txtMunicipio
             // 
@@ -101,7 +101,7 @@ namespace ProyectoRegistroAsistencia
             txtMunicipio.Location = new Point(257, 96);
             txtMunicipio.Name = "txtMunicipio";
             txtMunicipio.Size = new Size(200, 29);
-            txtMunicipio.TabIndex = 6;
+            txtMunicipio.TabIndex = 7;
             // 
             // txtLocalidad
             // 
@@ -109,7 +109,7 @@ namespace ProyectoRegistroAsistencia
             txtLocalidad.Location = new Point(16, 96);
             txtLocalidad.Name = "txtLocalidad";
             txtLocalidad.Size = new Size(200, 29);
-            txtLocalidad.TabIndex = 5;
+            txtLocalidad.TabIndex = 6;
             // 
             // txtNumCalle
             // 
@@ -245,7 +245,7 @@ namespace ProyectoRegistroAsistencia
             lblTelefono.Name = "lblTelefono";
             lblTelefono.Size = new Size(71, 21);
             lblTelefono.TabIndex = 0;
-            lblTelefono.Text = "Teléfono:";
+            lblTelefono.Text = "TelÃ©fono:";
             lblTelefono.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // btnGuardar
@@ -261,6 +261,7 @@ namespace ProyectoRegistroAsistencia
             btnGuardar.TabIndex = 10;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // cmbPuesto
             // 
@@ -333,6 +334,7 @@ namespace ProyectoRegistroAsistencia
             // 
             // txtClaveTrabajador
             // 
+            txtClaveTrabajador.CharacterCasing = CharacterCasing.Upper;
             txtClaveTrabajador.ForeColor = Color.FromArgb(64, 64, 64);
             txtClaveTrabajador.Location = new Point(16, 48);
             txtClaveTrabajador.Name = "txtClaveTrabajador";
@@ -412,6 +414,7 @@ namespace ProyectoRegistroAsistencia
             btnCancelar.TabIndex = 11;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // lblTitulo
             // 

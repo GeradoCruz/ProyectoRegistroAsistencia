@@ -71,7 +71,7 @@ namespace ProyectoRegistroAsistencia
             grpCamaraActivo.Size = new Size(293, 386);
             grpCamaraActivo.TabIndex = 9;
             grpCamaraActivo.TabStop = false;
-            grpCamaraActivo.Text = "C�mara Activo";
+            grpCamaraActivo.Text = "Camara Activo";
             // 
             // pcbCamara
             // 
@@ -123,11 +123,10 @@ namespace ProyectoRegistroAsistencia
             txtClaveTrabajador.Name = "txtClaveTrabajador";
             txtClaveTrabajador.Size = new Size(270, 29);
             txtClaveTrabajador.TabIndex = 3;
-            // Al presionar Enter en este campo se registra la asistencia (ya no hay botón).
             txtClaveTrabajador.KeyDown += txtClaveTrabajador_KeyDown;
-            //
+            // 
             // lblAdministrador
-            //
+            // 
             lblAdministrador.AutoSize = true;
             lblAdministrador.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblAdministrador.ForeColor = Color.FromArgb(108, 117, 125);

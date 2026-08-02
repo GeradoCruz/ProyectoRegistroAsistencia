@@ -1,4 +1,4 @@
-﻿using MySqlConnector;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,8 +27,8 @@ namespace ProyectoRegistroAsistencia
                         "A.fecha AS Fecha " +
                         "FROM tblasistencia A " +
                         "INNER JOIN tbltrabajador T ON T.id_trabajador = A.id_trabajador "+
-                        "INNER JOIN tbldepartamento D ON D.id_departamento = T.id_departamento;"; 
-                        
+                        "INNER JOIN tbldepartamento D ON D.id_departamento = T.id_departamento;";
+
                     using (consulta = new MySqlDataAdapter(sql, conexion))
                     {
                         consulta.Fill(tabla);
@@ -53,12 +53,15 @@ namespace ProyectoRegistroAsistencia
 
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT T.clave_trabajador AS Clave_Trabajador,"+
+                    string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
                                  "CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS Trabajador, " +
+                                 "D.nombre_departamento AS Departamento, " +
                                  "A.registro AS Registro, " +
                                  "A.fecha AS Fecha " +
                                  "FROM tblasistencia A " +
-                                 "INNER JOIN tbltrabajador T ON A.id_trabajador = T.id_trabajador ";
+                                 "INNER JOIN tbltrabajador T ON A.id_trabajador = T.id_trabajador " +
+                                 "INNER JOIN tbldepartamento D ON D.id_departamento = T.id_departamento " +
+                                 "WHERE 1=1";
 
                     if (fecha.HasValue)
                     {

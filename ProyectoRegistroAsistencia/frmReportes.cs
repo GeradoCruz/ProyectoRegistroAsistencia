@@ -14,7 +14,7 @@ namespace ProyectoRegistroAsistencia
     public partial class frmReportes : Form
     {
         clsReportes reportes;
-        DataTable tabla; // último reporte generado, lo usan Exportar/Imprimir
+        DataTable tabla; // último reporte generado, lo usa Exportar
         int idDepartamento;
 
         public frmReportes()
@@ -55,7 +55,8 @@ namespace ProyectoRegistroAsistencia
         private string ObtenerTitulo()
         {
             if (rdbAsistencia.Checked) return "Reporte de Asistencia y Puntualidad";
-            if (rdbIncidencias.Checked) return "Reporte de Incidencias por Empleado";
+            if (rdbAntiguedad.Checked) return "Reporte de Antigüedad de Personal";
+            if (rdbSinHorario.Checked) return "Reporte de Empleados sin Horario Asignado";
             return "Reporte";
         }
 
@@ -74,8 +75,9 @@ namespace ProyectoRegistroAsistencia
         // Genera el reporte según el radio button activo y lo muestra en el grid.
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-            // Validar rango de fechas antes de consultar
-            if (!ValidarFechas()) return;
+            // Antigüedad y Sin Horario no usan rango de fechas, se valida solo para los demás reportes
+            bool usaFechas = !rdbAntiguedad.Checked && !rdbSinHorario.Checked;
+            if (usaFechas && !ValidarFechas()) return;
 
             reportes = new clsReportes();
             dgvReporte.DataSource = null;
@@ -92,9 +94,13 @@ namespace ProyectoRegistroAsistencia
                 {
                     tabla = reportes.ConsultarTardanzasFaltas(dtpFechaInicio.Value, dtpFechaFin.Value, idDepartamento, apellidos);
                 }
-                else if (rdbIncidencias.Checked)
+                else if (rdbAntiguedad.Checked)
                 {
-                    tabla = reportes.ConsultarIncidenciasPorEmpleado(dtpFechaInicio.Value, dtpFechaFin.Value, idDepartamento, apellidos);
+                    tabla = reportes.ConsultarAntiguedad(idDepartamento, apellidos);
+                }
+                else if (rdbSinHorario.Checked)
+                {
+                    tabla = reportes.ConsultarEmpleadosSinHorario(idDepartamento, apellidos);
                 }
 
                 // Mostrar resultado en el grid
@@ -155,22 +161,6 @@ namespace ProyectoRegistroAsistencia
             catch (Exception ex)
             {
                 MessageBox.Show("No se pudo exportar el Excel: " + ex.Message,
-                    "Staff Asistence", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnImprimir_Click(object sender, EventArgs e)
-        {
-            if (!HayDatosParaExportar()) return;
-
-            reportes = new clsReportes();
-            try
-            {
-                reportes.Imprimir(tabla, ObtenerTitulo());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("No se pudo enviar el reporte a imprimir: " + ex.Message,
                     "Staff Asistence", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

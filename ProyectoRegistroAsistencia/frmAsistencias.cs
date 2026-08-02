@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,6 +23,7 @@ namespace ProyectoRegistroAsistencia
         private void dtpFiltroAsistencia_ValueChanged(object sender, EventArgs e)
         {
             fechaSeleccionada = true;
+            RealizarBusqueda();
         }
 
         public void CargarGrid()
@@ -41,35 +42,6 @@ namespace ProyectoRegistroAsistencia
         }
 
 
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                clsAsistencias asistencia = new clsAsistencias();
-
-                DateTime? fecha = fechaSeleccionada ? dtpFiltroAsistencia.Value.Date : (DateTime?)null;
-                string apellido = txtApellido.Text.Trim();
-
-                DataTable resultado = asistencia.BusquedaFecha(fecha, apellido);
-
-                dgvRegistros.DataSource = resultado;
-
-                if (resultado.Rows.Count == 0)
-                {
-                    MessageBox.Show("No se encontraron registros.", "Información",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message,
-                                "Error",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
-            }
-
-        }
-
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             dtpFiltroAsistencia.Value = DateTime.Now;
@@ -82,6 +54,12 @@ namespace ProyectoRegistroAsistencia
 
         private void txtApellido_TextChanged(object sender, EventArgs e)
         {
+            RealizarBusqueda();
+        }
+
+        // Búsqueda en vivo (por LIKE), sin necesidad de botón Buscar.
+        private void RealizarBusqueda()
+        {
             try
             {
                 clsAsistencias asistencia = new clsAsistencias();
@@ -93,7 +71,7 @@ namespace ProyectoRegistroAsistencia
             }
             catch
             {
-                // No mostrar mensajes mientras escribe
+                // No mostrar mensajes mientras se escribe/selecciona
             }
         }
     }
