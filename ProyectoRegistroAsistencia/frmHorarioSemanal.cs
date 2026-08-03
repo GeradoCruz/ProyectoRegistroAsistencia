@@ -80,12 +80,12 @@ namespace ProyectoRegistroAsistencia
                 {
                     cargarGrid();
                     // Buscar la fila del trabajador que acabamos de asignar
-                    foreach (DataGridViewRow fila in dgvHorarios.Rows)
+                    foreach (DataGridViewRow fila in dgvListaEmpleados.Rows)
                     {
                         if (Convert.ToInt32(fila.Cells["id_trabajador"].Value) == frm.IdTrabajadorAsignado)
                         {
                             fila.Selected = true;
-                            dgvHorarios.CurrentCell = fila.Cells[1];
+                            dgvListaEmpleados.CurrentCell = fila.Cells[1];
                             cargarGridDiasHorario(frm.IdTrabajadorAsignado);
                             break;
                         }

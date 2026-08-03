@@ -257,9 +257,11 @@ namespace ProyectoRegistroAsistencia
                     string sql;
                     if (existe)
                     {
+                         // Se incluye id_semestre en el WHERE para no tocar el horario de
+                         // otro semestre del mismo trabajador y dia.
                          sql = "UPDATE tblhorario_trabajo SET " +
                                "hora_entrada = @entrada, hora_salida = @salida, id_semestre = @semestre " +
-                                  "WHERE id_trabajador = @trabajador AND id_dia = @dia;";
+                                  "WHERE id_trabajador = @trabajador AND id_dia = @dia AND id_semestre = @semestre;";
                     }
                     else
                     {
@@ -318,7 +320,9 @@ namespace ProyectoRegistroAsistencia
             }
             return existe;
         }
-        public DataTable diasFaltantes(int idTrabajador)
+        // idSemestre se agrega para que los dias faltantes se calculen solo contra el
+        // semestre que se esta trabajando, no contra todos los semestres juntos.
+        public DataTable diasFaltantes(int idTrabajador, int idSemestre)
         {
             DataTable tabla = new DataTable();
             try
@@ -330,18 +334,20 @@ namespace ProyectoRegistroAsistencia
                                  "FROM tbldias D " +
                                  "WHERE D.id_dia BETWEEN 1 AND 5 " +
                                  "AND D.id_dia NOT IN ( " +
-                                 "    SELECT id_dia FROM tblhorario_trabajo WHERE id_trabajador = @trabajador " +
-                                 ");"; 
+                                 "    SELECT id_dia FROM tblhorario_trabajo " +
+                                 "    WHERE id_trabajador = @trabajador AND id_semestre = @semestre " +
+                                 ");";
                     using (MySqlCommand comando = new MySqlCommand(sql,conexion))
                     {
                         comando.Parameters.AddWithValue("@trabajador", idTrabajador);
+                        comando.Parameters.AddWithValue("@semestre", idSemestre);
                         using (var consulta = new MySqlDataAdapter(comando))
                         {
                             consulta.Fill(tabla);
                         }
                     }
                 }
-                            
+
             }
             catch (Exception ex)
             {
