@@ -15,6 +15,11 @@ namespace ProyectoRegistroAsistencia
         private clsHorarioSemanal horario;
         private int idTrabajadorAsignado;
 
+        // Solo es true si la ultima busqueda encontro un trabajador valido.
+        // Sirve para no guardar horarios de una busqueda anterior si la nueva
+        // busqueda (con una clave distinta) fallo.
+        private bool trabajadorValido = false;
+
         public int IdTrabajadorAsignado { get => idTrabajadorAsignado; set => idTrabajadorAsignado = value; }
 
         public frmAsignacionHorarios()
@@ -36,8 +41,14 @@ namespace ProyectoRegistroAsistencia
             // TODO: buscar al trabajador en la base de datos y llenar
             // txtBuscarNombreCompleto, txtDepartamento, txtPuesto y txtSemestre
 
+            // Se limpia lo que se haya mostrado de una busqueda anterior, para que si
+            // esta busqueda falla no se quede visible (ni se pueda guardar) informacion
+            // de un trabajador distinto al que se acaba de buscar.
+            trabajadorValido = false;
+            LimpiarDatosTrabajador();
+
             horario = new clsHorarioSemanal();
-            horario.ClaveTrabajador = txtBuscarClave.Text;
+            horario.ClaveTrabajador = txtBuscarClave.Text.Trim();
 
             try
             {
@@ -45,6 +56,7 @@ namespace ProyectoRegistroAsistencia
                 txtNombreCompleto.Text = horario.NombreTrabajador;
                 txtDepartamento.Text = horario.Departamento;
                 txtPuesto.Text = horario.Puesto;
+                trabajadorValido = true;
 
                 if (horario.IdSemestre > 0)
                 {
@@ -65,7 +77,7 @@ namespace ProyectoRegistroAsistencia
                     checksDias[i].Enabled = !horario.TieneHorarioAsignado(horario.IdTrabajador, idDia,horario.IdSemestre );
                 }
 
-                DataTable diasFalta = horario.diasFaltantes(horario.IdTrabajador);
+                DataTable diasFalta = horario.diasFaltantes(horario.IdTrabajador, horario.IdSemestre);
 
                 if (diasFalta.Rows.Count > 0 )
                 {
@@ -90,9 +102,29 @@ namespace ProyectoRegistroAsistencia
                 MessageBox.Show(ex.Message);
             }
         }
+        // Deja los campos como si nunca se hubiera buscado a nadie. Se usa antes de
+        // cada busqueda nueva, para no dejar visible informacion de un trabajador
+        // distinto si la busqueda actual falla.
+        private void LimpiarDatosTrabajador()
+        {
+            txtNombreCompleto.Clear();
+            txtDepartamento.Clear();
+            txtPuesto.Clear();
+            cmbSemestre.SelectedIndex = 0;
+
+            CheckBox[] checksDias = { chkLunes, chkMartes, chkMiercoles, chkJueves, chkViernes };
+            foreach (CheckBox chk in checksDias)
+            {
+                chk.Checked = false;
+                chk.Enabled = true;
+            }
+        }
+
         private bool ValidarCampos()
         {
-            if (string.IsNullOrWhiteSpace(txtNombreCompleto.Text))
+            // Se valida con la bandera (no con el texto del nombre) porque el texto
+            // podria haber quedado visible aunque la busqueda haya fallado.
+            if (!trabajadorValido || horario == null)
             {
                 MessageBox.Show("Primero busca un trabajador valido.", "Staff Asistence",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -110,6 +142,14 @@ namespace ProyectoRegistroAsistencia
             if (cmbSemestre.SelectedValue == null || Convert.ToInt32(cmbSemestre.SelectedValue) == 0)
             {
                 MessageBox.Show("Selecciona un semestre.", "Staff Asistence",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            // La hora de salida debe ser mayor a la hora de entrada.
+            if (dtpHoraSalida.Value.TimeOfDay <= dtpHoraEntrada.Value.TimeOfDay)
+            {
+                MessageBox.Show("La hora de salida debe ser mayor a la hora de entrada.", "Staff Asistence",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }

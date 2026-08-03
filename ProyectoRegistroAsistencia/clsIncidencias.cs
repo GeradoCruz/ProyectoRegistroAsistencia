@@ -111,9 +111,9 @@ namespace ProyectoRegistroAsistencia
                         // 2. Filtro por Nombre del Trabajador----------------CORREGIDO
                         if (!string.IsNullOrWhiteSpace(nombreTrabajador))
                         {
-                            sql += @" AND ( T.nombre LIKE @nombre OR T.a_paterno LIKE @nombre OR T.a_materno LIKE @nombre)";
+                            sql += @" AND ( T.nombre LIKE @filtroNombre OR T.a_paterno LIKE @filtroNombre OR T.a_materno LIKE @filtroNombre)";
 
-                            cmd.Parameters.AddWithValue("@nombre","%" + nombreTrabajador.Trim() + "%");
+                            cmd.Parameters.AddWithValue("@filtroNombre", "%" + nombreTrabajador.Trim() + "%");
                         }
 
                         // 3. Filtro por Tipo de Incidencia (0 = "-- Todos --", no se filtra)
