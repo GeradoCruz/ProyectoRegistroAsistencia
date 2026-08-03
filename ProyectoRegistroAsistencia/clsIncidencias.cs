@@ -26,7 +26,7 @@ namespace ProyectoRegistroAsistencia
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT \r\n       I.id_incidencia,             T.clave_trabajador AS 'Clave trabajador',\r\n                    CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS 'Nombre completo',\r\n                    D.nombre_departamento AS 'Nombre departamento',\r\n                    I.tipo_incidencia AS 'Tipo de incidencia',\r\n                    I.justificacion AS 'Justificaciones',\r\n                    I.fecha AS Fecha\r\n                FROM tblincidencias I\r\n                INNER JOIN tbltrabajador T ON T.id_trabajador = I.id_trabajador\r\n                INNER JOIN tbldepartamento D ON D.id_departamento = T.id_departamento";
+                    string sql = "SELECT \r\n       I.id_incidencia,             T.clave_trabajador AS 'Clave trabajador',\r\n                    CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS 'Nombre completo',\r\n                    D.nombre_departamento AS 'Nombre departamento',\r\n                    CASE\r\n    WHEN I.id_tipo_incidencia = 1 THEN 'Falta'\r\n    WHEN I.id_tipo_incidencia = 2 THEN 'Retardo'\r\n  END AS 'Tipo de incidencia',\r\n                    I.justificacion AS 'Justificaciones',\r\n                    I.fecha AS Fecha\r\n                FROM tblincidencias I\r\n                INNER JOIN tbltrabajador T ON T.id_trabajador = I.id_trabajador\r\n                INNER JOIN tbldepartamento D ON D.id_departamento = T.id_departamento";
                     using (consulta = new MySqlDataAdapter(sql, conexion))
                     {
                         consulta.Fill(tabla);
@@ -53,7 +53,10 @@ namespace ProyectoRegistroAsistencia
                                     T.clave_trabajador AS 'Clave trabajador',
                                     CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS 'Nombre completo',
                                     D.nombre_departamento AS 'Nombre departamento',
-                                    I.tipo_incidencia AS 'Tipo de incidencia',
+                                    CASE
+                                    WHEN I.id_tipo_incidencia = 1 THEN 'Falta'
+                                    WHEN I.id_tipo_incidencia = 2 THEN 'Retardo'
+                                    END AS 'Tipo de incidencia',
                                     I.justificacion AS 'Justificaciones',
                                     I.fecha AS Fecha
                                 FROM tblincidencias I
@@ -81,11 +84,19 @@ namespace ProyectoRegistroAsistencia
                             cmd.Parameters.AddWithValue("@nombre","%" + nombreTrabajador.Trim() + "%");
                         }
 
-                        // 3. Filtro por Tipo de Incidencia (si se seleccionó una opción válida)
+                        // 3. Filtro por Tipo de Incidencia (si se seleccionó una opción válida)-------------------------------------------------------------
                         if (!string.IsNullOrWhiteSpace(tipoIncidencia))
                         {
-                            sql += " AND I.tipo_incidencia = @tipo";
-                            cmd.Parameters.AddWithValue("@tipo", tipoIncidencia);
+                            if (tipoIncidencia == "Falta")
+                            {
+                                sql += " AND I.id_tipo_incidencia = @tipo";
+                                cmd.Parameters.AddWithValue("@tipo", 1);
+                            }
+                            else if (tipoIncidencia == "Retardo")
+                            {
+                                sql += " AND I.id_tipo_incidencia = @tipo";
+                                cmd.Parameters.AddWithValue("@tipo", 2);
+                            }
                         }
 
                         cmd.CommandText = sql;
