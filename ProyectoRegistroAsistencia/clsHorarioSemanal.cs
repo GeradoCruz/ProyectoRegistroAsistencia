@@ -134,10 +134,11 @@ namespace ProyectoRegistroAsistencia
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
+                    string sql = "SELECT T.id_trabajador, " +
+                                  "T.clave_trabajador AS 'Clave Trabajador', " +
                                   "CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS 'Nombre Completo', " +
-                                  "D.nombre_departamento AS Departamento " +                               
-                                  "FROM tbltrabajador T " +                       
+                                  "D.nombre_departamento AS Departamento " +
+                                  "FROM tbltrabajador T " +
                                   "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento " +
                                   "WHERE D.id_departamento = @id_departamento;";
                     using (var consultar = new MySqlCommand(sql, conexion))

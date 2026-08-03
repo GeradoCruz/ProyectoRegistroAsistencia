@@ -45,6 +45,7 @@ namespace ProyectoRegistroAsistencia
                 dgvEmpleados.Columns["Genero"].Visible = false;
                 dgvEmpleados.Columns["Localidad"].Visible = false;
                 dgvEmpleados.Columns["Telefono"].Visible = false;
+                dgvEmpleados.Columns["Genero"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -71,8 +72,8 @@ namespace ProyectoRegistroAsistencia
                 datosE.txtApellidoMaterno.Text = dgvEmpleados.CurrentRow.Cells["Apellido Materno"].Value.ToString();
                 datosE.txtLocalidad.Text = dgvEmpleados.CurrentRow.Cells["Localidad"].Value.ToString();
                 datosE.txtMunicipio.Text = dgvEmpleados.CurrentRow.Cells["Municipio"].Value.ToString();
-                datosE.rdbHombre.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "H";
-                datosE.rdbMujer.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "M";
+                datosE.rdbHombre.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "M";
+                datosE.rdbMujer.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "F";
                 datosE.txtCorreoInstitucional.Text = dgvEmpleados.CurrentRow.Cells["Correo Institucional"].Value.ToString();
                 datosE.txtTelefono.Text = dgvEmpleados.CurrentRow.Cells["Telefono"].Value.ToString();
                 datosE.txtCodigoPostal.Text = dgvEmpleados.CurrentRow.Cells["Codigo Postal"].Value.ToString();
@@ -146,10 +147,10 @@ namespace ProyectoRegistroAsistencia
         {
             empleados = new clsEmpleados();
             string filtro = txtBuscarEmpleado.Text.Trim();
-            string departamento = cmbDepartamento.SelectedValue.ToString();
+            string idDepartamento = cmbDepartamento.SelectedValue?.ToString();
             try
             {
-                dgvEmpleados.DataSource = empleados.BuscarEmpleado(filtro);
+                dgvEmpleados.DataSource = empleados.BuscarEmpleado(filtro, idDepartamento);
             }
             catch (Exception ex)
             {
