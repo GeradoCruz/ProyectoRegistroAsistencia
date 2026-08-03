@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,10 +13,17 @@ namespace ProyectoRegistroAsistencia
     public partial class frmAsistencias : Form
     {
         clsAsistencias asistencia;
+        private bool fechaSeleccionada = false;
         public frmAsistencias()
         {
             InitializeComponent();
             CargarGrid();
+        }
+
+        private void dtpFiltroAsistencia_ValueChanged(object sender, EventArgs e)
+        {
+            fechaSeleccionada = true;
+            RealizarBusqueda();
         }
 
         public void CargarGrid()
@@ -35,42 +42,37 @@ namespace ProyectoRegistroAsistencia
         }
 
 
-        private void btnBuscar_Click(object sender, EventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            dtpFiltroAsistencia.Value = DateTime.Now;
+            fechaSeleccionada = false;
+            txtApellido.Clear();
+            clsAsistencias asistencia = new clsAsistencias();
+            dgvRegistros.DataSource = asistencia.CargaDataGrid();
+
+        }
+
+        private void txtApellido_TextChanged(object sender, EventArgs e)
+        {
+            RealizarBusqueda();
+        }
+
+        // Búsqueda en vivo (por LIKE), sin necesidad de botón Buscar.
+        private void RealizarBusqueda()
         {
             try
             {
                 clsAsistencias asistencia = new clsAsistencias();
 
-                DateTime fecha = dtpFiltroAsistencia.Value.Date;
-                string clave = txtClaveTrabajador.Text.Trim();
+                DateTime? fecha = fechaSeleccionada ? dtpFiltroAsistencia.Value.Date : (DateTime?)null;
+                string apellido = txtApellido.Text.Trim();
 
-                DataTable resultado = asistencia.BusquedaFecha(fecha, clave);
-
-                dgvRegistros.DataSource = resultado;
-
-                if (resultado.Rows.Count == 0)
-                {
-                    MessageBox.Show("No se encontraron registros.", "Información",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                dgvRegistros.DataSource = asistencia.BusquedaFecha(fecha, apellido);
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message,
-                                "Error",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
+                // No mostrar mensajes mientras se escribe/selecciona
             }
-
-        }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            dtpFiltroAsistencia.Value = DateTime.Now;
-            txtClaveTrabajador.Clear();
-            clsAsistencias asistencia = new clsAsistencias();
-            dgvRegistros.DataSource = asistencia.CargaDataGrid();
-
         }
     }
 }

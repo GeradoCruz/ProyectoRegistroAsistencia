@@ -30,54 +30,26 @@ namespace ProyectoRegistroAsistencia
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNuevoPuesto));
             lblTitulo = new Label();
-            lblNombrePuesto = new Label();
-            txtNombrePuesto = new TextBox();
             btnGuardar = new Button();
             btnCancelar = new Button();
             txtDescripcion = new TextBox();
             lblDescripcion = new Label();
-            pnlPuesto = new Panel();
-            textBox1 = new TextBox();
-            label1 = new Label();
-            txtDepartamento = new TextBox();
-            lblDepartamento = new Label();
-            pnlPuesto.SuspendLayout();
+            txtNombrePuesto = new TextBox();
+            lblNombrePuesto = new Label();
             SuspendLayout();
             // 
             // lblTitulo
             // 
-            lblTitulo.AutoSize = true;
+            lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
             lblTitulo.Location = new Point(125, 22);
             lblTitulo.Margin = new Padding(4, 0, 4, 0);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(151, 30);
-            lblTitulo.TabIndex = 3;
+            lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Nuevo Puesto";
-            // 
-            // lblNombrePuesto
-            // 
-            lblNombrePuesto.AutoSize = true;
-            lblNombrePuesto.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblNombrePuesto.ForeColor = Color.FromArgb(108, 117, 125);
-            lblNombrePuesto.Location = new Point(54, 76);
-            lblNombrePuesto.Margin = new Padding(4, 0, 4, 0);
-            lblNombrePuesto.Name = "lblNombrePuesto";
-            lblNombrePuesto.Size = new Size(147, 21);
-            lblNombrePuesto.TabIndex = 5;
-            lblNombrePuesto.Text = "Nombre del puesto:";
-            // 
-            // txtNombrePuesto
-            // 
-            txtNombrePuesto.BackColor = Color.White;
-            txtNombrePuesto.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtNombrePuesto.ForeColor = Color.FromArgb(108, 117, 125);
-            txtNombrePuesto.Location = new Point(54, 110);
-            txtNombrePuesto.Margin = new Padding(4);
-            txtNombrePuesto.Name = "txtNombrePuesto";
-            txtNombrePuesto.Size = new Size(314, 29);
-            txtNombrePuesto.TabIndex = 4;
+            lblTitulo.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // btnGuardar
             // 
@@ -86,13 +58,14 @@ namespace ProyectoRegistroAsistencia
             btnGuardar.ForeColor = Color.White;
             btnGuardar.Image = (Image)resources.GetObject("btnGuardar.Image");
             btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGuardar.Location = new Point(18, 307);
+            btnGuardar.Location = new Point(27, 307);
             btnGuardar.Margin = new Padding(4);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(180, 40);
-            btnGuardar.TabIndex = 0;
+            btnGuardar.TabIndex = 2;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // btnCancelar
             // 
@@ -101,19 +74,20 @@ namespace ProyectoRegistroAsistencia
             btnCancelar.ForeColor = Color.White;
             btnCancelar.Image = (Image)resources.GetObject("btnCancelar.Image");
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(215, 307);
+            btnCancelar.Location = new Point(209, 307);
             btnCancelar.Margin = new Padding(4);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(180, 40);
-            btnCancelar.TabIndex = 1;
+            btnCancelar.TabIndex = 3;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // txtDescripcion
             // 
             txtDescripcion.BackColor = Color.White;
-            txtDescripcion.ForeColor = Color.FromArgb(108, 117, 125);
-            txtDescripcion.Location = new Point(49, 185);
+            txtDescripcion.ForeColor = Color.FromArgb(64, 64, 64);
+            txtDescripcion.Location = new Point(49, 177);
             txtDescripcion.Margin = new Padding(3, 4, 3, 4);
             txtDescripcion.Multiline = true;
             txtDescripcion.Name = "txtDescripcion";
@@ -125,68 +99,35 @@ namespace ProyectoRegistroAsistencia
             lblDescripcion.AutoSize = true;
             lblDescripcion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDescripcion.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDescripcion.Location = new Point(49, 153);
+            lblDescripcion.Location = new Point(49, 145);
             lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(100, 21);
+            lblDescripcion.Size = new Size(94, 21);
             lblDescripcion.TabIndex = 6;
-            lblDescripcion.Text = "Descripci�n:";
+            lblDescripcion.Text = "Descripción:";
+            lblDescripcion.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // pnlPuesto
+            // txtNombrePuesto
             // 
-            pnlPuesto.BorderStyle = BorderStyle.FixedSingle;
-            pnlPuesto.Controls.Add(textBox1);
-            pnlPuesto.Controls.Add(label1);
-            pnlPuesto.Controls.Add(txtDepartamento);
-            pnlPuesto.Controls.Add(lblDepartamento);
-            pnlPuesto.Location = new Point(22, 63);
-            pnlPuesto.Margin = new Padding(3, 4, 3, 4);
-            pnlPuesto.Name = "pnlPuesto";
-            pnlPuesto.Size = new Size(370, 235);
-            pnlPuesto.TabIndex = 8;
+            txtNombrePuesto.BackColor = Color.White;
+            txtNombrePuesto.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNombrePuesto.ForeColor = Color.FromArgb(64, 64, 64);
+            txtNombrePuesto.Location = new Point(49, 110);
+            txtNombrePuesto.Margin = new Padding(3, 4, 3, 4);
+            txtNombrePuesto.Name = "txtNombrePuesto";
+            txtNombrePuesto.Size = new Size(319, 29);
+            txtNombrePuesto.TabIndex = 5;
             // 
-            // textBox1
+            // lblNombrePuesto
             // 
-            textBox1.BackColor = Color.White;
-            textBox1.ForeColor = Color.FromArgb(108, 117, 125);
-            textBox1.Location = new Point(21, 116);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(319, 105);
-            textBox1.TabIndex = 3;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(108, 117, 125);
-            label1.Location = new Point(21, 84);
-            label1.Name = "label1";
-            label1.Size = new Size(94, 21);
-            label1.TabIndex = 2;
-            label1.Text = "Descripcion:";
-            // 
-            // txtDepartamento
-            // 
-            txtDepartamento.BackColor = Color.White;
-            txtDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
-            txtDepartamento.Location = new Point(21, 49);
-            txtDepartamento.Margin = new Padding(3, 4, 3, 4);
-            txtDepartamento.Name = "txtDepartamento";
-            txtDepartamento.Size = new Size(319, 29);
-            txtDepartamento.TabIndex = 1;
-            // 
-            // lblDepartamento
-            // 
-            lblDepartamento.AutoSize = true;
-            lblDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDepartamento.Location = new Point(21, 17);
-            lblDepartamento.Name = "lblDepartamento";
-            lblDepartamento.Size = new Size(113, 21);
-            lblDepartamento.TabIndex = 0;
-            lblDepartamento.Text = "Departamento:";
+            lblNombrePuesto.AutoSize = true;
+            lblNombrePuesto.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNombrePuesto.ForeColor = Color.FromArgb(108, 117, 125);
+            lblNombrePuesto.Location = new Point(49, 78);
+            lblNombrePuesto.Name = "lblNombrePuesto";
+            lblNombrePuesto.Size = new Size(147, 21);
+            lblNombrePuesto.TabIndex = 4;
+            lblNombrePuesto.Text = "Nombre del puesto:";
+            lblNombrePuesto.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // frmNuevoPuesto
             // 
@@ -194,40 +135,33 @@ namespace ProyectoRegistroAsistencia
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(416, 361);
-            Controls.Add(pnlPuesto);
             Controls.Add(txtDescripcion);
             Controls.Add(lblDescripcion);
-            Controls.Add(lblNombrePuesto);
             Controls.Add(txtNombrePuesto);
+            Controls.Add(lblNombrePuesto);
             Controls.Add(lblTitulo);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ForeColor = Color.FromArgb(108, 117, 125);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Margin = new Padding(4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmNuevoPuesto";
-            StartPosition = FormStartPosition.CenterParent;
-            Text = "Staff Asistence";
-            pnlPuesto.ResumeLayout(false);
-            pnlPuesto.PerformLayout();
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Staff Assistence";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private Label lblTitulo;
-        private Label lblNombrePuesto;
-        private TextBox txtNombrePuesto;
+        public Label lblTitulo;
         private Button btnGuardar;
         private Button btnCancelar;
-        private TextBox txtDescripcion;
+        public TextBox txtDescripcion;
         private Label lblDescripcion;
-        private Panel pnlPuesto;
-        private TextBox textBox1;
-        private Label label1;
-        private TextBox txtDepartamento;
-        private Label lblDepartamento;
+        public TextBox txtNombrePuesto;
+        private Label lblNombrePuesto;
     }
 }

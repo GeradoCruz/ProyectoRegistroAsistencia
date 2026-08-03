@@ -13,18 +13,25 @@ namespace ProyectoRegistroAsistencia
     public partial class frmAsignacionHorarios : Form
     {
         private clsHorarioSemanal horario;
+        private int idTrabajadorAsignado;
+
+        // Solo es true si la ultima busqueda encontro un trabajador valido.
+        // Sirve para no guardar horarios de una busqueda anterior si la nueva
+        // busqueda (con una clave distinta) fallo.
+        private bool trabajadorValido = false;
+
+        public int IdTrabajadorAsignado { get => idTrabajadorAsignado; set => idTrabajadorAsignado = value; }
+
         public frmAsignacionHorarios()
         {
             InitializeComponent();
-            btnGuardar.Click += btnGuardar_Click;
-            btnCancelar.Click += btnCancelar_Click;
             CargarComboSemestre();
         }
 
         private void btnBuscar_Click(object? sender, EventArgs e)
         {
             
-            if (string.IsNullOrWhiteSpace(txtBusacarClave.Text))
+            if (string.IsNullOrWhiteSpace(txtBuscarClave.Text))
             {
                 MessageBox.Show("Escribe la clave del trabajador a buscar.", "Staff Asistence",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -34,15 +41,22 @@ namespace ProyectoRegistroAsistencia
             // TODO: buscar al trabajador en la base de datos y llenar
             // txtBuscarNombreCompleto, txtDepartamento, txtPuesto y txtSemestre
 
+            // Se limpia lo que se haya mostrado de una busqueda anterior, para que si
+            // esta busqueda falla no se quede visible (ni se pueda guardar) informacion
+            // de un trabajador distinto al que se acaba de buscar.
+            trabajadorValido = false;
+            LimpiarDatosTrabajador();
+
             horario = new clsHorarioSemanal();
-            horario.ClaveTrabajador = txtBusacarClave.Text;
+            horario.ClaveTrabajador = txtBuscarClave.Text.Trim();
 
             try
             {
                 horario.buscarTrabajador();
-                txtBuscarNombreCompleto.Text = horario.NombreTrabajador;
+                txtNombreCompleto.Text = horario.NombreTrabajador;
                 txtDepartamento.Text = horario.Departamento;
                 txtPuesto.Text = horario.Puesto;
+                trabajadorValido = true;
 
                 if (horario.IdSemestre > 0)
                 {
@@ -55,7 +69,7 @@ namespace ProyectoRegistroAsistencia
 
 
                 CheckBox[] checksDias = { chkLunes, chkMartes, chkMiercoles, chkJueves, chkViernes };
-                for (int i = 0; i < checksDias.Length; i++)
+                for (int i = 0; i < checksDias.Length; i++) 
                 {
                     int idDia = i + 1;
                     checksDias[i].Checked = false;
@@ -63,18 +77,18 @@ namespace ProyectoRegistroAsistencia
                     checksDias[i].Enabled = !horario.TieneHorarioAsignado(horario.IdTrabajador, idDia,horario.IdSemestre );
                 }
 
-                DataTable diasFalta = horario.diasFaltantes(horario.IdTrabajador);
+                DataTable diasFalta = horario.diasFaltantes(horario.IdTrabajador, horario.IdSemestre);
 
                 if (diasFalta.Rows.Count > 0 )
                 {
-                    string mensaje = "Días pendientes por asignar:\n";
+                    string mensaje = "DÃ­as pendientes por asignar:\n";
                     foreach (DataRow fila in diasFalta.Rows)
                     {
                         mensaje += "- " + fila["nombre_dia"].ToString() + "\n";
                     }
                     if(horario.IdSemestre == 0)
                     {
-                        mensaje += "¡¡Avisó¡¡";
+                        mensaje += "Â¡Â¡AvisÃ³Â¡Â¡";
                         mensaje += "\n-Seleccione un Semestre";
                     }
                     MessageBox.Show(mensaje, "Staff Asistence",
@@ -88,9 +102,29 @@ namespace ProyectoRegistroAsistencia
                 MessageBox.Show(ex.Message);
             }
         }
+        // Deja los campos como si nunca se hubiera buscado a nadie. Se usa antes de
+        // cada busqueda nueva, para no dejar visible informacion de un trabajador
+        // distinto si la busqueda actual falla.
+        private void LimpiarDatosTrabajador()
+        {
+            txtNombreCompleto.Clear();
+            txtDepartamento.Clear();
+            txtPuesto.Clear();
+            cmbSemestre.SelectedIndex = 0;
+
+            CheckBox[] checksDias = { chkLunes, chkMartes, chkMiercoles, chkJueves, chkViernes };
+            foreach (CheckBox chk in checksDias)
+            {
+                chk.Checked = false;
+                chk.Enabled = true;
+            }
+        }
+
         private bool ValidarCampos()
         {
-            if (string.IsNullOrWhiteSpace(txtBuscarNombreCompleto.Text))
+            // Se valida con la bandera (no con el texto del nombre) porque el texto
+            // podria haber quedado visible aunque la busqueda haya fallado.
+            if (!trabajadorValido || horario == null)
             {
                 MessageBox.Show("Primero busca un trabajador valido.", "Staff Asistence",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -104,10 +138,18 @@ namespace ProyectoRegistroAsistencia
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            // la validación extra para que no se guarde semestre con 0:
+            // la validaciÃ³n extra para que no se guarde semestre con 0:
             if (cmbSemestre.SelectedValue == null || Convert.ToInt32(cmbSemestre.SelectedValue) == 0)
             {
                 MessageBox.Show("Selecciona un semestre.", "Staff Asistence",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            // La hora de salida debe ser mayor a la hora de entrada.
+            if (dtpHoraSalida.Value.TimeOfDay <= dtpHoraEntrada.Value.TimeOfDay)
+            {
+                MessageBox.Show("La hora de salida debe ser mayor a la hora de entrada.", "Staff Asistence",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
@@ -124,10 +166,10 @@ namespace ProyectoRegistroAsistencia
                 // Guardamos las horas seleccionadas
                 horario.HoraEntrada = dtpHoraEntrada.Value.ToString("HH:mm:ss");
                 horario.HoraSalida = dtpHoraSalida.Value.ToString("HH:mm:ss");
-                horario.IdSemestre = Convert.ToInt32(cmbSemestre.SelectedValue); // toma el valor del combo, no el que trajo la búsqueda
+                horario.IdSemestre = Convert.ToInt32(cmbSemestre.SelectedValue); // toma el valor del combo, no el que trajo la bÃºsqueda
 
 
-                // Guardar los días seleccionados
+                // Guardar los dÃ­as seleccionados
 
                 CheckBox[] checksDias = { chkLunes, chkMartes, chkMiercoles, chkJueves, chkViernes };
                 for (int i = 0; i < checksDias.Length; i++)
@@ -141,6 +183,7 @@ namespace ProyectoRegistroAsistencia
                 }
 
                 MessageBox.Show("Los horarios se guardaron correctamente.");
+                IdTrabajadorAsignado = horario.IdTrabajador;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
 

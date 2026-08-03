@@ -31,7 +31,7 @@ namespace ProyectoRegistroAsistencia
         private void btnInicioSesion_Click(object? sender, EventArgs e)
         {
             clsLogin login = new clsLogin();
-            login.Usuario = string.IsNullOrEmpty(txtUsuario.Text) ? null : txtUsuario.Text;
+            login.Usuario = string.IsNullOrWhiteSpace(txtUsuario.Text) ? null : txtUsuario.Text.Trim();
             login.Password = string.IsNullOrEmpty(txtPassword.Text) ? null : txtPassword.Text;
 
             if (login.Usuario == null)

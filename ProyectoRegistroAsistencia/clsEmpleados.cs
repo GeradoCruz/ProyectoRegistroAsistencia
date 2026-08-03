@@ -1,4 +1,4 @@
-﻿using MySqlConnector;
+using MySqlConnector;
 using System.Data;
 using System.Runtime.InteropServices.Marshalling;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
@@ -49,11 +49,10 @@ namespace ProyectoRegistroAsistencia
                 using (var conexion = conexionBD.AbrirConexion())
                 {
                     string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
+                                "CONCAT(T.nombre,' ', T.a_paterno,' ', T.a_materno) AS 'Nombre Completo', " +
                                 "T.nombre AS Nombre, " +
                                 "T.a_paterno AS 'Apellido Paterno', " +
                                 "T.a_materno AS 'Apellido Materno', " +
-                                "T.telefono AS Telefono, " +
-                                "T.email AS 'Correo Institucional', " +
                                 "T.sexo AS Genero, " +
                                 "T.municipio AS Municipio, " +
                                 "T.localidad AS Localidad, " +
@@ -63,16 +62,17 @@ namespace ProyectoRegistroAsistencia
                                 "T.id_puesto, " +
                                 "T.estatus AS Estatus, " +
                                 "D.nombre_departamento AS Departamento, " +
-                                "P.nombre_puesto AS Puesto " +
+                                "P.nombre_puesto AS Puesto, " +
+                                "T.telefono AS Telefono, " +
+                                "T.email AS 'Correo Institucional' " +
                                 "FROM tbltrabajador T " +
                                 "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento " +
-                                "INNER JOIN tblpuestos P ON T.id_puesto = P.id_Puesto " +
-                                "ORDER BY clave_trabajador ASC; ";
+                                "INNER JOIN tblpuestos P ON T.id_puesto = P.id_Puesto ";
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
                         consultar.Parameters.AddWithValue("@Clave Trabajador", "%" + claveTrabajador + "%");
                         using (consulta = new MySqlDataAdapter(consultar))
-                        { 
+                        {
                             consulta.Fill(tabla);
                         }
                     }
@@ -104,10 +104,10 @@ namespace ProyectoRegistroAsistencia
                                     using (comando = new MySqlCommand(sqlInsertar, conexion, transaccion))
                                     {
                                             comando.Parameters.AddWithValue("@'Clave Trabajador'", claveTrabajador);
-                                            comando.Parameters.AddWithValue("@nombre", nombre);
+                                            comando.Parameters.AddWithValue("@Nombre", nombre);
                                             comando.Parameters.AddWithValue("@'Apellido Paterno'", apellidoPaterno);
                                             comando.Parameters.AddWithValue("@'Apellido Materno'", apellidoMaterno);
-                                            comando.Parameters.AddWithValue("@telefono", telefono);
+                                            comando.Parameters.AddWithValue("@Telefono", telefono);
                                             comando.Parameters.AddWithValue("@'Correo Electronico'", correoElectronico);
                                             comando.Parameters.AddWithValue("@genero", genero);
                                             comando.Parameters.AddWithValue("@'fecha Ingreso'", fechaIngreso);
@@ -130,7 +130,7 @@ namespace ProyectoRegistroAsistencia
                                         comando.Parameters.AddWithValue("@nombre", nombre);
                                         comando.Parameters.AddWithValue("@'Apellido Paterno'", apellidoPaterno);
                                         comando.Parameters.AddWithValue("@'Apellido Materno'", apellidoMaterno);
-                                        comando.Parameters.AddWithValue("@telefono", telefono);
+                                        comando.Parameters.AddWithValue("@Telefono", telefono);
                                         comando.Parameters.AddWithValue("@'Correo Electronico'", correoElectronico);
                                         comando.Parameters.AddWithValue("@genero", genero);
                                         comando.Parameters.AddWithValue("@municipio", municipio);
@@ -167,7 +167,7 @@ namespace ProyectoRegistroAsistencia
         public DataTable ObtenerDepartamentos()
         {
             tabla = new DataTable();
-            try 
+            try
             {
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion=conexionBD.AbrirConexion())
@@ -177,7 +177,7 @@ namespace ProyectoRegistroAsistencia
                     {
                         consulta.Fill(tabla);
                     }
-                }    
+                }
             }
             catch (Exception ex)
             {
@@ -214,26 +214,23 @@ namespace ProyectoRegistroAsistencia
             {
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    using (var transaccion = conexion.BeginTransaction())
-                    {
                         try
                         {
-                            string sqlEmpleados = "DELETE FROM empleados WHERE id_empleado = @id_empleado";
-                            using (comando = new MySqlCommand(sqlEmpleados, conexion, transaccion))
+                            string sqlEmpleados = "UPDATE tbltrabajador SET estatus = 'inactivo' WHERE clave_trabajador = @claveTrabajador;";
+
+                            using (comando = new MySqlCommand(sqlEmpleados, conexion))
                             {
-                                comando.Parameters.AddWithValue("@id_empleado", claveTrabajador);
+                                comando.Parameters.AddWithValue("@claveTrabajador", claveTrabajador);
                                 comando.ExecuteNonQuery();
                             }
-                            transaccion.Commit();
+
                             msg = "Empleado dado de baja correctamente";
                         }
                         catch (Exception ex)
                         {
-                            transaccion.Rollback();
                             throw new Exception("Error en la operacion. Se cancelaron los cambios:" + ex.Message);
                         }
                     }
-                }
             }
             catch (Exception ex)
             {
@@ -241,7 +238,41 @@ namespace ProyectoRegistroAsistencia
             }
             return msg;
         }
-        public DataTable BuscarEmpleado(string filtro)
+        // Verifica si ya existe un trabajador registrado con esa clave.
+        // claveOriginal se usa al editar, para no marcar como duplicada la propia clave del empleado.
+        public bool ExisteClave(string clave, string claveOriginal = null)
+        {
+            try
+            {
+                clsConexion conexionBD = new clsConexion();
+                using (var conexion = conexionBD.AbrirConexion())
+                {
+                    string sql = "SELECT COUNT(*) FROM tbltrabajador WHERE clave_trabajador = @clave";
+                    if (!string.IsNullOrEmpty(claveOriginal))
+                    {
+                        sql += " AND clave_trabajador <> @claveOriginal";
+                    }
+
+                    using (var comando = new MySqlCommand(sql, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@clave", clave);
+                        if (!string.IsNullOrEmpty(claveOriginal))
+                        {
+                            comando.Parameters.AddWithValue("@claveOriginal", claveOriginal);
+                        }
+
+                        int cantidad = Convert.ToInt32(comando.ExecuteScalar());
+                        return cantidad > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al verificar la clave: " + ex.Message);
+            }
+        }
+
+        public DataTable BuscarEmpleado(string filtro, string idDepartamento)
         {
             tabla = new DataTable();
             try
@@ -250,6 +281,7 @@ namespace ProyectoRegistroAsistencia
                 using (var conexion = conexionBD.AbrirConexion())
                 {
                     string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
+                                "CONCAT(T.nombre,' ', T.a_paterno,' ', T.a_materno) AS 'Nombre Completo', " +
                                 "T.nombre AS Nombre, " +
                                 "T.a_paterno AS 'Apellido Paterno', " +
                                 "T.a_materno AS 'Apellido Materno', " +
@@ -268,13 +300,17 @@ namespace ProyectoRegistroAsistencia
                                 "FROM tbltrabajador T " +
                                 "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento " +
                                 "INNER JOIN tblpuestos P ON T.id_puesto = P.id_Puesto " +
-                                "WHERE clave_trabajador LIKE @filtro " +
-                                "OR nombre LIKE @filtro "+
-                                "OR a_paterno LIKE @filtro "+
-                                "OR a_materno LIKE @filtro ";
+                                "WHERE (T.nombre LIKE @filtro " +
+                                "OR T.a_paterno LIKE @filtro "+
+                                "OR T.a_materno LIKE @filtro "+
+                                "OR D.nombre_departamento LIKE @filtro) " +
+                                "AND (@idDepartamento = 0 OR T.id_departamento = @idDepartamento)";
                     using (var comando = new MySqlCommand(sql, conexion))
                     {
                         comando.Parameters.AddWithValue("@filtro", "%" + filtro + "%");
+                        int idDepartamentoValor = 0;
+                        int.TryParse(idDepartamento, out idDepartamentoValor);
+                        comando.Parameters.AddWithValue("@idDepartamento", idDepartamentoValor);
                         using (consulta = new MySqlDataAdapter(comando))
                         {
                             consulta.Fill(tabla);

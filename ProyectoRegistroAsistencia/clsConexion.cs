@@ -11,12 +11,12 @@ namespace ProyectoRegistroAsistencia
         private string user = "usuario1GB";
         private string password = "equipo1gb";
         private string port = "3306";
-        
-        //datos del servidor local 
+
+        //datos del servidor local
         private string hostLocal = "localhost";
         private string bdLocal = "equipo1_staff_asistence";
         private string usuarioLocal = "root";
-        private string passwordLocal = "";
+        private string passwordLocal = "root";
         private string puertoLocal = "3306";
 
         private string CadenaRemota => $"server={host}; database={bd}; user={user}; password={password}; port={port}; CharSet=utf8mb4;";

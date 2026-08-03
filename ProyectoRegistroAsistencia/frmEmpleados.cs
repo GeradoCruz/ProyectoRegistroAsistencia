@@ -1,4 +1,5 @@
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace ProyectoRegistroAsistencia
 {
     public partial class frmEmpleados : Form
@@ -31,19 +32,31 @@ namespace ProyectoRegistroAsistencia
             try
             {
                 dgvEmpleados.DataSource = empleados.Consultar();
-                dgvEmpleados.Columns["id_departamento"].Visible = false;
-                dgvEmpleados.Columns["id_puesto"].Visible = false;
-                dgvEmpleados.Columns["Estatus"].Visible = false;
-                dgvEmpleados.Columns["Numero Calle"].Visible = false;
-                dgvEmpleados.Columns["Codigo Postal"].Visible = false;
-                dgvEmpleados.Columns["Municipio"].Visible = false;
-                dgvEmpleados.Columns["Localidad"].Visible = false;
-                dgvEmpleados.Columns["Telefono"].Visible = false;
+                OcultarColumnasEmpleados();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        // Ambas consultas (carga inicial y búsqueda) devuelven las mismas columnas,
+        // pero cada vez que se reasigna el DataSource el DataGridView regenera las
+        // columnas visibles, así que hay que volver a ocultarlas.
+        private void OcultarColumnasEmpleados()
+        {
+            dgvEmpleados.Columns["id_departamento"].Visible = false;
+            dgvEmpleados.Columns["id_puesto"].Visible = false;
+            dgvEmpleados.Columns["Estatus"].Visible = false;
+            dgvEmpleados.Columns["Nombre"].Visible = false;
+            dgvEmpleados.Columns["Apellido Paterno"].Visible = false;
+            dgvEmpleados.Columns["Apellido Materno"].Visible = false;
+            dgvEmpleados.Columns["Numero Calle"].Visible = false;
+            dgvEmpleados.Columns["Codigo Postal"].Visible = false;
+            dgvEmpleados.Columns["Municipio"].Visible = false;
+            dgvEmpleados.Columns["Genero"].Visible = false;
+            dgvEmpleados.Columns["Localidad"].Visible = false;
+            dgvEmpleados.Columns["Telefono"].Visible = false;
         }
         public void btnEditar_Click(object? sender, EventArgs e)
         {
@@ -57,17 +70,16 @@ namespace ProyectoRegistroAsistencia
                 if (dgvEmpleados.CurrentRow == null) return;
             try
             {
-                datosE.lblTitulo.Text = "Actualizaci�n del Empleado";
+                datosE.lblTitulo.Text = "Actualizaci�n del Empleado";
                 datosE.ClaveTrabajador = dgvEmpleados.CurrentRow.Cells["Clave Trabajador"].Value.ToString();
-
                 datosE.txtClaveTrabajador.Text = dgvEmpleados.CurrentRow.Cells["Clave Trabajador"].Value.ToString();
                 datosE.txtNombre.Text = dgvEmpleados.CurrentRow.Cells["Nombre"].Value.ToString();
                 datosE.txtApellidoPaterno.Text = dgvEmpleados.CurrentRow.Cells["Apellido Paterno"].Value.ToString();
                 datosE.txtApellidoMaterno.Text = dgvEmpleados.CurrentRow.Cells["Apellido Materno"].Value.ToString();
                 datosE.txtLocalidad.Text = dgvEmpleados.CurrentRow.Cells["Localidad"].Value.ToString();
                 datosE.txtMunicipio.Text = dgvEmpleados.CurrentRow.Cells["Municipio"].Value.ToString();
-                datosE.rdbHombre.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "Hombre";
-                datosE.rdbMujer.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "Mujer";
+                datosE.rdbHombre.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "M";
+                datosE.rdbMujer.Checked = dgvEmpleados.CurrentRow.Cells["Genero"].Value.ToString() == "F";
                 datosE.txtCorreoInstitucional.Text = dgvEmpleados.CurrentRow.Cells["Correo Institucional"].Value.ToString();
                 datosE.txtTelefono.Text = dgvEmpleados.CurrentRow.Cells["Telefono"].Value.ToString();
                 datosE.txtCodigoPostal.Text = dgvEmpleados.CurrentRow.Cells["Codigo Postal"].Value.ToString();
@@ -110,12 +122,21 @@ namespace ProyectoRegistroAsistencia
 
         public void btnDarBaja_Click(object sender, EventArgs e)
         {
-            var respuesta = MessageBox.Show("�Deseas dar de baja a este empleado?", "Advertencia",
+            if (ban != 1 || dgvEmpleados.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona un empleado de la lista para dar de baja.", "Staff Asistence",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var respuesta = MessageBox.Show("Deseas dar de baja a este empleado?", "Advertencia",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (respuesta == DialogResult.Yes)
             {
                 try
                 {
+                    claveTrabajador = dgvEmpleados.CurrentRow.Cells["Clave Trabajador"].Value.ToString();
+
                     empleados = new clsEmpleados();
                     empleados.ClaveTrabajador = claveTrabajador;
                     string resultado = empleados.DarDeBaja();
@@ -128,19 +149,31 @@ namespace ProyectoRegistroAsistencia
                 }
             }
         }
-        private void btnBuscar_Click(object sender, EventArgs e)
+        // Búsqueda en vivo (por LIKE), sin necesidad de botón Buscar.
+        private void RealizarBusqueda()
         {
-            empleados = new clsEmpleados();
-            string filtro = txtBuscarEmpleado.Text.Trim();
-
             try
             {
-                dgvEmpleados.DataSource = empleados.BuscarEmpleado(filtro);
+                empleados = new clsEmpleados();
+                string filtro = txtBuscarEmpleado.Text.Trim();
+                string idDepartamento = cmbDepartamento.SelectedValue?.ToString();
+                dgvEmpleados.DataSource = empleados.BuscarEmpleado(filtro, idDepartamento);
+                OcultarColumnasEmpleados();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // No mostrar mensajes mientras se escribe/selecciona
             }
+        }
+
+        private void txtBuscarEmpleado_TextChanged(object sender, EventArgs e)
+        {
+            RealizarBusqueda();
+        }
+
+        private void cmbDepartamento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RealizarBusqueda();
         }
 
         int ban = 0;

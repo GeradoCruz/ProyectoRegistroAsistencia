@@ -10,11 +10,7 @@ namespace ProyectoRegistroAsistencia
 {
     internal class clsHorarioSemanal
     {
-        private int id_departamento;
-
-        private MySqlDataAdapter consulta;
-        private DataTable tabla;
-
+        //Variables para obtener los datos del trabajador
         private string claveTrabajador;
         private string nombreTrabajador;
         private string departamento;
@@ -44,7 +40,7 @@ namespace ProyectoRegistroAsistencia
 
         public DataTable cargarDataGrid()
         {
-            tabla = new DataTable();
+            DataTable tabla = new DataTable();
 
             try
             {
@@ -60,7 +56,7 @@ namespace ProyectoRegistroAsistencia
                                     "INNER JOIN tblpuestos P ON T.id_puesto = P.id_puesto " +
                                     "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento "+
                                     "ORDER BY T.id_trabajador"; 
-                    using (consulta = new MySqlDataAdapter(sql, conexion))
+                    using (var consulta = new MySqlDataAdapter(sql, conexion))
                     {
                         consulta.Fill(tabla);       
                     }
@@ -74,7 +70,7 @@ namespace ProyectoRegistroAsistencia
         }
         public DataTable cargarDataGridDiasHorarios(int idTrabajador)
         {
-            tabla = new DataTable();
+            DataTable tabla = new DataTable();
 
             try
             {
@@ -91,7 +87,7 @@ namespace ProyectoRegistroAsistencia
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
                         consultar.Parameters.AddWithValue("@trabajador", idTrabajador);
-                        using (consulta = new MySqlDataAdapter(consultar))
+                        using (var consulta = new MySqlDataAdapter(consultar))
                         {
                             consulta.Fill(tabla);
                         }
@@ -106,7 +102,7 @@ namespace ProyectoRegistroAsistencia
         }
         public DataTable ObtenerDepartamento()
         {
-            tabla = new DataTable();
+            DataTable tabla = new DataTable();
             try
             {
                 clsConexion conexionBD = new clsConexion();
@@ -114,7 +110,7 @@ namespace ProyectoRegistroAsistencia
                 {
 
                     string sql = "SELECT id_departamento,nombre_departamento FROM  tbldepartamento;";
-                    using (consulta = new MySqlDataAdapter(sql, conexion))
+                    using (var consulta = new MySqlDataAdapter(sql, conexion))
                     {
                         consulta.Fill(tabla);
                     }
@@ -126,33 +122,27 @@ namespace ProyectoRegistroAsistencia
             }
             return tabla;
         }
-        public DataTable consultar(int id_departamento)
+        public DataTable consultarPorBusquedaDepartamento(int id_departamento)
         {
-            tabla = new DataTable();
+            DataTable tabla = new DataTable();
             try
             {
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
+                    string sql = "SELECT T.id_trabajador, "+"" +
+                                  "T.clave_trabajador AS 'Clave Trabajador', " +
                                   "CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS 'Nombre Completo', " +
-                                  "D.nombre_departamento AS Departamento, " +
-                                  "Dd.nombre_dia AS Dia, " +
-                                  "H.hora_entrada AS 'Hora Entrada', " +
-                                  "H.hora_salida AS 'Hora Salida', " +
-                                  "H.id_trabajador, " +
-                                  "H.id_semestre, " +
-                                  "S.semestre AS Semestre " +
-                                  "FROM tblhorario_trabajo H " +
-                                  "INNER JOIN tbltrabajador T ON H.id_trabajador = T.id_trabajador " +
-                                  "INNER JOIN tbldias Dd ON H.id_dia = Dd.id_dia " +
-                                  "INNER JOIN tblsemestres S ON H.id_semestre = S.id_semestre " +
+                                  "P.nombre_puesto AS Puesto," +
+                                  "D.nombre_departamento AS Departamento " +                               
+                                  "FROM tbltrabajador T " +
+                                  "INNER JOIN tblpuestos P ON T.id_puesto = P.id_puesto " +
                                   "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento " +
-                                  "WHERE T.id_departamento = @id_departamento;";
+                                  "WHERE D.id_departamento = @id_departamento;";
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
                         consultar.Parameters.AddWithValue("@id_departamento", id_departamento);
-                        using (consulta = new MySqlDataAdapter(consultar))
+                        using (var consulta = new MySqlDataAdapter(consultar))
                         {
                             consulta.Fill(tabla);
                         }
@@ -163,6 +153,49 @@ namespace ProyectoRegistroAsistencia
             {
                 throw new Exception("Error en la consulta" + ex.Message);
             }
+            return tabla;
+        }
+        public DataTable BusquedaNombreApellido(string apellido)
+        {
+            DataTable tabla = new DataTable();
+
+            try
+            {
+                clsConexion conexionBD = new clsConexion();
+
+                using (var conexion = conexionBD.AbrirConexion())
+                {
+                    string sql = "SELECT T.id_trabajador, " +
+                                 "T.clave_trabajador AS 'Clave Trabajador', " +
+                                 "CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS 'Nombre Completo', " +
+                                 "D.nombre_departamento AS Departamento " +
+                                 "FROM tbltrabajador T " +
+                                 "INNER JOIN tbldepartamento D ON T.id_departamento = D.id_departamento ";
+
+                    if (!string.IsNullOrWhiteSpace(apellido))
+                    {
+                        sql += "WHERE CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) LIKE @apellido";
+                    }
+
+                    using (var consultar = new MySqlCommand(sql, conexion))
+                    {
+                        if (!string.IsNullOrWhiteSpace(apellido))
+                        {
+                            consultar.Parameters.AddWithValue("@apellido", "%" + apellido + "%");
+                        }
+
+                        using (var consulta = new MySqlDataAdapter(consultar))
+                        {
+                            consulta.Fill(tabla);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al buscar el trabajador: " + ex.Message);
+            }
+
             return tabla;
         }
         public void buscarTrabajador()
@@ -224,9 +257,11 @@ namespace ProyectoRegistroAsistencia
                     string sql;
                     if (existe)
                     {
+                         // Se incluye id_semestre en el WHERE para no tocar el horario de
+                         // otro semestre del mismo trabajador y dia.
                          sql = "UPDATE tblhorario_trabajo SET " +
                                "hora_entrada = @entrada, hora_salida = @salida, id_semestre = @semestre " +
-                                  "WHERE id_trabajador = @trabajador AND id_dia = @dia;";
+                                  "WHERE id_trabajador = @trabajador AND id_dia = @dia AND id_semestre = @semestre;";
                     }
                     else
                     {
@@ -285,9 +320,11 @@ namespace ProyectoRegistroAsistencia
             }
             return existe;
         }
-        public DataTable diasFaltantes(int idTrabajador)
+        // idSemestre se agrega para que los dias faltantes se calculen solo contra el
+        // semestre que se esta trabajando, no contra todos los semestres juntos.
+        public DataTable diasFaltantes(int idTrabajador, int idSemestre)
         {
-            tabla = new DataTable();
+            DataTable tabla = new DataTable();
             try
             {
                 clsConexion conexionBD = new clsConexion();
@@ -297,18 +334,20 @@ namespace ProyectoRegistroAsistencia
                                  "FROM tbldias D " +
                                  "WHERE D.id_dia BETWEEN 1 AND 5 " +
                                  "AND D.id_dia NOT IN ( " +
-                                 "    SELECT id_dia FROM tblhorario_trabajo WHERE id_trabajador = @trabajador " +
-                                 ");"; 
+                                 "    SELECT id_dia FROM tblhorario_trabajo " +
+                                 "    WHERE id_trabajador = @trabajador AND id_semestre = @semestre " +
+                                 ");";
                     using (MySqlCommand comando = new MySqlCommand(sql,conexion))
                     {
                         comando.Parameters.AddWithValue("@trabajador", idTrabajador);
-                        using (consulta = new MySqlDataAdapter(comando))
+                        comando.Parameters.AddWithValue("@semestre", idSemestre);
+                        using (var consulta = new MySqlDataAdapter(comando))
                         {
                             consulta.Fill(tabla);
                         }
                     }
                 }
-                            
+
             }
             catch (Exception ex)
             {
@@ -318,14 +357,14 @@ namespace ProyectoRegistroAsistencia
         }
         public DataTable ObtenerSemestres()
         {
-            tabla = new DataTable();
+            DataTable tabla = new DataTable();
             try
             {
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
                     string sql = "SELECT id_semestre, semestre FROM tblsemestres;";
-                    using (consulta = new MySqlDataAdapter(sql, conexion))
+                    using (var consulta = new MySqlDataAdapter(sql, conexion))
                     {
                         consulta.Fill(tabla);
                     }

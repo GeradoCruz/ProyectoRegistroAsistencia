@@ -12,10 +12,113 @@ namespace ProyectoRegistroAsistencia
 {
     public partial class frmPuestos : Form
     {
+        clsPuestos puestos;
+        int idPuestoSeleccionado = 0; // 0 = no hay ninguna fila seleccionada
+
         public frmPuestos()
         {
             InitializeComponent();
+            CargarDataGrid();
+        }
 
+        public void CargarDataGrid()
+        {
+            puestos = new clsPuestos();
+            dgvPuestos.DataSource = null;
+            dgvPuestos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            try
+            {
+                dgvPuestos.DataSource = puestos.Consultar();
+                dgvPuestos.Columns["Descripcion"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo cargar el listado de puestos: " + ex.Message,
+                    "Staff Asistence", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgvPuestos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvPuestos.CurrentRow == null)
+            {
+                idPuestoSeleccionado = 0;
+                return;
+            }
+            idPuestoSeleccionado = Convert.ToInt32(dgvPuestos.CurrentRow.Cells["Clave"].Value);
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            using (var frm = new frmNuevoPuesto())
+            {
+                if (frm.ShowDialog(this) == DialogResult.OK)
+                {
+                    CargarDataGrid();
+                }
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            if (dgvPuestos.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona un puesto de la lista para editarlo.",
+                    "Staff Asistence", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (var frm = new frmNuevoPuesto())
+            {
+                try
+                {
+                    frm.lblTitulo.Text = "Editar Puesto";
+                    frm.IdPuesto = Convert.ToInt32(dgvPuestos.CurrentRow.Cells["Clave"].Value);
+                    frm.txtNombrePuesto.Text = dgvPuestos.CurrentRow.Cells["Puesto"].Value.ToString();
+                    frm.txtDescripcion.Text = dgvPuestos.CurrentRow.Cells["Descripcion"].Value?.ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("No se pudo cargar el puesto seleccionado: " + ex.Message,
+                        "Staff Asistence", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (frm.ShowDialog(this) == DialogResult.OK)
+                {
+                    CargarDataGrid();
+                }
+            }
+        }
+
+        private void btnDarBaja_Click(object sender, EventArgs e)
+        {
+            if (dgvPuestos.CurrentRow == null)
+            {
+                MessageBox.Show("Selecciona un puesto de la lista para darlo de baja.",
+                    "Staff Asistence", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string nombrePuesto = dgvPuestos.CurrentRow.Cells["Puesto"].Value.ToString();
+            var respuesta = MessageBox.Show(
+                $"¿Deseas dar de baja el puesto \"{nombrePuesto}\"?\nDejará de aparecer en el catálogo, pero su información no se borrará.",
+                "Confirmar baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (respuesta != DialogResult.Yes) return;
+
+            try
+            {
+                puestos = new clsPuestos();
+                puestos.IdPuesto = Convert.ToInt32(dgvPuestos.CurrentRow.Cells["Clave"].Value);
+                string resultado = puestos.DarDeBaja();
+                MessageBox.Show(resultado, "Staff Asistence", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CargarDataGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "No se pudo dar de baja", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

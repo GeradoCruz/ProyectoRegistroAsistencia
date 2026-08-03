@@ -30,147 +30,139 @@ namespace ProyectoRegistroAsistencia
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNuevoDepartamento));
             lblTitulo = new Label();
-            pnlDepartamento = new Panel();
+            btnGuardar = new Button();
+            btnCancelar = new Button();
             txtDescripcion = new TextBox();
             lblDescripcion = new Label();
             txtDepartamento = new TextBox();
             lblDepartamento = new Label();
-            btnGuardar = new Button();
-            btnCancelar = new Button();
-            pnlDepartamento.SuspendLayout();
             SuspendLayout();
             // 
             // lblTitulo
             // 
-            lblTitulo.AutoSize = true;
+            lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblTitulo.Location = new Point(79, 12);
+            lblTitulo.Location = new Point(95, 13);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(226, 30);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Nuevo Departamento";
-            // 
-            // pnlDepartamento
-            // 
-            pnlDepartamento.BorderStyle = BorderStyle.FixedSingle;
-            pnlDepartamento.Controls.Add(txtDescripcion);
-            pnlDepartamento.Controls.Add(lblDescripcion);
-            pnlDepartamento.Controls.Add(txtDepartamento);
-            pnlDepartamento.Controls.Add(lblDepartamento);
-            pnlDepartamento.Location = new Point(14, 56);
-            pnlDepartamento.Margin = new Padding(3, 4, 3, 4);
-            pnlDepartamento.Name = "pnlDepartamento";
-            pnlDepartamento.Size = new Size(365, 235);
-            pnlDepartamento.TabIndex = 1;
-            // 
-            // txtDescripcion
-            // 
-            txtDescripcion.BackColor = Color.White;
-            txtDescripcion.ForeColor = Color.FromArgb(108, 117, 125);
-            txtDescripcion.Location = new Point(15, 116);
-            txtDescripcion.Margin = new Padding(3, 4, 3, 4);
-            txtDescripcion.Multiline = true;
-            txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(319, 105);
-            txtDescripcion.TabIndex = 3;
-            // 
-            // lblDescripcion
-            // 
-            lblDescripcion.AutoSize = true;
-            lblDescripcion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDescripcion.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDescripcion.Location = new Point(15, 84);
-            lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(94, 21);
-            lblDescripcion.TabIndex = 2;
-            lblDescripcion.Text = "Descripcion:";
-            // 
-            // txtDepartamento
-            // 
-            txtDepartamento.BackColor = Color.White;
-            txtDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
-            txtDepartamento.Location = new Point(15, 49);
-            txtDepartamento.Margin = new Padding(3, 4, 3, 4);
-            txtDepartamento.Name = "txtDepartamento";
-            txtDepartamento.Size = new Size(319, 29);
-            txtDepartamento.TabIndex = 1;
-            // 
-            // lblDepartamento
-            // 
-            lblDepartamento.AutoSize = true;
-            lblDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDepartamento.Location = new Point(15, 17);
-            lblDepartamento.Name = "lblDepartamento";
-            lblDepartamento.Size = new Size(113, 21);
-            lblDepartamento.TabIndex = 0;
-            lblDepartamento.Text = "Departamento:";
+            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnGuardar
             // 
             btnGuardar.BackColor = Color.FromArgb(43, 76, 140);
-            btnGuardar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGuardar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnGuardar.ForeColor = Color.White;
             btnGuardar.Image = (Image)resources.GetObject("btnGuardar.Image");
             btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGuardar.Location = new Point(12, 303);
+            btnGuardar.Location = new Point(36, 318);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(180, 40);
             btnGuardar.TabIndex = 2;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // btnCancelar
             // 
             btnCancelar.BackColor = Color.FromArgb(108, 117, 125);
-            btnCancelar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCancelar.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnCancelar.ForeColor = Color.White;
             btnCancelar.Image = (Image)resources.GetObject("btnCancelar.Image");
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(201, 303);
+            btnCancelar.Location = new Point(221, 318);
             btnCancelar.Margin = new Padding(3, 4, 3, 4);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(180, 40);
             btnCancelar.TabIndex = 3;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
+            // txtDescripcion
+            // 
+            txtDescripcion.BackColor = Color.White;
+            txtDescripcion.ForeColor = Color.FromArgb(64, 64, 64);
+            txtDescripcion.Location = new Point(42, 184);
+            txtDescripcion.Margin = new Padding(3, 4, 3, 4);
+            txtDescripcion.Multiline = true;
+            txtDescripcion.Name = "txtDescripcion";
+            txtDescripcion.Size = new Size(358, 110);
+            txtDescripcion.TabIndex = 7;
+            // 
+            // lblDescripcion
+            // 
+            lblDescripcion.AutoSize = true;
+            lblDescripcion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDescripcion.ForeColor = Color.FromArgb(108, 117, 125);
+            lblDescripcion.Location = new Point(42, 150);
+            lblDescripcion.Name = "lblDescripcion";
+            lblDescripcion.Size = new Size(94, 21);
+            lblDescripcion.TabIndex = 6;
+            lblDescripcion.Text = "Descripción:";
+            lblDescripcion.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // txtDepartamento
+            // 
+            txtDepartamento.BackColor = Color.White;
+            txtDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtDepartamento.ForeColor = Color.FromArgb(64, 64, 64);
+            txtDepartamento.Location = new Point(42, 113);
+            txtDepartamento.Margin = new Padding(3, 4, 3, 4);
+            txtDepartamento.Name = "txtDepartamento";
+            txtDepartamento.Size = new Size(358, 29);
+            txtDepartamento.TabIndex = 5;
+            // 
+            // lblDepartamento
+            // 
+            lblDepartamento.AutoSize = true;
+            lblDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
+            lblDepartamento.Location = new Point(42, 80);
+            lblDepartamento.Name = "lblDepartamento";
+            lblDepartamento.Size = new Size(113, 21);
+            lblDepartamento.TabIndex = 4;
+            lblDepartamento.Text = "Departamento:";
+            lblDepartamento.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // frmNuevoDepartamento
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
-            ClientSize = new Size(393, 361);
+            ClientSize = new Size(442, 379);
+            Controls.Add(txtDescripcion);
+            Controls.Add(lblDescripcion);
+            Controls.Add(txtDepartamento);
+            Controls.Add(lblDepartamento);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
-            Controls.Add(pnlDepartamento);
             Controls.Add(lblTitulo);
-            Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ForeColor = Color.FromArgb(108, 117, 125);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmNuevoDepartamento";
-            StartPosition = FormStartPosition.CenterParent;
-            Text = "Staff Asistence";
-            pnlDepartamento.ResumeLayout(false);
-            pnlDepartamento.PerformLayout();
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Staff Assistence";
+            Load += frmNuevoDepartamento_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label lblTitulo;
-        private Panel pnlDepartamento;
-        private Label lblDescripcion;
-        private TextBox txtDepartamento;
-        private Label lblDepartamento;
-        private TextBox txtDescripcion;
+        public Label lblTitulo;
         private Button btnGuardar;
         private Button btnCancelar;
+        public TextBox txtDescripcion;
+        private Label lblDescripcion;
+        public TextBox txtDepartamento;
+        private Label lblDepartamento;
     }
 }

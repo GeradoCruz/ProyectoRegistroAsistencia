@@ -1,4 +1,4 @@
-﻿using MySqlConnector;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,9 +12,6 @@ namespace ProyectoRegistroAsistencia
     {
         private DataTable tabla;
         private MySqlDataAdapter consulta;
-        private DataTable clave;
-        private DataTable fecha;
-        private MySqlCommand comando;
         public DataTable CargaDataGrid()
         {
             tabla = new DataTable();
@@ -23,12 +20,15 @@ namespace ProyectoRegistroAsistencia
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT A.id_asistencia AS id_Asistencia," +
-                        "CONCAT(T.nombre,'',  T.a_paterno,' ', T.a_materno) AS Trabajador," +
+                    string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
+                        "CONCAT(T.nombre,' ',  T.a_paterno,' ', T.a_materno) AS Trabajador," +
+                        "D.nombre_departamento AS Departamento," +
                         "A.registro  AS Registro," +
                         "A.fecha AS Fecha " +
                         "FROM tblasistencia A " +
-                        "INNER JOIN tbltrabajador T ON A.id_trabajador = T.id_departamento;";
+                        "INNER JOIN tbltrabajador T ON T.id_trabajador = A.id_trabajador "+
+                        "INNER JOIN tbldepartamento D ON D.id_departamento = T.id_departamento;";
+
                     using (consulta = new MySqlDataAdapter(sql, conexion))
                     {
                         consulta.Fill(tabla);
@@ -43,7 +43,7 @@ namespace ProyectoRegistroAsistencia
         }
 
 
-        public DataTable BusquedaFecha(DateTime fecha, string clave)
+        public DataTable BusquedaFecha(DateTime? fecha, string apellido)
         {
             tabla = new DataTable();
 
@@ -53,26 +53,36 @@ namespace ProyectoRegistroAsistencia
 
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    string sql = "SELECT A.id_asistencia AS Id_Asistencia, " +
+                    string sql = "SELECT T.clave_trabajador AS 'Clave Trabajador', " +
                                  "CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) AS Trabajador, " +
+                                 "D.nombre_departamento AS Departamento, " +
                                  "A.registro AS Registro, " +
                                  "A.fecha AS Fecha " +
                                  "FROM tblasistencia A " +
                                  "INNER JOIN tbltrabajador T ON A.id_trabajador = T.id_trabajador " +
-                                 "WHERE DATE(A.fecha) = @fecha ";
+                                 "INNER JOIN tbldepartamento D ON D.id_departamento = T.id_departamento " +
+                                 "WHERE 1=1";
 
-                    if (!string.IsNullOrEmpty(clave))
+                    if (fecha.HasValue)
                     {
-                        sql += "AND T.clave_trabajador = @clave ";
+                        sql += " AND DATE(A.fecha) = @fecha";
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(apellido))
+                    {
+                        sql += " AND CONCAT(T.nombre, ' ', T.a_paterno, ' ', T.a_materno) LIKE @apellido";
                     }
 
                     using (var consultar = new MySqlCommand(sql, conexion))
                     {
-                        consultar.Parameters.AddWithValue("@fecha", fecha.Date);
-
-                        if (!string.IsNullOrEmpty(clave))
+                        if (fecha.HasValue)
                         {
-                            consultar.Parameters.AddWithValue("@clave", clave);
+                            consultar.Parameters.AddWithValue("@fecha", fecha.Value.Date);
+                        }
+
+                        if (!string.IsNullOrEmpty(apellido))
+                        {
+                            consultar.Parameters.AddWithValue("@apellido", "%" + apellido + "%");
                         }
 
                         using (consulta = new MySqlDataAdapter (consultar))
