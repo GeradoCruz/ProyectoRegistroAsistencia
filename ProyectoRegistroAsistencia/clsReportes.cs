@@ -1,3 +1,4 @@
+using ClosedXML.Excel;
 using MySqlConnector;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
@@ -10,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ClosedXML.Excel;
+using System.Windows.Forms;
 
 namespace ProyectoRegistroAsistencia
 {
@@ -98,17 +99,16 @@ namespace ProyectoRegistroAsistencia
                         "INNER JOIN tbldepartamento d ON d.id_departamento = t.id_departamento " +
                         "INNER JOIN tblpuestos p ON p.id_puesto = t.id_puesto " +
                         "WHERE t.estatus = 'activo' " +
-                        (idDepartamento != 0 ? "AND t.id_departamento = @idDepartamento " : "") +
-                        (filtrarApellidos ? "AND (t.a_paterno LIKE @apellidos OR t.a_materno LIKE @apellidos) " : "") +
+                        "AND (@idDepartamento = 0 OR t.id_departamento = @idDepartamento) " +
+                        "AND (@apellidos IS NULL OR CONCAT(t.a_paterno, ' ', IFNULL(t.a_materno,'')) LIKE @apellidos) " +
                         "ORDER BY d.nombre_departamento, t.nombre;";
 
                     using (var cmd = new MySqlCommand(sqlEmpleados, conexion))
                     {
                         cmd.Parameters.AddWithValue("@idDepartamento", idDepartamento);
-                        if (filtrarApellidos)
-                        {
-                            cmd.Parameters.AddWithValue("@apellidos", "%" + apellidos.Trim() + "%");
-                        }
+                        cmd.Parameters.AddWithValue("@apellidos",
+                            filtrarApellidos ? "%" + apellidos.Trim() + "%" : (object)DBNull.Value);
+
                         using (var reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -133,18 +133,18 @@ namespace ProyectoRegistroAsistencia
                         "INNER JOIN tbltrabajador t ON t.id_trabajador = a.id_trabajador " +
                         "WHERE t.estatus = 'activo' AND a.estatus_registro IS NOT NULL " +
                         "AND a.fecha BETWEEN @desde AND @hasta AND WEEKDAY(a.fecha) < 5 " +
-                        (idDepartamento != 0 ? "AND t.id_departamento = @idDepartamento " : "") +
-                        (filtrarApellidos ? "AND (t.a_paterno LIKE @apellidos OR t.a_materno LIKE @apellidos) " : "") + ";";
+                        "AND (@idDepartamento = 0 OR t.id_departamento = @idDepartamento) " +
+                        "AND (@apellidos IS NULL " +
+                        "OR CONCAT(t.a_paterno, ' ', IFNULL(t.a_materno, '')) LIKE @apellidos); ";
 
                     using (var cmd = new MySqlCommand(sqlAsistencia, conexion))
                     {
                         cmd.Parameters.AddWithValue("@desde", desde.ToString("yyyy-MM-dd"));
                         cmd.Parameters.AddWithValue("@hasta", hasta.ToString("yyyy-MM-dd"));
                         cmd.Parameters.AddWithValue("@idDepartamento", idDepartamento);
-                        if (filtrarApellidos)
-                        {
-                            cmd.Parameters.AddWithValue("@apellidos", "%" + apellidos.Trim() + "%");
-                        }
+                        cmd.Parameters.AddWithValue("@apellidos",
+                            filtrarApellidos ? "%" + apellidos.Trim() + "%" : (object)DBNull.Value);
+
                         using (var reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
