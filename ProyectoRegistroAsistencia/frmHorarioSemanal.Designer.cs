@@ -81,7 +81,7 @@ namespace ProyectoRegistroAsistencia
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
             lblDepartamento.Location = new Point(12, 127);
             lblDepartamento.Name = "lblDepartamento";
-            lblDepartamento.Size = new Size(113, 21);
+            lblDepartamento.Size = new Size(143, 28);
             lblDepartamento.TabIndex = 5;
             lblDepartamento.Text = "Departamento:";
             lblDepartamento.TextAlign = ContentAlignment.MiddleLeft;
@@ -93,7 +93,7 @@ namespace ProyectoRegistroAsistencia
             cmbDepartamento.FormattingEnabled = true;
             cmbDepartamento.Location = new Point(12, 156);
             cmbDepartamento.Name = "cmbDepartamento";
-            cmbDepartamento.Size = new Size(200, 29);
+            cmbDepartamento.Size = new Size(200, 36);
             cmbDepartamento.TabIndex = 6;
             cmbDepartamento.SelectionChangeCommitted += cmbDepartamento_SelectionChangeCommitted;
             // 
@@ -104,9 +104,9 @@ namespace ProyectoRegistroAsistencia
             btnAsignarHorario.ForeColor = Color.White;
             btnAsignarHorario.Image = (Image)resources.GetObject("btnAsignarHorario.Image");
             btnAsignarHorario.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAsignarHorario.Location = new Point(875, 143);
+            btnAsignarHorario.Location = new Point(846, 143);
             btnAsignarHorario.Name = "btnAsignarHorario";
-            btnAsignarHorario.Size = new Size(180, 40);
+            btnAsignarHorario.Size = new Size(209, 40);
             btnAsignarHorario.TabIndex = 11;
             btnAsignarHorario.Text = "Asignar Horario";
             btnAsignarHorario.UseVisualStyleBackColor = false;
@@ -135,7 +135,7 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.White;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.FromArgb(28, 32, 51);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(108, 117, 125);
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle2.SelectionForeColor = Color.White;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
@@ -174,9 +174,9 @@ namespace ProyectoRegistroAsistencia
             btnLimpiar.ForeColor = Color.White;
             btnLimpiar.Image = (Image)resources.GetObject("btnLimpiar.Image");
             btnLimpiar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnLimpiar.Location = new Point(691, 142);
+            btnLimpiar.Location = new Point(631, 143);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(180, 40);
+            btnLimpiar.Size = new Size(209, 40);
             btnLimpiar.TabIndex = 13;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = false;
@@ -205,7 +205,7 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = Color.White;
             dataGridViewCellStyle6.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle6.ForeColor = Color.FromArgb(28, 32, 51);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(108, 117, 125);
             dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(63, 90, 166);
             dataGridViewCellStyle6.SelectionForeColor = Color.White;
             dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
@@ -240,7 +240,7 @@ namespace ProyectoRegistroAsistencia
             // 
             txtApellido.Location = new Point(258, 156);
             txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(200, 29);
+            txtApellido.Size = new Size(200, 34);
             txtApellido.TabIndex = 14;
             txtApellido.TextChanged += txtApellido_TextChanged;
             // 
@@ -250,13 +250,13 @@ namespace ProyectoRegistroAsistencia
             lblNombreApellido.ForeColor = Color.FromArgb(108, 117, 125);
             lblNombreApellido.Location = new Point(254, 127);
             lblNombreApellido.Name = "lblNombreApellido";
-            lblNombreApellido.Size = new Size(136, 21);
+            lblNombreApellido.Size = new Size(172, 28);
             lblNombreApellido.TabIndex = 15;
             lblNombreApellido.Text = "Nombre/apellidos";
             // 
             // frmHorarioSemanal
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);

@@ -53,10 +53,29 @@ namespace ProyectoRegistroAsistencia
             try
             {
                 horario.buscarTrabajador();
+                DataTable diasFalta = horario.diasFaltantes(horario.IdTrabajador, horario.IdSemestre);
+                if (diasFalta.Rows.Count == 0)
+                {
+                    trabajadorValido = false;
+                    LimpiarDatosTrabajador();
+                    //Desactiva los checkboxes de los días de la semana si el empleado ya tiene todos los horarios asignados
+                    CheckBox[] checksDiasDesactivar = { chkLunes, chkMartes, chkMiercoles, chkJueves, chkViernes };
+                    foreach (CheckBox chk in checksDiasDesactivar)
+                    {
+                        chk.Enabled = false;
+                    }
+
+                    MessageBox.Show("El empleado tiene todos los horarios asignados", "Staff Asistence",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+
+                }
+
                 txtNombreCompleto.Text = horario.NombreTrabajador;
                 txtDepartamento.Text = horario.Departamento;
                 txtPuesto.Text = horario.Puesto;
                 trabajadorValido = true;
+
 
                 if (horario.IdSemestre > 0)
                 {
@@ -76,8 +95,6 @@ namespace ProyectoRegistroAsistencia
 
                     checksDias[i].Enabled = !horario.TieneHorarioAsignado(horario.IdTrabajador, idDia,horario.IdSemestre );
                 }
-
-                DataTable diasFalta = horario.diasFaltantes(horario.IdTrabajador, horario.IdSemestre);
 
                 if (diasFalta.Rows.Count > 0 )
                 {
@@ -107,6 +124,7 @@ namespace ProyectoRegistroAsistencia
         // distinto si la busqueda actual falla.
         private void LimpiarDatosTrabajador()
         {
+
             txtNombreCompleto.Clear();
             txtDepartamento.Clear();
             txtPuesto.Clear();
@@ -117,7 +135,9 @@ namespace ProyectoRegistroAsistencia
             {
                 chk.Checked = false;
                 chk.Enabled = true;
+
             }
+
         }
 
         private bool ValidarCampos()
