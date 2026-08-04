@@ -119,7 +119,6 @@ namespace ProyectoRegistroAsistencia
             // 
             // lblNombrePuesto
             // 
-            lblNombrePuesto.AutoSize = true;
             lblNombrePuesto.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblNombrePuesto.ForeColor = Color.FromArgb(108, 117, 125);
             lblNombrePuesto.Location = new Point(49, 78);

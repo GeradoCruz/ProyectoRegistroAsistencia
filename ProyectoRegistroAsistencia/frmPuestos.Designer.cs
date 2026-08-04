@@ -95,7 +95,6 @@ namespace ProyectoRegistroAsistencia
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvPuestos.DefaultCellStyle = dataGridViewCellStyle2;
             dgvPuestos.EnableHeadersVisualStyles = false;
-            dgvPuestos.ForeColor = Color.FromArgb(28, 32, 51);
             dgvPuestos.GridColor = Color.FromArgb(221, 225, 232);
             dgvPuestos.Location = new Point(11, 178);
             dgvPuestos.MultiSelect = false;

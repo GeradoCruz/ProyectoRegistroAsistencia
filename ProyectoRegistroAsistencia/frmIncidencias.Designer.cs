@@ -117,9 +117,9 @@ namespace ProyectoRegistroAsistencia
             lblTipoIncidencia.ForeColor = Color.FromArgb(108, 117, 125);
             lblTipoIncidencia.Location = new Point(434, 95);
             lblTipoIncidencia.Name = "lblTipoIncidencia";
-            lblTipoIncidencia.Size = new Size(134, 21);
+            lblTipoIncidencia.Size = new Size(137, 21);
             lblTipoIncidencia.TabIndex = 10;
-            lblTipoIncidencia.Text = "Tipo de Incidencia";
+            lblTipoIncidencia.Text = "Tipo de Incidencia:";
             lblTipoIncidencia.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cmbTipoIncidencia

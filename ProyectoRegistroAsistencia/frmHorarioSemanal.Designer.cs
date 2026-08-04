@@ -45,7 +45,7 @@ namespace ProyectoRegistroAsistencia
             dgvListaEmpleados = new DataGridView();
             btnLimpiar = new Button();
             dgvDiasHorarios = new DataGridView();
-            txtApellido = new TextBox();
+            txtApellidos = new TextBox();
             lblNombreApellido = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvListaEmpleados).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvDiasHorarios).BeginInit();
@@ -236,7 +236,7 @@ namespace ProyectoRegistroAsistencia
             dgvDiasHorarios.Size = new Size(484, 427);
             dgvDiasHorarios.TabIndex = 12;
             // 
-            // txtApellido
+            // txtApellidos
             // 
             txtApellido.Location = new Point(258, 156);
             txtApellido.Name = "txtApellido";
@@ -252,7 +252,7 @@ namespace ProyectoRegistroAsistencia
             lblNombreApellido.Name = "lblNombreApellido";
             lblNombreApellido.Size = new Size(172, 28);
             lblNombreApellido.TabIndex = 15;
-            lblNombreApellido.Text = "Nombre/apellidos";
+            lblNombreApellido.Text = "Nombre/Apellidos:";
             // 
             // frmHorarioSemanal
             // 
@@ -261,7 +261,7 @@ namespace ProyectoRegistroAsistencia
             BackColor = Color.FromArgb(240, 242, 245);
             ClientSize = new Size(1068, 659);
             Controls.Add(lblNombreApellido);
-            Controls.Add(txtApellido);
+            Controls.Add(txtApellidos);
             Controls.Add(dgvDiasHorarios);
             Controls.Add(btnLimpiar);
             Controls.Add(dgvListaEmpleados);
@@ -291,7 +291,7 @@ namespace ProyectoRegistroAsistencia
         private DataGridView dgvListaEmpleados;
         private Button btnLimpiar;
         private DataGridView dgvDiasHorarios;
-        private TextBox txtApellido;
+        private TextBox txtApellidos;
         private Label lblNombreApellido;
     }
 }

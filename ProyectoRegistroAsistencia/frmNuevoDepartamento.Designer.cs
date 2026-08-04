@@ -43,7 +43,7 @@ namespace ProyectoRegistroAsistencia
             lblTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblTitulo.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblTitulo.Location = new Point(95, 13);
+            lblTitulo.Location = new Point(91, 13);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(226, 30);
             lblTitulo.TabIndex = 0;
@@ -57,7 +57,7 @@ namespace ProyectoRegistroAsistencia
             btnGuardar.ForeColor = Color.White;
             btnGuardar.Image = (Image)resources.GetObject("btnGuardar.Image");
             btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnGuardar.Location = new Point(36, 318);
+            btnGuardar.Location = new Point(13, 309);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(180, 40);
@@ -73,7 +73,7 @@ namespace ProyectoRegistroAsistencia
             btnCancelar.ForeColor = Color.White;
             btnCancelar.Image = (Image)resources.GetObject("btnCancelar.Image");
             btnCancelar.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancelar.Location = new Point(221, 318);
+            btnCancelar.Location = new Point(198, 309);
             btnCancelar.Margin = new Padding(3, 4, 3, 4);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(180, 40);
@@ -86,7 +86,7 @@ namespace ProyectoRegistroAsistencia
             // 
             txtDescripcion.BackColor = Color.White;
             txtDescripcion.ForeColor = Color.FromArgb(64, 64, 64);
-            txtDescripcion.Location = new Point(42, 184);
+            txtDescripcion.Location = new Point(19, 179);
             txtDescripcion.Margin = new Padding(3, 4, 3, 4);
             txtDescripcion.Multiline = true;
             txtDescripcion.Name = "txtDescripcion";
@@ -98,7 +98,7 @@ namespace ProyectoRegistroAsistencia
             lblDescripcion.AutoSize = true;
             lblDescripcion.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDescripcion.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDescripcion.Location = new Point(42, 150);
+            lblDescripcion.Location = new Point(19, 145);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(94, 21);
             lblDescripcion.TabIndex = 6;
@@ -110,7 +110,7 @@ namespace ProyectoRegistroAsistencia
             txtDepartamento.BackColor = Color.White;
             txtDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtDepartamento.ForeColor = Color.FromArgb(64, 64, 64);
-            txtDepartamento.Location = new Point(42, 113);
+            txtDepartamento.Location = new Point(19, 108);
             txtDepartamento.Margin = new Padding(3, 4, 3, 4);
             txtDepartamento.Name = "txtDepartamento";
             txtDepartamento.Size = new Size(358, 29);
@@ -121,7 +121,7 @@ namespace ProyectoRegistroAsistencia
             lblDepartamento.AutoSize = true;
             lblDepartamento.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblDepartamento.ForeColor = Color.FromArgb(108, 117, 125);
-            lblDepartamento.Location = new Point(42, 80);
+            lblDepartamento.Location = new Point(19, 75);
             lblDepartamento.Name = "lblDepartamento";
             lblDepartamento.Size = new Size(113, 21);
             lblDepartamento.TabIndex = 4;
@@ -133,7 +133,7 @@ namespace ProyectoRegistroAsistencia
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 242, 245);
-            ClientSize = new Size(442, 379);
+            ClientSize = new Size(393, 361);
             Controls.Add(txtDescripcion);
             Controls.Add(lblDescripcion);
             Controls.Add(txtDepartamento);
