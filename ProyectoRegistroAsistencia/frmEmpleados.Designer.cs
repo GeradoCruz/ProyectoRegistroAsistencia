@@ -89,7 +89,7 @@ namespace ProyectoRegistroAsistencia
             txtBuscarEmpleado.Size = new Size(200, 29);
             txtBuscarEmpleado.TabIndex = 3;
             txtBuscarEmpleado.TextChanged += txtBuscarEmpleado_TextChanged;
-            //
+            // 
             // lblDepartamento
             // 
             lblDepartamento.AutoSize = true;
@@ -111,7 +111,7 @@ namespace ProyectoRegistroAsistencia
             cmbDepartamento.Size = new Size(200, 29);
             cmbDepartamento.TabIndex = 5;
             cmbDepartamento.SelectedIndexChanged += cmbDepartamento_SelectedIndexChanged;
-            //
+            // 
             // btnLimpiar
             // 
             btnLimpiar.Anchor = AnchorStyles.Top | AnchorStyles.Right;

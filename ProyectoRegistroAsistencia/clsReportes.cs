@@ -1,3 +1,4 @@
+using ClosedXML.Excel;
 using MySqlConnector;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
@@ -10,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ClosedXML.Excel;
+using System.Windows.Forms;
 
 namespace ProyectoRegistroAsistencia
 {
@@ -62,59 +63,128 @@ namespace ProyectoRegistroAsistencia
             return diasHabiles;
         }
 
-        // Reporte de Asistencia y Puntualidad: puntual/retardo/falta por trabajador en el rango.
-        public DataTable ConsultarTardanzasFaltas(DateTime desde, DateTime hasta, int idDepartamento, string apellidos = "")
+        // Reporte de Asistencia y Puntualidad: detalle día por día de cada trabajador dentro del
+        // rango, mostrando su estado (Puntual/Retardo/Falta). Los totales generales (para mostrarlos
+        // debajo del grid y en el PDF/Excel) se regresan por los parámetros out.
+        public DataTable ConsultarTardanzasFaltas(DateTime desde, DateTime hasta, int idDepartamento,
+            string apellidos, out int totalPuntual, out int totalRetardo, out int totalFalta)
         {
             tabla = new DataTable();
+            tabla.Columns.Add("Clave");
+            tabla.Columns.Add("Trabajador");
+            tabla.Columns.Add("Departamento");
+            tabla.Columns.Add("Puesto");
+            tabla.Columns.Add("Fecha");
+            tabla.Columns.Add("Estado");
+
+            totalPuntual = 0;
+            totalRetardo = 0;
+            totalFalta = 0;
+
             try
             {
-                // Calcular datos base antes de armar la consulta
-                int totalDiasHabiles = ContarDiasHabiles(desde, hasta);
                 bool filtrarApellidos = !string.IsNullOrWhiteSpace(apellidos);
 
                 // Abrir conexión
                 clsConexion conexionBD = new clsConexion();
                 using (var conexion = conexionBD.AbrirConexion())
                 {
-                    // Armar el SQL (WEEKDAY < 5 en cada subconsulta = ignora sábado/domingo)
-                    string sql =
-                        "SELECT t.clave_trabajador AS Clave, " +
+                    // 1) Empleados activos que cumplen los filtros (departamento/apellidos)
+                    var empleados = new List<(int Id, string Clave, string Nombre, string Departamento, string Puesto)>();
+                    string sqlEmpleados =
+                        "SELECT t.id_trabajador, t.clave_trabajador AS Clave, " +
                         "CONCAT(t.nombre, ' ', t.a_paterno, ' ', IFNULL(t.a_materno,'')) AS Trabajador, " +
-                        "d.nombre_departamento AS Departamento, " +
-                        "p.nombre_puesto AS Puesto, " +
-                        "(SELECT COUNT(*) FROM tblasistencia a " +
-                        " WHERE a.id_trabajador = t.id_trabajador AND a.estatus_registro = 'Puntual' " +
-                        " AND a.fecha BETWEEN @desde AND @hasta AND WEEKDAY(a.fecha) < 5) AS Puntual, " +
-                        "(SELECT COUNT(*) FROM tblasistencia a " +
-                        " WHERE a.id_trabajador = t.id_trabajador AND a.estatus_registro = 'Retardo' " +
-                        " AND a.fecha BETWEEN @desde AND @hasta AND WEEKDAY(a.fecha) < 5) AS Retardo, " +
-                        "@totalDiasHabiles - (SELECT COUNT(*) FROM tblasistencia a " +
-                        " WHERE a.id_trabajador = t.id_trabajador AND a.estatus_registro IN ('Puntual','Retardo') " +
-                        " AND a.fecha BETWEEN @desde AND @hasta AND WEEKDAY(a.fecha) < 5) AS Falta " +
+                        "d.nombre_departamento AS Departamento, p.nombre_puesto AS Puesto " +
                         "FROM tbltrabajador t " +
                         "INNER JOIN tbldepartamento d ON d.id_departamento = t.id_departamento " +
                         "INNER JOIN tblpuestos p ON p.id_puesto = t.id_puesto " +
                         "WHERE t.estatus = 'activo' " +
-                        (idDepartamento != 0 ? "AND t.id_departamento = @idDepartamento " : "") +
-                        (filtrarApellidos ? "AND (t.a_paterno LIKE @apellidos OR t.a_materno LIKE @apellidos) " : "") +
+                        "AND (@idDepartamento = 0 OR t.id_departamento = @idDepartamento) " +
+                        "AND (@apellidos IS NULL OR CONCAT(t.a_paterno, ' ', IFNULL(t.a_materno,'')) LIKE @apellidos) " +
                         "ORDER BY d.nombre_departamento, t.nombre;";
 
-                    // Ejecutar la consulta con sus parámetros
-                    using (var cmd = new MySqlCommand(sql, conexion))
+                    using (var cmd = new MySqlCommand(sqlEmpleados, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@idDepartamento", idDepartamento);
+                        cmd.Parameters.AddWithValue("@apellidos",
+                            filtrarApellidos ? "%" + apellidos.Trim() + "%" : (object)DBNull.Value);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                empleados.Add((
+                                    reader.GetInt32("id_trabajador"),
+                                    reader["Clave"].ToString(),
+                                    reader["Trabajador"].ToString(),
+                                    reader["Departamento"].ToString(),
+                                    reader["Puesto"].ToString()
+                                ));
+                            }
+                        }
+                    }
+
+                    // 2) Registros de asistencia (primer check-in del día, el que trae el estatus)
+                    //    de esos mismos empleados dentro del rango de fechas
+                    var registros = new Dictionary<(int IdTrabajador, DateTime Fecha), string>();
+                    string sqlAsistencia =
+                        "SELECT a.id_trabajador, a.fecha, a.estatus_registro " +
+                        "FROM tblasistencia a " +
+                        "INNER JOIN tbltrabajador t ON t.id_trabajador = a.id_trabajador " +
+                        "WHERE t.estatus = 'activo' AND a.estatus_registro IS NOT NULL " +
+                        "AND a.fecha BETWEEN @desde AND @hasta AND WEEKDAY(a.fecha) < 5 " +
+                        "AND (@idDepartamento = 0 OR t.id_departamento = @idDepartamento) " +
+                        "AND (@apellidos IS NULL " +
+                        "OR CONCAT(t.a_paterno, ' ', IFNULL(t.a_materno, '')) LIKE @apellidos); ";
+
+                    using (var cmd = new MySqlCommand(sqlAsistencia, conexion))
                     {
                         cmd.Parameters.AddWithValue("@desde", desde.ToString("yyyy-MM-dd"));
                         cmd.Parameters.AddWithValue("@hasta", hasta.ToString("yyyy-MM-dd"));
                         cmd.Parameters.AddWithValue("@idDepartamento", idDepartamento);
-                        cmd.Parameters.AddWithValue("@totalDiasHabiles", totalDiasHabiles);
-                        if (filtrarApellidos)
-                        {
-                            cmd.Parameters.AddWithValue("@apellidos", "%" + apellidos.Trim() + "%");
-                        }
+                        cmd.Parameters.AddWithValue("@apellidos",
+                            filtrarApellidos ? "%" + apellidos.Trim() + "%" : (object)DBNull.Value);
 
-                        // Llenar la tabla de resultados
-                        using (consulta = new MySqlDataAdapter(cmd))
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            consulta.Fill(tabla);
+                            while (reader.Read())
+                            {
+                                int idTrabajador = reader.GetInt32("id_trabajador");
+                                DateTime fecha = reader.GetDateTime("fecha").Date;
+                                string estatus = reader["estatus_registro"].ToString();
+                                registros[(idTrabajador, fecha)] = estatus;
+                            }
+                        }
+                    }
+
+                    // 3) Cruzar cada empleado con cada día hábil del rango: si no hay registro para
+                    //    ese día, se cuenta como Falta. Se agrupa por trabajador (todas sus fechas
+                    //    seguidas) para facilitar la lectura del reporte.
+                    foreach (var empleado in empleados)
+                    {
+                        for (DateTime fecha = desde.Date; fecha <= hasta.Date; fecha = fecha.AddDays(1))
+                        {
+                            if (fecha.DayOfWeek == DayOfWeek.Saturday || fecha.DayOfWeek == DayOfWeek.Sunday)
+                            {
+                                continue;
+                            }
+
+                            string estado = registros.TryGetValue((empleado.Id, fecha), out string valor)
+                                ? valor
+                                : "Falta";
+
+                            DataRow fila = tabla.NewRow();
+                            fila["Clave"] = empleado.Clave;
+                            fila["Trabajador"] = empleado.Nombre;
+                            fila["Departamento"] = empleado.Departamento;
+                            fila["Puesto"] = empleado.Puesto;
+                            fila["Fecha"] = fecha.ToString("dd/MM/yyyy");
+                            fila["Estado"] = estado;
+                            tabla.Rows.Add(fila);
+
+                            if (estado == "Puntual") totalPuntual++;
+                            else if (estado == "Retardo") totalRetardo++;
+                            else totalFalta++;
                         }
                     }
                 }
@@ -233,7 +303,9 @@ namespace ProyectoRegistroAsistencia
         }
 
         // Arma el PDF del reporte (usado por ExportarPDF para no repetir el diseño).
-        private IDocument CrearDocumentoPdf(DataTable tabla, string tituloReporte)
+        // resumenTotales es opcional: si viene, se imprime en negritas debajo de la tabla
+        // (por ejemplo, los totales de Puntual/Retardo/Falta del reporte de Asistencia).
+        private IDocument CrearDocumentoPdf(DataTable tabla, string tituloReporte, string resumenTotales = null)
         {
             return Document.Create(container =>
             {
@@ -331,6 +403,13 @@ namespace ProyectoRegistroAsistencia
                                 alternarFila = !alternarFila;
                             }
                         });
+
+                        // Totales generales del reporte (si se proporcionaron)
+                        if (!string.IsNullOrWhiteSpace(resumenTotales))
+                        {
+                            column.Item().PaddingTop(12).Text(resumenTotales)
+                                .FontSize(11).Bold().FontColor(Colors.Black);
+                        }
                     });
                     //Este es el pie de pagina
                     page.Footer().AlignRight().Text(x =>
@@ -345,7 +424,9 @@ namespace ProyectoRegistroAsistencia
         }
 
         // Exporta el reporte a PDF (pide dónde guardarlo).
-        public void ExportarPDF(DataTable tabla, string tituloReporte, string nombreArchivoSugerido)
+        // resumenTotales es opcional: texto con los totales del reporte (Puntual/Retardo/Falta)
+        // que se imprime debajo de la tabla, igual que en pantalla.
+        public void ExportarPDF(DataTable tabla, string tituloReporte, string nombreArchivoSugerido, string resumenTotales = null)
         {
             // Validar que haya datos
             if (tabla == null || tabla.Rows.Count == 0)
@@ -363,7 +444,7 @@ namespace ProyectoRegistroAsistencia
                 try
                 {
                     // Generar y guardar el PDF
-                    CrearDocumentoPdf(tabla, tituloReporte).GeneratePdf(guardarArchivo.FileName);
+                    CrearDocumentoPdf(tabla, tituloReporte, resumenTotales).GeneratePdf(guardarArchivo.FileName);
 
                     MessageBox.Show("Reporte institucional generado con exito.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -375,7 +456,9 @@ namespace ProyectoRegistroAsistencia
         }//Finaliza el metodo de conversion
 
         // Exporta el reporte a Excel (pide dónde guardarlo).
-        public void ExportarExcel(DataTable tabla, string tituloReporte, string nombreArchivoSugerido)
+        // resumenTotales es opcional: texto con los totales del reporte (Puntual/Retardo/Falta)
+        // que se agrega en una fila al final de la tabla, igual que en pantalla.
+        public void ExportarExcel(DataTable tabla, string tituloReporte, string nombreArchivoSugerido, string resumenTotales = null)
         {
             // Validar que haya datos
             if (tabla == null || tabla.Rows.Count == 0)
@@ -435,6 +518,17 @@ namespace ProyectoRegistroAsistencia
                             }
                             alternarFila = !alternarFila;
                             filaActual++;
+                        }
+
+                        // Totales generales del reporte (si se proporcionaron), en una fila aparte
+                        if (!string.IsNullOrWhiteSpace(resumenTotales))
+                        {
+                            filaActual++;
+                            hoja.Range(filaActual, 1, filaActual, totalColumnas).Merge();
+                            var celdaTotales = hoja.Cell(filaActual, 1);
+                            celdaTotales.Value = resumenTotales;
+                            celdaTotales.Style.Font.Bold = true;
+                            celdaTotales.Style.Font.FontColor = XLColor.FromHtml("#10407A");
                         }
 
                         // Ajusta el ancho de columnas automáticamente al contenido

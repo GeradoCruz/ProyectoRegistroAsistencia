@@ -219,6 +219,7 @@ namespace ProyectoRegistroAsistencia
             // txtTelefono
             // 
             txtTelefono.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtTelefono.ForeColor = Color.FromArgb(64, 64, 64);
             txtTelefono.Location = new Point(17, 43);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(200, 29);
@@ -285,6 +286,7 @@ namespace ProyectoRegistroAsistencia
             // 
             // txtApellidoMaterno
             // 
+            txtApellidoMaterno.ForeColor = Color.FromArgb(64, 64, 64);
             txtApellidoMaterno.Location = new Point(257, 158);
             txtApellidoMaterno.Name = "txtApellidoMaterno";
             txtApellidoMaterno.Size = new Size(200, 29);

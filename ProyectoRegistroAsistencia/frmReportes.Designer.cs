@@ -53,6 +53,7 @@ namespace ProyectoRegistroAsistencia
             txtApellidos = new TextBox();
             btnLimpiar = new Button();
             gpbFiltros = new GroupBox();
+            lblTotales = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvReporte).BeginInit();
             SuspendLayout();
             // 
@@ -194,9 +195,21 @@ namespace ProyectoRegistroAsistencia
             dgvReporte.ReadOnly = true;
             dgvReporte.RowHeadersVisible = false;
             dgvReporte.RowTemplate.Height = 40;
-            dgvReporte.Size = new Size(1046, 377);
+            dgvReporte.Size = new Size(1046, 337);
             dgvReporte.TabIndex = 30;
-            // 
+            //
+            // lblTotales
+            //
+            lblTotales.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lblTotales.AutoSize = false;
+            lblTotales.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotales.ForeColor = Color.FromArgb(43, 76, 140);
+            lblTotales.Location = new Point(10, 616);
+            lblTotales.Name = "lblTotales";
+            lblTotales.Size = new Size(1046, 34);
+            lblTotales.TabIndex = 44;
+            lblTotales.TextAlign = ContentAlignment.MiddleLeft;
+            //
             // btnPdf
             // 
             btnPdf.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -346,6 +359,7 @@ namespace ProyectoRegistroAsistencia
             Controls.Add(lblTitulo);
             Controls.Add(btnGenerar);
             Controls.Add(dgvReporte);
+            Controls.Add(lblTotales);
             Controls.Add(gpbOpciones);
             Controls.Add(gpbFiltros);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -380,5 +394,6 @@ namespace ProyectoRegistroAsistencia
         private TextBox txtApellidos;
         private Button btnLimpiar;
         private GroupBox gpbFiltros;
+        private Label lblTotales;
     }
 }
