@@ -160,7 +160,7 @@ namespace ProyectoRegistroAsistencia
             {
                 horario = new clsHorarioSemanal();
 
-                string apellido = txtApellido.Text.Trim();
+                string apellido = txtApellidos.Text.Trim();
 
                 if (!string.IsNullOrWhiteSpace(apellido))
                 {

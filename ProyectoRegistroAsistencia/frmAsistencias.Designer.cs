@@ -59,9 +59,9 @@ namespace ProyectoRegistroAsistencia
             lblSubtitulo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblSubtitulo.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitulo.ForeColor = Color.FromArgb(108, 117, 125);
-            lblSubtitulo.Location = new Point(139, 74);
+            lblSubtitulo.Location = new Point(232, 68);
             lblSubtitulo.Name = "lblSubtitulo";
-            lblSubtitulo.Size = new Size(771, 25);
+            lblSubtitulo.Size = new Size(589, 25);
             lblSubtitulo.TabIndex = 1;
             lblSubtitulo.Text = "Consulte todos los registros de un empleado en una fecha específica";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;

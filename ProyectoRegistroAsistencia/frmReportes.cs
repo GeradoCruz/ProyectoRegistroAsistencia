@@ -16,6 +16,7 @@ namespace ProyectoRegistroAsistencia
         clsReportes reportes;
         DataTable tabla; // último reporte generado, lo usa Exportar
         int idDepartamento;
+        string resumenTotales; // texto de totales (solo Asistencia y Puntualidad); null en los demás reportes
 
         public frmReportes()
         {
@@ -88,11 +89,17 @@ namespace ProyectoRegistroAsistencia
                 // Leer filtros de pantalla
                 idDepartamento = Convert.ToInt32(cmbDepartamento.SelectedValue);
                 string apellidos = txtApellidos.Text.Trim();
+                resumenTotales = null;
+                lblTotales.Text = string.Empty;
 
                 // Elegir la consulta según el tipo de reporte seleccionado
                 if (rdbAsistencia.Checked)
                 {
-                    tabla = reportes.ConsultarTardanzasFaltas(dtpFechaInicio.Value, dtpFechaFin.Value, idDepartamento, apellidos);
+                    tabla = reportes.ConsultarTardanzasFaltas(dtpFechaInicio.Value, dtpFechaFin.Value, idDepartamento,
+                        apellidos, out int totalPuntual, out int totalRetardo, out int totalFalta);
+
+                    resumenTotales = $"Totales — Puntual: {totalPuntual}   Retardo: {totalRetardo}   Falta: {totalFalta}";
+                    lblTotales.Text = resumenTotales;
                 }
                 else if (rdbAntiguedad.Checked)
                 {
@@ -139,7 +146,7 @@ namespace ProyectoRegistroAsistencia
             try
             {
                 // Nombre de archivo sugerido = título del reporte con guiones bajos
-                reportes.ExportarPDF(tabla, ObtenerTitulo(), ObtenerTitulo().Replace(" ", "_") + ".pdf");
+                reportes.ExportarPDF(tabla, ObtenerTitulo(), ObtenerTitulo().Replace(" ", "_") + ".pdf", resumenTotales);
             }
             catch (Exception ex)
             {
@@ -156,7 +163,7 @@ namespace ProyectoRegistroAsistencia
             try
             {
                 // Nombre de archivo sugerido = título del reporte con guiones bajos
-                reportes.ExportarExcel(tabla, ObtenerTitulo(), ObtenerTitulo().Replace(" ", "_") + ".xlsx");
+                reportes.ExportarExcel(tabla, ObtenerTitulo(), ObtenerTitulo().Replace(" ", "_") + ".xlsx", resumenTotales);
             }
             catch (Exception ex)
             {
@@ -178,6 +185,8 @@ namespace ProyectoRegistroAsistencia
             // Vaciar resultados
             dgvReporte.DataSource = null;
             tabla = null;
+            resumenTotales = null;
+            lblTotales.Text = string.Empty;
         }
     }
 }
