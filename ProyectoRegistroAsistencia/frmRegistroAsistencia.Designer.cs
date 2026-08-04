@@ -31,7 +31,7 @@ namespace ProyectoRegistroAsistencia
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRegistroAsistencia));
             pnlFormulario = new Panel();
-            grpCamaraActivo = new GroupBox();
+            gpbCamaraActivo = new GroupBox();
             pcbCamara = new PictureBox();
             lblTitulo = new Label();
             pcbRegistro = new PictureBox();
@@ -40,7 +40,7 @@ namespace ProyectoRegistroAsistencia
             lblAdministrador = new Label();
             tmrCamara = new System.Windows.Forms.Timer(components);
             pnlFormulario.SuspendLayout();
-            grpCamaraActivo.SuspendLayout();
+            gpbCamaraActivo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbCamara).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pcbRegistro).BeginInit();
             SuspendLayout();
@@ -49,7 +49,7 @@ namespace ProyectoRegistroAsistencia
             // 
             pnlFormulario.Anchor = AnchorStyles.None;
             pnlFormulario.BackColor = Color.White;
-            pnlFormulario.Controls.Add(grpCamaraActivo);
+            pnlFormulario.Controls.Add(gpbCamaraActivo);
             pnlFormulario.Controls.Add(lblTitulo);
             pnlFormulario.Controls.Add(pcbRegistro);
             pnlFormulario.Controls.Add(lblClaveTrabajador);
@@ -60,18 +60,18 @@ namespace ProyectoRegistroAsistencia
             pnlFormulario.Size = new Size(641, 430);
             pnlFormulario.TabIndex = 0;
             // 
-            // grpCamaraActivo
+            // gpbCamaraActivo
             // 
-            grpCamaraActivo.Controls.Add(pcbCamara);
-            grpCamaraActivo.FlatStyle = FlatStyle.Popup;
-            grpCamaraActivo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpCamaraActivo.ForeColor = Color.FromArgb(108, 117, 125);
-            grpCamaraActivo.Location = new Point(335, 25);
-            grpCamaraActivo.Name = "grpCamaraActivo";
-            grpCamaraActivo.Size = new Size(293, 386);
-            grpCamaraActivo.TabIndex = 9;
-            grpCamaraActivo.TabStop = false;
-            grpCamaraActivo.Text = "Camara Activo";
+            gpbCamaraActivo.Controls.Add(pcbCamara);
+            gpbCamaraActivo.FlatStyle = FlatStyle.Popup;
+            gpbCamaraActivo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            gpbCamaraActivo.ForeColor = Color.FromArgb(108, 117, 125);
+            gpbCamaraActivo.Location = new Point(335, 25);
+            gpbCamaraActivo.Name = "gpbCamaraActivo";
+            gpbCamaraActivo.Size = new Size(293, 386);
+            gpbCamaraActivo.TabIndex = 9;
+            gpbCamaraActivo.TabStop = false;
+            gpbCamaraActivo.Text = "Cámara Activo";
             // 
             // pcbCamara
             // 
@@ -112,13 +112,13 @@ namespace ProyectoRegistroAsistencia
             lblClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
             lblClaveTrabajador.Location = new Point(34, 239);
             lblClaveTrabajador.Name = "lblClaveTrabajador";
-            lblClaveTrabajador.Size = new Size(159, 21);
+            lblClaveTrabajador.Size = new Size(164, 21);
             lblClaveTrabajador.TabIndex = 2;
-            lblClaveTrabajador.Text = "Clave de trabajador";
+            lblClaveTrabajador.Text = "Clave de trabajador:";
             // 
             // txtClaveTrabajador
             // 
-            txtClaveTrabajador.ForeColor = Color.FromArgb(108, 117, 125);
+            txtClaveTrabajador.ForeColor = Color.FromArgb(64, 64, 64);
             txtClaveTrabajador.Location = new Point(34, 272);
             txtClaveTrabajador.Name = "txtClaveTrabajador";
             txtClaveTrabajador.Size = new Size(270, 29);
@@ -154,14 +154,13 @@ namespace ProyectoRegistroAsistencia
             Margin = new Padding(4);
             Name = "frmRegistroAsistencia";
             ShowIcon = false;
-            StartPosition = FormStartPosition.CenterScreen;
             Text = "StaffAsistence";
             WindowState = FormWindowState.Maximized;
             FormClosing += frmRegistroAsistencia_FormClosing;
             KeyDown += frmRegistroAsistencia_KeyDown;
             pnlFormulario.ResumeLayout(false);
             pnlFormulario.PerformLayout();
-            grpCamaraActivo.ResumeLayout(false);
+            gpbCamaraActivo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pcbCamara).EndInit();
             ((System.ComponentModel.ISupportInitialize)pcbRegistro).EndInit();
             ResumeLayout(false);
@@ -175,7 +174,7 @@ namespace ProyectoRegistroAsistencia
         private TextBox txtClaveTrabajador;
         private Label lblAdministrador;
         private System.Windows.Forms.Timer tmrCamara;
-        private GroupBox grpCamaraActivo;
+        private GroupBox gpbCamaraActivo;
         private PictureBox pcbCamara;
     }
 }

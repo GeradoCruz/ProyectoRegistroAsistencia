@@ -136,7 +136,7 @@ namespace ProyectoRegistroAsistencia
             txtJustificante.Margin = new Padding(4);
             txtJustificante.Multiline = true;
             txtJustificante.Name = "txtJustificante";
-            txtJustificante.Size = new Size(407, 82);
+            txtJustificante.Size = new Size(408, 82);
             txtJustificante.TabIndex = 10;
             // 
             // txtNombre
